@@ -1,0 +1,50 @@
+.App {
+  text-align: center;
+}
+
+.Product{
+  border: 1pt solid black;
+  margin: 2%;
+  padding: 1%;
+  border-radius: 5pt;
+}
+.Product:hover{
+  transition: 150ms;
+  border: 2pt solid black;
+}
+
+.ProductContainer{
+  width: 25%;
+}
+.ProductFocus{
+  border: 1pt solid black;
+  width: 25%;
+  margin: 1%;
+  padding: 1%;
+  border-radius: 5pt;
+}
+.TopNav{
+  border: 1pt solid black;
+  width: 50%;
+  margin: 2%;
+  padding: 1%;
+  border-radius: 5pt;
+  height: 80px;
+  float: right;
+}
+input{
+  border-radius: 5pt;
+  margin: 5pt;
+}
+
+.TopNavForm{
+  display: flex;
+  flex-direction: column;
+  float: left;
+}
+
+.navButton{
+  width: 50px;
+  height: 25px;
+
+}
