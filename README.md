@@ -6,4 +6,5 @@ The webshop was created for the module "Web and Multimedia technology" at the Un
 The Creators are: 
 
 Lucas Lichner 
+
 Jan Vincent Montzka
