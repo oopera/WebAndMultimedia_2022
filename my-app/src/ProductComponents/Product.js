@@ -2,20 +2,22 @@ import '../App.css';
 import {useState} from "react";
 
 export function ProductFocus(props) {
-    const [showFocus, setFocus] = props.pstate;
     return (
         <div className="ProductFocus">
             <header className="Product-name">
                 <p> {props.name} </p>
             </header>s
             <p> {props.description} </p>
+            <p> {props.price} €</p>
+            <button onClick={updateProducts(props._id)}>Buy Now</button>
+            <p>{props.availability} available</p>
         </div>
     );
 
 }
 
 export function Product(props) {
-    const [showFocus, setFocus] = useState('small')
+    const [showFocus, setFocus] = useState(props.state)
     return (
         <div>
         {showFocus === 'small' && (
@@ -28,15 +30,17 @@ export function Product(props) {
             </div>
          )}
                 {showFocus === 'big' && (
+                    <div className={'productFocusContainer'}>
                     <div className="ProductBig" onClick={() => setFocus('small')}>
                         <header className="Product-name">
                             <p> {props.name} </p>
                         </header>
-                        <p> {props.description} </p>
                         <p> {props.price} €</p>
-                        <button onClick={updateProducts(props._id)}>Buy Now</button>
-                        <p>{props.availability} available</p>
 
+                    </div>
+                    <div onClick={() => setFocus('small')} className={'focusContainer'}>
+                        <ProductFocus name={props.name} description={props.description} price={props.price} availability={props.availability}/>
+                    </div>
                     </div>
                 )}
         </div>

@@ -14,7 +14,6 @@
 .Product{
   border: 1pt solid black;
   margin: 2%;
-  width: 80%;
   padding: 1%;
   border-radius: 5pt;
 }
@@ -35,7 +34,7 @@
   display: grid;
   grid-auto-columns: 25%;
   grid-auto-rows: 25%;
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 .Product:hover{
@@ -43,9 +42,16 @@
   border: 2pt solid black;
 }
 
+.focusContainer{
+  position: absolute;
+  width: 200%;
+  height: 50vh;
+  background: white;
+}
+
 .ProductContainer{
-  width: 50%;
-  overflow-y: scroll;
+  width: 25%;
+  height: 100%;
 }
 .ProductFocus{
   border: 1pt solid black;
@@ -53,6 +59,10 @@
   margin: 1%;
   padding: 1%;
   border-radius: 5pt;
+}
+.productFocusContainer{
+  display: flex;
+  flex-direction: row;
 }
 .TopNav{
   border: 1pt solid black;
@@ -64,6 +74,7 @@
   float: right;
   position: fixed;
   margin-left: 70%;
+  z-index: 2;
 }
 input{
   border-radius: 5pt;

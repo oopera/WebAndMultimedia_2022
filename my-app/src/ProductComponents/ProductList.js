@@ -31,15 +31,15 @@ export default function ProductList() {
             return (
                 <div>
 
-                <Product name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
+                <Product state={'small'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
                         </div>
 
             )});
     }
         return (
 
-                <div className={'ProductContainer'}>
-                    <input className={'searchField'} placeholder={'search...'}/>
+                <div onClick={setProducts['']} className={'ProductContainer'}>
+                    <input style={{zIndex: '2'}} className={'searchField'} placeholder={'search...'}/>
                     {productList()}
                 </div>
         );
