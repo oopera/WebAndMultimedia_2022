@@ -1,9 +1,17 @@
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .ProductContainer {
-    width: 80%;
+    width: 200%;
   }
-  .Product{
-
+  .Product, .ProductBig {
+    width: 90vw;
+  }
+  .focusContainer, .ProductFocus{
+    grid-column: 1;
+    position: absolute;
+    width: 90vw;
+  }
+  .TopNav{
+    visibility: hidden;
   }
 }
 
@@ -49,6 +57,7 @@
 .ProductContainer{
   width: 25%;
   height: 100%;
+  padding-top: 5vh;
 }
 .ProductFocus{
   border: 1pt solid black;

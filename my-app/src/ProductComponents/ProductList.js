@@ -37,11 +37,12 @@ export default function ProductList() {
             )});
     }
         return (
-
+            <div>
+            <input style={{zIndex: '2'}} className={'searchField'} placeholder={'search...'}/>
                 <div onClick={setProducts['']} className={'ProductContainer'}>
-                    <input style={{zIndex: '2'}} className={'searchField'} placeholder={'search...'}/>
                     {productList()}
                 </div>
+            </div>
         );
     }
 
