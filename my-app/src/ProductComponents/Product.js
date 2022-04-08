@@ -6,7 +6,7 @@ export function ProductFocus(props) {
         <div className="ProductFocus">
             <header className="Product-name">
                 <p> {props.name} </p>
-            </header>s
+            </header>
             <p> {props.description} </p>
             <p> {props.price} €</p>
             <button onClick={updateProducts(props._id)}>Buy Now</button>
