@@ -1,5 +1,6 @@
 import React from "react";
 import TopNavForm from "./TopNavForm"
+import {Link} from "react-router-dom";
 
 
 class TopNav extends React.Component {
@@ -10,8 +11,8 @@ class TopNav extends React.Component {
             <div className="TopNav">
 
                 <TopNavForm/>
-                <button className={'navButton'}> login</button>
-
+                <button className={'navButton'}>  login</button>
+                <button className={'navButton'}>  <Link to="/about">admin</Link></button>
             </div>
         );
 

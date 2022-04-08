@@ -1,15 +1,36 @@
 import './App.css';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link
+} from "react-router-dom";
 
 import TopNav from "./TopNavComponents/TopNav";
 import ProductList from "./ProductComponents/ProductList"
+import {useState} from "react";
+export default function App() {
+    const [show, setVisibility] = useState();
 
-function App() {
     return (
-        <div>
-          <TopNav />
-          <ProductList />
-          </div>
+
+            <div>
+              <TopNav />
+              <ProductList />
+            </div>
+
       );
 }
 
-export default App;
+function Home() {
+    return <h2>Home</h2>;
+}
+
+function About() {
+    return <h2>About</h2>;
+}
+
+function Users() {
+    return <h2>Users</h2>;
+}
+

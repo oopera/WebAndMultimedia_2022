@@ -8,6 +8,14 @@
   padding: 1%;
   border-radius: 5pt;
 }
+
+.ProductBig{
+  border: 1pt solid black;
+  margin: 2%;
+  padding: 1%;
+  border-radius: 5pt;
+}
+
 .Product:hover{
   transition: 150ms;
   border: 2pt solid black;
@@ -15,6 +23,7 @@
 
 .ProductContainer{
   width: 25%;
+  overflow-y: scroll;
 }
 .ProductFocus{
   border: 1pt solid black;

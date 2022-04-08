@@ -1,12 +1,12 @@
 import '../App.css';
-import Product from "./Product";
+import {Product, ProductFocus} from "./Product";
 import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 
 
 export default function ProductList() {
     const [products, setProducts] = useState([]);
-
+    const [visible, setVisible] = useState('hidden');
     useEffect(() => {
         async function getProducts() {
             const response = await fetch(`http://localhost:5000/webweb/products`);
@@ -26,16 +26,19 @@ export default function ProductList() {
     }, [products.length]);
 
     function productList() {
+
         return products.map((product) => {
             return (
+                <div>
+
                 <Product name={product.Name} description={product.Description} price={product.Price} key={product._id}/>
-            );
-        });
+                        </div>
+
+            )});
     }
         return (
 
                 <div className={'ProductContainer'}>
-
                     {productList()}
                 </div>
         );
