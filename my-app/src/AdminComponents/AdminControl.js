@@ -1,10 +1,8 @@
 import '../App.css';
-import {Product, ProductFocus} from "./Product";
 import React, {useEffect, useState} from "react";
-import { Link } from "react-router-dom";
+import {Product} from "../ProductComponents/Product";
 
-
-export default function ProductList() {
+export default function AdminControl() {
     const [products, setProducts] = useState([]);
     const [visible, setVisible] = useState('hidden');
     useEffect(() => {
@@ -31,24 +29,17 @@ export default function ProductList() {
             return (
                 <div>
 
-                <Product name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
-                        </div>
+                    <Product name={product.Name} description={product.Description} price={product.Price} key={product._id}/>
+                </div>
 
             )});
     }
-        return (
+    return (
 
-                <div className={'ProductContainer'}>
-                    <input className={'searchField'} placeholder={'search...'}/>
-                    {productList()}
-                </div>
-        );
-    }
+        <div className={'ProductContainer'}>
+            <input/>
+            {productList()}
+        </div>
+    );
+}
 
-
-
-/*  <div className={'ProductContainer'}>
-                        {names.map(function(name, description){
-                            return(<Product key="{description}" name={name}/>);
-                        })}
-*/

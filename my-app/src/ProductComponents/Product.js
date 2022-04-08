@@ -34,13 +34,19 @@ export function Product(props) {
                         </header>
                         <p> {props.description} </p>
                         <p> {props.price} €</p>
-                        <button>Buy Now</button>
+                        <button onClick={updateProducts(props._id)}>Buy Now</button>
                         <p>{props.availability} available</p>
 
                     </div>
                 )}
         </div>
                 )
+                }
+
+                function updateProducts(){
+
+
+
                 }
 
 

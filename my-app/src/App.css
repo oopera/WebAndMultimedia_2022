@@ -1,3 +1,12 @@
+@media only screen and (max-width: 600px) {
+  .ProductContainer {
+    width: 80%;
+  }
+  .Product{
+
+  }
+}
+
 .App {
   text-align: center;
 }
@@ -5,6 +14,7 @@
 .Product{
   border: 1pt solid black;
   margin: 2%;
+  width: 80%;
   padding: 1%;
   border-radius: 5pt;
 }
@@ -16,13 +26,25 @@
   border-radius: 5pt;
 }
 
+.ProductBig:hover{
+  transition: 150ms;
+  border: 2pt solid black;
+}
+
+.ProductList{
+  display: grid;
+  grid-auto-columns: 25%;
+  grid-auto-rows: 25%;
+  margin-top: 5%;
+}
+
 .Product:hover{
   transition: 150ms;
   border: 2pt solid black;
 }
 
 .ProductContainer{
-  width: 25%;
+  width: 50%;
   overflow-y: scroll;
 }
 .ProductFocus{
@@ -34,12 +56,14 @@
 }
 .TopNav{
   border: 1pt solid black;
-  width: 50%;
+  width: 20%;
   margin: 2%;
   padding: 1%;
   border-radius: 5pt;
   height: 80px;
   float: right;
+  position: fixed;
+  margin-left: 70%;
 }
 input{
   border-radius: 5pt;
@@ -50,6 +74,10 @@ input{
   display: flex;
   flex-direction: column;
   float: left;
+}
+
+.searchField{
+  position: fixed;
 }
 
 .navButton{
