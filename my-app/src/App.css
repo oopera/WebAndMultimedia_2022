@@ -16,18 +16,14 @@
   margin: 2%;
   padding: 1%;
   border-radius: 5pt;
+  grid-column: 1;
 }
 
 .ProductBig{
-  border: 1pt solid black;
+  border: 2pt solid black;
   margin: 2%;
   padding: 1%;
   border-radius: 5pt;
-}
-
-.ProductBig:hover{
-  transition: 150ms;
-  border: 2pt solid black;
 }
 
 .ProductList{
@@ -43,9 +39,11 @@
 }
 
 .focusContainer{
-  position: absolute;
-  width: 200%;
-  height: 50vh;
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  margin: 2%;
+  padding: 1%;
 }
 
 .ProductContainer{
@@ -54,15 +52,13 @@
 }
 .ProductFocus{
   border: 1pt solid black;
-  width: 25%;
-  margin: 1%;
-  padding: 1%;
   border-radius: 5pt;
   background: white;
 }
 .productFocusContainer{
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 100% 150%;
+  grid-template-rows: auto;
 }
 .TopNav{
   border: 1pt solid black;

@@ -21,6 +21,7 @@ export function Product(props) {
     return (
         <div>
         {showFocus === 'small' && (
+            <div className={'productFocusContainer'}>
             <div className="Product" onClick={() => setFocus('big')}>
                 <header className="Product-name">
                     <p> {props.name} </p>
@@ -28,6 +29,7 @@ export function Product(props) {
 
                 <p> {props.price} €</p>
             </div>
+                </div>
          )}
                 {showFocus === 'big' && (
                     <div className={'productFocusContainer'}>
