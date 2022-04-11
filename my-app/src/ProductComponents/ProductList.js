@@ -3,10 +3,9 @@ import {Product, ProductFocus} from "./Product";
 import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 
-
 export default function ProductList() {
     const [products, setProducts] = useState([]);
-    const [visible, setVisible] = useState('hidden');
+    const [openedItem, setOpenedItem] = useState('null');
     useEffect(() => {
         async function getProducts() {
             const response = await fetch(`http://localhost:5000/webweb/products`);
@@ -16,37 +15,50 @@ export default function ProductList() {
                 window.alert(message);
                 return;
             }
-
             const records = await response.json();
             setProducts(records);
         }
-
         getProducts();
         return;
     }, [products.length]);
 
-    function productList() {
+    function updateProduct(string){
+       if(string === openedItem){
+           setOpenedItem('null')
+       }else{
+           setOpenedItem(string)
+       }
+    }
 
+    function AproductList() {
         return products.map((product) => {
             return (
-                <div>
-
-                <Product state={'small'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
+                <div key={product._id} className={'productFocusContainer'}>
+                    {openedItem !== product._id && (
+                        <div onClick={() => updateProduct(product._id)}>
+                        <Product name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
                         </div>
-
+                            )}
+                    {openedItem === product._id && (
+                        <div>
+                    <div onClick={() => updateProduct(product._id)} key={product._id}>
+                        <Product className={'focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
+                        </div>
+                        <ProductFocus name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
+                    </div>
+                        )}
+                    </div>
             )});
     }
         return (
             <div>
             <input style={{zIndex: '2'}} className={'searchField'} placeholder={'search...'}/>
-                <div onClick={setProducts['']} className={'ProductContainer'}>
-                    {productList()}
+                <div className={'ProductContainer'}>
+                    {AproductList()}
                 </div>
             </div>
         );
     }
-
-
 
 /*  <div className={'ProductContainer'}>
                         {names.map(function(name, description){
