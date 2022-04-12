@@ -52,12 +52,25 @@ recordRoutes.route("/products/add").post(function (req, response) {
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
-    availability: req.body.availability,
+    availability: req.body.availability
   };
   db_connect.collection("products").insertOne(myobj, function (err, res) {
     if (err) throw err;
     response.json(res);
   });
+});
+
+// This section will help you create a new record.
+recordRoutes.route("/users/add").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let myobj = {
+        Email: req.body.email,
+        Password: req.body.password
+    };
+    db_connect.collection("users").insertOne(myobj, function (err, res) {
+        if (err) throw err;
+        response.json(res);
+    });
 });
 
 // This section will help you update a record by id.

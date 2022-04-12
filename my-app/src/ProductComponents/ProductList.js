@@ -6,6 +6,7 @@ export default function ProductList(props) {
     const [products, setProducts] = useState([]);
     const [rerender, setRerender] = useState(false);
     const [searchInput, setSearchInput] = useState('');
+    console.log(searchInput)
     function softRerender(){
         setRerender(!rerender);
     }
@@ -39,7 +40,8 @@ export default function ProductList(props) {
         return products.map((product) => {
             return (
                 <div key={product._id}>
-                    {props.openedItem !== product._id && product.Name.includes(searchInput) &&  (
+                    {props.openedItem !== product._id  &&
+                        product.Name.toLowerCase().includes(searchInput) && (
                         <div onClick={() => updateProduct(product._id)}>
                         <Product name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
                         </div>

@@ -38,10 +38,7 @@ export function ProductFocus(props) {
     );
 }
 
-
-
 export function Commentlist(props){
-
     return(
         props.comments.filter(comment => comment.id === props.id).map((filteredComment) => {
             return (
@@ -63,7 +60,7 @@ export function Product(props){
     )
 }
 
-                function updateProducts(){
+function updateProducts(){
                 }
 
 

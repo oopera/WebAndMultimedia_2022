@@ -32,7 +32,7 @@ Umzusetzende Funktionen aufrufbar aus dem Browser
  */
 export default function App() {
     const [openedItem, setOpenedItem] = useState('null');
-
+    const [isLoggedIn, setLoggedIn] = useState(false);
     return (
             <div>
               <TopNav openedItem={openedItem} setOpenedItem={setOpenedItem}/>
