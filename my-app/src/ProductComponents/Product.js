@@ -46,7 +46,7 @@ export function Commentlist(props){
         props.comments.filter(comment => comment.id === props.id).map((filteredComment) => {
             return (
              <div key={filteredComment.id}>
-                <p>{filteredComment.comment}</p>
+                <p> {filteredComment.name}: {filteredComment.comment} | {filteredComment.Date}</p>
         </div>
         )
             }))

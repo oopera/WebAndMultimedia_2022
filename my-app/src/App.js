@@ -3,6 +3,7 @@ import './App.css';
 import TopNav from "./TopNavComponents/TopNav";
 import ProductList from "./ProductComponents/ProductList"
 import React, {useState} from "react";
+import AdminControl from "./AdminComponents/AdminControl";
 
 /*
 Umzusetzende Funktionen aufrufbar aus dem Browser
@@ -34,8 +35,9 @@ export default function App() {
 
     return (
             <div>
-              <TopNav/>
+              <TopNav openedItem={openedItem} setOpenedItem={setOpenedItem}/>
               <ProductList openedItem={openedItem} setOpenedItem={setOpenedItem} />
+                <AdminControl openedItem={openedItem} setOpenedItem={setOpenedItem}/>
             </div>
       );
 }
