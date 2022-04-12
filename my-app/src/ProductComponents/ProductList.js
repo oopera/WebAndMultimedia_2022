@@ -41,7 +41,7 @@ export default function ProductList(props) {
             return (
                 <div key={product._id}>
                     {props.openedItem !== product._id  &&
-                        product.Name.toLowerCase().includes(searchInput) && (
+                        product.Name.toLowerCase().includes(searchInput.toLowerCase()) && (
                         <div onClick={() => updateProduct(product._id)}>
                         <Product name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
                         </div>
