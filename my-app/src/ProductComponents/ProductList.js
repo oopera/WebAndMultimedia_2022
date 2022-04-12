@@ -1,17 +1,20 @@
 import '../App.css';
 import {Product, ProductFocus} from "./Product";
 import React, {useEffect, useState} from "react";
-import { Link } from "react-router-dom";
 
-export default function ProductList() {
+export default function ProductList(props) {
     const [products, setProducts] = useState([]);
-    const [openedItem, setOpenedItem] = useState('null');
+    const [rerender, setRerender] = useState(false);
+    const [searchInput, setSearchInput] = useState('');
+    function softRerender(){
+        setRerender(!rerender);
+    }
     useEffect(() => {
         async function getProducts() {
             const response = await fetch(`http://localhost:5000/webweb/products`);
 
             if (!response.ok) {
-                const message = `An error occurred`;
+                const message = `Products could not be loaded`;
                 window.alert(message);
                 return;
             }
@@ -23,28 +26,30 @@ export default function ProductList() {
     }, [products.length]);
 
     function updateProduct(string){
-       if(string === openedItem){
-           setOpenedItem('null')
+       if(string === props.openedItem){
+           props.setOpenedItem('null');
+           softRerender();
        }else{
-           setOpenedItem(string)
+           props.setOpenedItem(string);
+           softRerender();
        }
     }
 
-    function AproductList() {
+    function AproductList(props) {
         return products.map((product) => {
             return (
-                <div key={product._id} className={'productFocusContainer'}>
-                    {openedItem !== product._id && (
+                <div key={product._id}>
+                    {props.openedItem !== product._id && product.Name.includes(searchInput) &&  (
                         <div onClick={() => updateProduct(product._id)}>
                         <Product name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
                         </div>
                             )}
-                    {openedItem === product._id && (
+                    {props.openedItem === product._id && (
                         <div>
                     <div onClick={() => updateProduct(product._id)} key={product._id}>
                         <Product className={'focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                         </div>
-                        <ProductFocus name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
+                        <ProductFocus id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                     </div>
                         )}
                     </div>
@@ -52,16 +57,12 @@ export default function ProductList() {
     }
         return (
             <div>
-            <input style={{zIndex: '2'}} className={'searchField'} placeholder={'search...'}/>
+            <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}} className={'searchField'} placeholder={'search...'}/>
                 <div className={'ProductContainer'}>
-                    {AproductList()}
+
+                    {AproductList(props)}
                 </div>
             </div>
         );
     }
 
-/*  <div className={'ProductContainer'}>
-                        {names.map(function(name, description){
-                            return(<Product key="{description}" name={name}/>);
-                        })}
-*/

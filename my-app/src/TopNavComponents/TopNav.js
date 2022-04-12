@@ -1,22 +1,30 @@
 import React from "react";
 import TopNavForm from "./TopNavForm"
 import {Link} from "react-router-dom";
+import '../ProductComponents/ProductList'
+
+export default function TopNav() {
 
 
-class TopNav extends React.Component {
-
-
-    render() {
         return (
             <div className="TopNav">
 
                 <TopNavForm/>
-                <button className={'navButton'}>  login</button>
-                <button className={'navButton'}>  <Link to="/about">admin</Link></button>
+                <button className={'navButton'} onClick={() => login()}>  login</button>
+                <button className={'navButton'} onClick={() => adminLogin()}>  <Link to="/admin">admin</Link></button>
             </div>
         );
 
 
-    }
+
 }
-export default TopNav;
+function login(){
+    const message = `Login not yet implemented`;
+    window.alert(message);
+}
+
+function adminLogin(){
+    const message = `Admin-panel not yet implemented`;
+    window.alert(message);
+
+}

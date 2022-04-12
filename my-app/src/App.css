@@ -87,6 +87,8 @@ input{
 
 .searchField{
   position: fixed;
+  width: 23%;
+  height: 3%;
 }
 
 .navButton{

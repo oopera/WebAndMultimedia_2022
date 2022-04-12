@@ -8,8 +8,8 @@ export function ProductFocus(props) {
         async function getComments() {
             const response = await fetch(`http://localhost:5000/webweb/comments`);
             if (!response.ok) {
-                const message = `Couldn't load comments`;
-                return;
+                const message = `Comments could not be loaded`;
+                window.alert(message);
             }
             const comments = await response.json();
             setComments(comments);
@@ -17,7 +17,6 @@ export function ProductFocus(props) {
         getComments();
         return;
     }, [comments.length]);
-
     return (
         <div className="ProductFocus">
             <div className={'focusContent'}>
@@ -33,25 +32,25 @@ export function ProductFocus(props) {
                     <button>send</button>
 
                 </div>
-            <Commentlist id={props._id} comments={comments}/>
+            <Commentlist id={props.id} comments={comments}/>
             </div>
         </div>
     );
 }
 
-//   <button onClick={() => updateProduct('null')}>close</button>
+
 
 export function Commentlist(props){
+
     return(
-        <div>
-            <p>Theres supposed to be comments here</p>
-            {props.comments.filter(comment => comment.id === props.id).map(filteredComment => (
-                <div>
-                        {filteredComment}
-                </div>
-        ))}
+        props.comments.filter(comment => comment.id === props.id).map((filteredComment) => {
+            return (
+             <div key={filteredComment.id}>
+                <p>{filteredComment.comment}</p>
         </div>
-    )
+        )
+            }))
+
 }
 export function Product(props){
     return(
@@ -64,37 +63,6 @@ export function Product(props){
     )
 }
 
-/*
-export function Product(props) {
-    const [showFocus, setFocus] = useState(props.state)
-    return (
-        <div>
-        {showFocus === 'small' && (
-            <div className={'productFocusContainer'}>
-            <div className="Product" onClick={() => setFocus('big')}>
-                <header className="Product-name">
-                    <p> {props.name} </p>
-                </header>
-                <p> {props.price} €</p>
-            </div>
-                </div>
-         )}
-                {showFocus === 'big' && (
-                    <div className={'productFocusContainer'}>
-                    <div className="ProductBig" onClick={() => setFocus('small')}>
-                        <header className="Product-name">
-                            <p> {props.name} </p>
-                        </header>
-                        <p> {props.price} €</p>
-                    </div>
-                    <div onClick={() => setFocus('small')} className={'focusContainer'}>
-                        <ProductFocus name={props.name} description={props.description} price={props.price} availability={props.availability}/>
-                    </div>
-                    </div>
-                )}
-        </div>
-                )}
-*/
                 function updateProducts(){
                 }
 
