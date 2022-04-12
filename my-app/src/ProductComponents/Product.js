@@ -51,7 +51,7 @@ export function Commentlist(props){
 }
 export function Product(props){
     return(
-                <div className={'Product'}>
+                <div className={props.className}>
                     <header className="Product-name">
                         <p> {props.name} </p>
                     </header>

@@ -43,13 +43,13 @@ export default function ProductList(props) {
                     {props.openedItem !== product._id  &&
                         product.Name.toLowerCase().includes(searchInput.toLowerCase()) && (
                         <div onClick={() => updateProduct(product._id)}>
-                        <Product name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
+                        <Product className={'Product'}name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
                         </div>
                             )}
                     {props.openedItem === product._id && (
                         <div>
                     <div onClick={() => updateProduct(product._id)} key={product._id}>
-                        <Product className={'focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
+                        <Product className={'Focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                         </div>
                         <ProductFocus id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                     </div>

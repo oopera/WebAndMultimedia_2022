@@ -19,6 +19,14 @@
   margin: 2%;
   padding: 1%;
   border-radius: 5pt;
+  transition: 150ms;
+}
+
+.Focused{
+  border: 2pt solid black;
+  margin: 2%;
+  padding: 1%;
+  border-radius: 5pt;
 }
 
 .ProductList{
