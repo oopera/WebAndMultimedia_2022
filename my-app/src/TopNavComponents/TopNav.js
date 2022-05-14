@@ -3,44 +3,13 @@ import {Link} from "react-router-dom";
 import '../ProductComponents/ProductList'
 
 
+
 export default function TopNav(props) {
-    return (
-        <div className="TopNav">
-            <TopNavForm/>
-            <button className={'navButton'} onClick={() => login()}>  login</button>
-            <button className={'navButton'} onClick={() => register()}>  <Link to="/register">register</Link></button>
-        </div>
-    );
 
-}
-function register(){
-
-}
-function TopNavForm() {
-        const [form, setForm] = useState({
-            email: "",
-            password: "",
-        });
-
-    async function onSubmit(e) {
-        e.preventDefault();
-
-        const newPerson = { ...form };
-
-        await fetch("http://localhost:5000/user/add", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newPerson),
-        })
-            .catch(error => {
-                window.alert(error);
-                return;
-            });
-
-        setForm({ email: "", password: "" });
-    }
+    const [form, setForm] = useState({
+        email: "",
+        password: "",
+    });
 
     function updateForm(value) {
         return setForm((prev) => {
@@ -49,24 +18,60 @@ function TopNavForm() {
     }
 
     return (
-        <div className="TopNavForm">
+       // {props.account === "admin" && (
+            <div className="TopNav">
             <input value={form.email}
-                   onChange={(e) => updateForm({ email: e.target.value })} type="text" name="email" placeholder="email"/>
+                   onChange={(e) => updateForm({ email: e.target.value })} type="email" name="email" placeholder="email"/>
             <input value={form.password}
                    onChange={(e) => updateForm({ password: e.target.value })} type="password" name="password" placeholder="password"/>
-        </div>
-    );
+
+            <button className={'navButton'} onClick={() => login(props={form, setForm})}>  login</button>
+
+            <button className={'navButton'} onClick={() => registre(props={form, setForm})}> register</button>
+
+            </div>
+
+    )}
+          //  )})}
+
+function register(){
+
 }
 
-function login(){
-    const message = `Login not yet implemented`;
-    window.alert(message);
+async function login(props){
+    const form = { ...props.form };
+    const response = await fetch("http://localhost:5000/users/email", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: form.email
+    })
+        .catch(error => {
+            window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
+        });
+    console.log(response)
+    props.setForm({ email: "", password: ""});
 }
 
-function adminLogin(props){
-    props.setOpenedItem('admin')
-    const message = `Admin-panel not yet implemented`;
-    window.alert(message);
 
+async function registre(props){
+    if(props.form.password.length<8){
+        window.alert("your password is too short. min. length is 8 characters");
+        return;
+    }
+    const newPerson = { ...props.form };
+    const response = await fetch("http://localhost:5000/users/add", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPerson),
+    })
+        .catch(error => {
+            window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
+        });
+    console.log(response.ok)
+    props.setForm({ email: "", password: ""});
 }
 

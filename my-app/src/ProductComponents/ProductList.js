@@ -19,8 +19,8 @@ export default function ProductList(props) {
                 window.alert(message);
                 return;
             }
-            const records = await response.json();
-            setProducts(records);
+            const prodDB = await response.json();
+            setProducts(prodDB);
         }
         getProducts();
         return;
@@ -35,23 +35,29 @@ export default function ProductList(props) {
            softRerender();
        }
     }
-
+    const colors =
+        ['#52FF00', '#00FFE0', '#3300FF', "#0057FF", "#AD00FF", "#FF0000", "#FFA800", '#CCFF00', '#52FF00']
+    let counter = -1;
     function AproductList(props) {
         return products.map((product) => {
+            counter = counter + 1
+            if(counter === colors.length){
+                counter = 0
+            }
             return (
                 <div key={product._id}>
                     {props.openedItem !== product._id  &&
                         product.Name.toLowerCase().includes(searchInput.toLowerCase()) && (
                         <div onClick={() => updateProduct(product._id)}>
-                        <Product className={'Product'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
+                        <Product style={{borderColor: colors[counter]}} className={'Product'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
                         </div>
                             )}
                     {props.openedItem === product._id && (
                         <div>
                     <div onClick={() => updateProduct(product._id)} key={product._id}>
-                        <Product className={'Focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
+                        <Product style={{borderColor: colors[counter]}} className={'Focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                         </div>
-                        <ProductFocus id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
+                        <ProductFocus style={{borderColor: colors[counter]}} id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                     </div>
                         )}
                     </div>

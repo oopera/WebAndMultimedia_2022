@@ -18,7 +18,7 @@ export function ProductFocus(props) {
         return;
     }, [comments.length]);
     return (
-        <div className="ProductFocus">
+        <div style={props.style} className="ProductFocus">
             <div className={'focusContent'}>
             <header className="Product-name">
             <p> {props.name} </p>
@@ -51,7 +51,7 @@ export function Commentlist(props){
 }
 export function Product(props){
     return(
-                <div className={props.className}>
+                <div className={props.className} style={props.style}>
                     <header className="Product-name">
                         <p> {props.name} </p>
                     </header>

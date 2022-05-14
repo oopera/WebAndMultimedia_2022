@@ -60,17 +60,55 @@ recordRoutes.route("/products/add").post(function (req, response) {
   });
 });
 
-// This section will help you create a new record.
 recordRoutes.route("/users/add").post(function (req, response) {
     let db_connect = dbo.getDb();
-    let myobj = {
-        Email: req.body.email,
-        Password: req.body.password
-    };
-    db_connect.collection("users").insertOne(myobj, function (err, res) {
-        if (err) throw err;
-        response.json(res);
-    });
+    let dbizzle = db_connect
+        .collection("users")
+    async function getDocs() {
+        try {
+            let cursor = await dbizzle.find({"Email": req.body.email.toLowerCase()})
+            return cursor.toArray()
+        } catch (e) {
+            console.error('Error:', e)
+        }
+    }
+
+    (async function() {
+        let docsList = await getDocs()
+        if(docsList.length>=1){
+            console.log('Fetched documents:', docsList)
+            console.log("email is already in use")
+            return false
+            }else {
+            let myobj = {
+                Email: req.body.email.toLowerCase(),
+                Password: req.body.password,
+                Admin: false,
+                Purchases: [],
+                Comments: [],
+            };
+            db_connect.collection("users").insertOne(myobj, function (err, res) {
+                if (err) throw err;
+                response.json(res);
+            });
+            console.log("email isnt already in use")
+            return true
+        }
+    })();
+
+});
+
+
+
+recordRoutes.route("/users/email").get(function (req, res) {
+    let db_connect = dbo.getDb();
+    let myquery = { "Email": req.email};
+    db_connect
+        .collection("users")
+        .find(myquery, function (err, result) {
+            if (err) throw err;
+            res.json(result);
+        });
 });
 
 // This section will help you update a record by id.
