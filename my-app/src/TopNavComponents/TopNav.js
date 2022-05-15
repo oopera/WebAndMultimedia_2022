@@ -34,9 +34,6 @@ export default function TopNav(props) {
     )}
           //  )})}
 
-function register(){
-
-}
 
 async function login(props){
     const form = { ...props.form };

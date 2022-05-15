@@ -1,5 +1,5 @@
 import './App.css';
-import Background from "./BackgroundComponents/background";
+import Background from "./BackgroundComponents/Background";
 import TopNav from "./TopNavComponents/TopNav";
 import ProductList from "./ProductComponents/ProductList"
 import React, {useState} from "react";

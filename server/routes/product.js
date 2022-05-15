@@ -72,7 +72,6 @@ recordRoutes.route("/users/add").post(function (req, response) {
             console.error('Error:', e)
         }
     }
-
     (async function() {
         let docsList = await getDocs()
         if(docsList.length>=1){
@@ -102,7 +101,7 @@ recordRoutes.route("/users/add").post(function (req, response) {
 
 recordRoutes.route("/users/email").get(function (req, res) {
     let db_connect = dbo.getDb();
-    let myquery = { "Email": req.email};
+    let myquery = { "Email": req.body.email.toLowerCase()};
     db_connect
         .collection("users")
         .find(myquery, function (err, result) {

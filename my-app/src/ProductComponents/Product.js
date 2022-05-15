@@ -25,6 +25,7 @@ export function ProductFocus(props) {
             </header>
             <p> {props.description} </p>
             <p> {props.price} €</p>
+                <img className={"productImage"} src={props.img}/>
             <button style={{zIndex : '5'}} onClick={updateProducts(props._id)}>Buy Now</button>
             <p>{props.availability} available</p>
                 <div >
@@ -53,9 +54,9 @@ export function Product(props){
     return(
                 <div className={props.className} style={props.style}>
                     <header className="Product-name">
-                        <p> {props.name} </p>
+                        <p className={'header'}> {props.name} </p>
                     </header>
-                    <p> {props.price} €</p>
+                    <p style={{float:'right'}}> {props.price}€</p>
                 </div>
     )
 }
