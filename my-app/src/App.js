@@ -33,7 +33,9 @@ export default function App() {
     const [account, setAccount] = useState('null');
     return (
             <div>
-
+              <p className={'logo'}>lucaslichner.</p>
+                <p className={'maintext'}>buy.my.shit.</p>
+                <Background/>
               <TopNav account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
               <ProductList openedItem={openedItem} setOpenedItem={setOpenedItem} />
               <AdminControl openedItem={openedItem} setOpenedItem={setOpenedItem}/>

@@ -44,12 +44,21 @@ export function Commentlist(props){
         props.comments.filter(comment => comment.id === props.id).map((filteredComment) => {
             return (
              <div key={filteredComment.id}>
-                <p> {filteredComment.name}: {filteredComment.comment} | {filteredComment.Date}</p>
+                <p> {filteredComment.name}: {filteredComment.comment} {filteredComment.Date}</p>
         </div>
         )
             }))
 
 }
+
+
+export function CommentListTwo(props){
+    return props.comments.map((comment) => {
+        return (
+            <div>{comment.Name}</div>
+        )})
+}
+
 export function Product(props){
     return(
                 <div className={props.className} style={props.style}>

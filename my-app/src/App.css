@@ -31,7 +31,7 @@
 }
 
 body{
-  margin: 0; height: 100%; overflow: hidden
+  margin: 0; height: 100%; overflow: hidden;background: gray();
 }
 
 .header{
@@ -45,7 +45,7 @@ body{
 
 .Product{
   Background-color: white;
-  border: 1pt solid black;
+
   margin: 2%;
   padding: 1%;
   border-radius: 10pt;
@@ -80,32 +80,56 @@ body{
   transition: 150ms;
 }
 
-
 .ProductContainer{
   width: 25%;
   min-width: 300px;
-  height: 95vh;
-  overflow-y:scroll;
+  height: 91%;
   padding-top: 5vh;
-  left: 10%;
+  overflow-y:scroll;
+  margin-top: 4%;
 }
 
 .ProductContainer::-webkit-scrollbar {
   display: none;
 }
 
+.ProductContainerOO{
+  position: absolute;
+  left: 20%;
+  top: 25%;
+  height: 75%;
+
+}
+.logo {
+  top: 4%;
+  left: 32%;
+  position: fixed;
+  color: black;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 175%;
+  font-weight: bold;
+}
+.maintext {
+  left: 30%;
+  position: fixed;
+  color: black;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 500%;
+  font-weight: bold;
+}
+
 .ProductFocus{
   border: 2pt solid black;
   border-radius: 25pt;
   background: white;
-  margin: 2%;
+  margin-left: 65%;
   position: absolute;
-  top: 15%;
-  left: 25%;
+  top: 9%;
+  left: 30%;
   height: 70vh;
-  max-height: 500px;
+  max-height: 650px;
   width: 50vw;
-  max-width: 500px;
+  max-width: 800px;
   transition: 150ms;
   animation: 0.2s ease-out 0s 1 slideInFromLeft;
   box-shadow: 5px 5px 50px -30px #000000;
@@ -149,13 +173,17 @@ input{
   position: fixed;
   width: 23%;
   height: 3%;
+  transition: 1s;
+}
+.searchField:focus{
+  border-radius: 10px;
+  width: 30%;
 }
 
 .navButton{
   width: 50px;
   height: 25px;
 }
-
 
 @keyframes from0to360 {
   from{transform:rotate(0);}
@@ -180,6 +208,8 @@ input{
 }
 
 .blob-svg {
+  bottom: 50%;
+  right: 90%;
   z-index: -10;
   filter: blur(15rem);
   position: absolute;

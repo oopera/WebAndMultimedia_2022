@@ -97,9 +97,8 @@ recordRoutes.route("/users/add").post(function (req, response) {
 
 });
 
-
-
 recordRoutes.route("/users/email").get(function (req, res) {
+    console.log("IEXIST")
     let db_connect = dbo.getDb();
     let myquery = { "Email": req.body.email.toLowerCase()};
     db_connect

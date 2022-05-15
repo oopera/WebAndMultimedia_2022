@@ -48,9 +48,9 @@ async function login(props){
             window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
         });
     console.log(response)
+    console.log("response")
     props.setForm({ email: "", password: ""});
 }
-
 
 async function registre(props){
     if(props.form.password.length<8){

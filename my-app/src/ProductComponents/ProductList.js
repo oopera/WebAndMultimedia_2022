@@ -49,7 +49,7 @@ export default function ProductList(props) {
                     {props.openedItem !== product._id  &&
                         product.Name.toLowerCase().includes(searchInput.toLowerCase()) && (
                         <div onClick={() => updateProduct(product._id)}>
-                        <Product style={{borderColor: colors[counter]}} className={'Product'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
+                        <Product style={{}} className={'Product'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
                         </div>
                             )}
                     {props.openedItem === product._id && (
@@ -57,14 +57,14 @@ export default function ProductList(props) {
                     <div onClick={() => updateProduct(product._id)} key={product._id}>
                         <Product style={{borderColor: colors[counter]}} className={'Focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                         </div>
-                        <ProductFocus style={{borderColor: colors[counter]}} img={product.img} id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
+                        <ProductFocus style={{borderColor: colors[counter]}} comments={product.Comments} img={product.img} id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                     </div>
                         )}
                     </div>
             )});
     }
         return (
-            <div>
+            <div className={'ProductContainerOO'}>
             <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}} className={'searchField'} placeholder={'search...'}/>
                 <div className={'ProductContainer'}>
 
