@@ -31,7 +31,7 @@ export default function App() {
     const [products, setProducts] = useState([]);
     const [openedItem, setOpenedItem] = useState('null');
     const [isLoggedIn, setLoggedIn] = useState(false);
-    const [account, setAccount] = useState('null');
+    const [account, setAccount] = useState('admin');
     function theTime() {
         let Datte = new Date();
         let H = Datte.getHours();

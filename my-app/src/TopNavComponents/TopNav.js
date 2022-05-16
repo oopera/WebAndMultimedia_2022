@@ -19,7 +19,7 @@ export default function TopNav(props) {
     return (
        // {props.account === "admin" && (
                 <div className="TopNav">
-                    {props.isLoggedIn === false && (
+                    {props.account !== 'admin' && (
                     <div>
                     <input value={form.email} className={'navInput'}
                            onChange={(e) => updateForm({email: e.target.value})} type="email" name="email"
@@ -28,7 +28,7 @@ export default function TopNav(props) {
                            onChange={(e) => updateForm({password: e.target.value})} type="password" name="password"
                            placeholder="password"/>
                     <button className={'navButton'} onClick={() => login(props = {form, setForm})}> login</button>
-                    <button className={'navButton'} onClick={() => registre(props = {form, setForm})}> register</button>
+                    <button className={'navButton'} onClick={() => register(props = {form, setForm})}> register</button>
                     </div>
             )}
                 {props.account === "admin" && (
@@ -38,7 +38,7 @@ export default function TopNav(props) {
                     <input value={form.password} className={'navInput'} onChange={(e) => updateForm({password: e.target.value})} type="password" name="password"
                     placeholder="password"/>
                     <button className={'navButton'} onClick={() => login(props = {form, setForm})}> login</button>
-                    <button className={'navButton'} onClick={() => registre(props = {form, setForm})}> register</button>
+                    <button className={'navButton'} onClick={() => register(props = {form, setForm})}> register</button>
                     <button className={'navButton'} onClick={() => adminControls(props)}> admin</button>
                     </div>
     )}
@@ -64,7 +64,7 @@ async function login(props){
     props.setForm({ email: "", password: ""});
 }
 
-async function registre(props){
+async function register(props){
     if(props.form.password.length<8){
         window.alert("your password is too short. min. length is 8 characters");
         return;

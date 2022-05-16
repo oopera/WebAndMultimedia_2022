@@ -1,5 +1,7 @@
 import '../App.css';
 import {useEffect, useState} from "react";
+import React, { Component } from 'react'
+import Select from 'react-select'
 
 export default function AdminControl(props) {
 
@@ -22,9 +24,7 @@ export default function AdminControl(props) {
 
                 <label htmlFor="products">Choose a product:</label>
 
-                <select name="cars" id="cars">
-                    <ProductOptions products={props.products}/>
-                </select>
+                    <Select options={props.products.name} />
                 </div>
             </div>
         )
