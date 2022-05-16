@@ -3,28 +3,12 @@ import {Product, ProductFocus} from "./Product";
 import React, {useEffect, useState} from "react";
 
 export default function ProductList(props) {
-    const [products, setProducts] = useState([]);
     const [rerender, setRerender] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     console.log(searchInput)
     function softRerender(){
         setRerender(!rerender);
     }
-    useEffect(() => {
-        async function getProducts() {
-            const response = await fetch(`http://localhost:5000/webweb/products`);
-
-            if (!response.ok) {
-                const message = `Products could not be loaded`;
-                window.alert(message);
-                return;
-            }
-            const prodDB = await response.json();
-            setProducts(prodDB);
-        }
-        getProducts();
-        return;
-    }, [products.length]);
 
     function updateProduct(string){
        if(string === props.openedItem){
@@ -39,7 +23,7 @@ export default function ProductList(props) {
         ['#52FF00', '#00FFE0', '#3300FF', "#0057FF", "#AD00FF", "#FF0000", "#FFA800", '#CCFF00', '#52FF00']
     let counter = -1;
     function AproductList(props) {
-        return products.map((product) => {
+        return props.products.map((product) => {
             counter = counter + 1
             if(counter === colors.length){
                 counter = 0

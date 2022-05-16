@@ -97,10 +97,13 @@ recordRoutes.route("/users/add").post(function (req, response) {
 
 });
 
-recordRoutes.route("/users/email").get(function (req, res) {
+recordRoutes.route("/users/email").post(function (req, res) {
     console.log("IEXIST")
     let db_connect = dbo.getDb();
-    let myquery = { "Email": req.body.email.toLowerCase()};
+    let myquery = { "Email": req.body.email.toLowerCase()
+    ,
+        "Password": req.body.password.toLowerCase()
+    };
     db_connect
         .collection("users")
         .find(myquery, function (err, result) {

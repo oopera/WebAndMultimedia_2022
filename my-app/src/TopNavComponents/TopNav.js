@@ -29,6 +29,8 @@ export default function TopNav(props) {
 
             <button className={'navButton'} onClick={() => registre(props={form, setForm})}> register</button>
 
+            <button className={'navButton'} onClick={() => adminControls(props)}> admin</button>
+
             </div>
 
     )}
@@ -42,13 +44,12 @@ async function login(props){
         headers: {
             "Content-Type": "application/json",
         },
-        body: form.email
+        body: JSON.stringify(form)
     })
         .catch(error => {
             window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
         });
     console.log(response)
-    console.log("response")
     props.setForm({ email: "", password: ""});
 }
 
@@ -72,3 +73,10 @@ async function registre(props){
     props.setForm({ email: "", password: ""});
 }
 
+function adminControls(props){
+    if(props.openedItem!=="admin") {
+        props.setOpenedItem("admin")
+    }else{
+        props.setOpenedItem('null')
+    }
+}

@@ -2,7 +2,7 @@ import './App.css';
 import Background from "./BackgroundComponents/Background";
 import TopNav from "./TopNavComponents/TopNav";
 import ProductList from "./ProductComponents/ProductList"
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import AdminControl from "./AdminComponents/AdminControl";
 
 /*
@@ -28,7 +28,10 @@ Umzusetzende Funktionen aufrufbar aus dem Browser
 
  */
 export default function App() {
-
+    const [products, setProducts] = useState([]);
+    const [openedItem, setOpenedItem] = useState('null');
+    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [account, setAccount] = useState('null');
     function theTime() {
         let Datte = new Date();
         let H = Datte.getHours();
@@ -43,23 +46,36 @@ export default function App() {
         if (s < 10 ){
             s = "0" + s;
         }
-        document.getElementById("time").textContent = `${H} : ${m} : ${s}`
+        //document.getElementById("time").textContent = `${H} : ${m} : ${s}`
     }
     setInterval(theTime);
 
-    const [openedItem, setOpenedItem] = useState('null');
-    const [isLoggedIn, setLoggedIn] = useState(false);
-    const [account, setAccount] = useState('null');
+    useEffect(() => {
+        async function getProducts() {
+            const response = await fetch(`http://localhost:5000/webweb/products`);
+
+            if (!response.ok) {
+                const message = `Products could not be loaded`;
+                window.alert(message);
+                return;
+            }
+            const prodDB = await response.json();
+            setProducts(prodDB);
+        }
+        getProducts();
+        return;
+    }, [products.length]);
+
     return (
             <div>
               <p className={'logo'}>lucaslichner.</p>
                 <p className={'maintext'}>buy.my.shit.</p>
                 <div style={{top: "95%", writingMode: "vertical-rl",
-                    textOrientation: "mixed", fontSize: "150%", position: "absolute"}} id="time"></div>
+                    textOrientation: "mixed", fontSize: "150%", position: "absolute"}} id="time">placeholder</div>
                 <Background/>
               <TopNav account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
-              <ProductList openedItem={openedItem} setOpenedItem={setOpenedItem} />
-              <AdminControl openedItem={openedItem} setOpenedItem={setOpenedItem}/>
+              <ProductList products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem} />
+              <AdminControl products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
             </div>
       );
 }

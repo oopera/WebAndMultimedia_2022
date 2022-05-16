@@ -134,6 +134,26 @@ body{
   animation: 0.2s ease-out 0s 1 slideInFromLeft;
   box-shadow: 5px 5px 50px -30px #000000;
 }
+
+.adminControl{
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 15%;
+  border: 2pt solid black;
+  border-radius: 25pt;
+  background: white;
+  position: absolute;
+  z-index: 10;
+  height: 70vh;
+  max-height: 650px;
+  width: 50vw;
+  max-width: 800px;
+  transition: 150ms;
+  animation: 0.2s ease-out 0s 1 slideInFromLeft;
+  box-shadow: 5px 5px 50px -30px #000000;
+}
+
 .focusContent{
   display:block;
   padding: 5%;
