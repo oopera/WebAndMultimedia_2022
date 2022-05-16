@@ -68,7 +68,7 @@ recordRoutes.route("/users/add").post(function (req, response) {
         try {
             let cursor = await dbizzle.find({"Email": req.body.email.toLowerCase()})
             return cursor.toArray()
-        } catch (e) {
+        }catch (e) {
             console.error('Error:', e)
         }
     }
@@ -78,7 +78,7 @@ recordRoutes.route("/users/add").post(function (req, response) {
             console.log('Fetched documents:', docsList)
             console.log("email is already in use")
             return false
-            }else {
+            }else{
             let myobj = {
                 Email: req.body.email.toLowerCase(),
                 Password: req.body.password,
@@ -94,14 +94,12 @@ recordRoutes.route("/users/add").post(function (req, response) {
             return true
         }
     })();
-
 });
 
-recordRoutes.route("/users/email").post(function (req, res) {
+recordRoutes.route("/users/login").get(function (req, res) {
     console.log("IEXIST")
-    let db_connect = dbo.getDb();
-    let myquery = { "Email": req.body.email.toLowerCase()
-    ,
+    let db_connect = dbo.getDb("webweb");
+    let myquery = { "Email": req.body.email.toLowerCase(),
         "Password": req.body.password.toLowerCase()
     };
     db_connect
@@ -136,7 +134,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
 // This section will help you delete a record
 recordRoutes.route("/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { _id: ObjectId(req.params.id)};
   db_connect.collection("products").deleteOne(myquery, function (err, obj) {
     if (err) throw err;
     console.log("1 document deleted");

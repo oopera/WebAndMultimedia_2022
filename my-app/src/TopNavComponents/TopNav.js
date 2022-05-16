@@ -5,7 +5,6 @@ import '../ProductComponents/ProductList'
 
 
 export default function TopNav(props) {
-
     const [form, setForm] = useState({
         email: "",
         password: "",
@@ -19,28 +18,40 @@ export default function TopNav(props) {
 
     return (
        // {props.account === "admin" && (
-            <div className="TopNav">
-            <input value={form.email}
-                   onChange={(e) => updateForm({ email: e.target.value })} type="email" name="email" placeholder="email"/>
-            <input value={form.password}
-                   onChange={(e) => updateForm({ password: e.target.value })} type="password" name="password" placeholder="password"/>
+                <div className="TopNav">
+                    {props.isLoggedIn === false && (
+                    <div>
+                    <input value={form.email} className={'navInput'}
+                           onChange={(e) => updateForm({email: e.target.value})} type="email" name="email"
+                           placeholder="email"/>
+                    <input value={form.password} className={'navInput'}
+                           onChange={(e) => updateForm({password: e.target.value})} type="password" name="password"
+                           placeholder="password"/>
+                    <button className={'navButton'} onClick={() => login(props = {form, setForm})}> login</button>
+                    <button className={'navButton'} onClick={() => registre(props = {form, setForm})}> register</button>
+                    </div>
+            )}
+                {props.account === "admin" && (
+                    <div>
+                    <input value={form.email} className={'navInput'} onChange={(e) => updateForm({email: e.target.value})} type="email" name="email"
+                           placeholder="email"/>
+                    <input value={form.password} className={'navInput'} onChange={(e) => updateForm({password: e.target.value})} type="password" name="password"
+                    placeholder="password"/>
+                    <button className={'navButton'} onClick={() => login(props = {form, setForm})}> login</button>
+                    <button className={'navButton'} onClick={() => registre(props = {form, setForm})}> register</button>
+                    <button className={'navButton'} onClick={() => adminControls(props)}> admin</button>
+                    </div>
+    )}
 
-            <button className={'navButton'} onClick={() => login(props={form, setForm})}>  login</button>
-
-            <button className={'navButton'} onClick={() => registre(props={form, setForm})}> register</button>
-
-            <button className={'navButton'} onClick={() => adminControls(props)}> admin</button>
-
-            </div>
-
+                </div>
     )}
           //  )})}
 
 
 async function login(props){
     const form = { ...props.form };
-    const response = await fetch("http://localhost:5000/users/email", {
-        method: "post",
+    const response = await fetch("http://localhost:5000/users/login", {
+        method: "get",
         headers: {
             "Content-Type": "application/json",
         },

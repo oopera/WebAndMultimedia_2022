@@ -46,14 +46,13 @@ export default function App() {
         if (s < 10 ){
             s = "0" + s;
         }
-        //document.getElementById("time").textContent = `${H} : ${m} : ${s}`
+        document.getElementById("time").textContent = `${H} : ${m} : ${s}`
     }
     setInterval(theTime);
 
     useEffect(() => {
         async function getProducts() {
             const response = await fetch(`http://localhost:5000/webweb/products`);
-
             if (!response.ok) {
                 const message = `Products could not be loaded`;
                 window.alert(message);
@@ -73,7 +72,7 @@ export default function App() {
                 <div style={{top: "95%", writingMode: "vertical-rl",
                     textOrientation: "mixed", fontSize: "150%", position: "absolute"}} id="time">placeholder</div>
                 <Background/>
-              <TopNav account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
+              <TopNav isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
               <ProductList products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem} />
               <AdminControl products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
             </div>
