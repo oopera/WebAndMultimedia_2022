@@ -53,14 +53,15 @@ body{
   border-radius: 10pt;
   display: flex;
   flex-direction: row;
-  transition: 150ms;
+  transition: 250ms;
   box-shadow: 5px 5px 50px -35px #000000;
   justify-content: space-between;
 }
 
 .Product:hover{
-  border: 2pt solid black;
+  border: 1pt solid black;
   padding-left:5%;
+  transition: 150ms;
 }
 
 
@@ -68,7 +69,7 @@ body{
   Background-color: white;
   display: flex;
   flex-direction: row;
-  border: 2pt solid black;
+  border: 1pt solid black;
   margin: 2%;
   padding: 1%;
   border-radius: 10pt;
@@ -128,7 +129,7 @@ body{
 }
 
 .ProductFocus{
-  border: 2pt solid black;
+  border: 1pt solid black;
   border-radius: 25pt;
   background: white;
   margin-left: 65%;
