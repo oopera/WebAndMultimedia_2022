@@ -31,7 +31,8 @@ export default function App() {
     const [products, setProducts] = useState([]);
     const [openedItem, setOpenedItem] = useState('null');
     const [isLoggedIn, setLoggedIn] = useState(false);
-    const [account, setAccount] = useState('admin');
+    const [account, setAccount] = useState(false);
+    const [loading, setLoading] = useState(false);
     function theTime() {
         let Datte = new Date();
         let H = Datte.getHours();
@@ -48,7 +49,7 @@ export default function App() {
         }
         document.getElementById("time").textContent = `${H} : ${m} : ${s}`
     }
-    setInterval(theTime);
+  //  setInterval(theTime);
 
     useEffect(() => {
         async function getProducts() {
@@ -74,6 +75,7 @@ export default function App() {
                 <Background/>
               <TopNav isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
               <ProductList products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem} />
+
               <AdminControl products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
             </div>
       );

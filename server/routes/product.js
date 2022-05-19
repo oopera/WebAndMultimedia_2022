@@ -85,6 +85,7 @@ recordRoutes.route("/users/add").post(function (req, response) {
                 Admin: false,
                 Purchases: [],
                 Comments: [],
+                Username:"",
             };
             db_connect.collection("users").insertOne(myobj, function (err, res) {
                 if (err) throw err;
@@ -96,18 +97,17 @@ recordRoutes.route("/users/add").post(function (req, response) {
     })();
 });
 
-recordRoutes.route("/users/login").get(function (req, res) {
-    console.log("IEXIST")
-    let db_connect = dbo.getDb("webweb");
-    let myquery = { "Email": req.body.email.toLowerCase(),
-        "Password": req.body.password.toLowerCase()
-    };
+recordRoutes.route("/users/login").post(function (req, res) {
+    let db_connect = dbo.getDb();
+
     db_connect
         .collection("users")
-        .find(myquery, function (err, result) {
+        .find({"Email": req.body.email.toLowerCase(), "Password": req.body.password})
+        .toArray(function (err, result) {
             if (err) throw err;
             res.json(result);
         });
+
 });
 
 // This section will help you update a record by id.

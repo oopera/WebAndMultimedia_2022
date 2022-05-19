@@ -27,8 +27,8 @@ export default function TopNav(props) {
                     <input value={form.password} className={'navInput'}
                            onChange={(e) => updateForm({password: e.target.value})} type="password" name="password"
                            placeholder="password"/>
-                    <button className={'navButton'} onClick={() => login(props = {form, setForm})}> login</button>
-                    <button className={'navButton'} onClick={() => register(props = {form, setForm})}> register</button>
+                    <button className={'navButton'} onClick={() => login(props = {props, form, setForm})}> login</button>
+                    <button className={'navButton'} onClick={() => register(props = {props, form, setForm})}> register</button>
                     </div>
             )}
                 {props.account === "admin" && (
@@ -37,8 +37,8 @@ export default function TopNav(props) {
                            placeholder="email"/>
                     <input value={form.password} className={'navInput'} onChange={(e) => updateForm({password: e.target.value})} type="password" name="password"
                     placeholder="password"/>
-                    <button className={'navButton'} onClick={() => login(props = {form, setForm})}> login</button>
-                    <button className={'navButton'} onClick={() => register(props = {form, setForm})}> register</button>
+                    <button className={'navButton'} onClick={() => login(props)}> login</button>
+                    <button className={'navButton'} onClick={() => register(props)}> register</button>
                     <button className={'navButton'} onClick={() => adminControls(props)}> admin</button>
                     </div>
     )}
@@ -50,8 +50,8 @@ export default function TopNav(props) {
 
 async function login(props){
     const form = { ...props.form };
-    const response = await fetch("http://localhost:5000/users/login", {
-        method: "get",
+    const res = await fetch("http://localhost:5000/users/login", {
+        method: "post",
         headers: {
             "Content-Type": "application/json",
         },
@@ -60,9 +60,20 @@ async function login(props){
         .catch(error => {
             window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
         });
-    console.log(response)
-    props.setForm({ email: "", password: ""});
-}
+    const user = await res.json();
+    if(user.length === 0){
+        console.log("Wrong credentials")
+    } else {
+        if(user[0].Admin === true){
+            props.props.setAccount('admin')
+        }
+        console.log(user[0].Admin)
+        props.props.setLoggedIn(user[0])
+        console.log(props.props.isLoggedIn)
+    }
+
+    }
+
 
 async function register(props){
     if(props.form.password.length<8){
