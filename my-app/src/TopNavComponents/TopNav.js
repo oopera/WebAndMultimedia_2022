@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import '../ProductComponents/ProductList'
+import Select from "react-select";
 
 
 
@@ -19,7 +20,7 @@ export default function TopNav(props) {
     return (
        // {props.account === "admin" && (
                 <div className="TopNav">
-                    {props.account !== 'admin' && (
+                    {props.isLoggedIn === false && (
                     <div>
                     <input value={form.email} className={'navInput'}
                            onChange={(e) => updateForm({email: e.target.value})} type="email" name="email"
@@ -31,22 +32,42 @@ export default function TopNav(props) {
                     <button className={'navButton'} onClick={() => register(props = {props, form, setForm})}> register</button>
                     </div>
             )}
+                    {props.account !== 'admin' && props.isLoggedIn === true && (
+
+                        <div>
+
+                            <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
+                            <button className={'navButton'} onClick={() => myAccount(props) }> my account</button>
+                        </div>
+                    )}
                 {props.account === "admin" && (
                     <div>
-                    <input value={form.email} className={'navInput'} onChange={(e) => updateForm({email: e.target.value})} type="email" name="email"
-                           placeholder="email"/>
-                    <input value={form.password} className={'navInput'} onChange={(e) => updateForm({password: e.target.value})} type="password" name="password"
-                    placeholder="password"/>
-                    <button className={'navButton'} onClick={() => login(props)}> login</button>
-                    <button className={'navButton'} onClick={() => register(props)}> register</button>
+                    <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
                     <button className={'navButton'} onClick={() => adminControls(props)}> admin</button>
+                    <button className={'navButton'} onClick={() => myAccount(props)}> my account</button>
                     </div>
     )}
 
                 </div>
     )}
-          //  )})}
 
+
+
+
+
+function logout(props){
+    props.props.setAccount('');
+    props.props.setLoggedIn(false);
+    props.setForm({ email: "", password: ""});
+}
+
+function myAccount(props){
+    if(props.openedItem!=="account") {
+        props.setOpenedItem("account")
+    }else{
+        props.setOpenedItem('null')
+    }
+}
 
 async function login(props){
     const form = { ...props.form };
@@ -68,10 +89,15 @@ async function login(props){
             props.props.setAccount('admin')
         }
         console.log(user[0].Admin)
-        props.props.setLoggedIn(user[0])
+        props.props.setLoggedIn(user[0]._id)
+        props.props.setAccComments(Object.values(user[0].Comments))
+        console.log(user[0].Comments)
+        props.props.setPurchases(user[0].purchases)
+        console.log(user[0].Purchases)
+
         console.log(props.props.isLoggedIn)
     }
-
+    props.setForm({ email: "", password: ""});
     }
 
 
@@ -92,6 +118,7 @@ async function register(props){
             window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
         });
     console.log(response.ok)
+    await login(props);
     props.setForm({ email: "", password: ""});
 }
 

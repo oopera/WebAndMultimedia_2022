@@ -31,8 +31,15 @@ export default function App() {
     const [products, setProducts] = useState([]);
     const [openedItem, setOpenedItem] = useState('null');
     const [isLoggedIn, setLoggedIn] = useState(false);
-    const [account, setAccount] = useState(false);
+    const [account, setAccount] = useState();
     const [loading, setLoading] = useState(false);
+    const [purchases, setPurchases] = useState(false);
+    const [accComments, setAccComments] = useState(false);
+
+    if(isLoggedIn !== false){
+        console.log(accComments)
+    }
+
     function theTime() {
         let Datte = new Date();
         let H = Datte.getHours();
@@ -73,10 +80,8 @@ export default function App() {
                 <div style={{top: "95%", writingMode: "vertical-rl",
                     textOrientation: "mixed", fontSize: "150%", position: "absolute"}} id="time">placeholder</div>
                 <Background/>
-              <TopNav isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
-              <ProductList products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem} />
-
-              <AdminControl products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
+              <TopNav setAccComments={setAccComments} setPurchases={setPurchases} isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
+              <ProductList accComments={accComments} purchases={purchases} products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem} />
             </div>
       );
 }

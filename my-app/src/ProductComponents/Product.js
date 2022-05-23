@@ -1,6 +1,7 @@
 import '../App.css';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import  './ProductList';
+import Select from "react-select";
 
 export function ProductFocus(props) {
     const [comments, setComments] = useState([]);
@@ -38,6 +39,7 @@ export function ProductFocus(props) {
         </div>
     );
 }
+
 
 export function Commentlist(props){
     return(

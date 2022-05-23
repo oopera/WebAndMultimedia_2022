@@ -1,6 +1,7 @@
 import '../App.css';
 import {Product, ProductFocus} from "./Product";
 import React, {useEffect, useState} from "react";
+import Select from "react-select";
 
 export default function ProductList(props) {
     const [rerender, setRerender] = useState(false);
@@ -44,6 +45,27 @@ export default function ProductList(props) {
                         <ProductFocus style={{borderColor: colors[counter]}} comments={product.Comments} img={product.img} id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                     </div>
                         )}
+                    {props.openedItem === 'admin' && (
+                            <div className={'ProductFocus'}>
+                                <div className={'focusContent'}>
+                                    <p> Add user </p>
+                                    <p> Add product </p>
+                                    <p> delete product </p>
+
+                                    <label htmlFor="products">Choose a product:</label>
+
+                                </div>
+                            </div>
+                        )}
+                    {props.openedItem === 'account' && (
+                        <div className={'ProductFocus'}>
+                            <div className={'focusContent'}>
+                                <p>{props.accComments.toString()}</p>
+
+
+                            </div>
+                        </div>
+                    )}
                     </div>
             )});
     }
