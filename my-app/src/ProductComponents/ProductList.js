@@ -1,12 +1,15 @@
 import '../App.css';
-import {Product, ProductFocus} from "./Product";
+import {Product} from "./Product";
+import {ProductFocus} from "./ProductFocus";
 import React, {useEffect, useState} from "react";
+import AdminControl from "../AdminComponents/AdminControl"
 import Select from "react-select";
+import {AccountWindow} from "../AccountComponents/AccountWindow";
 
 export default function ProductList(props) {
     const [rerender, setRerender] = useState(false);
     const [searchInput, setSearchInput] = useState('');
-    console.log(searchInput)
+
     function softRerender(){
         setRerender(!rerender);
     }
@@ -23,6 +26,7 @@ export default function ProductList(props) {
     const colors =
         ['#52FF00', '#00FFE0', '#3300FF', "#0057FF", "#AD00FF", "#FF0000", "#FFA800", '#CCFF00', '#52FF00']
     let counter = -1;
+
     function AproductList(props) {
         return props.products.map((product) => {
             counter = counter + 1
@@ -45,28 +49,7 @@ export default function ProductList(props) {
                         <ProductFocus style={{borderColor: colors[counter]}} comments={product.Comments} img={product.img} id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                     </div>
                         )}
-                    {props.openedItem === 'admin' && (
-                            <div className={'ProductFocus'}>
-                                <div className={'focusContent'}>
-                                    <p> Add user </p>
-                                    <p> Add product </p>
-                                    <p> delete product </p>
-
-                                    <label htmlFor="products">Choose a product:</label>
-
-                                </div>
-                            </div>
-                        )}
-                    {props.openedItem === 'account' && (
-                        <div className={'ProductFocus'}>
-                            <div className={'focusContent'}>
-                                <p>{props.accComments.toString()}</p>
-
-
-                            </div>
-                        </div>
-                    )}
-                    </div>
+                </div>
             )});
     }
         return (

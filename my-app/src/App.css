@@ -144,6 +144,22 @@ body{
   animation: 0.2s ease-out 0s 1 slideInFromLeft;
   box-shadow: 5px 5px 50px -40px #000000;
 }
+.FocusWindow{
+  border: 1pt solid black;
+  border-radius: 25pt;
+  background: white;
+  margin-left: 25%;
+  position: absolute;
+  top: 9%;
+z-index: 10;
+  height: 65vh;
+  max-height: 650px;
+  width: 40vw;
+  max-width: 800px;
+  transition: 150ms;
+  animation: 0.2s ease-out 0s 1 slideInFromLeft;
+  box-shadow: 5px 5px 50px -40px #000000;
+}
 
 .adminControl{
   left: 0;

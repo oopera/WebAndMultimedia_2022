@@ -1,9 +1,12 @@
 import './App.css';
 import Background from "./BackgroundComponents/Background";
+import BackGroundGrafix from "./BackgroundComponents/BackGroundGrafix";
 import TopNav from "./TopNavComponents/TopNav";
 import ProductList from "./ProductComponents/ProductList"
 import React, {useEffect, useState} from "react";
 import AdminControl from "./AdminComponents/AdminControl";
+import {ProductFocus} from "./ProductComponents/Product";
+import SubWindow from "./SubWindows/SubWindow";
 
 /*
 Umzusetzende Funktionen aufrufbar aus dem Browser
@@ -37,26 +40,8 @@ export default function App() {
     const [accComments, setAccComments] = useState(false);
 
     if(isLoggedIn !== false){
-        console.log(accComments)
+        console.log(purchases)
     }
-
-    function theTime() {
-        let Datte = new Date();
-        let H = Datte.getHours();
-        let m = Datte.getMinutes();
-        let s = Datte.getSeconds();
-        if (H < 10 ){
-            H = "0" + H;
-        }
-        if (m < 10 ){
-            m = "0" + m;
-        }
-        if (s < 10 ){
-            s = "0" + s;
-        }
-        document.getElementById("time").textContent = `${H} : ${m} : ${s}`
-    }
-  //  setInterval(theTime);
 
     useEffect(() => {
         async function getProducts() {
@@ -75,13 +60,11 @@ export default function App() {
 
     return (
             <div>
-              <p className={'logo'}>lucaslichner.</p>
-                <p className={'maintext'}>buy.my.shit.</p>
-                <div style={{top: "95%", writingMode: "vertical-rl",
-                    textOrientation: "mixed", fontSize: "150%", position: "absolute"}} id="time">placeholder</div>
+                <BackGroundGrafix/>
                 <Background/>
               <TopNav setAccComments={setAccComments} setPurchases={setPurchases} isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
               <ProductList accComments={accComments} purchases={purchases} products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem} />
+              <SubWindow accComments={accComments} purchases={purchases} account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
             </div>
       );
 }

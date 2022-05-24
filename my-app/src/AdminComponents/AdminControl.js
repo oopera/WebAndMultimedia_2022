@@ -1,5 +1,4 @@
 import '../App.css';
-
 import React, { Component } from 'react'
 import Select from 'react-select'
 
@@ -13,22 +12,22 @@ export default function AdminControl(props) {
 
             )})
     }
-    console.log(props.products.name)
+
+    //<Select options={props.products.name}/>
     return(
 
-        props.openedItem === 'admin' && (
-            <div className={'adminControl'}>
+            <div className={'FocusWindow'}>
                 <div className={'focusContent'}>
                 <p> Add user </p>
                 <p> Add product </p>
                 <p> delete product </p>
 
                 <label htmlFor="products">Choose a product:</label>
-                    <Select options={props.products.name}/>
+
                 </div>
             </div>
 
-        )
+
 
     )
 

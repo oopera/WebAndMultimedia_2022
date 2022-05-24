@@ -18,7 +18,7 @@ export default function TopNav(props) {
     }
 
     return (
-       // {props.account === "admin" && (
+
                 <div className="TopNav">
                     {props.isLoggedIn === false && (
                     <div>
@@ -32,7 +32,7 @@ export default function TopNav(props) {
                     <button className={'navButton'} onClick={() => register(props = {props, form, setForm})}> register</button>
                     </div>
             )}
-                    {props.account !== 'admin' && props.isLoggedIn === true && (
+                    {props.account !== 'admin' && props.isLoggedIn !== false && (
 
                         <div>
 
@@ -40,7 +40,7 @@ export default function TopNav(props) {
                             <button className={'navButton'} onClick={() => myAccount(props) }> my account</button>
                         </div>
                     )}
-                {props.account === "admin" && (
+                {props.account === "admin" && props.isLoggedIn !== false && (
                     <div>
                     <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
                     <button className={'navButton'} onClick={() => adminControls(props)}> admin</button>
@@ -90,12 +90,11 @@ async function login(props){
         }
         console.log(user[0].Admin)
         props.props.setLoggedIn(user[0]._id)
-        props.props.setAccComments(Object.values(user[0].Comments))
-        console.log(user[0].Comments)
-        props.props.setPurchases(user[0].purchases)
+        props.props.setAccComments(user[0].Comments)
+        props.props.setPurchases(user[0].Purchases)
         console.log(user[0].Purchases)
+        console.log(user[0].Comments)
 
-        console.log(props.props.isLoggedIn)
     }
     props.setForm({ email: "", password: ""});
     }

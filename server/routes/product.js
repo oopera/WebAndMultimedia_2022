@@ -34,15 +34,26 @@ recordRoutes.route("/webweb/comments").get(function (req, res) {
       });
 });
 // This section will help you get a single record by id
-recordRoutes.route("/products/:id").get(function (req, res) {
+recordRoutes.route("/comments/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect
-      .collection("products")
+      .collection("comments")
       .findOne(myquery, function (err, result) {
         if (err) throw err;
         res.json(result);
       });
+});
+
+recordRoutes.route("/purchases/:id").get(function (req, res) {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: ObjectId( req.params.id )};
+    db_connect
+        .collection("purchases")
+        .findOne(myquery, function (err, result) {
+            if (err) throw err;
+            res.json(result);
+        });
 });
 
 // This section will help you create a new record.
