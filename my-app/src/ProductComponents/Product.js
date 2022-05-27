@@ -9,7 +9,6 @@ export function Product(props){
                     <header className="Product-name">
                         <h1 className={'header'}> {props.name} </h1>
                     </header>
-
                     <p className="text-1xl font-bold underline"> {props.price}€</p>
                 </div>
     )

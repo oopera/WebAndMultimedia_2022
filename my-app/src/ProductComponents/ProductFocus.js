@@ -13,7 +13,16 @@ export function Commentlist(props){
 
 }
 
+function updateBasket(props){
+    let newBasket = props.basket.concat(props.product)
+    props.setBasket(newBasket)
+
+}
+
+
 export function ProductFocus(props) {
+
+    console.log(props.purchases)
     const [comments, setComments] = useState([]);
     useEffect(() => {
         async function getComments() {
@@ -37,12 +46,25 @@ export function ProductFocus(props) {
                 <p> {props.description} </p>
                 <p> {props.price} €</p>
                 <img className={"productImage"} src={props.img}/>
-                <button style={{zIndex : '5'}} onClick={updateProducts(props._id)}>Buy Now</button>
+                <button style={{zIndex : '5'}} onClick={() => updateBasket(props)}>Add to Basket</button>
                 <p>{props.availability} available</p>
                 <div >
+                    {props.purchases.filter(e=> e.Item === props.name).length>0 && props.isLoggedIn !== false && (
+                        <div>
                     <input placeholder={'Write a comment'}/>
-                    <button>send</button>
-
+                    <button onClick={sendComment()}>send</button>
+                        </div>
+                        )}
+                    {props.purchases.filter(e=> e.Item === props.name).length===0 && props.isLoggedIn !== false && (
+                        <div>
+                            You have to purchase the Item before you can leave a comment.
+                        </div>
+                    )}
+                    {props.isLoggedIn === false && (
+                        <div>
+                            You have to log in before you can leave a comment.
+                        </div>
+                    )}
                 </div>
                 <Commentlist id={props.id} comments={comments}/>
             </div>
@@ -50,6 +72,6 @@ export function ProductFocus(props) {
     );
 }
 
-function updateProducts(){
+function sendComment(){
 
 }

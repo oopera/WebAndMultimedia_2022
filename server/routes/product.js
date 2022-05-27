@@ -33,7 +33,19 @@ recordRoutes.route("/webweb/comments").get(function (req, res) {
         res.json(result);
       });
 });
-// This section will help you get a single record by id
+
+recordRoutes.route("/webweb/users").get(function (req, res) {
+    let db_connect = dbo.getDb("webweb");
+    db_connect
+        .collection("users")
+        .find({})
+        .toArray(function (err, result) {
+            if (err) throw err;
+            res.json(result);
+        });
+});
+
+
 recordRoutes.route("/comments/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
@@ -44,6 +56,22 @@ recordRoutes.route("/comments/:id").get(function (req, res) {
         res.json(result);
       });
 });
+
+recordRoutes.route("/comments/add").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let myobj = {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        availability: req.body.availability
+    };
+    db_connect.collection("comments").insertOne(myobj, function (err, res) {
+        if (err) throw err;
+        response.json(res);
+    });
+});
+
+
 
 recordRoutes.route("/purchases/:id").get(function (req, res) {
     let db_connect = dbo.getDb();
@@ -56,7 +84,20 @@ recordRoutes.route("/purchases/:id").get(function (req, res) {
         });
 });
 
-// This section will help you create a new record.
+recordRoutes.route("/purchases/add").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let myobj = {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        availability: req.body.availability
+    };
+    db_connect.collection("purchases").insertOne(myobj, function (err, res) {
+        if (err) throw err;
+        response.json(res);
+    });
+});
+
 recordRoutes.route("/products/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
@@ -69,6 +110,26 @@ recordRoutes.route("/products/add").post(function (req, response) {
     if (err) throw err;
     response.json(res);
   });
+});
+
+recordRoutes.route("/updateProduct/:id").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: ObjectId( req.params.id )};
+    let newvalues = {
+        $set: {
+            Name: req.body.Name,
+            Description: req.body.Description,
+            Price: req.body.Price,
+            Availability: req.body.Availability,
+        },
+    };
+    db_connect
+        .collection("products")
+        .updateOne(myquery, newvalues, function (err, res) {
+            if (err) throw err;
+            console.log("1 document updated");
+            response.json(res);
+        });
 });
 
 recordRoutes.route("/users/add").post(function (req, response) {
@@ -110,7 +171,6 @@ recordRoutes.route("/users/add").post(function (req, response) {
 
 recordRoutes.route("/users/login").post(function (req, res) {
     let db_connect = dbo.getDb();
-
     db_connect
         .collection("users")
         .find({"Email": req.body.email.toLowerCase(), "Password": req.body.password})
@@ -121,28 +181,29 @@ recordRoutes.route("/users/login").post(function (req, res) {
 
 });
 
-// This section will help you update a record by id.
-recordRoutes.route("/update/:id").post(function (req, response) {
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
-  let newvalues = {
-    $set: {
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      availability: req.body.price,
-    },
-  };
-  db_connect
-    .collection("products")
-    .updateOne(myquery, newvalues, function (err, res) {
-      if (err) throw err;
-      console.log("1 document updated");
-      response.json(res);
-    });
+recordRoutes.route("/updateUser/:id").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: ObjectId( req.params.id )};
+    let newvalues = {
+        $set: {
+            Email: req.body.Name,
+            Password: req.body.Description,
+            Admin: req.body.Price,
+            Purchases: req.body.Availability,
+            Comments: req.body.Availability,
+            Username: req.body.Availability,
+        },
+    };
+    db_connect
+        .collection("products")
+        .updateOne(myquery, newvalues, function (err, res) {
+            if (err) throw err;
+            console.log("1 document updated");
+            response.json(res);
+        });
 });
 
-// This section will help you delete a record
+
 recordRoutes.route("/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id)};

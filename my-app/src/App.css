@@ -12,8 +12,12 @@
   .ProductFocus {
     left: 300px;
   }
+  .maintext {
+    font-size: 300px;
+
+  }
 }
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .ProductContainer {
     overflow-y: visible;
     width: 600px;
@@ -27,6 +31,11 @@
   }
   .TopNav{
     visibility: hidden;
+  }
+  .maintext {
+
+    font-size: 50px;
+
   }
 }
 
@@ -56,6 +65,15 @@ body{
   transition: 250ms;
   box-shadow: 5px 5px 50px -35px #000000;
   justify-content: space-between;
+}
+
+.subItem{
+  border-radius: 10pt;
+  border: 1pt solid black;
+  justify-content: space-between;
+  margin: 2%;
+  padding: 1%;
+  width: 70%;
 }
 
 .Product:hover{
@@ -119,7 +137,7 @@ body{
   position: fixed;
   color: black;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 500%;
+  font-size: 80px;
   font-weight: bold;
   transition: 150ms;
 }

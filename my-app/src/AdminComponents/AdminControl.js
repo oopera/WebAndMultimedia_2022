@@ -1,8 +1,25 @@
 import '../App.css';
-import React, { Component } from 'react'
+import React, {Component, useEffect, useState} from 'react'
 import Select from 'react-select'
 
 export default function AdminControl(props) {
+    const [users, setUsers] = useState([])
+    const [selectedProduct, setSelectedProduct] = useState('')
+    const [searchInput, setSearchInput] = useState('');
+    useEffect(() => {
+        async function getUsers() {
+            const response = await fetch(`http://localhost:5000/webweb/users`);
+            if (!response.ok) {
+                const message = `Products could not be loaded`;
+                window.alert(message);
+                return;
+            }
+            const userDB = await response.json();
+            setUsers(userDB);
+        }
+        getUsers();
+        return;
+    }, [users.length]);
 
     function ProductOptions(props){
         return props.products.map((product) => {
@@ -12,8 +29,8 @@ export default function AdminControl(props) {
 
             )})
     }
+    console.log(props.products)
 
-    //<Select options={props.products.name}/>
     return(
 
             <div className={'FocusWindow'}>
@@ -21,13 +38,15 @@ export default function AdminControl(props) {
                 <p> Add user </p>
                 <p> Add product </p>
                 <p> delete product </p>
-
-                <label htmlFor="products">Choose a product:</label>
-
+                    <div>
+                    <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}placeholder={'search...'}/>
+                    </div>
+                    <label htmlFor="products">Choose a product:</label>
+                    <select>
+                    {props.products.map((product) => <option value={product.Name}>{product.Name}</option>)}
+                    </select>
                 </div>
             </div>
-
-
 
     )
 

@@ -4,14 +4,10 @@ import BackGroundGrafix from "./BackgroundComponents/BackGroundGrafix";
 import TopNav from "./TopNavComponents/TopNav";
 import ProductList from "./ProductComponents/ProductList"
 import React, {useEffect, useState} from "react";
-import AdminControl from "./AdminComponents/AdminControl";
-import {ProductFocus} from "./ProductComponents/Product";
 import SubWindow from "./SubWindows/SubWindow";
 
 /*
 Umzusetzende Funktionen aufrufbar aus dem Browser
-
-• Registrierung/Login durch Kunde
 
 (Admin)
 
@@ -19,13 +15,6 @@ Umzusetzende Funktionen aufrufbar aus dem Browser
 • Update Anzahl verfügbarer von Produkten (auf Lager)
 • Add/Remove von Benutzern/Kunden (Email, Name, Vorname, …)
 • Suche nach Usern („Mic….“) durch Admin
-
-• Eingabe von Bewertungen / Kommentaren durch Kunden
-
-• Liste eigener Bewertungen
-• Liste eigener Käufe
-
-• Markierung von Bewertungen tatsächlich von diesem User gekaufter Waren / Nur user die gekauft haben können bewerten
 
 • Canvas2D: Charts für Aktivität des Systems (Anzahl verkaufter Produkte, Lagerstand, …)
 
@@ -38,10 +27,8 @@ export default function App() {
     const [loading, setLoading] = useState(false);
     const [purchases, setPurchases] = useState(false);
     const [accComments, setAccComments] = useState(false);
+    const [basket, setBasket] = useState([]);
 
-    if(isLoggedIn !== false){
-        console.log(purchases)
-    }
 
     useEffect(() => {
         async function getProducts() {
@@ -59,12 +46,19 @@ export default function App() {
     }, [products.length]);
 
     return (
-            <div>
-                <BackGroundGrafix/>
-                <Background/>
-              <TopNav setAccComments={setAccComments} setPurchases={setPurchases} isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
-              <ProductList accComments={accComments} purchases={purchases} products={products} setProducts={setProducts} openedItem={openedItem} setOpenedItem={setOpenedItem} />
-              <SubWindow accComments={accComments} purchases={purchases} account={account} setAccount={setAccount} openedItem={openedItem} setOpenedItem={setOpenedItem}/>
-            </div>
+
+    <div>
+        <BackGroundGrafix/>
+        <Background/>
+        <TopNav setAccComments={setAccComments} setPurchases={setPurchases} isLoggedIn={isLoggedIn}
+                setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem}
+                setOpenedItem={setOpenedItem}/>
+        <ProductList  isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} products={products} setProducts={setProducts}
+                     openedItem={openedItem} setOpenedItem={setOpenedItem}/>
+        <SubWindow basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} account={account} setAccount={setAccount}
+                   openedItem={openedItem} setOpenedItem={setOpenedItem} products={products}/>
+    </div>
+
+
       );
 }

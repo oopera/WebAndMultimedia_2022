@@ -18,7 +18,6 @@ export default function TopNav(props) {
     }
 
     return (
-
                 <div className="TopNav">
                     {props.isLoggedIn === false && (
                     <div>
@@ -30,23 +29,25 @@ export default function TopNav(props) {
                            placeholder="password"/>
                     <button className={'navButton'} onClick={() => login(props = {props, form, setForm})}> login</button>
                     <button className={'navButton'} onClick={() => register(props = {props, form, setForm})}> register</button>
+                    <button className={'navButton'} onClick={() => basket(props) }> basket</button>
                     </div>
-            )}
+                    )}
                     {props.account !== 'admin' && props.isLoggedIn !== false && (
 
                         <div>
-
                             <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
-                            <button className={'navButton'} onClick={() => myAccount(props) }> my account</button>
+                            <button className={'navButton'} onClick={() => myAccount(props) }>account</button>
+                            <button className={'navButton'} onClick={() => basket(props) }> basket</button>
                         </div>
                     )}
                 {props.account === "admin" && props.isLoggedIn !== false && (
                     <div>
                     <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
                     <button className={'navButton'} onClick={() => adminControls(props)}> admin</button>
-                    <button className={'navButton'} onClick={() => myAccount(props)}> my account</button>
+                    <button className={'navButton'} onClick={() => myAccount(props)}>account</button>
+                        <button className={'navButton'} onClick={() => basket(props) }> basket</button>
                     </div>
-    )}
+                    )}
 
                 </div>
     )}
@@ -61,6 +62,13 @@ function logout(props){
     props.setForm({ email: "", password: ""});
 }
 
+function basket(props){
+    if(props.openedItem!=="basket") {
+        props.setOpenedItem("basket")
+    }else{
+        props.setOpenedItem('null')
+    }
+}
 function myAccount(props){
     if(props.openedItem!=="account") {
         props.setOpenedItem("account")
@@ -88,12 +96,9 @@ async function login(props){
         if(user[0].Admin === true){
             props.props.setAccount('admin')
         }
-        console.log(user[0].Admin)
         props.props.setLoggedIn(user[0]._id)
         props.props.setAccComments(user[0].Comments)
         props.props.setPurchases(user[0].Purchases)
-        console.log(user[0].Purchases)
-        console.log(user[0].Comments)
 
     }
     props.setForm({ email: "", password: ""});
