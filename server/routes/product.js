@@ -57,20 +57,6 @@ recordRoutes.route("/comments/:id").get(function (req, res) {
       });
 });
 
-recordRoutes.route("/comments/add").post(function (req, response) {
-    let db_connect = dbo.getDb();
-    let myobj = {
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        availability: req.body.availability
-    };
-    db_connect.collection("comments").insertOne(myobj, function (err, res) {
-        if (err) throw err;
-        response.json(res);
-    });
-});
-
 
 
 recordRoutes.route("/purchases/:id").get(function (req, res) {
@@ -117,7 +103,7 @@ recordRoutes.route("/comments/add").post(function (req, response) {
     let myobj = {
         name: req.body.name,
         comment: req.body.comment,
-        id: req.body.id
+        id: ObjectId(req.body.id)
     };
     db_connect.collection("comments").insertOne(myobj, function (err, res) {
         if (err) throw err;
