@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
 
 
+
 export function Commentlist(props){
     return(
-        props.comments.filter(comment => comment.id === props.id).map((filteredComment) => {
+        props.comments.filter(comment => comment.productID === props.id).map((filteredComment) => {
             return (
                 <div key={filteredComment._id}>
                     <p> {filteredComment.name}: {filteredComment.comment} {filteredComment.Date}</p>
@@ -15,13 +16,13 @@ export function Commentlist(props){
 
 function updateBasket(props){
     let newBasket = props.basket.concat(props.product)
-    console.log(typeof newBasket)
     props.setBasket(newBasket)
 
 }
 
-function softRerender(props){
-    props.setRerender(!props.rerender)
+function softRerender(rerender, setRerender){
+   setRerender(!rerender)
+    console.log(rerender)
 }
 export function ProductFocus(props) {
     const [rerender, setRerender] = useState(false)
@@ -53,7 +54,7 @@ export function ProductFocus(props) {
                 )}
                 {props.availability !== 0 && (
                     <div>
-                    <button style={{zIndex : '5'}} onClick={() => updateBasket(props, rerender, setRerender)}>Add to Basket</button>
+                    <button style={{zIndex : '5'}} onClick={() => updateBasket(props)}>Add to Basket</button>
                     <p>{props.availability} available</p>
                     </div>
                 )}
@@ -62,7 +63,7 @@ export function ProductFocus(props) {
                     {props.purchases.filter(e=> e.Item === props.name).length>0 && props.isLoggedIn !== false && (
                         <div>
                     <input id={'commentInput'} placeholder={'Write a comment'}/>
-                    <button onClick={() => sendComment(props)}>send</button>
+                    <button onClick={() => sendComment(props, setRerender, rerender)}>send</button>
                         </div>
                         )}
                     {props.purchases.filter(e=> e.Item === props.name).length===0 && props.isLoggedIn !== false && (
@@ -82,12 +83,12 @@ export function ProductFocus(props) {
     );
 }
 
-async function sendComment(props){
+async function sendComment(props, setRerender, rerender){
     let comment = document.getElementById("commentInput").value;
-    let id = props.id
-    let name = props.isLoggedIn
-
-    const newComment = {name, comment, id};
+    let name = 'this_is_a_test_name'
+    let productID = props.id
+    let userID = props.isLoggedIn._id
+    const newComment = {name, comment, productID, userID};
     const response = await fetch("http://localhost:5000/comments/add", {
         method: "post",
         headers: {
@@ -98,7 +99,37 @@ async function sendComment(props){
         .catch(error => {
             window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
         });
-    console.log(response.ok)
-    softRerender(props)
+    document.getElementById("commentInput").value = "";
+    const commentDB = await response.json();
+    console.log(commentDB)
+    const comment2blogged = {Comment: comment, Item: props.name, id: commentDB.insertedId}
+    props.isLoggedIn.Comments.push(comment2blogged)
+    softRerender(rerender, setRerender)
+    updateUserComments(props)
+
 }
 
+
+async function updateUserComments(props){
+
+    const updatedAccount = {Email: props.isLoggedIn.Email,
+        Password: props.isLoggedIn.Password,
+        Purchases: props.isLoggedIn.Purchases,
+        Username: props.isLoggedIn.Username,
+        Comments: props.isLoggedIn.Comments,
+        Admin: props.isLoggedIn.Admin,
+        id: props.isLoggedIn._id};
+
+    const response = await fetch(`http://localhost:5000/updateUser/${props.isLoggedIn._id.toString()}`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedAccount),
+    })
+        .catch(error => {
+            window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
+        });
+
+
+}

@@ -103,32 +103,14 @@ recordRoutes.route("/comments/add").post(function (req, response) {
     let myobj = {
         name: req.body.name,
         comment: req.body.comment,
-        id: ObjectId(req.body.id)
+        productID: ObjectId(req.body.productID),
+        userID: ObjectId(req.body.userID)
     };
     db_connect.collection("comments").insertOne(myobj, function (err, res) {
+        console.log(myobj._id)
         if (err) throw err;
         response.json(res);
-    });
-});
-
-recordRoutes.route("/updateProduct/:id").post(function (req, response) {
-    let db_connect = dbo.getDb();
-    let myquery = { _id: ObjectId( req.params.id )};
-    let newvalues = {
-        $set: {
-            Name: req.body.Name,
-            Description: req.body.Description,
-            Price: req.body.Price,
-            Availability: req.body.Availability,
-        },
-    };
-    db_connect
-        .collection("products")
-        .updateOne(myquery, newvalues, function (err, res) {
-            if (err) throw err;
-            console.log("1 document updated");
-            response.json(res);
-        });
+    })
 });
 
 recordRoutes.route("/users/add").post(function (req, response) {
@@ -183,21 +165,26 @@ recordRoutes.route("/users/login").post(function (req, res) {
 recordRoutes.route("/updateUser/:id").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
+
+
+    req.body.Comments.forEach(castIDs)
+    function castIDs(Comment){
+            Comment.id = ObjectId(Comment.id)
+    }
     let newvalues = {
         $set: {
-            Email: req.body.Name,
-            Password: req.body.Description,
-            Admin: req.body.Price,
-            Purchases: req.body.Availability,
-            Comments: req.body.Availability,
-            Username: req.body.Availability,
+            Email: req.body.Email,
+            Password: req.body.Password,
+            Admin: req.body.Admin,
+            Purchases: req.body.Purchases,
+            Comments: req.body.Comments,
+            Username: req.body.Username,
         },
     };
     db_connect
-        .collection("products")
+        .collection("users")
         .updateOne(myquery, newvalues, function (err, res) {
             if (err) throw err;
-            console.log("1 document updated");
             response.json(res);
         });
 });

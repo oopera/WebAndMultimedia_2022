@@ -161,6 +161,27 @@ body{
   transition: 150ms;
   animation: 0.2s ease-out 0s 1 slideInFromLeft;
   box-shadow: 5px 5px 50px -40px #000000;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  height: 90%;
+  margin: 10%;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 .FocusWindow{
   border: 1pt solid black;
@@ -177,6 +198,7 @@ z-index: 10;
   transition: 150ms;
   animation: 0.2s ease-out 0s 1 slideInFromLeft;
   box-shadow: 5px 5px 50px -40px #000000;
+  overflow-x: scroll;
 }
 
 .adminControl{

@@ -6,7 +6,6 @@ export default function BasketComponent(props){
                 {props.basket.length !== 0 && (
                     props.basket.map((basketItem) => {
                         return (
-
                             <div key={basketItem._id}>
                                 <div>{basketItem.Name}</div>
                                 <button onClick={() => removeFromBasket(props = {props, basketItem})}>Remove from Basket
@@ -21,8 +20,8 @@ export default function BasketComponent(props){
     function removeFromBasket(props){
        //let newBasket = props.props.basket.filter(item => item !== props.basketItem)
 
-        console.log(typeof props.props.basket)
-
+        console.log(typeof  Object.values(props.props.basket))
+        delete props.props.basket.props.basketItem
 
         let index = Object.values(props.props.basket).findIndex(props.basketItem)
 
@@ -46,6 +45,7 @@ export default function BasketComponent(props){
                     <div>
                     <BasketItems setBasket={props.setBasket} basket={props.basket}/>
                     <button onClick={() => purchase(props)}>buy now</button> for {basketPrice}
+                        <div id={'infobox'}></div>
                     </div>
                 )}{props.basket.length === 0 && (
                 <div>Your Basket is Empty </div>
@@ -56,8 +56,22 @@ export default function BasketComponent(props){
 }
 
 function purchase(props){
+    let availabilityFlag = false
+    props.basket.forEach(checkAvailability)
+
+
+    function checkAvailability(basketItem){
+        console.log(basketItem.Availability)
+        if(props.basket.filter((v) => (v === basketItem)).length > basketItem.Availability){
+            availabilityFlag = true
+        }
+    }
+    if(availabilityFlag === true){
+        document.getElementById("infobox").value = "ONE OF YOUR ITEMS IS NOT AVAILABLE IN THE QUANTITIES YOU SELECTED, PLEASE RECHECK";
+    }
 
     /*
+
     WHAT NEEDS TO BE DONE:
 
     AVAILABILITY HAS TO BE CHECKED

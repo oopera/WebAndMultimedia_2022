@@ -2,7 +2,7 @@ import '../App.css';
 import React, {useEffect, useState} from "react";
 
 export function AccPurchaseList(props){
-    console.log(props.purchases)
+
     return(
         props.purchases.map((purchase) => {
             return(
@@ -22,8 +22,8 @@ export function AccCommentList(props){
          props.comments.map((comment) => {
             return(
                 <div className={'subItem'} key={comment.CommentID}>
-                    <div> {comment.Comment} </div>
-                    <div> {comment.Product} </div>
+                    <div> Comment: {comment.Comment} </div>
+                    <div> Item: {comment.Item} </div>
                 </div>
             )}
         )

@@ -52,10 +52,6 @@ export default function TopNav(props) {
                 </div>
     )}
 
-
-
-
-
 function logout(props){
     props.props.setAccount('');
     props.props.setLoggedIn(false);
@@ -96,7 +92,7 @@ async function login(props){
         if(user[0].Admin === true){
             props.props.setAccount('admin')
         }
-        props.props.setLoggedIn(user[0]._id)
+        props.props.setLoggedIn(user[0])
         props.props.setAccComments(user[0].Comments)
         props.props.setPurchases(user[0].Purchases)
 
