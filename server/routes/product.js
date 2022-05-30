@@ -112,6 +112,19 @@ recordRoutes.route("/products/add").post(function (req, response) {
   });
 });
 
+recordRoutes.route("/comments/add").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let myobj = {
+        name: req.body.name,
+        comment: req.body.comment,
+        id: req.body.id
+    };
+    db_connect.collection("comments").insertOne(myobj, function (err, res) {
+        if (err) throw err;
+        response.json(res);
+    });
+});
+
 recordRoutes.route("/updateProduct/:id").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};

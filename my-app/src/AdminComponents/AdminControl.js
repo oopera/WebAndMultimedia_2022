@@ -32,14 +32,13 @@ export default function AdminControl(props) {
     console.log(props.products)
 
     return(
-
             <div className={'FocusWindow'}>
                 <div className={'focusContent'}>
                 <p> Add user </p>
                 <p> Add product </p>
                 <p> delete product </p>
                     <div>
-                    <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}placeholder={'search...'}/>
+                    <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}placeholder={'search users...'}/>
                     </div>
                     <label htmlFor="products">Choose a product:</label>
                     <select>
@@ -51,3 +50,4 @@ export default function AdminControl(props) {
     )
 
 }
+

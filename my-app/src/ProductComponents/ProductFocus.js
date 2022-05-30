@@ -15,14 +15,16 @@ export function Commentlist(props){
 
 function updateBasket(props){
     let newBasket = props.basket.concat(props.product)
+    console.log(typeof newBasket)
     props.setBasket(newBasket)
 
 }
 
-
+function softRerender(props){
+    props.setRerender(!props.rerender)
+}
 export function ProductFocus(props) {
-
-    console.log(props.purchases)
+    const [rerender, setRerender] = useState(false)
     const [comments, setComments] = useState([]);
     useEffect(() => {
         async function getComments() {
@@ -46,13 +48,21 @@ export function ProductFocus(props) {
                 <p> {props.description} </p>
                 <p> {props.price} €</p>
                 <img className={"productImage"} src={props.img}/>
-                <button style={{zIndex : '5'}} onClick={() => updateBasket(props)}>Add to Basket</button>
-                <p>{props.availability} available</p>
-                <div >
+                {props.availability === 0 && (
+                    <p>Item is currently not in Stock</p>
+                )}
+                {props.availability !== 0 && (
+                    <div>
+                    <button style={{zIndex : '5'}} onClick={() => updateBasket(props, rerender, setRerender)}>Add to Basket</button>
+                    <p>{props.availability} available</p>
+                    </div>
+                )}
+                <div>
+
                     {props.purchases.filter(e=> e.Item === props.name).length>0 && props.isLoggedIn !== false && (
                         <div>
-                    <input placeholder={'Write a comment'}/>
-                    <button onClick={sendComment()}>send</button>
+                    <input id={'commentInput'} placeholder={'Write a comment'}/>
+                    <button onClick={() => sendComment(props)}>send</button>
                         </div>
                         )}
                     {props.purchases.filter(e=> e.Item === props.name).length===0 && props.isLoggedIn !== false && (
@@ -72,6 +82,23 @@ export function ProductFocus(props) {
     );
 }
 
-function sendComment(){
+async function sendComment(props){
+    let comment = document.getElementById("commentInput").value;
+    let id = props.id
+    let name = props.isLoggedIn
 
+    const newComment = {name, comment, id};
+    const response = await fetch("http://localhost:5000/comments/add", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newComment),
+    })
+        .catch(error => {
+            window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
+        });
+    console.log(response.ok)
+    softRerender(props)
 }
+

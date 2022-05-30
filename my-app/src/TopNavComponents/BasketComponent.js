@@ -19,14 +19,16 @@ export default function BasketComponent(props){
     }
 
     function removeFromBasket(props){
-       let newBasket = props.props.basket.filter(item => item !== props.basketItem)
+       //let newBasket = props.props.basket.filter(item => item !== props.basketItem)
 
-        /*console.log(props.basketItem)
-        let index = props.props.basket.findIndex(props.basketItem)
-        console.log(index)
-        let newBasket = props.props.basket.splice(index, 1)
-         */
+        console.log(typeof props.props.basket)
 
+
+        let index = Object.values(props.props.basket).findIndex(props.basketItem)
+
+        let newBasket = Object.values(props.props.basket).splice(index, 1)
+
+        //props.props.basket.remove(props.basketItem.id)
         props.props.setBasket(newBasket)
 
 

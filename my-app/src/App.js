@@ -25,7 +25,7 @@ export default function App() {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [account, setAccount] = useState();
     const [loading, setLoading] = useState(false);
-    const [purchases, setPurchases] = useState(false);
+    const [purchases, setPurchases] = useState([]);
     const [accComments, setAccComments] = useState(false);
     const [basket, setBasket] = useState([]);
 
