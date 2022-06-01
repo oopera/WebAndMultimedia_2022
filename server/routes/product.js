@@ -138,7 +138,7 @@ recordRoutes.route("/users/add").post(function (req, response) {
                 Admin: false,
                 Purchases: [],
                 Comments: [],
-                Username:"",
+                Username:req.body.username,
             };
             db_connect.collection("users").insertOne(myobj, function (err, res) {
                 if (err) throw err;

@@ -1,14 +1,17 @@
+import {useState} from "react";
+
 export default function BasketComponent(props){
+    const [rerender, setRerender] = useState(false)
 
     function BasketItems(props) {
         return (
             <div>
                 {props.basket.length !== 0 && (
-                    props.basket.map((basketItem) => {
+                    props.basket.map((basketItem, index) => {
                         return (
-                            <div key={basketItem._id}>
+                            <div key={index}>
                                 <div>{basketItem.Name}</div>
-                                <button onClick={() => removeFromBasket(props = {props, basketItem})}>Remove from Basket
+                                <button onClick={() => removeFromBasket(props = {props, basketItem, index})}>Remove from Basket
                                 </button>
                             </div>
                         )
@@ -18,18 +21,13 @@ export default function BasketComponent(props){
     }
 
     function removeFromBasket(props){
-       //let newBasket = props.props.basket.filter(item => item !== props.basketItem)
 
-        console.log(typeof  Object.values(props.props.basket))
-        delete props.props.basket.props.basketItem
 
-        let index = Object.values(props.props.basket).findIndex(props.basketItem)
+        let baskey = props.props.basket
 
-        let newBasket = Object.values(props.props.basket).splice(index, 1)
-
-        //props.props.basket.remove(props.basketItem.id)
-        props.props.setBasket(newBasket)
-
+        baskey.splice(props.index, 1)
+        props.props.setBasket(baskey)
+        setRerender(!rerender)
 
     }
     let basketPrice = 0
@@ -58,7 +56,6 @@ export default function BasketComponent(props){
 function purchase(props){
     let availabilityFlag = false
     props.basket.forEach(checkAvailability)
-
 
     function checkAvailability(basketItem){
         console.log(basketItem.Availability)

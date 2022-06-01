@@ -20,10 +20,6 @@ function updateBasket(props){
 
 }
 
-function softRerender(rerender, setRerender){
-   setRerender(!rerender)
-    console.log(rerender)
-}
 export function ProductFocus(props) {
     const [rerender, setRerender] = useState(false)
     const [comments, setComments] = useState([]);
@@ -39,7 +35,7 @@ export function ProductFocus(props) {
         }
         getComments();
         return;
-    }, [comments.length]);
+    }, [comments.length, rerender.valueOf()]);
     return (
         <div style={props.style} className="ProductFocus">
             <div className={'focusContent'}>
@@ -63,7 +59,7 @@ export function ProductFocus(props) {
                     {props.purchases.filter(e=> e.Item === props.name).length>0 && props.isLoggedIn !== false && (
                         <div>
                     <input id={'commentInput'} placeholder={'Write a comment'}/>
-                    <button onClick={() => sendComment(props, setRerender, rerender)}>send</button>
+                    <button onClick={() => {sendComment(props, rerender, setRerender);}}>send</button>
                         </div>
                         )}
                     {props.purchases.filter(e=> e.Item === props.name).length===0 && props.isLoggedIn !== false && (
@@ -83,9 +79,9 @@ export function ProductFocus(props) {
     );
 }
 
-async function sendComment(props, setRerender, rerender){
+async function sendComment(props, rerender, setRerender){
     let comment = document.getElementById("commentInput").value;
-    let name = 'this_is_a_test_name'
+    let name = props.isLoggedIn.Username
     let productID = props.id
     let userID = props.isLoggedIn._id
     const newComment = {name, comment, productID, userID};
@@ -104,7 +100,7 @@ async function sendComment(props, setRerender, rerender){
     console.log(commentDB)
     const comment2blogged = {Comment: comment, Item: props.name, id: commentDB.insertedId}
     props.isLoggedIn.Comments.push(comment2blogged)
-    softRerender(rerender, setRerender)
+    setRerender(!rerender)
     updateUserComments(props)
 
 }

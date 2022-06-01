@@ -50,7 +50,7 @@ export default function App() {
     <div>
         <BackGroundGrafix/>
         <Background/>
-        <TopNav setAccComments={setAccComments} setPurchases={setPurchases} isLoggedIn={isLoggedIn}
+        <TopNav basket={basket} setAccComments={setAccComments} setPurchases={setPurchases} isLoggedIn={isLoggedIn}
                 setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem}
                 setOpenedItem={setOpenedItem}/>
         <ProductList  isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} products={products} setProducts={setProducts}

@@ -183,6 +183,14 @@ body{
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.buttonRow{
+  display: flex;
+  flex-direction: row;
+}
+.inputs{
+  display: flex;
+  flex-direction: column;
+}
 .FocusWindow{
   border: 1pt solid black;
   border-radius: 25pt;
@@ -236,11 +244,9 @@ z-index: 10;
   padding: 5px;
 }
 .TopNav{
-  width: 13%;
   margin: 2%;
   padding: 1%;
   border-radius: 5pt;
-  height: 80px;
   float: right;
   position: fixed;
   z-index: 2;
@@ -268,17 +274,19 @@ input{
 }
 
 .navButton{
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
+  width: 60px;
+  height: 25px;
+  border-radius: 5pt;
   background: white;
-  transition: 150ms;
+  transition: 450ms;
   border: white;
+  margin: 1%;
+
 }
 .navButton:hover{
   color: white;
   background: black;
-  transition: 150ms;
+  transition: 450ms;
 }
 
 .navInput{
