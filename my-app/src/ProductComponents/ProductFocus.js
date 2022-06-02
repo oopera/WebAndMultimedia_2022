@@ -39,7 +39,7 @@ export function ProductFocus(props) {
         getComments();
         return;
     }, [comments.length, rerender.valueOf()]);
-
+    console.log(props.purchases)
     return (
         <div style={props.style} className="ProductFocus">
             <div className={'focusContent'}>
@@ -59,13 +59,13 @@ export function ProductFocus(props) {
                     </div>
                 )}
                 <div>
-                    {props.purchases.filter(e=> e.Item === props.name).length>0 && props.isLoggedIn !== false && (
+                    {props.purchases.filter(e=> e.Products.includes(props.name)).length>0 && props.isLoggedIn !== false && (
                         <div>
                     <input id={'commentInput'} placeholder={'Write a comment'}/>
                     <button onClick={() => {sendComment(props, rerender, setRerender);}}>send</button>
                         </div>
                         )}
-                    {props.purchases.filter(e=> e.Item === props.name).length===0 && props.isLoggedIn !== false && (
+                    {props.purchases.filter(e=> e.Products.includes(props.name)).length===0 && props.isLoggedIn !== false && (
                         <div>
                             You have to purchase the Item before you can leave a comment.
                         </div>

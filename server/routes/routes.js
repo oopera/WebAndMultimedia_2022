@@ -71,7 +71,7 @@ recordRoutes.route("/purchases/:id").get(function (req, res) {
 recordRoutes.route("/purchases/add").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myobj = {
-        date: req.body.date,
+        date: new Date(req.body.date),
         price: req.body.price,
         email: req.body.email,
         products: req.body.products
@@ -161,6 +161,25 @@ recordRoutes.route("/users/login").post(function (req, res) {
 
 });
 
+recordRoutes.route("/updateProduct/:id").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: ObjectId( req.params.id )};
+    let newvalues = {
+        $set: {
+            Name: req.body.Name,
+            Price: req.body.Price,
+            Availability: req.body.Availability,
+        },
+    };
+    db_connect
+        .collection("products")
+        .updateOne(myquery, newvalues, function (err, res) {
+            if (err) throw err;
+            response.json(res);
+        });
+});
+
+
 recordRoutes.route("/updateUser/:id").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
@@ -168,6 +187,10 @@ recordRoutes.route("/updateUser/:id").post(function (req, response) {
     req.body.Comments.forEach(castIDs)
     function castIDs(Comment){
             Comment.id = ObjectId(Comment.id)
+    }
+    req.body.Purchases.forEach(castIDs)
+    function castPurchaseIDs(purchase){
+        purchase.PurchaseID = ObjectId(purchase.PurchaseID)
     }
     let newvalues = {
         $set: {
