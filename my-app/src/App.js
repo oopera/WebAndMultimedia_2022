@@ -47,18 +47,18 @@ export default function App() {
 
     return (
 
-    <div>
+        <div>
         <BackGroundGrafix/>
-        <Background/>
+
         <TopNav basket={basket} setAccComments={setAccComments} setPurchases={setPurchases} isLoggedIn={isLoggedIn}
                 setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem}
                 setOpenedItem={setOpenedItem}/>
         <ProductList  isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} products={products} setProducts={setProducts}
                      openedItem={openedItem} setOpenedItem={setOpenedItem}/>
-        <SubWindow basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} account={account} setAccount={setAccount}
+        <SubWindow isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} account={account} setAccount={setAccount}
                    openedItem={openedItem} setOpenedItem={setOpenedItem} products={products}/>
-    </div>
-
+        </div>
 
       );
 }
+//<Background/>

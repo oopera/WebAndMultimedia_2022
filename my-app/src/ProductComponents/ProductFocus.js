@@ -4,13 +4,16 @@ import React, {useEffect, useState} from "react";
 
 export function Commentlist(props){
     return(
-        props.comments.filter(comment => comment.productID === props.id).map((filteredComment) => {
+    <div className={'commentBox'}>
+        {props.comments.filter(comment => comment.productID === props.id).map((filteredComment) => {
             return (
                 <div key={filteredComment._id}>
                     <p> {filteredComment.name}: {filteredComment.comment} {filteredComment.Date}</p>
                 </div>
             )
-        }))
+        })}
+    </div>
+        )
 
 }
 
@@ -36,11 +39,12 @@ export function ProductFocus(props) {
         getComments();
         return;
     }, [comments.length, rerender.valueOf()]);
+
     return (
         <div style={props.style} className="ProductFocus">
             <div className={'focusContent'}>
                 <header className="Product-name">
-                    <p> {props.name} </p>
+                <p> {props.name} </p>
                 </header>
                 <p> {props.description} </p>
                 <p> {props.price} €</p>
@@ -55,7 +59,6 @@ export function ProductFocus(props) {
                     </div>
                 )}
                 <div>
-
                     {props.purchases.filter(e=> e.Item === props.name).length>0 && props.isLoggedIn !== false && (
                         <div>
                     <input id={'commentInput'} placeholder={'Write a comment'}/>
@@ -101,12 +104,12 @@ async function sendComment(props, rerender, setRerender){
     const comment2blogged = {Comment: comment, Item: props.name, id: commentDB.insertedId}
     props.isLoggedIn.Comments.push(comment2blogged)
     setRerender(!rerender)
-    updateUserComments(props)
+    updateUser(props)
 
 }
 
 
-async function updateUserComments(props){
+export async function updateUser(props){
 
     const updatedAccount = {Email: props.isLoggedIn.Email,
         Password: props.isLoggedIn.Password,

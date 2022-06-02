@@ -13,7 +13,7 @@ return(
         <AccountWindow accComments={props.accComments} purchases={props.purchases}/>
     )}
     {props.openedItem === 'basket' && (
-        <BasketComponent setBasket={props.setBasket} basket={props.basket}/>
+        <BasketComponent isLoggedIn={props.isLoggedIn} setBasket={props.setBasket} basket={props.basket}/>
     )}
     </div>
     )}

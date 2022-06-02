@@ -2,18 +2,20 @@ import '../App.css';
 import React, {useEffect, useState} from "react";
 
 export function AccPurchaseList(props){
-
+    console.log(props.purchases)
     return(
         props.purchases.map((purchase) => {
             return(
                 <div className={'subItem'} key={purchase.PurchaseID}>
-                    <div> Item: {purchase.Item} </div>
+                    {purchase.Products.map((product, index) => {
+                        return(
+                        <div key={index}> Item: {product} </div>
+                        )
+                    })}
                     <div> Price: {purchase.Cost}€ </div>
                     <div> Date: {purchase.Date} </div>
                 </div>
-
             )}
-
         )
     )
 }

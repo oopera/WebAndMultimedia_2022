@@ -57,8 +57,6 @@ recordRoutes.route("/comments/:id").get(function (req, res) {
       });
 });
 
-
-
 recordRoutes.route("/purchases/:id").get(function (req, res) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
@@ -73,10 +71,10 @@ recordRoutes.route("/purchases/:id").get(function (req, res) {
 recordRoutes.route("/purchases/add").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myobj = {
-        name: req.body.name,
-        description: req.body.description,
+        date: req.body.date,
         price: req.body.price,
-        availability: req.body.availability
+        email: req.body.email,
+        products: req.body.products
     };
     db_connect.collection("purchases").insertOne(myobj, function (err, res) {
         if (err) throw err;
@@ -87,14 +85,15 @@ recordRoutes.route("/purchases/add").post(function (req, response) {
 recordRoutes.route("/products/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    name: req.body.name,
-    description: req.body.description,
-    price: req.body.price,
-    availability: req.body.availability
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      availability: req.body.availability
   };
   db_connect.collection("products").insertOne(myobj, function (err, res) {
-    if (err) throw err;
-    response.json(res);
+      console.log(myobj._id)
+      if (err) throw err;
+      response.json(res);
   });
 });
 
@@ -165,7 +164,6 @@ recordRoutes.route("/users/login").post(function (req, res) {
 recordRoutes.route("/updateUser/:id").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
-
 
     req.body.Comments.forEach(castIDs)
     function castIDs(Comment){
