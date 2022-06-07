@@ -7,13 +7,13 @@ export default function SubWindow(props){
 return(
     <div>
     {props.openedItem === 'admin' && (
-        <AdminControl products={props.products}/>
+        <AdminControl setOpenedItem={props.setOpenedItem} products={props.products}/>
     )}
     {props.openedItem === 'account' && (
-        <AccountWindow accComments={props.accComments} purchases={props.purchases}/>
+        <AccountWindow setOpenedItem={props.setOpenedItem} accComments={props.accComments} purchases={props.purchases}/>
     )}
     {props.openedItem === 'basket' && (
-        <BasketComponent isLoggedIn={props.isLoggedIn} setBasket={props.setBasket} basket={props.basket}/>
+        <BasketComponent setOpenedItem={props.setOpenedItem} setReload={props.setReload} reload={props.reload} isLoggedIn={props.isLoggedIn} setBasket={props.setBasket} basket={props.basket}/>
     )}
     </div>
     )}

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import XButton from "../XButton";
 
 
 
@@ -39,9 +40,10 @@ export function ProductFocus(props) {
         getComments();
         return;
     }, [comments.length, rerender.valueOf()]);
-    console.log(props.purchases)
+
     return (
         <div style={props.style} className="ProductFocus">
+            <XButton setOpenedItem={props.setOpenedItem}/>
             <div className={'focusContent'}>
                 <header className="Product-name">
                 <p> {props.name} </p>

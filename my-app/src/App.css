@@ -8,44 +8,143 @@
   }
 }
 
-@media (max-width: 1200px) {
+
+@media (min-width: 1200px) {
   .ProductFocus {
     left: 300px;
   }
   .maintext {
     font-size: 300px;
+  }
+  .FocusWindow{
+    margin-left: 25%;
+    top: 31%;
+    z-index: 10;
+    height: 65vh;
+    max-height: 650px;
+    width: 40vw;
+    max-width: 800px;
+  }
 
+  .ProductFocus{
+    margin-left: 65%;
+    top: 9%;
+    left: 30%;
+    height: 85%;
+    max-height: 650px;
+    width: 40vw;
+    max-width: 800px;
+  }
+
+  .TopNav{
+    margin-left: 2%;
+    margin-top: 1%;
+    padding: 1%;
+    float: right;
+    position: fixed;
+    z-index: 2;
+    background: black;
+  }
+
+  .mobileNav {
+    visibility: hidden;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
   .ProductContainer {
     overflow-y: visible;
     width: 600px;
   }
   .Product {
-    width: 600px;
+
   }
-  .focusContainer, .ProductFocus{
-    position: absolute;
-    width: 90vw;
-  }
-  .TopNav{
+
+  .TopNavWrapper{
     visibility: hidden;
   }
-  .maintext {
+  .mobileNav{
+    visibility: visible;
+  }
 
-    font-size: 50px;
+  .TopNav{
+    margin-left: 2%;
+    margin-top: 1%;
+    padding: 1%;
+    float: right;
+    position: fixed;
+    z-index: 2;
+    background: black;
+  }
 
+
+  .FocusWindow{
+    margin-left: 10%;
+    top: 15%;
+    z-index: 10;
+    height: 65vh;
+    max-height: 650px;
+    width: 80vw;
+    max-width: 800px;
+  }
+
+  .ProductFocus{
+    margin-left: 65%;
+    top: 9%;
+    left: 30%;
+    height: 85%;
+    max-height: 650px;
+    width: 40vw;
+    max-width: 800px;
   }
 }
+
+@media (max-width: 800px) {
+  .ProductFocus{
+    left: 0;
+    margin-left: 0%;
+    top: 9%;
+  position: fixed;
+    height: 90%;
+    max-height: 650px;
+    width: 93%;
+    max-width: 800px;
+  }
+}
+
 
 body{
   margin: 0; height: 100%; overflow: hidden;
   background-image: url("Vector.png");
   background-repeat: no-repeat;
   background-position:right;
+
 }
 
+.XButton {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.XButton:hover {
+  opacity: 1;
+}
+.XButton:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.XButton:before {
+  transform: rotate(45deg);
+}
+.XButton:after {
+  transform: rotate(-45deg);
+}
 .header{
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 20px;
@@ -56,22 +155,32 @@ body{
 }
 
 .Product{
-  Background-color: white;
-  border: 1pt solid black;
+  Background-color: rgba(255, 255, 255, .8);
+
+  border-bottom: 2pt solid black;
   margin: 2%;
   padding: 1%;
-  border-radius: 10pt;
+
   display: flex;
   flex-direction: row;
   transition: 250ms;
-  box-shadow: 5px 5px 50px -35px #000000;
+  box-shadow: 5px 5px 80px -50px #000000;
   justify-content: space-between;
 }
 
 .Product:hover{
-  border: 2pt solid black;
+
   padding-left:5%;
   transition: 150ms;
+}
+
+.frame{
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  bottom: 0;
+  pointer-events: none;
+  border: 10pt solid greenyellow;
 }
 
 .subItem{
@@ -83,19 +192,36 @@ body{
   width: 70%;
 }
 
-
-
-
 .Focused{
   Background-color: white;
   display: flex;
   flex-direction: row;
-  border: 2pt solid black;
+  border-bottom: 2pt solid black;
   margin: 2%;
   padding: 1%;
   border-radius: 10pt;
   padding-left:5%;
+
   justify-content: space-between;
+}
+
+.hamNavButtonClosed{
+  color: black;
+  background: black;
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.hamNavButtonOpen{
+  color: black;
+  background: black;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  margin-left: 20px;
+  margin-top: 5px;
 }
 
 .ProductList{
@@ -127,7 +253,6 @@ body{
 
 }
 .logo {
-
   left: 32%;
   position: fixed;
   color: black;
@@ -140,12 +265,12 @@ body{
   position: fixed;
   color: black;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 80px;
+  font-size: 60px;
   font-weight: bold;
   transition: 150ms;
 }
 .maintext:hover{
-  font-size: 520%;
+  font-size: 65px;
   transition: 150ms;
 }
 
@@ -153,14 +278,7 @@ body{
   border: 1pt solid black;
   border-radius: 25pt;
   background: white;
-  margin-left: 65%;
   position: absolute;
-  top: 9%;
-  left: 30%;
-  height: 85%;
-  max-height: 650px;
-  width: 40vw;
-  max-width: 800px;
   transition: 150ms;
   animation: 0.2s ease-out 0s 1 slideInFromLeft;
   box-shadow: 5px 5px 50px -40px #000000;
@@ -202,14 +320,7 @@ body{
   border: 1pt solid black;
   border-radius: 25pt;
   background: white;
-  margin-left: 25%;
   position: absolute;
-  top: 9%;
-z-index: 10;
-  height: 65vh;
-  max-height: 650px;
-  width: 40vw;
-  max-width: 800px;
   transition: 150ms;
   animation: 0.2s ease-out 0s 1 slideInFromLeft;
   box-shadow: 5px 5px 50px -40px #000000;
@@ -239,7 +350,7 @@ z-index: 10;
   display:block;
   padding: 5%;
   width: 100%;
-  overflow: fragments;
+
   transition: 150ms;
   animation: 0.4s ease-out 0s 1 slideInFromLeft;
 
@@ -250,14 +361,8 @@ z-index: 10;
 
   padding: 5px;
 }
-.TopNav{
-  margin: 2%;
-  padding: 1%;
-  border-radius: 5pt;
-  float: right;
-  position: fixed;
-  z-index: 2;
-}
+
+
 input{
   border-radius: 5pt;
   margin: 5pt;
@@ -272,7 +377,8 @@ input{
 .searchField{
   position: fixed;
   width: 23%;
-  height: 3%;
+  min-width: 280px;
+  height: 30px;
   transition: 1s;
 }
 .searchField:focus{
@@ -281,40 +387,27 @@ input{
 }
 
 .navButton{
-  width: 60px;
+  width: 65px;
   height: 25px;
   border-radius: 5pt;
   background: white;
-  transition: 450ms;
-  border: white;
+
+
   margin: 1%;
+  border: 1pt black solid;
 
 }
 .navButton:hover{
   color: white;
   background: black;
-  transition: 450ms;
+
 }
 
 .navInput{
 height: 25px;
 width: 200px;
-border: white;
   display: inline-block;
-}
-
-.navInput:after{
-  transition: all ease-in-out .2s;
-  background: none repeat scroll 0 0 #ffffff;
-  content: "";
-  display: block;
-  height: 2px;
-  width: 0;
-}
-
-.navInput:hover:after {
-  width: 100%;
-  padding-right: 35px;
+  border: 1pt black solid;
 }
 
 @keyframes from0to360 {

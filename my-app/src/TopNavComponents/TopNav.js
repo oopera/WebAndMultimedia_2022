@@ -2,8 +2,10 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import '../ProductComponents/ProductList'
 import Select from "react-select";
-
+import clear from '../App.js'
+import {ReactSession} from "react-client-session";
 export default function TopNav(props) {
+
     const [form, setForm] = useState({
         email: "",
         password: "",
@@ -32,7 +34,7 @@ export default function TopNav(props) {
     return (
                 <div className="TopNav">
                     {props.isLoggedIn === false && wantsToRegistre === false &&(
-                    <div>
+                    <div className={'desktopNav'}>
                         <div className={'inputs'}>
                     <input value={form.email} className={'navInput'}
                            onChange={(e) => updateForm({email: e.target.value})} type="email" name="email"
@@ -54,7 +56,7 @@ export default function TopNav(props) {
                     </div>
                     )}
                     {props.isLoggedIn === false && wantsToRegistre === true && (
-                        <div>
+                        <div className={'desktopNav'}>
                             <div className={'inputs'}>
                         <input value={reform.email} className={'navInput'}
                                onChange={(e) => updateReform({email: e.target.value})} type="email" name="email"
@@ -82,7 +84,7 @@ export default function TopNav(props) {
                         </div>
                         )}
                     {props.account !== 'admin' && props.isLoggedIn !== false && wantsToRegistre === false && (
-
+                        <div className={'desktopNav'}>
                         <div className={'buttonRow'}>
                             <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
                             <button className={'navButton'} onClick={() => myAccount(props) }>account</button>
@@ -93,8 +95,10 @@ export default function TopNav(props) {
                                 <button className={'navButton'} onClick={() => basket(props) }> {props.basket.length}</button>
                             ))}
                         </div>
+                        </div>
                     )}
                 {props.account === "admin" && props.isLoggedIn !== false && (
+                    <div className={'desktopNav'}>
                     <div className={'buttonRow'}>
                     <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
                     <button className={'navButton'} onClick={() => adminControls(props)}> admin</button>
@@ -106,6 +110,7 @@ export default function TopNav(props) {
                             <button className={'navButton'} onClick={() => basket(props) }> {props.basket.length}</button>
                         ))}
                     </div>
+                    </div>
                     )}
 
 
@@ -116,6 +121,14 @@ function logout(props){
     props.props.setAccount('');
     props.props.setLoggedIn(false);
     props.setForm({ email: "", password: ""});
+    ReactSession.set("wholeAcc", "");
+    ReactSession.set("admin", "");
+    ReactSession.set("Purchases", "");
+    ReactSession.set("Comments", "");
+    ReactSession.set("hasData", false);
+    if(props.props.openedItem === 'account' || props.props.openedItem === 'admin') {
+        props.props.setOpenedItem("null")
+    }
 }
 
 function basket(props){
@@ -138,7 +151,7 @@ function wantsToRegistreFunc(props){
 }
 
 async function login(props){
-
+    console.log(props.form)
     const form = { ...props.form };
     const res = await fetch("http://localhost:5000/users/login", {
         method: "post",
@@ -160,9 +173,11 @@ async function login(props){
         props.props.setLoggedIn(user[0])
         props.props.setAccComments(user[0].Comments)
         props.props.setPurchases(user[0].Purchases)
+        props.props.setReload(!props.props.reload)
+
 
     }
-    props.setForm({ email: "", password: ""});
+    //props.setForm({ email: "", password: ""});
     }
 
 
@@ -192,10 +207,10 @@ async function register(props){
         .catch(error => {
             window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
         });
-    props.setForm({ email: props.reform.email, password: props.reform.password});
-
-    await login(props);
-
+    props.setForm({email: props.reform.email, password: props.reform.password});
+    if(response.ok) {
+        await login(props);
+    }
 }
 
 function adminControls(props){

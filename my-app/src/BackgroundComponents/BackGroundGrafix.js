@@ -19,12 +19,13 @@ export default function BackGroundGrafix(props){
         }
         document.getElementById("time").textContent = `${H} : ${m} : ${s}`
     }
-    //  setInterval(theTime);
+     setInterval(theTime);
 
     return(
-        <div>
+        <div className={"frame"}>
     <p className={'logo'}>lucaslichner.</p>
-    <p className={'maintext'}>buy.my.shit.</p>
+    <p className={'maintext'}><span>buy.</span><span>my.</span><span style={{textDecoration: 'line-through'}}>shit</span>.<span style={{fontStyle: 'italic'}}>stuff</span>.</p>
+
     <div style={{top: "95%", writingMode: "vertical-rl",
         textOrientation: "mixed", fontSize: "150%", position: "absolute"}} id="time">placeholder</div>
         </div>

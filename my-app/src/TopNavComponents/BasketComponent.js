@@ -1,5 +1,6 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {updateUser} from "../ProductComponents/ProductFocus";
+import XButton from "../XButton";
 
 export default function BasketComponent(props){
     const [rerender, setRerender] = useState(false)
@@ -34,6 +35,7 @@ export default function BasketComponent(props){
 
     return(
         <div className={'FocusWindow'}>
+            <XButton setOpenedItem={props.setOpenedItem}/>
             <div className={'focusContent'}>
                 {props.basket.length !== 0 && (
                     <div>
@@ -118,6 +120,7 @@ async function purchase(props, basketPrice){
     console.log(purchaseDB)
     const purchase2Blogged = {Products: products, Cost: price, Date: date, PurchaseID: purchaseDB.insertedId}
     props.isLoggedIn.Purchases.push(purchase2Blogged)
+    props.setReload(!props.reload)
     if (email === "") return
     updateUser(props)
 

@@ -1,6 +1,7 @@
 import '../App.css';
 import React, {Component, useEffect, useState} from 'react'
 import Select from 'react-select'
+import XButton from "../XButton";
 
 export default function AdminControl(props) {
     const [users, setUsers] = useState([])
@@ -33,6 +34,7 @@ export default function AdminControl(props) {
 
     return(
             <div className={'FocusWindow'}>
+                <XButton setOpenedItem={props.setOpenedItem}/>
                 <div className={'focusContent'}>
                 <p> Add user </p>
                 <p> Add product </p>
