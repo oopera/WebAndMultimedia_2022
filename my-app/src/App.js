@@ -33,14 +33,13 @@ export default function App() {
     const [accComments, setAccComments] = useState(false);
     const [basket, setBasket] = useState([]);
 
-    console.log(isLoggedIn)
     ReactSession.setStoreType("localStorage");
 
 
     useEffect(() => {
         setLoading(!loading)
     },[reload.valueOf()]);
-    console.log(ReactSession.get("Purchases"))
+
 
     function setStorage() {
         if (isLoggedIn !== false) {
@@ -89,12 +88,28 @@ export default function App() {
         return;
     }, [products.length]);
 
-    const Component = (props) => {
-        const ref = React.useRef(null)
-        const mouse = useMouse(ref, {
-            enterDelay: 100,
-            leaveDelay: 100,
-        })}
+
+
+    const useMousePosition = () => {
+        const [position, setPosition] = useState({ x: 0, y: 0 });
+
+        useEffect(() => {
+            const setFromEvent = (e) => setPosition({ x: e.clientX, y: e.clientY });
+            window.addEventListener("mousemove", setFromEvent);
+
+            return () => {
+                window.removeEventListener("mousemove", setFromEvent);
+            };
+        }, []);
+
+        return position;
+    };
+
+    const position = useMousePosition();
+    console.log(position.x)
+    const el = document.querySelector("body");
+
+    el.style.backgroundPosition = "position.y position.x";
 
 
     return (
