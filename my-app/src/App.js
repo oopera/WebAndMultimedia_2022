@@ -7,6 +7,9 @@ import React, {useEffect, useState} from "react";
 import SubWindow from "./SubWindows/SubWindow";
 import { ReactSession } from 'react-client-session';
 import HamNav from "./TopNavComponents/HamNav";
+
+import useMouse from '@react-hook/mouse-position'
+
 /*
 
 • Anlegen / Editieren / Löschen von Produkten
@@ -85,6 +88,14 @@ export default function App() {
         getProducts();
         return;
     }, [products.length]);
+
+    const Component = (props) => {
+        const ref = React.useRef(null)
+        const mouse = useMouse(ref, {
+            enterDelay: 100,
+            leaveDelay: 100,
+        })}
+
 
     return (
 

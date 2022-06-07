@@ -24,7 +24,8 @@ export default function ProductList(props) {
        }
     }
     const colors =
-        ['#52FF00', '#00FFE0', '#3300FF', "#0057FF", "#AD00FF", "#FF0000", "#FFA800", '#CCFF00', '#52FF00']
+    //    ['#52FF00', '#00FFE0', '#3300FF', "#0057FF", "#AD00FF", "#FF0000", "#FFA800", '#CCFF00', '#52FF00']
+        ['greenyellow', 'greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow',]
     let counter = -1;
 
     function AproductList(props) {

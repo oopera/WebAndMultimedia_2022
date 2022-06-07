@@ -48,9 +48,10 @@ export function ProductFocus(props) {
                 <header className="Product-name">
                 <p> {props.name} </p>
                 </header>
-                <p> {props.description} </p>
-                <p> {props.price} €</p>
+                <p> {props.description} // {props.price} € </p>
+                {props.img !== undefined && (
                 <img className={"productImage"} src={props.img}/>
+                )}
                 {props.availability === 0 && (
                     <p>Item is currently not in Stock</p>
                 )}
@@ -69,7 +70,7 @@ export function ProductFocus(props) {
                         )}
                     {props.purchases.filter(e=> e.Products.includes(props.name)).length===0 && props.isLoggedIn !== false && (
                         <div>
-                            You have to purchase the Item before you can leave a comment.
+                            <p>You have to purchase the Item before you can leave a comment.</p>
                         </div>
                     )}
                     {props.isLoggedIn === false && (

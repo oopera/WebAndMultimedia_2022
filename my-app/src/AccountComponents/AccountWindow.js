@@ -46,7 +46,7 @@ export function AccountWindow(props) {
         <div className="FocusWindow">
             <XButton setOpenedItem={props.setOpenedItem}/>
             <div className={'focusContent'}>
-                <button onClick={() => clear()}> CLEAR CACHE </button> (you should log out immediately after, or the cache might be reloaded
+                <button onClick={() => clear()}> CLEAR CACHE </button> <p>(you should log out immediately after, or the cache might be reloaded</p>
                 <div> YOUR COMMENTS </div>
               <AccCommentList comments={props.accComments}/>
                 <div> YOUR PURCHASES </div>
