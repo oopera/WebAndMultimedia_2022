@@ -29,7 +29,7 @@
     left: 30%;
     position: fixed;
     color: black;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
     font-size: 60px;
     font-weight: bold;
     transition: 150ms;
@@ -42,6 +42,9 @@
     max-height: 650px;
     width: 40vw;
     max-width: 800px;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
   }
 
   .ProductFocus{
@@ -50,16 +53,16 @@
     left: 30%;
     height: 85%;
     max-height: 650px;
-    width: 40vw;
+    width: 60vw;
     max-width: 800px;
     overflow-x: hidden;
     overflow-y: hidden;
   }
 
   .TopNav{
-    margin-left: 2%;
+    margin-left: 5%;
     margin-top: 1%;
-    padding: 1%;
+
     float: right;
     position: fixed;
     z-index: 2;
@@ -114,8 +117,6 @@
     z-index: 2;
 
   }
-
-
   .FocusWindow{
     top: 15%;
     z-index: 10;
@@ -131,9 +132,9 @@
     top: 9%;
     left: 30%;
 
-    height: 100%;
+
     max-height: 650px;
-    width: 40vw;
+    width: 60vw;
     max-width: 800px;
   }
 }
@@ -146,7 +147,7 @@
     position: fixed;
     height: 90%;
     max-height: 650px;
-    width: 93%;
+    width: 93vw;
     max-width: 800px;
 
   }
@@ -191,11 +192,9 @@ body{
 }
 
 p{
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 
 }
 .header{
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 20px;
   letter-spacing: -1px;
   word-spacing: 2px;
@@ -303,7 +302,7 @@ p{
 
 .ProductContainerOO{
   position: absolute;
-  left: 20%;
+  left: 5%;
   top: 20%;
   height: 75%;
 
@@ -312,7 +311,7 @@ p{
 
 .ProductFocus{
   border: 2pt solid black;
-  border-radius: 25pt;
+  border-radius: 15pt;
   background: white;
   position: absolute;
   transition: 150ms;
@@ -390,6 +389,7 @@ p{
   align-content: center;
   width: 90%;
   transition: 150ms;
+  padding: 2%;
 
 
 }
@@ -412,7 +412,7 @@ p{
 input{
   margin: 5pt;
   background: white;
-  border:   2pt solid greenyellow;
+  border:   2pt solid black;
   outline: hidden;
 }
 
@@ -436,7 +436,7 @@ input{
 }
 
 .Product-name{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
   font-size: 150%;
   font-weight: bold;
 }
@@ -446,15 +446,14 @@ input{
   height: 30px;
   background: black;
   border: greenyellow;
-  margin-top: 1%;
-  margin-left: 5px;
-
+  margin-top: 5px;
+  margin-left: 6.5px;
   box-shadow: 2px 2px 0px 1px greenyellow;
 }
+
 .navButton:hover{
   color: black;
   background: greenyellow;
-
 }
 
 button{
@@ -469,7 +468,7 @@ button{
 
 button:hover{
   color: black;
-  background: white;
+  background: greenyellow;
 }
 
 .navInput{
