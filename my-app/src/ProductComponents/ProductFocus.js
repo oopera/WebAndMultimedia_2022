@@ -8,9 +8,9 @@ export function Commentlist(props){
     <div className={'commentBox'}>
         {props.comments.filter(comment => comment.productID === props.id).map((filteredComment) => {
             return (
-                <div key={filteredComment._id}>
-                    <p> {filteredComment.name}: {filteredComment.comment} {filteredComment.Date}</p>
-                </div>
+
+                    <p key={filteredComment._id}> {filteredComment.name}: {filteredComment.comment} {filteredComment.Date}</p>
+
             )
         })}
     </div>
@@ -53,7 +53,7 @@ export function ProductFocus(props) {
                 <img className={"productImage"} src={props.img}/>
                 )}
                 {props.availability === 0 && (
-                    <p>Item is currently not in Stock</p>
+                    <p style={{border: "1pt solid black"}}>Item is currently not in Stock</p>
                 )}
                 {props.availability !== 0 && (
                     <div>
@@ -74,9 +74,9 @@ export function ProductFocus(props) {
                         </div>
                     )}
                     {props.isLoggedIn === false && (
-                        <div>
+                        <p>
                             You have to log in before you can leave a comment.
-                        </div>
+                        </p>
                     )}
                 </div>
                 <Commentlist id={props.id} comments={comments}/>

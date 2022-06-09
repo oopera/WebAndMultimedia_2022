@@ -24,8 +24,9 @@ export default function ProductList(props) {
        }
     }
     const colors =
-    //    ['#52FF00', '#00FFE0', '#3300FF', "#0057FF", "#AD00FF", "#FF0000", "#FFA800", '#CCFF00', '#52FF00']
-        ['greenyellow', 'greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow',]
+      // ['#52FF00', '#00FFE0', '#3300FF', "#0057FF", "#AD00FF", "#FF0000", "#FFA800", '#CCFF00', '#52FF00']
+       // ['greenyellow', 'greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow',]
+        ['black','black','black','black','black','black','black','black',]
     let counter = -1;
 
     function AproductList(props) {
@@ -43,12 +44,12 @@ export default function ProductList(props) {
                         </div>
                             )}
                     {props.openedItem === product._id && (
-                        <div>
-                    <div onClick={() => updateProduct(product._id)} key={product._id}>
-                        <Product style={{borderColor: colors[counter]}} className={'Focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
+                        <>
+                        <div onClick={() => updateProduct(product._id)} key={product._id}>
+                        <Product  onClick={() => updateProduct(product._id)} key={product._id} style={{borderColor: colors[counter]}} className={'Focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                         </div>
                         <ProductFocus setOpenedItem={props.setOpenedItem} isLoggedIn={props.isLoggedIn} style={{borderColor: colors[counter]}} purchases={props.purchases} basket={props.basket} setBasket={props.setBasket} product={product} comments={product.Comments} img={product.img} id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
-                    </div>
+                        </>
                         )}
                 </div>
             )});

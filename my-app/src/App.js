@@ -1,5 +1,5 @@
 import './App.css';
-import Background from "./BackgroundComponents/Background";
+
 import BackGroundGrafix from "./BackgroundComponents/BackGroundGrafix";
 import TopNav from "./TopNavComponents/TopNav";
 import ProductList from "./ProductComponents/ProductList"

@@ -15,8 +15,19 @@
 
 }
 
+@keyframes moveProduct {
+  0% {width: 100%}
+
+  100% {  width: 150px;}
+
+}
+
 
 @media (min-width: 1200px) {
+
+  .buttonRow{
+    flex-direction:row;
+  }
   .logo {
     left: 32%;
     position: fixed;
@@ -24,6 +35,7 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 175%;
     font-weight: bold;
+    z-index: 5;
   }
   .maintext {
     left: 30%;
@@ -31,9 +43,20 @@
     color: black;
 
     font-size: 60px;
-    font-weight: bold;
+
     transition: 150ms;
   }
+
+  .navButton{
+    width: 65px;
+    height: 30px;
+    background: white;
+    color: black;
+    border: 1pt solid black;
+    margin-top: 5px;
+    margin-left: 6.5px;
+  }
+
 
   .FocusWindow{
     top: 25%;
@@ -48,24 +71,28 @@
   }
 
   .ProductFocus{
-    margin-left: 65%;
-    top: 9%;
-    left: 30%;
-    height: 85%;
-    max-height: 650px;
-    width: 60vw;
-    max-width: 800px;
-    overflow-x: hidden;
-    overflow-y: hidden;
+
+    top: 0%;
+    left: 102%;
+    height: 100%;
+    width: 200%;
+
   }
 
+  @keyframes rotate {
+    0%{transform: rotate(360deg)
+    }
+    100%{transform: rotate(0deg)}
+  }
   .TopNav{
-    margin-left: 5%;
-    margin-top: 1%;
+  left: 10px;
+  top: 2px;
 
     float: right;
     position: fixed;
-    z-index: 2;
+    z-index: 10;
+    background-color: white;
+    border: 1pt black solid;
 
   }
 
@@ -75,6 +102,16 @@
 }
 
 @media (max-width: 1200px) {
+  .navButton{
+    width: 50vw;
+    height: 30px;
+    background: white;
+    color: black;
+    border: 1pt solid black;
+    margin-left: 10%;
+  }
+
+
   .logo {
     left: 15%;
     position: fixed;
@@ -82,23 +119,20 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 175%;
     font-weight: bold;
+    z-index: 5;
   }
   .maintext {
     left: 5%;
     position: fixed;
     color: black;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
     font-size: 55px;
-    font-weight: bold;
-    transition: 150ms;
+
   }
 
   .ProductContainer {
     overflow-y: visible;
     width: 600px;
-  }
-  .Product {
-
   }
 
   .TopNavWrapper{
@@ -106,6 +140,7 @@
   }
   .mobileNav{
     visibility: visible;
+    z-index: 5;
   }
 
   .TopNav{
@@ -127,15 +162,21 @@
     background: greenyellow;
   }
 
+
+  .buttonRow{
+    flex-direction: column;
+  }
+
+
   .ProductFocus{
-    margin-left: 65%;
-    top: 9%;
-    left: 30%;
-
-
-    max-height: 650px;
-    width: 60vw;
+    top: 0%;
     max-width: 800px;
+    left: 0;
+    margin-left: 0%;
+    position: fixed;
+    height: 90%;
+    max-height: 650px;
+    width: 225%;
   }
 }
 
@@ -143,7 +184,7 @@
   .ProductFocus{
     left: 0;
     margin-left: 0%;
-    top: 7%;
+    top: 0%;
     position: fixed;
     height: 90%;
     max-height: 650px;
@@ -158,9 +199,26 @@ body{
   margin: 0;
   height: 100%;
   overflow: hidden;
-  background-image: url("Vector.svg");
+  background-image:
+          url("./images/bg9.png"),
+          url("images/HalfttoneGradients.png"),
+  url("./images/bg7.jpg"),
+  url("./images/bg3.jpg"),
+  url("./images/bg4.jpg"),
+  url("./images/bg5.jpg"),
+  url("./images/bg8.png");
+
+  background-position:
+  30% -50%,
+  15% -5%,
+  45% -75%,
+  58% -47%,
+  60% 5%;
+
+  background-blend-mode:hue;
+
+
   background-repeat: no-repeat;
-  background-position:center;
 
 
 }
@@ -197,15 +255,69 @@ p{
 .header{
   font-size: 20px;
   letter-spacing: -1px;
-  word-spacing: 2px;
+  word-spacing: 5px;
   color: #000000;
-  font-weight: 700;
+
 }
 
+.partingline{
+  background-color: white;
+  border: 1pt black solid;
+  width: 100vw;
+  height: 150px;
+  z-index: -10;
+  position: relative;
+}
+
+.breakingNewsCont{
+  height: 25px;
+  background: white;
+  width: 100vw;
+
+  border-bottom: 1pt black solid;
+  border-left: 1pt black solid;
+  border-right: 1pt black solid;
+  overflow-y: hidden;
+}
+
+.breakingNews{
+  color: black;
+  display: flex;
+  flex-direction: row;
+  height: 25px;
+
+  animation: slidez 20s linear;
+  animation-iteration-count: infinite;
+}
+@keyframes slidez {
+  0% {transform: translateX(-100%);
+}
+  100% {transform: translateX(100%);
+}
+}
+
+.sideBox{
+  margin-left: 70%;
+  height: calc(100% - 210px);
+  border-left: 1pt black solid;
+  padding: 20px;
+  background-color: white;
+  color: black;
+  font-size: 100%;
+  overflow: scroll;
+  word-wrap: break-word;
+  text-align: right;
+
+}
+.tableTing{
+  border-top: 1pt black solid;
+}
+.tableTingHeader{
+  border-top: 1pt black solid;
+  font-style:italic  ;
+}
 .Product{
-  Background-color: rgba(255, 255, 255, .8);
-  margin: 2%;
-  padding: 1%;
+  background: white;
   display: flex;
   flex-direction: row;
   transition: 250ms;
@@ -214,7 +326,8 @@ p{
 }
 
 .Product:hover{
-  border-bottom: 2pt solid black;
+
+  border-left: 1pt solid greenyellow;
   padding-left:5%;
   transition: 150ms;
 }
@@ -225,12 +338,12 @@ p{
   height: 100vh;
   width: 100vw;
   bottom: 0;
-  pointer-events: none;
-  border: 10pt solid greenyellow;
+  z-index: -1;
+  border: 5pt solid greenyellow;
 }
 
 .subItem{
-  border-radius: 10pt;
+
   border: 1pt solid black;
   justify-content: space-between;
   margin: 2%;
@@ -242,15 +355,14 @@ p{
   Background-color: white;
   display: flex;
   flex-direction: row;
-  border-bottom: 2pt solid black;
-  margin: 2%;
-  padding: 1%;
+  border-left: 1pt solid black;
+
+
   padding-left:5%;
   justify-content: space-between;
+
+
 }
-
-
-
 .hamNavButtonClosed{
   border: greenyellow;
   background: greenyellow;
@@ -258,7 +370,8 @@ p{
   height: 40px;
   margin-left: 20px;
   margin-top: 5px;
-  transition: 150ms;
+
+  z-index: 10;
 }
 .hamNavButtonClosed:hover{
   background: black;
@@ -271,29 +384,34 @@ p{
   border-radius: 20px;
   margin-left: 20px;
   margin-top: 5px;
-  transition: 150ms;
-}
 
-.hamNavButtonOpen:hover{
+}
+.hamNavButtonOpen:hover {
   background: black;
 }
-
-.ProductList{
-
-  display: grid;
-  margin-top: 10%;
-  height: 80vh;
-  transition: 150ms
-
-}
-
 .ProductContainer{
-  width: 50%;
+  padding-top: 70px;
+  position: relative;
+  background: white;
+  border: black solid 1pt;
+  width: 30%;
   min-width: 300px;
-  height: 91%;
-  padding-top: 5vh;
-  overflow-y:scroll;
-  margin-top: 4%;
+  overflow-x:visible;
+  margin-right: 5pt;
+  height: 100%;
+  bottom: 10pt;
+  padding-left: 5pt;
+  padding-right: 5pt;
+}
+.help{
+  width: 100vw;
+  height: 50vw;
+  margin-top: 0;
+  text-align: center;
+  background: white;
+  z-index: 10000000;
+  padding: 20px;
+
 }
 
 .ProductContainer::-webkit-scrollbar {
@@ -302,21 +420,21 @@ p{
 
 .ProductContainerOO{
   position: absolute;
-  left: 5%;
-  top: 20%;
-  height: 75%;
-
+  left: 10pt;
+  width: 70%;
+  top: 190px;
+  height: 70%;
+  z-index: 9;
+  bottom: 10pt;
+  margin-right: 5pt;
 }
 
-
 .ProductFocus{
-  border: 2pt solid black;
-  border-radius: 15pt;
+  border: 1pt solid black;
   background: white;
+  z-index: 10;
   position: absolute;
-  transition: 150ms;
-  min-height: 600px;
-  animation: 0.2s ease-out 0s 1 slideInFromLeft;
+
 
 }
 .commentBox{
@@ -337,7 +455,7 @@ p{
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 5px;
+
   background: black;
 }
 
@@ -346,7 +464,6 @@ p{
 }
 .buttonRow{
   display: flex;
-  flex-direction: row;
 }
 .inputs{
   display: flex;
@@ -357,33 +474,14 @@ p{
 
   background: greenyellow;
   position: absolute;
-  transition: 150ms;
+
   animation: 0.3s ease-out 0s 1 slideActuallyInFromLeft;
 
   overflow-x: scroll;
 }
 
-.adminControl{
-  left: 0;
-  right: 0;
-  margin: auto;
-  top: 15%;
-  border: 2pt solid black;
-  border-radius: 25pt;
-  background: white;
-  position: absolute;
-  z-index: 10;
-  height: 70vh;
-  max-height: 650px;
-  width: 40vw;
-  max-width: 800px;
-  transition: 150ms;
-  animation: 0.2s ease-out 0s 1 slideInFromLeft;
-  box-shadow: 5px 5px 50px -30px #000000;
-}
 
 .focusContent{
-
   display:inline-block;
   text-align:center;
   align-content: center;
@@ -404,22 +502,22 @@ p{
 
 ::placeholder {
   color: black;
-  font-size: 1.2em;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 0.9em;
+
 
 }
 
 input{
   margin: 5pt;
   background: white;
-  border:   2pt solid black;
+  border:   1pt solid black;
   outline: hidden;
 }
 
 .TopNavForm{
   display: flex;
   flex-direction: column;
-  float: left;
+  transition: 150ms;
 }
 
 .searchField{
@@ -428,28 +526,22 @@ input{
   min-width: 280px;
   height: 30px;
   transition: 1s;
+  margin-bottom: 20px;
 }
 .searchField:focus{
   outline: hidden;
-  border-radius: 10px;
-  width: 30%;
+
+  width: 100%;
 }
 
 .Product-name{
 
   font-size: 150%;
-  font-weight: bold;
+
 }
 
-.navButton{
-  width: 65px;
-  height: 30px;
-  background: black;
-  border: greenyellow;
-  margin-top: 5px;
-  margin-left: 6.5px;
-  box-shadow: 2px 2px 0px 1px greenyellow;
-}
+
+
 
 .navButton:hover{
   color: black;
@@ -460,10 +552,11 @@ button{
   color: white;
   background: black;
   height: 30px;
+
   border: greenyellow;
   margin-top: 1%;
   margin-left: 5px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }
 
 button:hover{
@@ -475,94 +568,11 @@ button:hover{
 height: 25px;
 width: 200px;
   display: inline-block;
+  transition: 350ms;
 
 }
 
 .navInput:focus{
   outline: hidden;
-}
-
-@keyframes from0to360 {
-  from{transform:rotate(0);}
-  to{transform:rotate(360deg);}
-}
-@keyframes from360to0 {
-  from{transform:rotate(360deg);}
-  to{transform:rotate(0deg);}
-}
-@keyframes scaleUp {
-  from{transform:scale(0.8);}
-  to{transform:scale(1);}
-}
-@keyframes scaleDown {
-  from{transform:scale(1);}
-  to{transform:scale(0.8);}
-}
-
-@keyframes from360to0scaled {
-  from{transform:rotate(360deg) scale(1.1); }
-  to{transform:rotate(0deg) scale(0.25);}
-}
-
-.blob-svg {
-  bottom: 50%;
-  right: 90%;
-  z-index: -10;
-  filter: blur(15rem);
-  position: absolute;
-  will-change: transform;
-}
-
-.circle1 {
-  animation: from0to360 10s linear infinite;
-  cx: 150;
-  cy: 145;
-  r: 100;
-  fill: white;
-  transform-origin: 145px 150px;
-}
-.circle2 {
-  animation: from360to0 20s linear infinite;
-  cx: 250;
-  cy: 155;
-  r: 200;
-  fill: white;
-  transform-origin: 160px 150px;
-}
-
-.circle3 {
-  animation: from0to360 30s linear infinite alternate;
-  cx: 145;
-  cy: 150;
-  r: 100;
-  fill: white;
-  transform-origin: 150px 145px;
-}
-
-.circle4 {
-  animation: from360to0 25s linear infinite;
-  cx: 155;
-  cy: 150;
-  r: 100;
-  fill: white;
-  transform-origin: 150px 155px;
-}
-
-.ellipse1 {
-  animation: from360to0scaled 20s linear infinite alternate;
-  rx: 120;
-  ry: 100;
-  cx: 150;
-  cy: 150;
-  fill: white;
-  transform-origin: 130px 155px;
-}
-.ellipse2 {
-  animation: from0to360 15s linear infinite;
-  rx: 120;
-  ry: 100;
-  cx: 150;
-  cy: 150;
-  fill: white;
-  transform-origin: 150px 155px;
+  width: 800px;
 }

@@ -10,8 +10,8 @@ export default function BasketComponent(props){
                 {props.basket.length !== 0 && (
                     props.basket.map((basketItem, index) => {
                         return (
-                            <div key={index}>
-                                <div>{basketItem.Name}</div>
+                            <div className={'subItem'} key={index}>
+                                <div>{basketItem.Name} {basketItem.Price}€</div>
                                 <button onClick={() => removeFromBasket(props = {props, basketItem, index})}>Remove from Basket
                                 </button>
                             </div>

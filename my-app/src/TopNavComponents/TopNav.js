@@ -112,7 +112,7 @@ export default function TopNav(props) {
                     </div>
                     </div>
                     )}
-
+                    <p id={"CorrectionBox"}> </p>
 
                 </div>
     )}
@@ -148,9 +148,11 @@ function myAccount(props){
 
 function wantsToRegistreFunc(props){
     props.setWantsToRegistre(!props.wantsToRegistre)
+    document.getElementById("CorrectionBox").innerHTML = "";
 }
 
 async function login(props){
+    document.getElementById("CorrectionBox").innerHTML = "";
     console.log(props.form)
     const form = { ...props.form };
     const res = await fetch("http://localhost:5000/users/login", {
@@ -165,7 +167,7 @@ async function login(props){
         });
     const user = await res.json();
     if(user.length === 0){
-        console.log("Wrong credentials")
+        document.getElementById("CorrectionBox").innerHTML = "Wrong credentials";
     } else {
         if(user[0].Admin === true){
             props.props.setAccount('admin')
@@ -183,11 +185,11 @@ async function login(props){
 
 async function register(props){
     if(props.reform.password.length<8){
-        window.alert("your password is too short. min. length is 8 characters");
+        document.getElementById("CorrectionBox").innerHTML = "Password needs to be atleast 8 Characters";
         return;
     }
     if(props.reform.password !== props.reform.password2){
-        window.alert("Passwords must match");
+        document.getElementById("CorrectionBox").innerHTML = "Password needs to be atleast 8 Characters";
         return;
     }
     if(!props.reform.email.match(
