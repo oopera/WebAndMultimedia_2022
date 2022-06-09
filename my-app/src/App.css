@@ -30,20 +30,18 @@
   }
   .logo {
     left: 32%;
-    position: fixed;
-    color: black;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: absolute;
     font-size: 175%;
     font-weight: bold;
     z-index: 5;
+    top: 40px;
   }
   .maintext {
     left: 30%;
-    position: fixed;
+    position: absolute;
     color: black;
-
+    top: 0;
     font-size: 60px;
-
     transition: 150ms;
   }
 
@@ -113,21 +111,21 @@
 
 
   .logo {
-    left: 15%;
-    position: fixed;
-    color: black;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    left: 5%;
+    position: absolute;
+
     font-size: 175%;
     font-weight: bold;
     z-index: 5;
+    top: 60px;
   }
+
   .maintext {
-    left: 5%;
-    position: fixed;
+    left: 3%;
+    position: absolute;
     color: black;
-
     font-size: 55px;
-
+    top: 20px;
   }
 
   .ProductContainer {
@@ -196,12 +194,15 @@
 
 
 body{
+  cursor: crosshair;
+
+
   margin: 0;
   height: 100%;
   overflow: hidden;
   background-image:
-          url("./images/bg9.png"),
-          url("images/HalfttoneGradients.png"),
+ url("./images/bg9.png"),
+ url("images/HalfttoneGradients.png"),
   url("./images/bg7.jpg"),
   url("./images/bg3.jpg"),
   url("./images/bg4.jpg"),
@@ -216,13 +217,24 @@ body{
   60% 5%;
 
   background-blend-mode:hue;
-
-
   background-repeat: no-repeat;
-
-
 }
 
+#mouse-circle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0px 0px -10px;
+  border: 1px solid #000000;
+  mix-blend-mode:multiply;
+  border-radius: 50%;
+  pointer-events: none !important;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0);
+}
+
+.backImage{
+  height: 10000px;
+}
 .XButton {
   position: absolute;
   right: 15px;
@@ -266,18 +278,20 @@ p{
   width: 100vw;
   height: 150px;
   z-index: -10;
-  position: relative;
+  top: 0;
+  position: absolute;
 }
 
 .breakingNewsCont{
   height: 25px;
   background: white;
   width: 100vw;
-
+position: absolute;
   border-bottom: 1pt black solid;
   border-left: 1pt black solid;
   border-right: 1pt black solid;
   overflow-y: hidden;
+  top: 153px;
 }
 
 .breakingNews{
@@ -298,7 +312,8 @@ p{
 
 .sideBox{
   margin-left: 70%;
-  height: calc(100% - 210px);
+  margin-top: 130px;
+  height: calc(100vh - 210px);
   border-left: 1pt black solid;
   padding: 20px;
   background-color: white;

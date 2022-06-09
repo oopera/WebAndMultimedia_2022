@@ -3,12 +3,13 @@ import './App.css';
 import BackGroundGrafix from "./BackgroundComponents/BackGroundGrafix";
 import TopNav from "./TopNavComponents/TopNav";
 import ProductList from "./ProductComponents/ProductList"
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import SubWindow from "./SubWindows/SubWindow";
 import { ReactSession } from 'react-client-session';
 import HamNav from "./TopNavComponents/HamNav";
 
 import useMouse from '@react-hook/mouse-position'
+import SideNav from "./BackgroundComponents/SideNav";
 
 /*
 
@@ -92,11 +93,9 @@ export default function App() {
 
     const useMousePosition = () => {
         const [position, setPosition] = useState({ x: 0, y: 0 });
-
         useEffect(() => {
             const setFromEvent = (e) => setPosition({ x: e.clientX, y: e.clientY });
             window.addEventListener("mousemove", setFromEvent);
-
             return () => {
                 window.removeEventListener("mousemove", setFromEvent);
             };
@@ -106,24 +105,45 @@ export default function App() {
     };
 
     const position = useMousePosition();
-    console.log(position.x)
-    const el = document.querySelector("body");
+/*
+    let revisedMousePosX = 0;
+    let revisedMousePosY = 0;
+        let delay = 6
+    const mouseCircle = useRef();
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        function delayMouseFollow() {
+            requestAnimationFrame(delayMouseFollow);
+            revisedMousePosX += (position.x - revisedMousePosX) / delay;
+            revisedMousePosY += (position.y - revisedMousePosY) / delay;
+            mouseCircle.current.style.top= revisedMousePosY + "px";
+            mouseCircle.current.style.left= revisedMousePosX + "px";
+        }
 
-    el.style.backgroundPosition = "position.y position.x";
+        delayMouseFollow();
+    }
 
-
+*/
     return (
 
         <div>
-
+            <div id="mouse-circle" style={{
+                left: position.x,
+                top: position.y, zIndex: 20}}> </div>
             <div className={'TopNavWrapper'}>
         <TopNav setReload={setReload} reload={reload} basket={basket} setAccComments={setAccComments} setPurchases={setPurchases} isLoggedIn={isLoggedIn}
                 setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem}
                 setOpenedItem={setOpenedItem}/>
+                <HamNav setReload={setReload} reload={reload} basket={basket} setAccComments={setAccComments} setPurchases={setPurchases} isLoggedIn={isLoggedIn}
+                        setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem}
+                        setOpenedItem={setOpenedItem}/>
+
             </div>
-            <HamNav setReload={setReload} reload={reload} basket={basket} setAccComments={setAccComments} setPurchases={setPurchases} isLoggedIn={isLoggedIn}
-                    setLoggedIn={setLoggedIn} account={account} setAccount={setAccount} openedItem={openedItem}
-                    setOpenedItem={setOpenedItem}/>
+            <a  href={"https://lucaslichner.de"} target={"_blank"} className={'logo'}>lucaslichner. </a>
+                <p className={'maintext'}><span>buy.</span><span>my.</span><span style={{textDecoration: 'line-through'}}>shit</span>.<span style={{fontStyle: 'italic'}}>stuff</span>.</p>
+                <div className={"partingline"}> </div>
+            <div className={"breakingNewsCont"}> <div className={"breakingNews"} >Thank you for visiting! If youre in need of help or explanation: </div> </div>
+            <SideNav/>
+
         <ProductList  isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} products={products} setProducts={setProducts}
                      openedItem={openedItem} setOpenedItem={setOpenedItem}/>
         <SubWindow setReload={setReload} reload={reload} isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} account={account} setAccount={setAccount}
