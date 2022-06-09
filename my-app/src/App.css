@@ -218,9 +218,9 @@ body{
   34% -75%,
   75% -15%;
 
-  background-blend-mode:hue;
+  background-blend-mode:saturation;
   background-repeat: no-repeat;
-  animation: slowShift 25s linear;
+
   animation-iteration-count: infinite;
 }
 @keyframes slowShift {
@@ -239,8 +239,8 @@ body{
             60% 5%,
             15% -5%,
             75% -15%,
-            30% -50%,
             60% 5%,
+            30% -50%,
             58% -47%,
             34% -75%,
             70% 70%;
@@ -371,19 +371,28 @@ position: absolute;
   font-style:italic  ;
 }
 .Product{
-
   display: flex;
   flex-direction: row;
   transition: 250ms;
   box-shadow: 5px 5px 80px -50px #000000;
   justify-content: space-between;
+  border-bottom: 1pt solid black;
 }
 
 .Product:hover{
-
   border-left: 1pt solid greenyellow;
   padding-left:5%;
   transition: 150ms;
+}
+
+.Focused{
+  Background-color: white;
+  display: flex;
+  flex-direction: row;
+  border-left: 1pt solid black;
+  border-bottom: 1pt solid black;
+  padding-left:5%;
+  justify-content: space-between;
 }
 
 
@@ -405,18 +414,7 @@ position: absolute;
   width: 70%;
 }
 
-.Focused{
-  Background-color: white;
-  display: flex;
-  flex-direction: row;
-  border-left: 1pt solid black;
 
-
-  padding-left:5%;
-  justify-content: space-between;
-
-
-}
 .hamNavButtonClosed{
   border: greenyellow;
   background: greenyellow;

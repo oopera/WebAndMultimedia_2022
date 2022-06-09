@@ -103,23 +103,17 @@ export default function App() {
         return position;
     };
 
-    function theTime() {
-        let Datte = new Date();
-        let H = Datte.getHours();
-        let m = Datte.getMinutes();
-        let s = Datte.getSeconds();
-        if (H < 10 ){
-            H = "0" + H;
-        }
-        if (m < 10 ){
-            m = "0" + m;
-        }
-        if (s < 10 ){
-            s = "0" + s;
-        }
+    function getTime() {
+        let date = new Date();
+        let H = date.getHours();
+        let m = date.getMinutes();
+        let s = date.getSeconds();
+        if (H < 10 ) H = "0" + H;
+        if (m < 10 ) m = "0" + m;
+        if (s < 10 ) s = "0" + s;
         document.getElementById("time").textContent = `${H} : ${m} : ${s}`
     }
-    setInterval(theTime);
+    setInterval(getTime);
 
 
     const position = useMousePosition();
