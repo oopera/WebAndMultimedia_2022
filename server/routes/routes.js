@@ -188,10 +188,11 @@ recordRoutes.route("/updateUser/:id").post(function (req, response) {
     function castIDs(Comment){
             Comment.id = ObjectId(Comment.id)
     }
-    req.body.Purchases.forEach(castIDs)
+    req.body.Purchases.forEach(castPurchaseIDs)
     function castPurchaseIDs(purchase){
         purchase.PurchaseID = ObjectId(purchase.PurchaseID)
     }
+
     let newvalues = {
         $set: {
             Email: req.body.Email,

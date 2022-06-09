@@ -5,7 +5,7 @@ import BasketComponent from "../TopNavComponents/BasketComponent";
 
 export default function SubWindow(props){
 return(
-    <div>
+    <>
     {props.openedItem === 'admin' && (
         <AdminControl setOpenedItem={props.setOpenedItem} products={props.products}/>
     )}
@@ -15,5 +15,5 @@ return(
     {props.openedItem === 'basket' && (
         <BasketComponent setOpenedItem={props.setOpenedItem} setReload={props.setReload} reload={props.reload} isLoggedIn={props.isLoggedIn} setBasket={props.setBasket} basket={props.basket}/>
     )}
-    </div>
+    </>
     )}

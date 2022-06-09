@@ -185,16 +185,20 @@ async function login(props){
 
 async function register(props){
     if(props.reform.password.length<8){
-        document.getElementById("CorrectionBox").innerHTML = "Password needs to be atleast 8 Characters";
+        document.getElementById("CorrectionBox").innerHTML = "Password must be >8 Chars";
         return;
     }
     if(props.reform.password !== props.reform.password2){
-        document.getElementById("CorrectionBox").innerHTML = "Password needs to be atleast 8 Characters";
+        document.getElementById("CorrectionBox").innerHTML = "Passwords must match";
+        return;
+    }
+    if(props.reform.username.length<3){
+        document.getElementById("CorrectionBox").innerHTML = "Username must be >3 Chars";
         return;
     }
     if(!props.reform.email.match(
             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
-        window.alert("Please enter a valid email adress");
+        document.getElementById("CorrectionBox").innerHTML = "Please enter a valid email adress";
         return;
     }
     wantsToRegistreFunc(props)

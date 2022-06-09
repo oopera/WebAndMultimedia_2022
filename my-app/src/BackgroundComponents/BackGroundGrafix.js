@@ -19,7 +19,7 @@ export default function BackGroundGrafix(props){
         }
         document.getElementById("time").textContent = `${H} : ${m} : ${s}`
     }
-   //  setInterval(theTime);
+     setInterval(theTime);
 
     return(
         <div className={"frame"}>

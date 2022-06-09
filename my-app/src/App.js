@@ -100,29 +100,30 @@ export default function App() {
                 window.removeEventListener("mousemove", setFromEvent);
             };
         }, []);
-
         return position;
     };
 
-    const position = useMousePosition();
-/*
-    let revisedMousePosX = 0;
-    let revisedMousePosY = 0;
-        let delay = 6
-    const mouseCircle = useRef();
-    if (window.matchMedia("(min-width: 768px)").matches) {
-        function delayMouseFollow() {
-            requestAnimationFrame(delayMouseFollow);
-            revisedMousePosX += (position.x - revisedMousePosX) / delay;
-            revisedMousePosY += (position.y - revisedMousePosY) / delay;
-            mouseCircle.current.style.top= revisedMousePosY + "px";
-            mouseCircle.current.style.left= revisedMousePosX + "px";
+    function theTime() {
+        let Datte = new Date();
+        let H = Datte.getHours();
+        let m = Datte.getMinutes();
+        let s = Datte.getSeconds();
+        if (H < 10 ){
+            H = "0" + H;
         }
-
-        delayMouseFollow();
+        if (m < 10 ){
+            m = "0" + m;
+        }
+        if (s < 10 ){
+            s = "0" + s;
+        }
+        document.getElementById("time").textContent = `${H} : ${m} : ${s}`
     }
+    setInterval(theTime);
 
-*/
+
+    const position = useMousePosition();
+
     return (
 
         <div>
@@ -141,8 +142,10 @@ export default function App() {
             <a  href={"https://lucaslichner.de"} target={"_blank"} className={'logo'}>lucaslichner. </a>
                 <p className={'maintext'}><span>buy.</span><span>my.</span><span style={{textDecoration: 'line-through'}}>shit</span>.<span style={{fontStyle: 'italic'}}>stuff</span>.</p>
                 <div className={"partingline"}> </div>
-            <div className={"breakingNewsCont"}> <div className={"breakingNews"} >Thank you for visiting! If youre in need of help or explanation: </div> </div>
+            <div className={"breakingNewsCont"}> <div className={"breakingNews"} >Thank you for visiting! If youre in need of help or explanation please consult the container on the right hand side </div> </div>
             <SideNav/>
+            <div style={{bottom: "11px", left:"10px",
+                textOrientation: "mixed", zIndex: 10, fontSize: "150%", position: "absolute", backgroundColor: "white", border:"black solid 1pt", padding: "pt"}} id="time">placeholder</div>
 
         <ProductList  isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} products={products} setProducts={setProducts}
                      openedItem={openedItem} setOpenedItem={setOpenedItem}/>

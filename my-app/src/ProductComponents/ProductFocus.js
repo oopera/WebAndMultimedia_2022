@@ -5,15 +5,17 @@ import XButton from "../XButton";
 
 export function Commentlist(props){
     return(
-    <div className={'commentBox'}>
+        <div className={'commentBox'}>
+    <table className={"tablo"}>
         {props.comments.filter(comment => comment.productID === props.id).map((filteredComment) => {
             return (
-
-                    <p key={filteredComment._id}> {filteredComment.name}: {filteredComment.comment} {filteredComment.Date}</p>
-
+            <tr>
+                    <td className={'tableTingHeader'} key={filteredComment._id}> {filteredComment.name}: {filteredComment.comment} {filteredComment.Date}</td>
+            </tr>
             )
         })}
-    </div>
+    </table>
+        </div>
         )
 
 }
@@ -52,7 +54,7 @@ export function ProductFocus(props) {
                 {props.img !== undefined && (
                 <img className={"productImage"} src={props.img}/>
                 )}
-                {props.availability === 0 && (
+                {props.availability <= 0 && (
                     <p style={{border: "1pt solid black"}}>Item is currently not in Stock</p>
                 )}
                 {props.availability !== 0 && (

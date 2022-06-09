@@ -8,7 +8,6 @@ export default function SideNav(){
             need help?
 
             <table>
-
                 <tr>
                     <td className={'tableTingHeader'}>Functions:</td>
                 </tr>
@@ -45,8 +44,6 @@ export default function SideNav(){
                 <tr>
                     <td className={'tableTing'}>DISCLAIMER!!! Dont use serious credentials on here if you create an account - i don't want to have the responsibility attached to that. Also - once you log in you might want to clear the cache under "account" since Information will be stored to localstorage</td>
                 </tr>
-
-
             </table>
         </div>
     )
