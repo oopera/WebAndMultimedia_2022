@@ -1,7 +1,6 @@
 import '../App.css';
-import React, {useEffect, useState} from "react";
-import {ReactSession} from "react-client-session";
 import XButton from "../XButton";
+import {clear} from "../HelperFunctions/SessionFunctions";
 
 export function AccPurchaseList(props){
     console.log(props.purchases)
@@ -32,13 +31,6 @@ export function AccCommentList(props){
             )}
         )
     )
-}
-function clear(){
-    ReactSession.set("wholeAcc", "");
-    ReactSession.set("admin", "");
-    ReactSession.set("Purchases", "");
-    ReactSession.set("Comments", "");
-    ReactSession.set("hasData", false);
 }
 
 export function AccountWindow(props) {

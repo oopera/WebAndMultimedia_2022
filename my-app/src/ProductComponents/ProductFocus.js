@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import XButton from "../XButton";
+import {updateUser} from "../HelperFunctions/AccountFunctions";
 
 
 
@@ -17,13 +18,11 @@ export function Commentlist(props){
     </table>
         </div>
         )
-
 }
 
 function updateBasket(props){
     let newBasket = props.basket.concat(props.product)
     props.setBasket(newBasket)
-
 }
 
 export function ProductFocus(props) {
@@ -40,7 +39,6 @@ export function ProductFocus(props) {
             setComments(comments);
         }
         getComments();
-        return;
     }, [comments.length, rerender.valueOf()]);
 
     return (
@@ -52,7 +50,7 @@ export function ProductFocus(props) {
                 </header>
                 <p> {props.description} // {props.price} € </p>
                 {props.img !== undefined && (
-                <img className={"productImage"} src={props.img}/>
+                <img className={"productImage"} src={props.img} alt={props.name}/>
                 )}
                 {props.availability <= 0 && (
                     <p style={{border: "1pt solid black"}}>Item is currently not in Stock</p>
@@ -101,7 +99,8 @@ async function sendComment(props, rerender, setRerender){
         body: JSON.stringify(newComment),
     })
         .catch(error => {
-            window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
+            window.alert("Sending the Comment did not work due to an unknown error, please try again later.");
+            console.log(error)
         });
     document.getElementById("commentInput").value = "";
     const commentDB = await response.json();
@@ -113,27 +112,3 @@ async function sendComment(props, rerender, setRerender){
 
 }
 
-
-export async function updateUser(props){
-
-    const updatedAccount = {Email: props.isLoggedIn.Email,
-        Password: props.isLoggedIn.Password,
-        Purchases: props.isLoggedIn.Purchases,
-        Username: props.isLoggedIn.Username,
-        Comments: props.isLoggedIn.Comments,
-        Admin: props.isLoggedIn.Admin,
-        id: props.isLoggedIn._id};
-
-    const response = await fetch(`http://localhost:5000/updateUser/${props.isLoggedIn._id.toString()}`, {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedAccount),
-    })
-        .catch(error => {
-            window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
-        });
-
-
-}

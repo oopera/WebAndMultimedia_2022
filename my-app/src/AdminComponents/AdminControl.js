@@ -1,6 +1,5 @@
 import '../App.css';
-import React, {Component, useEffect, useState} from 'react'
-import Select from 'react-select'
+import React, {useEffect, useState} from 'react'
 import XButton from "../XButton";
 
 export default function AdminControl(props) {
@@ -19,18 +18,7 @@ export default function AdminControl(props) {
             setUsers(userDB);
         }
         getUsers();
-        return;
     }, [users.length]);
-
-    function ProductOptions(props){
-        return props.products.map((product) => {
-            return(
-
-            <option value={product.Name}>{product.Name}</option>
-
-            )})
-    }
-    console.log(props.products)
 
     return(
             <div className={'FocusWindow'}>
@@ -40,7 +28,7 @@ export default function AdminControl(props) {
                 <p> Add product </p>
                 <p> delete product </p>
                     <div>
-                    <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}placeholder={'search users...'}/>
+                    <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}} placeholder={'search users...'}/>
                     </div>
                     <label htmlFor="products">Choose a product:</label>
                     <select>
