@@ -12,7 +12,7 @@ export default function ProductList(props) {
     }
 
     function updateProduct(string){
-       if(string === setOpenedProduct){
+       if(string === openedProduct){
            setOpenedProduct('null');
 
        }else{

@@ -92,6 +92,45 @@ export async function register(props){
     }
 }
 
+export async function addUser(props) {
+    if(props.userform.password.length<8){
+        document.getElementById("CorrectionBox2").innerHTML = "Password must be >8 Chars";
+        return;
+    }
+    if(props.userform.password !== props.reform.password2){
+        document.getElementById("CorrectionBox2").innerHTML = "Passwords must match";
+        return;
+    }
+    if(props.userform.username.length<3){
+        document.getElementById("CorrectionBox2").innerHTML = "Username must be >3 Chars";
+        return;
+    }
+    if(!props.userform.email.match(
+        /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+        document.getElementById("CorrectionBox").innerHTML = "Please enter a valid email adress";
+        return;
+    }
+    const newPerson = {...props.userform};
+    console.log(newPerson);
+    const response = await fetch("http://localhost:5000/users/add", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPerson),
+    })
+        .catch(error => {
+            window.alert("Could not add user to Database");
+        });
+    props.setUserform({email: '', username: '', password: '', password2: '', admin: false});
+    props.setUsers(users => {
+        return [...users, {newPerson}]
+    })
+}
+
+
+
+
 export function wantsToRegistreFunc(props){
     props.setWantsToRegistre(!props.wantsToRegistre)
     document.getElementById("CorrectionBox").innerHTML = "";

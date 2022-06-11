@@ -1,7 +1,7 @@
 import '../App.css';
 import React, {Component, useEffect, useState} from 'react'
 import XButton from "../XButton";
-import {deleteUser} from "../HelperFunctions/AccountFunctions";
+import {addUser, deleteUser} from "../HelperFunctions/AccountFunctions";
 
 export default function AdminControl(props) {
     const [users, setUsers] = useState([])
@@ -21,20 +21,35 @@ export default function AdminControl(props) {
         }
     );
 
+    const [productForm, setProductForm] = useState({
+
+            name: "",
+            description: "",
+            price: "",
+            availability: "",
+            img: "",
+
+        }
+    );
+
     function checker(){
         setIsChecked(!isChecked);
         updateReform({admin: !isChecked})
     }
     const selectedUserChanged=(e)=>setSelectedUser(e.target.value)
 
+    function updateProForm(value) {
+        return setProductForm((prev) => {
+            return {...prev, ...value};
+        });
+    }
 
     function updateReform(value) {
         return setUserform((prev) => {
             return {...prev, ...value};
         });
     }
-    console.log("userform: " + userform.admin);
-    console.log("isChecked: " + isChecked);
+
     useEffect(() => {
         async function getUsers() {
             const response = await fetch(`http://localhost:5000/webweb/users`);
@@ -51,32 +66,60 @@ export default function AdminControl(props) {
         return;
     }, [users.length]);
 
-
+    console.log(openWindow)
 
     return (
         <div className={'FocusWindow'}>
+            <div className={'focusContent'}>
+
+                {openWindow === 'help' && (
+                    <XButton setOpenedItem={setOpenWindow}/>
+
+
+                )
+            }
+                {openWindow === 'none' && (
+                <div>
+                    <div onClick={() => setOpenWindow('help')}>Click me to see the Admin Doc.</div>
             <XButton setOpenedItem={props.setOpenedItem}/>
-            <div className={'adminButtonClmn'}>
-
-                <button className={'adminButton'} onClick={() => setOpenWindow("deleteProduct")}> Delete
-                    Product
-                </button>
-
-            </div>
             <label htmlFor="products">Choose a product:</label>
             <select>
                 {props.products.map((product) => <option value={product.Name}>{product.Name}</option>)}
             </select>
+            <div className={'adminButtonClmn'}>
+                <button className={'adminButton'}> Delete
+                    Product
+                </button>
+            </div>
+            <div className={'inputsUser'}>
+                <input  className={'userInput'}
+                       onChange={(e) => updateProForm({name: e.target.value})}
+                       placeholder="name"/>
+                <input className={'userInput'}
+                       onChange={(e) => updateProForm({description: e.target.value})}
+                       placeholder="description"/>
+                <input className={'userInput'}
+                       onChange={(e) => updateProForm({price: e.target.value})}
+                       placeholder="price"/>
+                <input className={'userInput'}
+                       onChange={(e) => updateProForm({availability: e.target.value})}
+                       placeholder="Availability (write 'true' if it has infinite Availability (i.e. download))"/>
+                <input className={'userInput'}
+                       onChange={(e) => updateProForm({img: e.target.value})}
+                       placeholder="link to image (optional)"/>
+            </div>
+
             <div>
                 <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}
                        placeholder={'search users...'}/>
+                <select onChange={event => selectedUserChanged(event)}>
+                    {users.map((user) => <option value={user._id}>{user.Email}</option>)}
+                </select>
             </div>
-            <button className={'adminButton'} onClick={() => setOpenWindow("deleteUser")}> Delete User
+            <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers)}> Delete User
             </button>
 
-
                     <div className={'inputsUser'}>
-
                         <input value={userform.email} className={'userInput'}
                                onChange={(e) => updateReform({email: e.target.value})} type="email" name="email"
                                placeholder="email"/>
@@ -99,13 +142,14 @@ export default function AdminControl(props) {
 
                     <div className={'addUserButton'}>
                         <button className={'adminButton'}
-                                onClick={() => addUser(props = {userform, setUserform, props})}> Add User to Database
+                                onClick={() => addUser(props = {userform, setUserform, props, users, setUsers})}> Add User to Database
                         </button>
                         <p id={'CorrectionBox2'}> </p>
 
                     </div>
-
-
+</div>
+                ) }
+                   </div>
                 </div>
 
 
@@ -113,41 +157,6 @@ export default function AdminControl(props) {
     )
 
 
-    async function addUser(props) {
-        if(props.userform.password.length<8){
-            document.getElementById("CorrectionBox2").innerHTML = "Password must be >8 Chars";
-            return;
-        }
-        if(props.userform.password !== props.reform.password2){
-            document.getElementById("CorrectionBox2").innerHTML = "Passwords must match";
-            return;
-        }
-        if(props.userform.username.length<3){
-            document.getElementById("CorrectionBox2").innerHTML = "Username must be >3 Chars";
-            return;
-        }
-        if(!props.userform.email.match(
-            /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
-            document.getElementById("CorrectionBox").innerHTML = "Please enter a valid email adress";
-            return;
-        }
-        const newPerson = {...props.userform};
-        console.log(newPerson);
-        const response = await fetch("http://localhost:5000/users/add", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newPerson),
-        })
-            .catch(error => {
-                window.alert("Could not add user to Database");
-            });
-        props.setUserform({email: '', username: '', password: '', password2: '', admin: false});
-        setUsers(users => {
-            return [...users, {newPerson}]
-        })
-    }
 
 
     function deleteProduct(props) {
