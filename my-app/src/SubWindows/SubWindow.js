@@ -11,8 +11,6 @@ return(
 
     )}
 
-
-
     {props.openedItem === 'account' && (
         <AccountWindow setOpenedItem={props.setOpenedItem} accComments={props.accComments} purchases={props.purchases}/>
     )}

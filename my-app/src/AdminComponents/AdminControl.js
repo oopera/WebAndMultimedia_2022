@@ -4,6 +4,8 @@ import XButton from "../XButton";
 
 export default function AdminControl(props) {
     const [users, setUsers] = useState([])
+    const [isChecked, setIsChecked] = useState(false)
+    const [selectedUser, setSelectedUser] = useState('');
     const [selectedProduct, setSelectedProduct] = useState('')
     const [searchInput, setSearchInput] = useState('');
     const [openWindow, setOpenWindow] = useState('none');
@@ -13,10 +15,13 @@ export default function AdminControl(props) {
             username: "",
             password: "",
             password2: "",
-            admin: "",
+            admin: false,
 
         }
     );
+
+    const selectedUserChanged=(e)=>setSelectedUser(e.target.value)
+    console.log(userform.admin);
 
     function updateReform(value) {
         return setUserform((prev) => {
@@ -40,15 +45,6 @@ export default function AdminControl(props) {
         return;
     }, [users.length]);
 
-    function ProductOptions(props) {
-        return props.products.map((product) => {
-            return (
-
-                <option value={product.Name}>{product.Name}</option>
-
-            )
-        })
-    }
 
 
     return (
@@ -74,9 +70,8 @@ export default function AdminControl(props) {
                                name="password"
                                placeholder="password"/>
                     </div>
-                    <input type="checkbox" value={userform.admin} className={'userInput'}
-                           onChange={(e) => updateReform({admin: e.target.value})} name="admin"
-                           id="adminCheck" placeholder="Admin"/>
+                    <input type="checkbox" className={'userInput'} checked={!isChecked}
+                           onClick={()=>{setIsChecked(!isChecked); updateReform({admin: isChecked})}}   name="admin"  id="adminCheck" placeholder="Admin"/>
                     <label htmlFor="adminCheck"> Admin </label>
 
                     <div className={'addUserButton'}>
@@ -119,11 +114,12 @@ export default function AdminControl(props) {
 
             {
                 openWindow === "deleteUser" && (<div className={'userNav'}>
-                    <select>
-                        {props.products.map((product) => <option value={product.Name}>{product.Name}</option>)}
+                    <select onChange={event => selectedUserChanged(event)}>
+                        {users.map((user) => <option value={user._id}>{user.Email}</option>)}
+
                     </select>
                     <div className={'deleteUserButton'}>
-                        <button className={'adminButton'} onClick={() => deleteUser(props)}> Delete User from Database
+                        <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers)}> Delete User from Database
                         </button>
                     </div>
                     <XButton setOpenedItem={setOpenWindow}/>
@@ -168,10 +164,14 @@ export default function AdminControl(props) {
 
     }
 
-    function deleteUser(props) {
+    async function deleteUser(id, users, setUsers) {
+        await fetch(`http://localhost:5000/delUser/${id}`, {
+        method: "DELETE"
+    });
 
-
-    }
+    const newUsers = users.filter((el) => el._id !== id);
+    setUsers(newUsers);
+}
 
     function deleteProduct(props) {
 
