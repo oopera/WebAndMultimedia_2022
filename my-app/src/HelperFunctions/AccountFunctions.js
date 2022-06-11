@@ -1,4 +1,5 @@
 import {ReactSession} from "react-client-session";
+import {clear} from "./SessionFunctions";
 
 export async function updateUser(props){
     const updatedAccount = {Email: props.isLoggedIn.Email,
@@ -100,12 +101,17 @@ export function logout(props){
     props.props.setAccount('');
     props.props.setLoggedIn(false);
     props.setForm({ email: "", password: ""});
-    ReactSession.set("wholeAcc", "");
-    ReactSession.set("admin", "");
-    ReactSession.set("Purchases", "");
-    ReactSession.set("Comments", "");
-    ReactSession.set("hasData", false);
+    clear();
     if(props.props.openedItem === 'account' || props.props.openedItem === 'admin') {
         props.props.setOpenedItem("null")
     }
+}
+
+export async function deleteUser(id, users, setUsers) {
+    await fetch(`http://localhost:5000/delUser/${id}`, {
+        method: "DELETE"
+    });
+
+    const newUsers = users.filter((el) => el._id !== id);
+    setUsers(newUsers);
 }

@@ -6,17 +6,17 @@ import React, {useEffect, useState} from "react";
 export default function ProductList(props) {
     const [rerender, setRerender] = useState(false);
     const [searchInput, setSearchInput] = useState('');
-
+    const [openedProduct, setOpenedProduct] = useState('');
     function softRerender(){
         setRerender(!rerender);
     }
 
     function updateProduct(string){
-       if(string === props.openedItem){
-           props.setOpenedItem('null');
+       if(string === setOpenedProduct){
+           setOpenedProduct('null');
 
        }else{
-           props.setOpenedItem(string);
+           setOpenedProduct(string);
 
        }
     }
@@ -32,18 +32,18 @@ export default function ProductList(props) {
             }
             return (
                 <div key={product._id}>
-                    {props.openedItem !== product._id  &&
+                    {openedProduct !== product._id  &&
                         product.Name.toLowerCase().includes(searchInput.toLowerCase()) && (
                         <div onClick={() => updateProduct(product._id)}>
                         <Product style={{borderColor: colors[counter]}} img={product.img} className={'Product'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability} key={product._id}/>
                         </div>
                             )}
-                    {props.openedItem === product._id && (
+                    {openedProduct === product._id && (
                         <>
                         <div onClick={() => updateProduct(product._id)} key={product._id}>
                         <Product  onClick={() => updateProduct(product._id)} key={product._id} style={{borderColor: colors[counter]}} className={'Focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                         </div>
-                        <ProductFocus setOpenedItem={props.setOpenedItem} isLoggedIn={props.isLoggedIn} style={{borderColor: colors[counter]}} purchases={props.purchases} basket={props.basket} setBasket={props.setBasket} product={product} comments={product.Comments} img={product.img} id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
+                        <ProductFocus setOpenedItem={setOpenedProduct} isLoggedIn={props.isLoggedIn} style={{borderColor: colors[counter]}} purchases={props.purchases} basket={props.basket} setBasket={props.setBasket} product={product} comments={product.Comments} img={product.img} id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                         </>
                         )}
                 </div>
