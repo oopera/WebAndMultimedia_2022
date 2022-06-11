@@ -525,6 +525,18 @@ position: absolute;
   display: flex;
   flex-direction: column;
 }
+
+.inputsUser{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  margin-top: 5%;
+
+}
+
+
 .FocusWindow{
   border-top: 1pt solid black;
   border-bottom: 1pt solid black;
