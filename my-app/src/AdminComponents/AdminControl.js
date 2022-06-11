@@ -41,3 +41,22 @@ export default function AdminControl(props) {
 
 }
 
+async function addUser(props){
+
+    const newPerson = { ...props.userform };
+    console.log(newPerson);
+    const response = await fetch("http://localhost:5000/users/add", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPerson),
+    })
+        .catch(error => {
+            window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
+        });
+
+    props.setUserform({email: '', username: '', password: '', password2: ''});
+
+
+}

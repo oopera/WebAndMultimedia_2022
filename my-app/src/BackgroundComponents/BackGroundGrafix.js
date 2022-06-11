@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 
-
 export default function BackGroundGrafix(props){
     const [helpIsNeeded, setHelpIsNeeded] = useState(false)
 
