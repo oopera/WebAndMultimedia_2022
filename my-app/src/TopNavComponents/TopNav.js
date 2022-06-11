@@ -14,6 +14,7 @@ export default function TopNav(props) {
         username: "",
         password: "",
         password2: "",
+        admin: false
     });
 
     const [wantsToRegistre, setWantsToRegistre] = useState(false);
