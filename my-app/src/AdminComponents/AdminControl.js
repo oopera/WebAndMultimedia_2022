@@ -1,13 +1,15 @@
 import '../App.css';
 import React, {Component, useEffect, useState} from 'react'
 import XButton from "../XButton";
-import {addUser, deleteUser} from "../HelperFunctions/AccountFunctions";
+import {addUser, deleteUser, wantsToRegistreFunc} from "../HelperFunctions/AccountFunctions";
 
 export default function AdminControl(props) {
     const [users, setUsers] = useState([])
+    const [purchases, setPurchases] = useState([])
+    const [comments, setComments] = useState([])
     const [isChecked, setIsChecked] = useState(false)
     const [selectedUser, setSelectedUser] = useState('');
-    const [selectedProduct, setSelectedProduct] = useState('')
+    const [selectedProduct, setSelectedProduct] = useState([])
     const [searchInput, setSearchInput] = useState('');
     const [openWindow, setOpenWindow] = useState('none');
     const [userform, setUserform] = useState({
@@ -28,7 +30,6 @@ export default function AdminControl(props) {
             price: "",
             availability: "",
             img: "",
-
         }
     );
 
@@ -37,6 +38,28 @@ export default function AdminControl(props) {
         updateReform({admin: !isChecked})
     }
     const selectedUserChanged=(e)=>setSelectedUser(e.target.value)
+    const selectedProductChanged=(e)=>{
+        setSelectedProduct(e.target.value)
+        if(e.target.value !== 'newProduct') {
+            setProductForm({
+                    name: props.products.filter(e => e._id.includes(selectedProduct))[0].Name,
+                    description: props.products.filter(e => e._id.includes(selectedProduct))[0].Description,
+                    price: props.products.filter(e => e._id.includes(selectedProduct))[0].Price,
+                    availability: props.products.filter(e => e._id.includes(selectedProduct))[0].Availability,
+                    img: props.products.filter(e => e._id.includes(selectedProduct))[0].img,
+                }
+            )
+        }else{
+            setProductForm({
+                    name: "",
+                    description: "",
+                    price: "",
+                    availability: "",
+                    img: "",
+                }
+            )
+        }
+    }
 
     function updateProForm(value) {
         return setProductForm((prev) => {
@@ -54,7 +77,7 @@ export default function AdminControl(props) {
         async function getUsers() {
             const response = await fetch(`http://localhost:5000/webweb/users`);
             if (!response.ok) {
-                const message = `Products could not be loaded`;
+                const message = `Users could not be loaded`;
                 window.alert(message);
                 return;
             }
@@ -66,48 +89,79 @@ export default function AdminControl(props) {
         return;
     }, [users.length]);
 
-    console.log(openWindow)
+    useEffect(() => {
+        async function getPurchases() {
+            const response = await fetch(`http://localhost:5000/webweb/purchases`);
+            if (!response.ok) {
+                const message = `Purchases could not be loaded`;
+                window.alert(message);
+                return;
+            }
+            const purchaseDB = await response.json();
+            setPurchases(purchaseDB);
+        }
 
+        getPurchases();
+        return;
+    }, [purchases.length]);
+    console.log(selectedProduct)
     return (
         <div className={'FocusWindow'}>
             <div className={'focusContent'}>
-
                 {openWindow === 'help' && (
                     <XButton setOpenedItem={setOpenWindow}/>
-
-
                 )
             }
                 {openWindow === 'none' && (
                 <div>
                     <div onClick={() => setOpenWindow('help')}>Click me to see the Admin Doc.</div>
+                    <div className={'adminButtonClmn'}>
+                        <button className={'adminButton'}> View Chart
+                        </button>
+                    </div>
             <XButton setOpenedItem={props.setOpenedItem}/>
             <label htmlFor="products">Choose a product:</label>
-            <select>
-                {props.products.map((product) => <option value={product.Name}>{product.Name}</option>)}
+            <select onChange={event => selectedProductChanged(event)}>
+                <option value={'newProduct'}> New Product</option>
+                {props.products.map((product) => <option value={product._id}>{product.Name}</option>)}
             </select>
-            <div className={'adminButtonClmn'}>
-                <button className={'adminButton'}> Delete
-                    Product
-                </button>
-            </div>
+
             <div className={'inputsUser'}>
                 <input  className={'userInput'}
+                        value={productForm.name}
                        onChange={(e) => updateProForm({name: e.target.value})}
                        placeholder="name"/>
                 <input className={'userInput'}
+                       value={productForm.description}
                        onChange={(e) => updateProForm({description: e.target.value})}
                        placeholder="description"/>
                 <input className={'userInput'}
+                       value={productForm.price}
                        onChange={(e) => updateProForm({price: e.target.value})}
                        placeholder="price"/>
                 <input className={'userInput'}
+                       value={productForm.availability}
                        onChange={(e) => updateProForm({availability: e.target.value})}
                        placeholder="Availability (write 'true' if it has infinite Availability (i.e. download))"/>
                 <input className={'userInput'}
+                       value={productForm.img}
                        onChange={(e) => updateProForm({img: e.target.value})}
                        placeholder="link to image (optional)"/>
             </div>
+                    {selectedProduct === 'newProduct' && (
+                        <button className={'adminButton'} onClick={() => deleteProduct(selectedUser, users, setUsers)}> Create New Product
+                        </button>
+                    )}
+                    {selectedProduct !== 'newProduct' && (
+                        <div>
+
+
+                    <button className={'adminButton'} onClick={() => updateProduct(selectedUser, users, setUsers)}> Edit Product
+                    </button>
+                            <button className={'adminButton'} onClick={() => deleteProduct(selectedUser, users, setUsers)}> Delete Product
+                            </button>
+                        </div>
+                        )}
 
             <div>
                 <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}
@@ -157,8 +211,9 @@ export default function AdminControl(props) {
     )
 
 
+    function updateProduct(){
 
-
+    }
     function deleteProduct(props) {
 
     }

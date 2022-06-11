@@ -45,6 +45,18 @@ recordRoutes.route("/webweb/users").get(function (req, res) {
         });
 });
 
+recordRoutes.route("/webweb/purchases").get(function (req, res) {
+    let db_connect = dbo.getDb("webweb");
+    db_connect
+        .collection("purchases")
+        .find({})
+        .toArray(function (err, result) {
+            if (err) throw err;
+            res.json(result);
+        });
+});
+
+
 
 recordRoutes.route("/comments/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
