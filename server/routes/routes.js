@@ -134,7 +134,7 @@ recordRoutes.route("/users/add").post(function (req, response) {
             let myobj = {
                 Email: req.body.email.toLowerCase(),
                 Password: req.body.password,
-                Admin: false,
+                Admin: req.body.admin,
                 Purchases: [],
                 Comments: [],
                 Username:req.body.username,
