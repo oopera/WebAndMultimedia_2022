@@ -2,9 +2,6 @@ import '../App.css';
 import {Product} from "./Product";
 import {ProductFocus} from "./ProductFocus";
 import React, {useEffect, useState} from "react";
-import AdminControl from "../AdminComponents/AdminControl"
-import Select from "react-select";
-import {AccountWindow} from "../AccountComponents/AccountWindow";
 
 export default function ProductList(props) {
     const [rerender, setRerender] = useState(false);
@@ -24,8 +21,6 @@ export default function ProductList(props) {
        }
     }
     const colors =
-      // ['#52FF00', '#00FFE0', '#3300FF', "#0057FF", "#AD00FF", "#FF0000", "#FFA800", '#CCFF00', '#52FF00']
-       // ['greenyellow', 'greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow','greenyellow',]
         ['black','black','black','black','black','black','black','black',]
     let counter = -1;
 

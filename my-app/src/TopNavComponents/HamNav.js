@@ -1,9 +1,5 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
 import '../ProductComponents/ProductList'
-import Select from "react-select";
-import clear from '../App.js'
-import {ReactSession} from "react-client-session";
 import TopNav from "./TopNav";
 export default function HamNav(props) {
     const [hamNav, setHamNav] = useState(false);

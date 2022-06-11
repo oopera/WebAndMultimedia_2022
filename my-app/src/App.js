@@ -8,19 +8,8 @@ import SubWindow from "./SubWindows/SubWindow";
 import { ReactSession } from 'react-client-session';
 import HamNav from "./TopNavComponents/HamNav";
 
-import useMouse from '@react-hook/mouse-position'
 import SideNav from "./BackgroundComponents/SideNav";
 
-/*
-
-• Anlegen / Editieren / Löschen von Produkten
-• Update Anzahl verfügbarer von Produkten (auf Lager)
-• Add/Remove von Benutzern/Kunden (Email, Name, Vorname, …)
-• Suche nach Usern („Mic….“) durch Admin
-
-• Canvas2D: Charts für Aktivität des Systems (Anzahl verkaufter Produkte, Lagerstand, …)
-
- */
 ReactSession.setStoreType("localStorage");
 
 export default function App() {
@@ -62,17 +51,6 @@ export default function App() {
         setStorage();
         },[loading.valueOf()]);
 
-    function clear(){
-        ReactSession.set("wholeAcc", "");
-        ReactSession.set("admin", "");
-        ReactSession.set("Purchases", "");
-        ReactSession.set("Comments", "");
-        ReactSession.set("hasData", false);
-        setLoggedIn(false)
-        setAccount(false)
-        setAccComments(false)
-        setPurchases([])
-    }
 
     useEffect(() => {
         async function getProducts() {

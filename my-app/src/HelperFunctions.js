@@ -1,32 +1,4 @@
-import {updateUser} from "./AccountFunctions";
-
-export async function sendComment(props, rerender, setRerender){
-    let comment = document.getElementById("commentInput").value;
-    let name = props.isLoggedIn.Username
-    let productID = props.id
-    let userID = props.isLoggedIn._id
-    const newComment = {name, comment, productID, userID};
-    const response = await fetch("http://localhost:5000/comments/add", {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newComment),
-    })
-        .catch(error => {
-            window.alert("Sending the Comment did not work due to an unknown error, please try again later.");
-            console.log(error)
-        });
-    document.getElementById("commentInput").value = "";
-    const commentDB = await response.json();
-    console.log(commentDB)
-    const comment2blogged = {Comment: comment, Item: props.name, id: commentDB.insertedId}
-    props.isLoggedIn.Comments.push(comment2blogged)
-    setRerender(!rerender)
-    updateUser(props)
-
-}
-
+import {updateUser} from "./ProductComponents/ProductFocus";
 
 
 export async function purchase(props, basketPrice){
@@ -45,6 +17,7 @@ export async function purchase(props, basketPrice){
 
     if(availabilityFlag === false){
         document.getElementById("infobox").innerHTML = "ONE OF YOUR ITEMS IS NOT AVAILABLE IN THE QUANTITIES YOU SELECTED, PLEASE RECHECK";
+        console.log("WEEE ITS NOT AVAILABLE ANYMORE")
         return;
     }
 
@@ -68,8 +41,7 @@ export async function purchase(props, basketPrice){
             body: JSON.stringify(updatedProduct),
         })
             .catch(error => {
-                window.alert("Updating the Product did not work, please notify an Administrator.");
-                console.log(error, response)
+                window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
             });
     }
 
@@ -91,8 +63,7 @@ export async function purchase(props, basketPrice){
         body: JSON.stringify(newOrder),
     })
         .catch(error => {
-            window.alert("Your purchase could not be added to your Account, please notify an Administrator");
-            console.log(error)
+            window.alert("DAT SHIT AIN FUNSHIONIN MAYNEEE");
         });
 
     const purchaseDB = await response.json();
