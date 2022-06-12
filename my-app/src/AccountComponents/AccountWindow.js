@@ -1,9 +1,10 @@
 import '../App.css';
 import XButton from "../XButton";
 import {clear} from "../HelperFunctions/SessionFunctions";
+import {deleteComment} from "../HelperFunctions/AccountFunctions";
+import {ReactSession} from "react-client-session";
 
 export function AccPurchaseList(props){
-    console.log(props.purchases)
     return(
         props.purchases.map((purchase) => {
             return(
@@ -22,16 +23,27 @@ export function AccPurchaseList(props){
 }
 export function AccCommentList(props){
     return(
-         props.comments.map((comment) => {
+         props.comments.map((comment, index) => {
             return(
                 <div className={'subItem'} key={comment.CommentID}>
                     <div> Comment: {comment.Comment} </div>
                     <div> Item: {comment.Item} </div>
+                    <button onClick={() => deleteAccComment(comment, props.setComments, props.comments, index)}>delete Comment</button>
                 </div>
             )}
         )
     )
 }
+
+function deleteAccComment(comment, setComments, comments, index){
+    console.log(comment)
+    deleteComment(comment)
+    let commeys =(comments)
+    commeys.splice(index, 1)
+    setComments(commeys)
+    ReactSession.set("Comments", comments);
+}
+
 
 export function AccountWindow(props) {
     return (
@@ -40,7 +52,7 @@ export function AccountWindow(props) {
             <div className={'focusContent'}>
                 <button onClick={() => clear()}> CLEAR CACHE </button> <p>(you should log out immediately after, or the cache might be reloaded</p>
                 <div> YOUR COMMENTS </div>
-              <AccCommentList comments={props.accComments}/>
+              <AccCommentList comments={props.accComments} setComments={props.setAccComments}/>
                 <div> YOUR PURCHASES </div>
                 <AccPurchaseList purchases={props.purchases}/>
 

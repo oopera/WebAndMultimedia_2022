@@ -1,8 +1,8 @@
 import '../App.css';
 import React, {Component, useEffect, useState} from 'react'
 import XButton from "../XButton";
-import {addUser, deleteUser, wantsToRegistreFunc} from "../HelperFunctions/AccountFunctions";
-import {deleteProduct, updateProduct} from "../HelperFunctions/ProductFunctions";
+import {addUser, deleteUser} from "../HelperFunctions/AccountFunctions";
+import {addProduct, deleteProduct, updateProduct} from "../HelperFunctions/ProductFunctions";
 
 export default function AdminControl(props) {
     const [users, setUsers] = useState([])
@@ -25,11 +25,11 @@ export default function AdminControl(props) {
     );
 
     const [productForm, setProductForm] = useState({
-
-            name: "",
-            description: "",
-            price: "",
-            availability: "",
+            id: "",
+            Name: "",
+            Description: "",
+            Price: "",
+            Availability: "",
             img: "",
         }
     );
@@ -38,6 +38,7 @@ export default function AdminControl(props) {
         setIsChecked(!isChecked);
         updateReform({admin: !isChecked})
     }
+    console.log(productForm)
     const selectedUserChanged=(e)=>setSelectedUser(e.target.value)
     const selectedProductChanged=(e)=>{
         setSelectedProduct(e.target.value)
@@ -51,19 +52,21 @@ export default function AdminControl(props) {
                 img = props.products.filter(e => e._id.includes(id))[0].img
             }
             setProductForm({
-                    name: props.products.filter(e => e._id.includes(id))[0].Name,
-                    description: props.products.filter(e => e._id.includes(id))[0].Description,
-                    price: props.products.filter(e => e._id.includes(id))[0].Price,
-                    availability: props.products.filter(e => e._id.includes(id))[0].Availability,
+                    id: e.target.value,
+                    Name: props.products.filter(e => e._id.includes(id))[0].Name,
+                    Description: props.products.filter(e => e._id.includes(id))[0].Description,
+                    Price: props.products.filter(e => e._id.includes(id))[0].Price,
+                    Availability: props.products.filter(e => e._id.includes(id))[0].Availability,
                     img: img,
                 }
             )
         }else{
             setProductForm({
-                    name: "",
-                    description: "",
-                    price: "",
-                    availability: "",
+                    id: "",
+                    Name: "",
+                    Description: "",
+                    Price: "",
+                    Availability: "",
                     img: "",
                 }
             )
@@ -136,20 +139,20 @@ export default function AdminControl(props) {
 
             <div className={'inputsUser'}>
                 <input  className={'userInput'}
-                        value={productForm.name}
-                       onChange={(e) => updateProForm({name: e.target.value})}
+                        value={productForm.Name}
+                       onChange={(e) => updateProForm({Name: e.target.value})}
                        placeholder="name"/>
                 <input className={'userInput'}
-                       value={productForm.description}
-                       onChange={(e) => updateProForm({description: e.target.value})}
+                       value={productForm.Description}
+                       onChange={(e) => updateProForm({Description: e.target.value})}
                        placeholder="description"/>
                 <input className={'userInput'}
-                       value={productForm.price}
-                       onChange={(e) => updateProForm({price: e.target.value})}
+                       value={productForm.Price}
+                       onChange={(e) => updateProForm({Price: e.target.value})}
                        placeholder="price"/>
                 <input className={'userInput'}
-                       value={productForm.availability}
-                       onChange={(e) => updateProForm({availability: e.target.value})}
+                       value={productForm.Availability}
+                       onChange={(e) => updateProForm({Availability: e.target.value})}
                        placeholder="Availability (write 'true' if it has infinite Availability (i.e. download))"/>
                 <input className={'userInput'}
                        value={productForm.img}
@@ -157,16 +160,14 @@ export default function AdminControl(props) {
                        placeholder="link to image (optional)"/>
             </div>
                     {selectedProduct === 'newProduct' && (
-                        <button className={'adminButton'} onClick={() => deleteProduct(selectedProduct, props.products, props.setProducts)}> Create New Product
+                        <button className={'adminButton'} onClick={() => addProduct(productForm, props.products, props.setProducts)}> Create New Product
                         </button>
                     )}
                     {selectedProduct !== 'newProduct' && (
                         <div>
-
-
-                    <button className={'adminButton'} onClick={() => updateProduct(selectedUser, users, setUsers)}> Edit Product
+                    <button className={'adminButton'} onClick={() => updateProduct(productForm)}> Edit Product
                     </button>
-                            <button className={'adminButton'} onClick={() => deleteProduct(selectedUser, users, setUsers)}> Delete Product
+                            <button className={'adminButton'} onClick={() => deleteProduct(selectedProduct, comments, setComments, props.products, props.setProducts)}> Delete Product
                             </button>
                         </div>
                         )}
@@ -175,7 +176,7 @@ export default function AdminControl(props) {
                 <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}
                        placeholder={'search users...'}/>
                 <select onChange={event => selectedUserChanged(event)}>
-                    {users.map((user) => <option value={user._id}>{user.Email}</option>)}
+                    {users.filter(user => user.Email.includes(searchInput)).map(user => <option value={user._id}>{user.Email})</option>)}
                 </select>
             </div>
             <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers)}> Delete User

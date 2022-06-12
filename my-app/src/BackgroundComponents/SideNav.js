@@ -12,7 +12,7 @@ export default function SideNav(){
                     <td className={'tableTingHeader'}>Functions:</td>
                 </tr>
                 <tr>
-                    <td className={'tableTing'}>Logging in & registring</td>
+                    <td className={'tableTing'}>Logging in & registering</td>
                 </tr>
                 <tr>
                     <td className={'tableTing'}>Putting Items into baskets</td>
@@ -36,10 +36,10 @@ export default function SideNav(){
                     <td className={'tableTing'}>Click on an Item (The Text with Prices next to them on the left hand side) </td>
                 </tr>
                 <tr>
-                    <td className={'tableTing'}>Check Availability and add to Basket (You wont be able to purchase if your basket contains more than Available, but youll save a step by checking beforehand ;) </td>
+                    <td className={'tableTing'}>Check Availability and add to Basket (You wont be able to purchase if your basket contains more than Available, but you'll save a step by checking beforehand ;) </td>
                 </tr>
                 <tr>
-                    <td className={'tableTing'}>In Basket youll see the resulting final price and youll be able to purchase. </td>
+                    <td className={'tableTing'}>In Basket you'll see the resulting final price and you'll be able to purchase. </td>
                 </tr>
                 <tr>
                     <td className={'tableTing'}>DISCLAIMER!!! Dont use serious credentials on here if you create an account - i don't want to have the responsibility attached to that. Also - once you log in you might want to clear the cache under "account" since Information will be stored to localstorage</td>

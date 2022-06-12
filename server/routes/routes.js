@@ -97,10 +97,11 @@ recordRoutes.route("/purchases/add").post(function (req, response) {
 recordRoutes.route("/products/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      availability: req.body.availability
+      Name: req.body.Name,
+      Description: req.body.Description,
+      Price: req.body.Price,
+      Availability: req.body.Availability,
+      img: req.body.img
   };
   db_connect.collection("products").insertOne(myobj, function (err, res) {
       console.log(myobj._id)
@@ -179,8 +180,10 @@ recordRoutes.route("/updateProduct/:id").post(function (req, response) {
     let newvalues = {
         $set: {
             Name: req.body.Name,
-            Price: req.body.Price,
+            Description: req.body.Description,
             Availability: req.body.Availability,
+            Price: req.body.Price,
+            img: req.body.img,
         },
     };
     db_connect
@@ -224,12 +227,12 @@ recordRoutes.route("/updateUser/:id").post(function (req, response) {
 });
 
 
-recordRoutes.route("/:id").delete((req, response) => {
+recordRoutes.route("delProduct/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id)};
   db_connect.collection("products").deleteOne(myquery, function (err, obj) {
     if (err) throw err;
-    console.log("1 document deleted");
+    console.log("1 Product deleted");
     response.json(obj);
   });
 });

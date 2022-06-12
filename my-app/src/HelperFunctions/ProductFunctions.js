@@ -105,35 +105,80 @@ export async function purchase(props, basketPrice){
 
 }
 
-export async function deleteProduct(id, products, setProducts){
-    const product = products.filter(e => e._id.includes(id))
+export async function deleteProduct(selectedProduct, comments, setComments, products, setProducts){
+    const filteredCommies = comments.filter(e => e.productID.includes(selectedProduct))
+    const theProducts = products.filter(e => e._id.includes(selectedProduct))
+    filteredCommies.forEach(element => deleteComment(element))
 
-    const comments = product[0].Comments
-    comments.forEach(element => deleteComment(element))
-
-    await fetch(`http://localhost:5000/delUser/${id}`, {
+    await fetch(`http://localhost:5000/delProduct/${selectedProduct}`, {
         method: "DELETE"
     });
 
-    const newProducts = products.filter((el) => el._id !== id);
-    setProducts(newProducts);
+    const newComments = comments.filter(e => !e.productID.includes(selectedProduct));
+    setComments(newComments);
+    const newProducts = products.filter(e => !e._id.includes(selectedProduct))
+    setProducts(newProducts)
 }
 
+export async function addProduct(form, products, setProducts) {
+    let newAvailability
+    if(form.Availability !== 'true'){
+        newAvailability = parseInt(form.Availability)
+    }else{
+        newAvailability = true
+    }
+    const newForm ={
+        Name: form.Name,
+        Description: form.Description,
+        Price: parseFloat(form.Price),
+        Availability: newAvailability,
+        img: form.img,
+    }
+    const response = await fetch("http://localhost:5000/products/add", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newForm),
+    })
+        .catch(error => {
+            window.alert("Sending the Comment did not work due to an unknown error, please try again later.");
+            console.log(error, response)
+        });
 
-export async function updateProduct(id,form){
+    setProducts(products => {
+        return[products, newForm]
+    })
 
+}
 
-        const response = await fetch(`http://localhost:5000/updateProduct/${id.toString()}`, {
+export async function updateProduct(form){
+        let newAvailability
+        if(form.Availability !== 'true'){
+             newAvailability = parseInt(form.Availability)
+        }else{
+            newAvailability = true
+        }
+    const newForm ={
+            id: form.id,
+            Name: form.Name,
+            Description: form.Description,
+            Price: parseFloat(form.Price),
+            Availability: newAvailability,
+            img: form.img,
+    }
+        const response = await fetch(`http://localhost:5000/updateProduct/${form.id.toString()}`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(form),
+            body: JSON.stringify(newForm),
         })
             .catch(error => {
                 window.alert("Updating the User Failed due to an unknown error, please try again later.");
                 console.log(error, response)
             });
+
 
 }
 

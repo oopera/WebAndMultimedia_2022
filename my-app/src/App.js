@@ -91,7 +91,7 @@ export default function App() {
         if (s < 10 ) s = "0" + s;
         document.getElementById("time").textContent = `${H} : ${m} : ${s}`
     }
-    setInterval(getTime);
+//    setInterval(getTime);
 
 
     const position = useMousePosition();
@@ -121,7 +121,7 @@ export default function App() {
 
         <ProductList  isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} products={products} setProducts={setProducts}
                      openedItem={openedItem} setOpenedItem={setOpenedItem}/>
-        <SubWindow setReload={setReload} reload={reload} isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} account={account} setAccount={setAccount}
+        <SubWindow setReload={setReload} reload={reload} isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} setAccComments={setAccComments} purchases={purchases} account={account} setAccount={setAccount}
                    openedItem={openedItem} setOpenedItem={setOpenedItem} products={products}/>
             <BackGroundGrafix/>
 
