@@ -46,9 +46,9 @@ export function ProductFocus(props) {
             <XButton setOpenedItem={props.setOpenedItem}/>
             <div className={'focusContent'}>
                 <header className="Product-name">
-                <p> {props.name} </p>
+                <p> {props.name.toUpperCase()} </p>
                 </header>
-                <p> {props.description} // {props.price} € </p>
+                <p> {props.description.toUpperCase()} // {props.price} € </p>
                 {props.img !== undefined && (
                 <img className={"productImage"} src={props.img} alt={props.name}/>
                 )}

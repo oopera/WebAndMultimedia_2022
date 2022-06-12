@@ -162,7 +162,12 @@ export async function deleteUser(id, users, setUsers) {
     setUsers(newUsers);
 }
 export async function deleteComment(comment) {
-
+    console.log(comment)
+    if(comment.id === undefined){
+        await fetch(`http://localhost:5000/delComment/${comment._id}`, {
+            method: "DELETE"
+        });
+    }
     await fetch(`http://localhost:5000/delComment/${comment.id}`, {
         method: "DELETE"
     });

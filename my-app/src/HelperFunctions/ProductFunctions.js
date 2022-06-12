@@ -106,8 +106,9 @@ export async function purchase(props, basketPrice){
 }
 
 export async function deleteProduct(selectedProduct, comments, setComments, products, setProducts){
+
     const filteredCommies = comments.filter(e => e.productID.includes(selectedProduct))
-    const theProducts = products.filter(e => e._id.includes(selectedProduct))
+    console.log(filteredCommies)
     filteredCommies.forEach(element => deleteComment(element))
 
     await fetch(`http://localhost:5000/delProduct/${selectedProduct}`, {

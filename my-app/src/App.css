@@ -22,6 +22,30 @@
 
 }
 
+@font-face {
+  font-family: "NightWatch";
+  src: url("TheNightWatch.ttf");
+
+}
+
+@font-face {
+  font-family: "Dirtyline";
+  src: url("Dirtyline.otf");
+
+}
+
+@font-face {
+  font-family: "Krylon";
+  src: url("Krylon-Regular.otf");
+
+}
+
+@font-face {
+  font-family: "Recia";
+  src: url("ReciaSerifDisplay-Bold.ttf");
+
+}
+
 
 @media (min-width: 1200px) {
 
@@ -35,14 +59,13 @@
     font-weight: bold;
     z-index: 5;
     top: 40px;
+    font-family: Krylon;
+    color: black
   }
   .maintext {
     left: 30%;
-    position: absolute;
-    color: black;
     top: 0;
     font-size: 60px;
-    transition: 150ms;
   }
 
   .navButton{
@@ -72,7 +95,7 @@
   .ProductFocus{
 
     top: 0px;
-    left: clamp(315px, calc(30% + 14px), calc(30% + 14px));
+    left: clamp(315px, calc(30% + 15px), calc(30% + 15px));
 
     height: calc(100vh - 180px - 9px);
     width: calc(((70% / 30) * 30) - 20px);
@@ -120,8 +143,6 @@
 
   .maintext {
     left: 3%;
-    position: absolute;
-    color: black;
     font-size: 55px;
     top: 20px;
   }
@@ -163,13 +184,13 @@
 
 
   .ProductFocus{
-    max-width: 827px;
+    max-width: 830px;
     top: 0;
     left: 0;
     margin-left: 0;
     position: fixed;
     height: calc(100vh - 180px - 9px);
-    width: calc(((70% / 29) * 100) );
+    width: 100%;
   }
 }
 
@@ -180,7 +201,7 @@
     top: 0px;
     position: fixed;
     height: calc(100vh - 180px - 9px);
-    width: 98vw;
+    width: calc(100vw - 9px);
   }
 }
 
@@ -211,9 +232,12 @@ body{
 
   background-blend-mode:saturation;
   background-repeat: no-repeat;
-
+  animation: slowShift 120s linear;
   animation-iteration-count: infinite;
 }
+
+
+
 @keyframes slowShift {
   0%{
     background-position:
@@ -225,6 +249,20 @@ body{
             34% -75%,
             75% -15%;
   }
+
+  25%{
+  background-position:
+          5% 45%,
+          15% -5%,
+          5% 60%,
+          42% 25%,
+          5% 130%,
+          0 50%,
+          90% 20%,
+          10% 140%;
+
+
+}
   50%{
     background-position:
             60% 5%,
@@ -237,6 +275,21 @@ body{
             70% 70%;
 
   }
+
+  75%{
+    background-position:
+            5% 45%,
+            15% -5%,
+            5% 60%,
+            42% 25%,
+            5% 130%,
+            0 50%,
+            90% 20%,
+            10% 140%;
+
+
+  }
+
   100%{
     background-position:
             30% -50%,
@@ -259,6 +312,13 @@ body{
   border-radius: 50%;
   pointer-events: none !important;
   box-shadow: 0 0 16px rgba(255, 255, 255, 0);
+}
+
+.maintext {
+  position: absolute;
+  color: black;
+  font-family: Krylon;
+  font-weight: bold;
 }
 
 .backImage{
@@ -538,7 +598,6 @@ position: absolute;
   text-align:center;
   align-content: center;
   width: 90%;
-  transition: 150ms;
   padding: 2%;
   margin-left: 3%;
 
@@ -569,7 +628,6 @@ input{
 .TopNavForm{
   display: flex;
   flex-direction: column;
-  transition: 150ms;
 }
 
 .searchField{
@@ -578,12 +636,16 @@ input{
   margin-left: 5px;
   margin-right: 5px;
   height: 40px;
-  transition: 1s;
   margin-bottom: 20px;
 }
 
 .Product-name{
   font-size: 150%;
+  font-family: Krylon;
+  font-weight: bold;
+}
+
+.price{
 
 }
 
@@ -609,14 +671,8 @@ button:hover{
 }
 
 .navInput{
-height: 25px;
-width: 200px;
+  height: 25px;
+  width: 200px;
   display: inline-block;
-  transition: 350ms;
-
 }
 
-.navInput:focus{
-  outline: hidden;
-  width: 800px;
-}

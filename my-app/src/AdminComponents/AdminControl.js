@@ -115,6 +115,20 @@ export default function AdminControl(props) {
         getPurchases();
         return;
     }, [purchases.length]);
+
+    useEffect(() => {
+        async function getComments() {
+            const response = await fetch(`http://localhost:5000/webweb/comments`);
+            if (!response.ok) {
+                const message = `Comments could not be loaded`;
+                window.alert(message);
+            }
+            const comments = await response.json();
+            setComments(comments);
+        }
+        getComments();
+    }, [comments.length]);
+
     return (
         <div className={'FocusWindow'}>
             <div className={'focusContent'}>

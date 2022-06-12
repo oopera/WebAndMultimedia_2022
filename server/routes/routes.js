@@ -227,7 +227,7 @@ recordRoutes.route("/updateUser/:id").post(function (req, response) {
 });
 
 
-recordRoutes.route("delProduct/:id").delete((req, response) => {
+recordRoutes.route("/delProduct/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id)};
   db_connect.collection("products").deleteOne(myquery, function (err, obj) {
