@@ -71,10 +71,11 @@
 
   .ProductFocus{
 
-    top: -2px;
-    left: 100%;
-    height: 100%;
-    width: calc(((70% / 31) * 100) - 20px);
+    top: 0px;
+    left: clamp(315px, calc(30% + 14px), calc(30% + 14px));
+
+    height: calc(100vh - 180px - 9px);
+    width: calc(((70% / 30) * 30) - 20px);
 
   }
 
@@ -84,15 +85,11 @@
     100%{transform: rotate(0deg)}
   }
   .TopNav{
-  left: 10px;
-  top: 2px;
-
+   left: 10px;
+   top: 2px;
     float: right;
     position: fixed;
     z-index: 10;
-    background-color: white;
-    border: 1pt black solid;
-
   }
 
   .mobileNav {
@@ -166,24 +163,23 @@
 
 
   .ProductFocus{
-    top: -2px;
-    max-width: 800px;
+    max-width: 827px;
+    top: 0;
     left: 0;
     margin-left: 0;
     position: fixed;
-    height: 100%;
-
+    height: calc(100vh - 180px - 9px);
     width: calc(((70% / 29) * 100) );
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 827px) {
   .ProductFocus{
     left: 0;
     margin-left: 0;
-    top: -2px;
+    top: 0px;
     position: fixed;
-    height: 100%;
+    height: calc(100vh - 180px - 9px);
     width: 98vw;
   }
 }
@@ -255,9 +251,9 @@ body{
 }
 #mouse-circle {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  margin: -10px 0 0 -10px;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
   border: 1px solid #000000;
   mix-blend-mode:multiply;
   border-radius: 50%;
@@ -439,41 +435,31 @@ position: absolute;
 }
 .ProductContainer{
   padding-top: 70px;
-  position: relative;
   background: white;
   border: black solid 1pt;
   width: 30%;
   min-width: 300px;
-  overflow-x:visible;
-  height: 100%;
-  bottom: 10pt;
+  height: calc(100vh - 250px - 9px);
+  overflow-x: scroll;
+  margin-bottom: 40pt;
   padding-left: 5pt;
   padding-right: 5pt;
 }
-.help{
-  width: 100vw;
-  height: 50vw;
-  margin-top: 0;
-  text-align: center;
-  background: white;
-  z-index: 10000000;
-  padding: 20px;
 
-}
-
-.ProductContainer::-webkit-scrollbar {
-  display: none;
-}
 
 .ProductContainerOO{
   position: absolute;
   left: 5.5pt;
   width: 70%;
-  top: 192px;
+  top: 178px;
   height: calc(100vh - 250px - 9px);
   z-index: 9;
-  bottom: 10pt;
+  bottom: 20pt;
   margin-right: 5pt;
+}
+
+.ProductContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .ProductFocus{
@@ -481,7 +467,7 @@ position: absolute;
   background: white;
   z-index: 10;
   position: absolute;
-
+  overflow-x: scroll;
 
 }
 .commentBox{
@@ -588,26 +574,18 @@ input{
 
 .searchField{
   position: fixed;
-  width: 21%;
-  min-width: 300px;
-  height: 30px;
+  width: clamp(300px, 21%, 21%);
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 40px;
   transition: 1s;
   margin-bottom: 20px;
 }
-.searchField:focus{
-  outline: hidden;
-
-  width: 100%;
-}
 
 .Product-name{
-
   font-size: 150%;
 
 }
-
-
-
 
 .navButton:hover{
   color: black;

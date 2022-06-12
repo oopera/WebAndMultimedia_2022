@@ -1,6 +1,4 @@
 import './App.css';
-
-import BackGroundGrafix from "./BackgroundComponents/BackGroundGrafix";
 import TopNav from "./TopNavComponents/TopNav";
 import ProductList from "./ProductComponents/ProductList"
 import React, {useEffect, useRef, useState} from "react";
@@ -9,6 +7,7 @@ import { ReactSession } from 'react-client-session';
 import HamNav from "./TopNavComponents/HamNav";
 
 import SideNav from "./BackgroundComponents/SideNav";
+import BackGroundGrafix from "./BackgroundComponents/BackGroundGrafix";
 
 ReactSession.setStoreType("localStorage");
 
@@ -81,17 +80,7 @@ export default function App() {
         return position;
     };
 
-    function getTime() {
-        let date = new Date();
-        let H = date.getHours();
-        let m = date.getMinutes();
-        let s = date.getSeconds();
-        if (H < 10 ) H = "0" + H;
-        if (m < 10 ) m = "0" + m;
-        if (s < 10 ) s = "0" + s;
-        document.getElementById("time").textContent = `${H} : ${m} : ${s}`
-    }
-//    setInterval(getTime);
+
 
 
     const position = useMousePosition();
@@ -116,17 +105,16 @@ export default function App() {
                 <div className={"partingline"}> </div>
             <div className={"breakingNewsCont"}> <div className={"breakingNews"} >Thank you for visiting! If youre in need of help or explanation please consult the container on the right hand side </div> </div>
             <SideNav/>
-            <div style={{bottom: "11px", left:"10px",
-                textOrientation: "mixed", zIndex: 10, fontSize: "150%", position: "absolute", backgroundColor: "white", border:"black solid 1pt", padding: "pt"}} id="time">placeholder</div>
 
         <ProductList  isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} purchases={purchases} products={products} setProducts={setProducts}
                      openedItem={openedItem} setOpenedItem={setOpenedItem}/>
         <SubWindow setReload={setReload} reload={reload} isLoggedIn={isLoggedIn} basket={basket} setBasket={setBasket} accComments={accComments} setAccComments={setAccComments} purchases={purchases} account={account} setAccount={setAccount}
                    openedItem={openedItem} setOpenedItem={setOpenedItem} products={products}/>
-            <BackGroundGrafix/>
+            <div className={"frame"}>
 
+            </div>
         </div>
 
       );
 }
-//<Background/>
+
