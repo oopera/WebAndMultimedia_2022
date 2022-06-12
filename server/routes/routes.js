@@ -245,4 +245,16 @@ recordRoutes.route("/delUser/:id").delete((req, response) => {
     });
 });
 
+
+
+recordRoutes.route("/delComment/:id").delete((req, response) => {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: ObjectId(req.params.id)};
+    db_connect.collection("comments").deleteOne(myquery, function (err, obj) {
+        if (err) throw err;
+        console.log("1 comment deleted");
+        response.json(obj);
+    });
+});
+
 module.exports = recordRoutes;

@@ -65,7 +65,7 @@ export function ProductFocus(props) {
                     {props.purchases.filter(e=> e.Products.includes(props.name)).length>0 && props.isLoggedIn !== false && (
                         <div>
                     <input id={'commentInput'} placeholder={'Write a comment'}/>
-                    <button onClick={() => {sendComment(props, rerender, setRerender);}}>send</button>
+                    <button onClick={() => sendComment(props, rerender, setRerender)}>send</button>
                         </div>
                         )}
                     {props.purchases.filter(e=> e.Products.includes(props.name)).length===0 && props.isLoggedIn !== false && (

@@ -2,6 +2,7 @@ import '../App.css';
 import React, {Component, useEffect, useState} from 'react'
 import XButton from "../XButton";
 import {addUser, deleteUser, wantsToRegistreFunc} from "../HelperFunctions/AccountFunctions";
+import {deleteProduct, updateProduct} from "../HelperFunctions/ProductFunctions";
 
 export default function AdminControl(props) {
     const [users, setUsers] = useState([])
@@ -40,13 +41,21 @@ export default function AdminControl(props) {
     const selectedUserChanged=(e)=>setSelectedUser(e.target.value)
     const selectedProductChanged=(e)=>{
         setSelectedProduct(e.target.value)
+        let id = e.target.value
+        let img
+
         if(e.target.value !== 'newProduct') {
+            if(props.products.filter(e => e._id.includes(id))[0].img === undefined){
+                img = ""
+            }else{
+                img = props.products.filter(e => e._id.includes(id))[0].img
+            }
             setProductForm({
-                    name: props.products.filter(e => e._id.includes(selectedProduct))[0].Name,
-                    description: props.products.filter(e => e._id.includes(selectedProduct))[0].Description,
-                    price: props.products.filter(e => e._id.includes(selectedProduct))[0].Price,
-                    availability: props.products.filter(e => e._id.includes(selectedProduct))[0].Availability,
-                    img: props.products.filter(e => e._id.includes(selectedProduct))[0].img,
+                    name: props.products.filter(e => e._id.includes(id))[0].Name,
+                    description: props.products.filter(e => e._id.includes(id))[0].Description,
+                    price: props.products.filter(e => e._id.includes(id))[0].Price,
+                    availability: props.products.filter(e => e._id.includes(id))[0].Availability,
+                    img: img,
                 }
             )
         }else{
@@ -104,7 +113,6 @@ export default function AdminControl(props) {
         getPurchases();
         return;
     }, [purchases.length]);
-    console.log(selectedProduct)
     return (
         <div className={'FocusWindow'}>
             <div className={'focusContent'}>
@@ -149,7 +157,7 @@ export default function AdminControl(props) {
                        placeholder="link to image (optional)"/>
             </div>
                     {selectedProduct === 'newProduct' && (
-                        <button className={'adminButton'} onClick={() => deleteProduct(selectedUser, users, setUsers)}> Create New Product
+                        <button className={'adminButton'} onClick={() => deleteProduct(selectedProduct, props.products, props.setProducts)}> Create New Product
                         </button>
                     )}
                     {selectedProduct !== 'newProduct' && (
@@ -201,24 +209,10 @@ export default function AdminControl(props) {
                         <p id={'CorrectionBox2'}> </p>
 
                     </div>
-</div>
+                    </div>
                 ) }
                    </div>
                 </div>
-
-
-
     )
-
-
-    function updateProduct(){
-
-    }
-    function deleteProduct(props) {
-
-    }
-
-
-
 }
 

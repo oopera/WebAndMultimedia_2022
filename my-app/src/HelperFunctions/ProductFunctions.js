@@ -1,4 +1,4 @@
-import {updateUser} from "./AccountFunctions";
+import {deleteComment, updateUser} from "./AccountFunctions";
 
 export async function sendComment(props, rerender, setRerender){
     let comment = document.getElementById("commentInput").value;
@@ -105,4 +105,35 @@ export async function purchase(props, basketPrice){
 
 }
 
+export async function deleteProduct(id, products, setProducts){
+    const product = products.filter(e => e._id.includes(id))
+
+    const comments = product[0].Comments
+    comments.forEach(element => deleteComment(element))
+
+    await fetch(`http://localhost:5000/delUser/${id}`, {
+        method: "DELETE"
+    });
+
+    const newProducts = products.filter((el) => el._id !== id);
+    setProducts(newProducts);
+}
+
+
+export async function updateProduct(id,form){
+
+
+        const response = await fetch(`http://localhost:5000/updateProduct/${id.toString()}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form),
+        })
+            .catch(error => {
+                window.alert("Updating the User Failed due to an unknown error, please try again later.");
+                console.log(error, response)
+            });
+
+}
 

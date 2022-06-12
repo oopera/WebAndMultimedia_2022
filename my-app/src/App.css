@@ -184,16 +184,14 @@
     top: -2px;
     position: fixed;
     height: 100%;
-
     width: 98vw;
-
-
   }
 }
 
 
 body{
   cursor: crosshair;
+
   margin: 0;
   height: 100%;
   overflow: hidden;
@@ -503,7 +501,7 @@ position: absolute;
 ::-webkit-scrollbar {
   height: 90%;
   margin: 10%;
-  width: 1px;
+  width: 5px;
   display: block;
 }
 

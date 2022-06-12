@@ -49,10 +49,7 @@ export async function login(props){
         props.props.setAccComments(user[0].Comments)
         props.props.setPurchases(user[0].Purchases)
         props.props.setReload(!props.props.reload)
-
-
     }
-    //props.setForm({ email: "", password: ""});
 }
 
 export async function register(props){
@@ -151,10 +148,24 @@ export function logout(props){
 }
 
 export async function deleteUser(id, users, setUsers) {
+
+    const user = users.filter(e => e._id.includes(id))
+    console.log(user)
+    const comments = user[0].Comments
+    comments.forEach(element => deleteComment(element))
+
     await fetch(`http://localhost:5000/delUser/${id}`, {
         method: "DELETE"
     });
 
     const newUsers = users.filter((el) => el._id !== id);
     setUsers(newUsers);
+}
+export async function deleteComment(comment) {
+
+    await fetch(`http://localhost:5000/delComment/${comment.id}`, {
+        method: "DELETE"
+    });
+
+
 }
