@@ -1,11 +1,12 @@
 import {deleteComment, updateUser} from "./AccountFunctions";
+import {ReactSession} from "react-client-session";
 
 export async function sendComment(props, rerender, setRerender){
-    let comment = document.getElementById("commentInput").value;
-    let name = props.isLoggedIn.Username
-    let productID = props.id
-    let userID = props.isLoggedIn._id
-    const newComment = {name, comment, productID, userID};
+        let comment = document.getElementById("commentInput").value;
+        let name = props.isLoggedIn.Username
+        let productID = props.id
+        let userID = props.isLoggedIn._id
+        const newComment = {name, comment, productID, userID};
     const response = await fetch("http://localhost:5000/comments/add", {
         method: "post",
         headers: {
@@ -18,12 +19,13 @@ export async function sendComment(props, rerender, setRerender){
             console.log(error)
         });
     document.getElementById("commentInput").value = "";
-    const commentDB = await response.json();
-    console.log(commentDB)
-    const comment2blogged = {Comment: comment, Item: props.name, id: commentDB.insertedId}
+        const commentDB = await response.json();
+        const comment2blogged = {Comment: comment, Item: props.name, id: commentDB.insertedId}
     props.isLoggedIn.Comments.push(comment2blogged)
+    console.log(props.isLoggedIn.Comments)
+    ReactSession.set("wholeAcc",  props.isLoggedIn);
     setRerender(!rerender)
-    updateUser(props)
+    await updateUser(props)
 
 }
 
@@ -47,17 +49,20 @@ export async function purchase(props, basketPrice){
         document.getElementById("infobox").innerHTML = "ONE OF YOUR ITEMS IS NOT AVAILABLE IN THE QUANTITIES YOU SELECTED, PLEASE RECHECK";
         return;
     }
+    props.basket.forEach(updateAvailability)
 
-    props.setBasket([])
+    function updateAvailability(spaghettiItem){
+        if(spaghettiItem.Availability === true) return
+        spaghettiItem.Availability = spaghettiItem.Availability-1
+    }
+
     props.basket.forEach(updateProduct)
     async function updateProduct(basketItem){
-        if(basketItem.Availability === true) return
-        basketItem.Availability = basketItem.Availability-1
         const updatedProduct = {
             Name: basketItem.Name,
             Description: basketItem.Description,
             Price: basketItem.Price,
-            Availability: basketItem.Availability-1
+            Availability: basketItem.Availability
         };
 
         const response = await fetch(`http://localhost:5000/updateProduct/${basketItem._id.toString()}`, {
@@ -94,14 +99,16 @@ export async function purchase(props, basketPrice){
             window.alert("Your purchase could not be added to your Account, please notify an Administrator");
             console.log(error)
         });
-
+    props.setBasket([])
     const purchaseDB = await response.json();
     console.log(purchaseDB)
     const purchase2Blogged = {Products: products, Cost: price, Date: date, PurchaseID: purchaseDB.insertedId}
-    props.isLoggedIn.Purchases.push(purchase2Blogged)
+    const newAccountData = props.isLoggedIn
+    newAccountData.Purchases.push(purchase2Blogged)
+    props.setLoggedIn(newAccountData)
     props.setReload(!props.reload)
     if (email === "") return
-    updateUser(props)
+    await updateUser(props)
 
 }
 
@@ -111,7 +118,7 @@ export async function deleteProduct(selectedProduct, comments, setComments, prod
     console.log(filteredCommies)
     filteredCommies.forEach(element => deleteComment(element))
 
-    await fetch(`http://localhost:5000/delProduct/${selectedProduct}`, {
+    const response = await fetch(`http://localhost:5000/delProduct/${selectedProduct}`, {
         method: "DELETE"
     });
 
@@ -119,6 +126,13 @@ export async function deleteProduct(selectedProduct, comments, setComments, prod
     setComments(newComments);
     const newProducts = products.filter(e => !e._id.includes(selectedProduct))
     setProducts(newProducts)
+
+    if(response.ok) {
+        document.getElementById('adminProdResponse').innerHTML = 'Product Deleted'
+    }else{
+        document.getElementById('adminProdResponse').innerHTML = 'Product could not be Deleted, please try again'
+    }
+
 }
 
 export async function addProduct(form, products, setProducts) {
@@ -146,14 +160,16 @@ export async function addProduct(form, products, setProducts) {
             window.alert("Sending the Comment did not work due to an unknown error, please try again later.");
             console.log(error, response)
         });
-
-    setProducts(products => {
-        return[products, newForm]
-    })
+    if(response.ok) {
+        document.getElementById('adminProdResponse').innerHTML = 'Product Added'
+    }else{
+        document.getElementById('adminProdResponse').innerHTML = 'Product could not be Added, please try again'
+    }
+    setProducts([])
 
 }
 
-export async function updateProduct(form){
+export async function updateProduct(form, setProduct){
         let newAvailability
         if(form.Availability !== 'true'){
              newAvailability = parseInt(form.Availability)
@@ -179,7 +195,15 @@ export async function updateProduct(form){
                 window.alert("Updating the User Failed due to an unknown error, please try again later.");
                 console.log(error, response)
             });
-
-
+    if(response.ok) {
+        document.getElementById('adminProdResponse').innerHTML = 'Product Updated'
+    }else{
+        document.getElementById('adminProdResponse').innerHTML = 'Product could not be Updated, please try again'
+    }
+    setProduct([])
 }
 
+export function updateBasket(props){
+    let newBasket = props.basket.concat(props.product)
+    props.setBasket(newBasket)
+}

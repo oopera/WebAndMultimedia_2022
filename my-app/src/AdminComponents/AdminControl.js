@@ -1,8 +1,9 @@
 import '../App.css';
-import React, {Component, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import XButton from "../XButton";
 import {addUser, deleteUser} from "../HelperFunctions/AccountFunctions";
 import {addProduct, deleteProduct, updateProduct} from "../HelperFunctions/ProductFunctions";
+import Canvas from "./Canvas";
 
 export default function AdminControl(props) {
     const [users, setUsers] = useState([])
@@ -10,11 +11,10 @@ export default function AdminControl(props) {
     const [comments, setComments] = useState([])
     const [isChecked, setIsChecked] = useState(false)
     const [selectedUser, setSelectedUser] = useState('');
-    const [selectedProduct, setSelectedProduct] = useState([])
+    const [selectedProduct, setSelectedProduct] = useState("newProduct")
     const [searchInput, setSearchInput] = useState('');
     const [openWindow, setOpenWindow] = useState('none');
     const [userform, setUserform] = useState({
-
             email: "",
             username: "",
             password: "",
@@ -23,7 +23,6 @@ export default function AdminControl(props) {
 
         }
     );
-
     const [productForm, setProductForm] = useState({
             id: "",
             Name: "",
@@ -38,6 +37,7 @@ export default function AdminControl(props) {
         setIsChecked(!isChecked);
         updateReform({admin: !isChecked})
     }
+
     const selectedUserChanged=(e)=>setSelectedUser(e.target.value)
     const selectedProductChanged=(e)=>{
         setSelectedProduct(e.target.value)
@@ -97,7 +97,7 @@ export default function AdminControl(props) {
         }
 
         getUsers();
-        return;
+
     }, [users.length]);
 
     useEffect(() => {
@@ -113,7 +113,7 @@ export default function AdminControl(props) {
         }
 
         getPurchases();
-        return;
+
     }, [purchases.length]);
 
     useEffect(() => {
@@ -128,6 +128,7 @@ export default function AdminControl(props) {
         }
         getComments();
     }, [comments.length]);
+
 
     return (
         <div className={'FocusWindow'}>
@@ -177,13 +178,22 @@ export default function AdminControl(props) {
                     </div>
                 )
             }
+
+                {openWindow === 'chart' && (
+                    <div className={'wholeChart'}>
+                        <XButton setOpenedItem={setOpenWindow}/>
+                        <Canvas comments={comments} purchases={purchases} products={props.products} setOpenWindow={setOpenWindow}/>
+                    </div>
+                )}
+
                 {openWindow === 'none' && (
                 <div>
                     <div onClick={() => setOpenWindow('help')}>Click me to see the Admin Doc.</div>
                     <div className={'adminButtonClmn'}>
-                        <button className={'adminButton'}> View Chart
+                        <button onClick={() => setOpenWindow('chart')} className={'adminButton'}> View Chart
                         </button>
                     </div>
+
             <XButton setOpenedItem={props.setOpenedItem}/>
             <label htmlFor="products">Choose a product:</label>
             <select onChange={event => selectedProductChanged(event)}>
@@ -213,13 +223,14 @@ export default function AdminControl(props) {
                        onChange={(e) => updateProForm({img: e.target.value})}
                        placeholder="link to image (optional)"/>
             </div>
+                    <p id={'adminProdResponse'}> </p>
                     {selectedProduct === 'newProduct' && (
                         <button className={'adminButton'} onClick={() => addProduct(productForm, props.products, props.setProducts)}> Create New Product
                         </button>
                     )}
                     {selectedProduct !== 'newProduct' && (
                         <div>
-                    <button className={'adminButton'} onClick={() => updateProduct(productForm)}> Edit Product
+                    <button className={'adminButton'} onClick={() => updateProduct(productForm, props.setProducts)}> Edit Product
                     </button>
                             <button className={'adminButton'} onClick={() => deleteProduct(selectedProduct, comments, setComments, props.products, props.setProducts)}> Delete Product
                             </button>
@@ -230,7 +241,7 @@ export default function AdminControl(props) {
                 <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}
                        placeholder={'search users...'}/>
                 <select onChange={event => selectedUserChanged(event)}>
-                    {users.filter(user => user.Email.includes(searchInput)).map(user => <option value={user._id}>{user.Email})</option>)}
+                    {users.filter(user => user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id}>{user.Email})</option>)}
                 </select>
             </div>
             <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers)}> Delete User
@@ -270,4 +281,3 @@ export default function AdminControl(props) {
                 </div>
     )
 }
-

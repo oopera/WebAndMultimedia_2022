@@ -1,29 +1,9 @@
 import React, {useEffect, useState} from "react";
 import XButton from "../XButton";
-import {sendComment} from "../HelperFunctions/ProductFunctions";
+import {sendComment, updateBasket} from "../HelperFunctions/ProductFunctions";
+import {CommentList} from "./CommentList";
 
 
-
-export function Commentlist(props){
-    return(
-        <div className={'commentBox'}>
-    <table className={"tablo"}>
-        {props.comments.filter(comment => comment.productID === props.id).map((filteredComment) => {
-            return (
-            <tr>
-                    <td className={'tableTingHeader'} key={filteredComment._id}> {filteredComment.name}: {filteredComment.comment} {filteredComment.Date}</td>
-            </tr>
-            )
-        })}
-    </table>
-        </div>
-        )
-}
-
-function updateBasket(props){
-    let newBasket = props.basket.concat(props.product)
-    props.setBasket(newBasket)
-}
 
 export function ProductFocus(props) {
     const [rerender, setRerender] = useState(false)
@@ -40,10 +20,10 @@ export function ProductFocus(props) {
         }
         getComments();
     }, [comments.length, rerender.valueOf()]);
-
+    console.log(props.isLoggedIn)
     return (
         <div style={props.style} className="ProductFocus">
-            <XButton setOpenedItem={props.setOpenedItem}/>
+            <XButton setOpenedItem={props.setOpenedProduct}/>
             <div className={'focusContent'}>
                 <header className="Product-name">
                 <p> {props.name.toUpperCase()} </p>
@@ -53,33 +33,34 @@ export function ProductFocus(props) {
                 <img className={"productImage"} src={props.img} alt={props.name}/>
                 )}
                 {props.availability <= 0 && (
-                    <p style={{border: "1pt solid black"}}>Item is currently not in Stock</p>
+                    <p>Item is currently not in Stock</p>
                 )}
-                {props.availability !== 0 && (
+                {props.availability > 0 && (
                     <div>
                     <button style={{zIndex : '5'}} onClick={() => updateBasket(props)}>Add to Basket</button>
                     <p>{props.availability} available</p>
                     </div>
                 )}
                 <div>
-                    {props.purchases.filter(e=> e.Products.includes(props.name)).length>0 && props.isLoggedIn !== false && (
-                        <div>
-                    <input id={'commentInput'} placeholder={'Write a comment'}/>
-                    <button onClick={() => sendComment(props, rerender, setRerender)}>send</button>
-                        </div>
-                        )}
-                    {props.purchases.filter(e=> e.Products.includes(props.name)).length===0 && props.isLoggedIn !== false && (
-                        <div>
-                            <p>You have to purchase the Item before you can leave a comment.</p>
-                        </div>
-                    )}
                     {props.isLoggedIn === false && (
                         <p>
                             You have to log in before you can leave a comment.
                         </p>
                     )}
+                    {props.isLoggedIn !== false && props.isLoggedIn.Purchases.filter(e=> e.Products.includes(props.name)).length>0 &&  (
+                        <div>
+                    <input id={'commentInput'} placeholder={'Write a comment'}/>
+                    <button onClick={() => sendComment(props, rerender, setRerender)}>send</button>
+                        </div>
+                        )}
+                    {props.isLoggedIn !== false && props.isLoggedIn.Purchases.filter(e=> e.Products.includes(props.name)).length===0 &&  (
+                        <div>
+                            <p>You have to purchase the Item before you can leave a comment.</p>
+                        </div>
+                    )}
+
                 </div>
-                <Commentlist id={props.id} comments={comments}/>
+                <CommentList id={props.id} comments={comments}/>
             </div>
         </div>
     );

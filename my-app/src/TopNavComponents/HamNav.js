@@ -12,15 +12,15 @@ export default function HamNav(props) {
 
         <div className={'mobileNav'} >
             {hamNav === false && (
-                <button className={'hamNavButtonClosed'} onClick={() => changeFunction()}> </button>
+                <i className={'arrow right'} onClick={() => changeFunction()}> </i>
             )}
             {hamNav === true && (
-                <button className={'hamNavButtonOpen'} onClick={() => changeFunction()}> </button>
+                <i className={'arrow left'} onClick={() => changeFunction()}> </i>
             )}
             {hamNav === true && (
                     <div className={'FocusWindow'}>
                         <div className={'XButton'} onClick={()=>setHamNav(!hamNav)}> </div>
-                        <TopNav setReload={props.setReload} reload={props.reload} basket={props.basket} setAccComments={props.setAccComments} setPurchases={props.setPurchases} isLoggedIn={props.isLoggedIn}
+                        <TopNav setReload={props.setReload} reload={props.reload} basket={props.basket} isLoggedIn={props.isLoggedIn}
                                 setLoggedIn={props.setLoggedIn} account={props.account} setAccount={props.setAccount} openedItem={props.openedItem}
                                 setOpenedItem={props.setOpenedItem}/>
                     </div>

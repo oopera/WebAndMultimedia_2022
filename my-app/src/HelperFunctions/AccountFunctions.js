@@ -9,7 +9,7 @@ export async function updateUser(props){
         Comments: props.isLoggedIn.Comments,
         Admin: props.isLoggedIn.Admin,
         id: props.isLoggedIn._id};
-
+    ReactSession.set("wholeAcc", props.isLoggedIn);
     const response = await fetch(`http://localhost:5000/updateUser/${props.isLoggedIn._id.toString()}`, {
         method: "post",
         headers: {
@@ -46,11 +46,10 @@ export async function login(props){
             props.props.setAccount('admin')
         }
         props.props.setLoggedIn(user[0])
-        props.props.setAccComments(user[0].Comments)
-        props.props.setPurchases(user[0].Purchases)
         props.props.setReload(!props.props.reload)
     }
 }
+
 
 export async function register(props){
     if(props.reform.password.length<8){
@@ -122,14 +121,18 @@ export async function addUser(props) {
     })
         .catch(error => {
             window.alert("Could not add user to Database");
+            console.log(error)
         });
     props.setUserform({email: '', username: '', password: '', password2: '', admin: false});
+    if(response.ok){
+        console.log('User Successfully added to the Database')
+    }else{
+
+    }
     props.setUsers(users => {
         return [...users, {newPerson}]
     })
 }
-
-
 
 
 export function wantsToRegistreFunc(props){
@@ -173,4 +176,13 @@ export async function deleteComment(comment) {
     });
 
 
+}
+
+export function deleteAccComment(comment, setLoggedIn, Comments, index){
+    console.log(comment)
+    deleteComment(comment)
+    let commeys = (Comments)
+    commeys.splice(index, 1)
+    setLoggedIn.Comments(commeys)
+    ReactSession.set("Comments", commeys);
 }

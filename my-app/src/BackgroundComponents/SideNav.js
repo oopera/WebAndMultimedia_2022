@@ -6,7 +6,6 @@ export default function SideNav(){
     return(
         <div className={"sideBox"}>Welcome to my brutalist nightmare. Enjoy your time. Or dont. I dont care, I'm a div.
             need help?
-
             <table>
                 <tr>
                     <td className={'tableTingHeader'}>Functions:</td>
