@@ -98,10 +98,10 @@ export default function App() {
                 <div id="mouse-circle" style={{
                     left: position.x,
                     top: position.y, zIndex: 20}}>
-                    <BackGroundGrafix logoName={'logo Middle'} mainText={'maintext Middle'}/>
                 </div>
 
             <div className={'loadingMover'}>
+                <BackGroundGrafix logoName={'logo Middle'} mainText={'maintext Middle'}/>
                 <div className={'welcomeTing'}> WELCOME </div>
              </div>
 
@@ -112,7 +112,9 @@ export default function App() {
 
         <div>
             <div className={'loadingMoverBackDown'}>
+
                 <div className={'welcomeTing'}> WELCOME </div>
+                <BackGroundGrafix logoName={'logo Middle'} mainText={'maintext Middle'}/>
                 <div id="mouse-circle" style={{
                     left: position.x,
                     top: position.y, zIndex: 20}}>

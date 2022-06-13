@@ -228,25 +228,16 @@ body{
   z-index: 10;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 .loadingMover{
   background-color: white;
-  z-index: 11;
+  z-index: 9;
   height: 0;
   width: 100vw;
-  animation: upAndGone 2s alternate-reverse;
-}
-.loadingMoverBackDown{
-  visibility: hidden;
-  background-color: black;
-  z-index: 15;
-  position: absolute;
-  width: 0;
-  height: 100vh;
-  top: 0;
   overflow: hidden;
-  animation: upAndGoner 2s alternate;
+  animation: upAndGone 2s alternate-reverse;
 }
 
 @keyframes upAndGone {
@@ -267,15 +258,37 @@ body{
   }
 }
 
+.loadingMoverBackDown{
+  visibility: hidden;
+  background-color: black;
+  z-index: 15;
+  position: absolute;
+  width: 0;
+  height: 100vh;
+  top: 0;
+  overflow: hidden;
+  animation: upAndGoner 3s running;
+}
+
 @keyframes upAndGoner {
   0%{
+    right: 0;
     visibility:visible;
     width: 100vw;
   }
 
+  50%{
+    right: 0;
+    width: 180px;
+  }
+  75%{
+    right: 0;
+    width: 180px;
+  }
   100%{
     visibility: hidden;
-    width: 0;
+    right: 0;
+    width: 0vw;
   }
 }
 
@@ -349,11 +362,12 @@ body{
   width: 26px;
   height: 26px;
   margin: -13px 0 0 -13px;
-  border: 1px solid #000000;
+  border: 1px solid white;
   mix-blend-mode:multiply;
   border-radius: 50%;
   pointer-events: none !important;
   box-shadow: 0 0 16px rgba(255, 255, 255, 0);
+  mix-blend-mode: difference;
 }
 .welcomeTing{
   color: white;
@@ -362,7 +376,7 @@ body{
   position: absolute;
   font-size: 10em;
   transform: rotate(90deg);
-  font-family: NightWatch;
+  font-family: Recia;
 }
 
 .maintext {
@@ -377,9 +391,13 @@ body{
   font-weight: bold;
   z-index: 5;
   font-family: Krylon;
-  color: black
+  color: black;
+  mix-blend-mode: luminosity;
 }
-
+.Middle{
+  mix-blend-mode: difference;
+  color: white;
+}
 
 .XButton {
   position: absolute;
