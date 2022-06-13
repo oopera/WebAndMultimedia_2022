@@ -156,7 +156,7 @@
   }
   .FocusWindow{
     left: 7px;
-    top: 20%;
+    top: 178px;
     z-index: 10;
     height: 65vh;
     max-height: 650px;
@@ -164,7 +164,6 @@
     max-width: 800px;
     background: black;
   }
-
 
   .buttonRow{
     flex-direction: column;
@@ -224,6 +223,61 @@ body{
   animation-iteration-count: infinite;
 }
 
+.loadingScreen{
+  background-color: black;
+  z-index: 10;
+  height: 100vh;
+  width: 100vw;
+}
+
+.loadingMover{
+  background-color: white;
+  z-index: 11;
+  height: 0;
+  width: 100vw;
+  animation: upAndGone 2s alternate-reverse;
+}
+.loadingMoverBackDown{
+  visibility: hidden;
+  background-color: black;
+  z-index: 15;
+  position: absolute;
+  width: 0;
+  height: 100vh;
+  top: 0;
+  overflow: hidden;
+  animation: upAndGoner 2s alternate;
+}
+
+@keyframes upAndGone {
+  0%{
+
+    height: 0;
+  }
+  50%{
+    margin-bottom: 200px;
+    height: 100vh;
+  }
+  70%{
+
+    height: 100vh;
+  }
+  100%{
+    height: 100vh;
+  }
+}
+
+@keyframes upAndGoner {
+  0%{
+    visibility:visible;
+    width: 100vw;
+  }
+
+  100%{
+    visibility: hidden;
+    width: 0;
+  }
+}
 
 
 @keyframes slowShift {
@@ -301,19 +355,31 @@ body{
   pointer-events: none !important;
   box-shadow: 0 0 16px rgba(255, 255, 255, 0);
 }
+.welcomeTing{
+  color: white;
+  width: 100px;
+  left: 25px;
+  position: absolute;
+  font-size: 10em;
+  transform: rotate(90deg);
+  font-family: NightWatch;
+}
 
 .maintext {
   position: absolute;
   color: black;
+  z-index: 5;
   font-family: Krylon;
   font-weight: bold;
 }
 .logo{
+  position: absolute;
   font-weight: bold;
   z-index: 5;
   font-family: Krylon;
   color: black
 }
+
 
 .XButton {
   position: absolute;
@@ -339,10 +405,6 @@ body{
   transform: rotate(45deg);
 }
 
-
-p{
-
-}
 .header{
   font-size: 20px;
   letter-spacing: -1px;

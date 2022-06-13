@@ -9,20 +9,6 @@ export function updateBasket(props){
 }
 
 export function ProductFocus(props) {
-    const [rerender, setRerender] = useState(false)
-    const [comments, setComments] = useState([]);
-    useEffect(() => {
-        async function getComments() {
-            const response = await fetch(`http://localhost:5000/webweb/comments`);
-            if (!response.ok) {
-                const message = `Comments could not be loaded`;
-                window.alert(message);
-            }
-            const comments = await response.json();
-            setComments(comments);
-        }
-        getComments();
-    }, [comments.length, rerender.valueOf()]);
     console.log(props.isLoggedIn)
     return (
         <div style={props.style} className="ProductFocus">
@@ -53,7 +39,7 @@ export function ProductFocus(props) {
                     {props.isLoggedIn !== false && props.isLoggedIn.Purchases.filter(e=> e.Products.includes(props.name)).length>0 &&  (
                         <div>
                     <input id={'commentInput'} placeholder={'Write a comment'}/>
-                    <button onClick={() => sendComment(props, rerender, setRerender)}>send</button>
+                    <button onClick={() => sendComment(props, props.rerender, props.setRerender)}>send</button>
                         </div>
                         )}
                     {props.isLoggedIn !== false && props.isLoggedIn.Purchases.filter(e=> e.Products.includes(props.name)).length===0 &&  (
@@ -63,7 +49,7 @@ export function ProductFocus(props) {
                     )}
 
                 </div>
-                <CommentList id={props.id} comments={comments}/>
+                <CommentList id={props.id} comments={props.comments}/>
             </div>
         </div>
     );

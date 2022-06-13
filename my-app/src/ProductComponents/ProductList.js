@@ -42,7 +42,12 @@ export default function ProductList(props) {
                                       name={product.Name}
                                       description={product.Description}
                                       price={product.Price}
-                                      availability={product.Availability}/>
+                                      availability={product.Availability}
+                                      comments={props.comments}
+                                      setComments={props.setComments}
+                                      rerender={props.rerender}
+                                      setRerender={props.setRerender}
+                        />
                         </>
                         )}
                 </div>
