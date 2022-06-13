@@ -49,13 +49,9 @@
   }
   .logo {
     left: 32%;
+    top: 40px;
     position: absolute;
     font-size: 175%;
-    font-weight: bold;
-    z-index: 5;
-    top: 40px;
-    font-family: Krylon;
-    color: black
   }
   .maintext {
     left: 30%;
@@ -129,10 +125,7 @@
   .logo {
     left: 5%;
     position: absolute;
-
     font-size: 175%;
-    font-weight: bold;
-    z-index: 5;
     top: 60px;
   }
 
@@ -169,7 +162,7 @@
     max-height: 650px;
     width: 80vw;
     max-width: 800px;
-    background: greenyellow;
+    background: black;
   }
 
 
@@ -315,10 +308,13 @@ body{
   font-family: Krylon;
   font-weight: bold;
 }
-
-.backImage{
-  height: 10000px;
+.logo{
+  font-weight: bold;
+  z-index: 5;
+  font-family: Krylon;
+  color: black
 }
+
 .XButton {
   position: absolute;
   right: 15px;
@@ -371,7 +367,7 @@ p{
   height: 25px;
   background: white;
   width: 100vw;
-position: absolute;
+  position: absolute;
   border-bottom: 1pt black solid;
   border-left: 1pt black solid;
   border-right: 1pt black solid;
@@ -397,13 +393,11 @@ position: absolute;
 
 .sideBox{
   margin-left: 70%;
-  margin-top: 130px;
+  margin-top: 131px;
   height: calc(100vh - 229px);
   border: 1pt black solid;
   padding: 20px;
   background-color: white;
-  color: black;
-  font-size: 100%;
   overflow: scroll;
   word-wrap: break-word;
   text-align: right;
@@ -450,7 +444,17 @@ position: absolute;
   width: 100vw;
   bottom: 0;
   z-index: -15;
-  border: 6pt solid greenyellow;
+  border: 6pt solid white;
+}
+.frame2{
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  bottom: 0;
+  margin-left: 7px;
+  margin-bottom: 8px;
+  z-index: -14;
+  border: 1pt solid black;
 }
 
 .subItem{
@@ -575,13 +579,23 @@ position: absolute;
 
 }
 
+.userInput{
+  height: 25px;
+}
+
+input{
+  height: 25px;
+}
+select{
+  height: 25px;
+}
 
 .FocusWindow{
   border-top: 1pt solid black;
   border-bottom: 1pt solid black;
   border-right: 1pt solid black;
 
-  background: greenyellow;
+  background: white;
   position: absolute;
   overflow-x: scroll;
 }
@@ -607,9 +621,9 @@ position: absolute;
 
 ::placeholder {
   color: black;
-  font-size: 0.9em;
+  font-size: 1.2em;
 
-
+  font-family: Krylon;
 }
 
 input{
@@ -644,22 +658,23 @@ input{
 }
 
 .navButton:hover{
-  color: black;
-  background: greenyellow;
+  color: white;
+  background: black;
 }
 
 button{
-  color: white;
-  background: black;
+  color: black;
+  background: white;
   height: 30px;
-  border: greenyellow;
   margin-top: 1%;
   margin-left: 5px;
+  font-family: Krylon;
+  font-size: 1em;
 }
 
 button:hover{
-  color: black;
-  background: greenyellow;
+  color: white;
+  background: black;
 }
 
 .navInput{

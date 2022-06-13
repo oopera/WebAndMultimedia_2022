@@ -8,8 +8,7 @@ export default function BackGroundGrafix(props){
       //  textOrientation: "mixed", fontSize: "150%", position: "absolute", backgroundColor: "white", border:"black solid 1pt", padding: "1pt"}} id="time">placeholder</div>
 //</div>
     return(
-        <div className={"frame"}>
-
-                </div>
+        <div className={"frame2"}>
+        </div>
     )
 }

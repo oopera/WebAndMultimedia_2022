@@ -10,7 +10,6 @@ export default function Canvas(props){
             const canvas = document.getElementById('ActivityChart');
             let ctx = canvas.getContext('2d');
             ctx.font = "14px Arial";
-            console.log(ctx);
             ctx.fillStyle = "black"
             ctx.lineWidth = 10
             ctx.fillText("All Sales:", 0, counter);
@@ -58,7 +57,7 @@ export default function Canvas(props){
             }
         }
     }, []);
-    console.log(counter)
+
     return(
         <div>
             <p> PINK INDICATES SALES, RED INDICATES COMMENTS, BLUE INDICATES AVAILABILITY </p>

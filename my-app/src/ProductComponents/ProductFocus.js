@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from "react";
 import XButton from "../XButton";
-import {sendComment, updateBasket} from "../HelperFunctions/ProductFunctions";
+import {sendComment} from "../HelperFunctions/ProductFunctions";
 import {CommentList} from "./CommentList";
 
-
+export function updateBasket(props){
+    let newBasket = props.basket.concat(props.product)
+    props.setBasket(newBasket)
+}
 
 export function ProductFocus(props) {
     const [rerender, setRerender] = useState(false)

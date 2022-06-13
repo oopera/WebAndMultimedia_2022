@@ -32,7 +32,17 @@ export default function ProductList(props) {
                         <div onClick={() => updateProduct(product._id)} key={product._id}>
                         <Product  onClick={() => updateProduct(product._id)} key={product._id} className={'Focused'} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
                         </div>
-                        <ProductFocus setOpenedProduct={setOpenedProduct} isLoggedIn={props.isLoggedIn} basket={props.basket} setBasket={props.setBasket} product={product} img={product.img} id={product._id} name={product.Name} description={product.Description} price={product.Price} availability={product.Availability}/>
+                        <ProductFocus setOpenedProduct={setOpenedProduct}
+                                      isLoggedIn={props.isLoggedIn}
+                                      basket={props.basket}
+                                      setBasket={props.setBasket}
+                                      product={product}
+                                      img={product.img}
+                                      id={product._id}
+                                      name={product.Name}
+                                      description={product.Description}
+                                      price={product.Price}
+                                      availability={product.Availability}/>
                         </>
                         )}
                 </div>

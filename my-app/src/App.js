@@ -119,6 +119,7 @@ export default function App() {
                 <SideNav/>
 
         <ProductList  isLoggedIn={isLoggedIn}
+                      basket={basket}
                       setBasket={setBasket}
                       products={products}
                       setProducts={setProducts}
@@ -137,9 +138,11 @@ export default function App() {
                    products={products}
                    setProducts={setProducts}/>
 
-                <div className={"frame"}>
-
+            <div className={"frame2"}>
             </div>
+            <div className={"frame"}>
+            </div>
+
         </div>
 
       );

@@ -104,14 +104,13 @@ export async function addUser(props) {
         document.getElementById("CorrectionBox2").innerHTML = "Username must be >3 Chars";
         return;
     }
-    if(!props.userform.email.match(
+    if(!props.userform.Email.match(
         /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
         document.getElementById("CorrectionBox").innerHTML = "Please enter a valid email address";
         return;
     }
 
     const newPerson = {...props.userform};
-    console.log(newPerson);
     const response = await fetch("http://localhost:5000/users/add", {
         method: "post",
         headers: {
@@ -123,14 +122,14 @@ export async function addUser(props) {
             window.alert("Could not add user to Database");
             console.log(error)
         });
-    props.setUserform({email: '', username: '', password: '', password2: '', admin: false});
+    const user = await response.json();
+    props.setUserform({Email: '', username: '', password: '', password2: '', admin: false});
     if(response.ok){
         console.log('User Successfully added to the Database')
-    }else{
-
     }
+    const newUser = user[0]
     props.setUsers(users => {
-        return [...users, {newPerson}]
+        return[...users, {newUser}]
     })
 }
 

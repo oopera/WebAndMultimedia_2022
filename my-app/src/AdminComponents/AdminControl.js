@@ -15,7 +15,7 @@ export default function AdminControl(props) {
     const [searchInput, setSearchInput] = useState('');
     const [openWindow, setOpenWindow] = useState('none');
     const [userform, setUserform] = useState({
-            email: "",
+            Email: "",
             username: "",
             password: "",
             password2: "",
@@ -138,6 +138,7 @@ export default function AdminControl(props) {
                     <XButton setOpenedItem={setOpenWindow}/>
 
                     <table>
+                    <tbody>
                     <tr>
                     <td className={'tableTingHeader'}>Functions:</td>
                     </tr>
@@ -174,6 +175,7 @@ export default function AdminControl(props) {
                     <tr>
                     <td className={'tableTing'}>DISCLAIMER!!! Dont use serious credentials on here if you create an account - i don't want to have the responsibility attached to that. Also - once you log in you might want to clear the cache under "account" since Information will be stored to localstorage</td>
                     </tr>
+                    </tbody>
                     </table>
                     </div>
                 )
@@ -198,7 +200,7 @@ export default function AdminControl(props) {
             <label htmlFor="products">Choose a product:</label>
             <select onChange={event => selectedProductChanged(event)}>
                 <option value={'newProduct'}> New Product</option>
-                {props.products.map((product) => <option value={product._id}>{product.Name}</option>)}
+                {props.products.map((product) => <option key={product._id} value={product._id}>{product.Name}</option>)}
             </select>
 
             <div className={'inputsUser'}>
@@ -241,15 +243,15 @@ export default function AdminControl(props) {
                 <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}
                        placeholder={'search users...'}/>
                 <select onChange={event => selectedUserChanged(event)}>
-                    {users.filter(user => user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id}>{user.Email})</option>)}
+                    {users.filter(user => user.Email !== undefined && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email})</option>)}
                 </select>
             </div>
             <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers)}> Delete User
             </button>
 
                     <div className={'inputsUser'}>
-                        <input value={userform.email} className={'userInput'}
-                               onChange={(e) => updateReform({email: e.target.value})} type="email" name="email"
+                        <input value={userform.Email} className={'userInput'}
+                               onChange={(e) => updateReform({Email: e.target.value})} type="email" name="email"
                                placeholder="email"/>
                         <input value={userform.username} className={'userInput'}
                                onChange={(e) => updateReform({username: e.target.value})} type="username"

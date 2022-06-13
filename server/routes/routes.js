@@ -131,7 +131,7 @@ recordRoutes.route("/users/add").post(function (req, response) {
         .collection("users")
     async function getDocs() {
         try {
-            let cursor = await dbizzle.find({"Email": req.body.email.toLowerCase()})
+            let cursor = await dbizzle.find({"Email": req.body.Email.toLowerCase()})
             return cursor.toArray()
         }catch (e) {
             console.error('Error:', e)
@@ -145,7 +145,7 @@ recordRoutes.route("/users/add").post(function (req, response) {
             return false
             }else{
             let myobj = {
-                Email: req.body.email.toLowerCase(),
+                Email: req.body.Email.toLowerCase(),
                 Password: req.body.password,
                 Admin: req.body.admin,
                 Purchases: [],

@@ -203,7 +203,3 @@ export async function updateProduct(form, setProduct){
     setProduct([])
 }
 
-export function updateBasket(props){
-    let newBasket = props.basket.concat(props.product)
-    props.setBasket(newBasket)
-}
