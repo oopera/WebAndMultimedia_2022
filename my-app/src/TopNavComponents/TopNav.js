@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import '../ProductComponents/ProductList'
 import {login, wantsToRegistreFunc, register, logout} from "../HelperFunctions/AccountFunctions";
 export default function TopNav(props) {
-
     const [form, setForm] = useState({
         email: "",
         password: "",
