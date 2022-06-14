@@ -105,9 +105,24 @@
   .mobileNav {
     visibility: hidden;
   }
+  .sideBox {
+    margin-top: 131px;
+  }
+
+  .ProductContainerOO {
+    width: 70%;
+  }
 }
 
 @media (max-width: 1200px) {
+
+  .ProductContainerOO {
+    width: 70%;
+  }
+
+  .sideBox {
+    margin-top: 178px;
+  }
   .navButton{
     width: 50vw;
     height: 30px;
@@ -138,8 +153,6 @@
     font-size: 55px;
     top: 20px;
   }
-
-
 
   .TopNavWrapper{
     visibility: hidden;
@@ -203,10 +216,6 @@
     width: calc(100vw - 9px);
   }
 
-  .ProductContainer{
-    width: 30%;
-    min-width: 300px;
-  }
 
   .mobileNav{
     visibility: visible;
@@ -219,9 +228,13 @@
 @media (max-width: 600px) {
 
   .ProductContainer{
-    width: 20px
+    min-width: 0px;
+    width: 95%;
+    background-color: black;
 
   }
+
+
   .mobileNav{
     visibility: visible;
     position: fixed;
@@ -230,13 +243,6 @@
     z-index: 15;
   }
 
-}
-
-
-html {
-  position: fixed;
-  height: 100%;
-  overflow: hidden;
 }
 
 body{
@@ -250,13 +256,14 @@ body{
 #root{
   cursor: none;
   margin: 0;
-  height: 99vh;
+  height: 100vh;
   width: 100vw;
   overflow: hidden;
   background-image:
           url("./images/bg9.png"),
           url("./images/bg7.jpg"),
           url("./images/bg5.jpg"),
+          url('./images/HalfttoneGradients.png'),
           url("./images/bg8.png");
   background-position:
           30% -50%,
@@ -266,7 +273,6 @@ body{
           60% 5%,
           34% -75%,
           75% -15%;
-
   background-blend-mode:saturation;
   background-repeat:repeat;
 }
@@ -566,7 +572,7 @@ body{
 }
 
 .partingline{
-  left: 7px;
+  left: 8px;
   background-color: white;
   border: 1pt black solid;
   width: 100vw;
@@ -607,7 +613,6 @@ body{
 
 .sideBox{
   margin-left: 70%;
-  margin-top: 131px;
   height: calc(100vh - 229px);
   border: 1pt black solid;
   padding: 20px;
@@ -657,7 +662,7 @@ body{
   height: 100vh;
   width: 100vw;
   bottom: 0;
-  z-index: -15;
+  z-index: 0;
   border: 6pt solid white;
 }
 .frame2{
@@ -667,7 +672,7 @@ body{
   bottom: 0;
   margin-left: 7px;
   margin-bottom: 8px;
-  z-index: -14;
+  z-index: 0;
   border: 1pt solid black;
 }
 
