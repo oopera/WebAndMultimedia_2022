@@ -1,8 +1,6 @@
 import '../App.css';
 import React, {useEffect, useState} from "react";
 import  './ProductList';
-
-
 export function Product(props){
     return(
                 <div className={props.className} style={props.style}>

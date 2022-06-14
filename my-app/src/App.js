@@ -13,7 +13,8 @@ export default function App() {
     const [openedItem, setOpenedItem] = useState('null');
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [account, setAccount] = useState();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [loading2, setLoading2] = useState(true);
     const [loadingScreen, setloadingScreen] = useState(true);
     const [reload, setReload] = useState(false);
     const [basket, setBasket] = useState([]);
@@ -21,14 +22,10 @@ export default function App() {
     const [rerender, setRerender] = useState(false)
     ReactSession.setStoreType("localStorage");
 
-    useEffect(() => {
-        setLoading(!loading)
-    },[reload.valueOf()]);
 
     useEffect(() => {
         setStorage();
-    },[loading.valueOf()]);
-
+    },[reload.valueOf()]);
 
     function setStorage() {
         if (isLoggedIn !== false) {
@@ -52,6 +49,7 @@ export default function App() {
             }
             const prodDB = await response.json();
             setProducts(prodDB);
+            setLoading(false)
         }
         getProducts();
 
@@ -66,6 +64,7 @@ export default function App() {
             }
             const comments = await response.json();
             setComments(comments);
+            setLoading2(false)
         }
         getComments();
     }, [comments.length, rerender.valueOf()]);
@@ -82,10 +81,14 @@ export default function App() {
         }, []);
         return position;
     };
+        useEffect(() => {
+            if(loading === true && loading2 === true) {
 
-    setTimeout(() => {
-        setloadingScreen(false);
-    }, "2000")
+                setTimeout(() => {
+                    setloadingScreen(false);
+                }, "2000")
+            }
+    }, [loading.valueOf(), loading.valueOf()]);
 
 
     const position = useMousePosition();
@@ -95,13 +98,35 @@ export default function App() {
         {loadingScreen === true && (
 
             <div className={'loadingScreen'}>
+                <div className={'loadingBox'}>
+                    <div className={'superCircle'}>
+                    <div className={'centerCircle'}>
+                    <div className={'loadingText'} id={'loadingText'}>
+
+           <span className={'first'}>L</span>
+           <span className={'second'}>O</span>
+           <span className={'third'}>A</span>
+           <span className={'fourth'}>D</span>
+           <span className={'fifth'}>I</span>
+           <span className={'sixth'}>N</span>
+           <span className={'seventh'}>G</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
                 <div id="mouse-circle" style={{
                     left: position.x,
                     top: position.y, zIndex: 20}}>
+                    <p style={{
+                        left: 15,
+                    }} className={'movePosition'}>{position.x}</p>
+                    <p style={{
+                        left: 15,
+                        top: -8 }} className={'movePosition'}>{position.y}</p>
                 </div>
 
             <div className={'loadingMover'}>
-                <BackGroundGrafix logoName={'logo Middle'} mainText={'maintext Middle'}/>
                 <div className={'welcomeTing'}> WELCOME </div>
              </div>
 
@@ -114,18 +139,22 @@ export default function App() {
             <div className={'loadingMoverBackDown'}>
 
                 <div className={'welcomeTing'}> WELCOME </div>
-                <BackGroundGrafix logoName={'logo Middle'} mainText={'maintext Middle'}/>
-                <div id="mouse-circle" style={{
-                    left: position.x,
-                    top: position.y, zIndex: 20}}>
-                </div>
+
+
 
             </div>
 
 
             <div id="mouse-circle" style={{
                 left: position.x,
-                top: position.y, zIndex: 20}}> </div>
+                top: position.y, zIndex: 20}}>
+                <p style={{
+                    left: 15,
+                }} className={'movePosition'}>{position.x}</p>
+                <p style={{
+                    left: 15,
+                    top: -8 }} className={'movePosition'}>{position.y}</p>
+            </div>
 
 
         <div className={'TopNavWrapper'}>
@@ -181,7 +210,10 @@ export default function App() {
                    openedItem={openedItem}
                    setOpenedItem={setOpenedItem}
                    products={products}
-                   setProducts={setProducts}/>
+                   setProducts={setProducts}
+                   rerender={rerender}
+                   setRerender={setRerender}
+        />
 
             <div className={"frame2"}>
             </div>

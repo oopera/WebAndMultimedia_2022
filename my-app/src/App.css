@@ -78,9 +78,6 @@
     width: 40vw;
     left: 7px;
     max-width: 800px;
-    text-align: center;
-    align-content: center;
-    justify-content: center;
   }
 
   .ProductFocus{
@@ -152,6 +149,7 @@
     float: right;
     position: fixed;
     z-index: 2;
+    justify-content: space-between;
 
   }
   .FocusWindow{
@@ -194,7 +192,7 @@
 
 
 body{
-  cursor: crosshair;
+  cursor: none;
 
   margin: 0;
   height: 100%;
@@ -222,76 +220,6 @@ body{
 
   animation-iteration-count: infinite;
 }
-
-.loadingScreen{
-  background-color: black;
-  z-index: 10;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-}
-
-.loadingMover{
-  background-color: white;
-  z-index: 9;
-  height: 0;
-  width: 100vw;
-  overflow: hidden;
-  animation: upAndGone 2s alternate-reverse;
-}
-
-@keyframes upAndGone {
-  0%{
-
-    height: 0;
-  }
-  50%{
-    margin-bottom: 200px;
-    height: 100vh;
-  }
-  70%{
-
-    height: 100vh;
-  }
-  100%{
-    height: 100vh;
-  }
-}
-
-.loadingMoverBackDown{
-  visibility: hidden;
-  background-color: black;
-  z-index: 15;
-  position: absolute;
-  width: 0;
-  height: 100vh;
-  top: 0;
-  overflow: hidden;
-  animation: upAndGoner 3s running;
-}
-
-@keyframes upAndGoner {
-  0%{
-    right: 0;
-    visibility:visible;
-    width: 100vw;
-  }
-
-  50%{
-    right: 0;
-    width: 180px;
-  }
-  75%{
-    right: 0;
-    width: 180px;
-  }
-  100%{
-    visibility: hidden;
-    right: 0;
-    width: 0vw;
-  }
-}
-
 
 @keyframes slowShift {
   0%{
@@ -363,11 +291,143 @@ body{
   height: 26px;
   margin: -13px 0 0 -13px;
   border: 1px solid white;
-  mix-blend-mode:multiply;
   border-radius: 50%;
   pointer-events: none !important;
   box-shadow: 0 0 16px rgba(255, 255, 255, 0);
   mix-blend-mode: difference;
+}
+
+.loadingScreen{
+  background-color: black;
+  z-index: 10;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.loadingMover{
+  background-color: white;
+  z-index: 9;
+  height: 0;
+  width: 100vw;
+  overflow: hidden;
+  animation: upAndGone 2s alternate-reverse;
+}
+
+@keyframes upAndGone {
+  0%{
+
+    height: 0;
+  }
+  50%{
+    margin-bottom: 200px;
+    height: 100vh;
+  }
+  70%{
+
+    height: 100vh;
+  }
+  100%{
+    height: 100vh;
+  }
+}
+
+.loadingMoverBackDown{
+  visibility: hidden;
+  background-color: black;
+  z-index: 15;
+  position: absolute;
+  width: 0;
+  height: 100vh;
+  top: 0;
+  overflow: hidden;
+  animation: upAndGoner 3s running;
+}
+
+@keyframes upAndGoner {
+  0%{
+    right: 0;
+    visibility:visible;
+    width: 100vw;
+  }
+
+  50%{
+    right: 0;
+    width: 180px;
+  }
+  75%{
+    right: 0;
+    width: 180px;
+  }
+  100%{
+    visibility: hidden;
+    right: 0;
+    width: 0vw;
+  }
+}
+
+.loadingBox{
+  position: absolute;
+  width: calc(100vw - 20px);
+  height: calc(100vh - 20px);
+  border: 1pt black solid;
+  font-size: 4em;
+  text-align: center;
+  margin-left: 10px;
+  bottom: 10px;
+}
+
+.loadingText{
+
+  z-index: 10;
+
+  transform-origin:center;
+  animation-iteration-count: infinite;
+}
+.centerCircle{
+  height: 500px;
+  width: 500px;
+
+  position: absolute;
+  animation: rotate 10s linear;
+  border: 1pt solid black;
+  bottom: 0px;
+  border-radius: 50%;
+}
+.superCircle{
+  height: 1000px;
+  width: 1000px;
+  margin-top: 5vh;
+  left: 20vh;
+  position: absolute;
+  animation: rotate 20s linear;
+  border: 1pt solid black;
+
+  border-radius: 50%;
+}
+
+.loadingText span{
+
+  font-family:Recia;
+  height: 50px;
+  position: absolute;
+  width: 50px;
+  bottom: 0px;
+  transform-origin: bottom center;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+
+  }
+}
+.movePosition{
+  color: white;
+  position: absolute;
+  z-index: 15;
 }
 .welcomeTing{
   color: white;
@@ -399,6 +459,27 @@ body{
   color: white;
 }
 
+.first{
+  transform: rotate(51deg);
+}
+.second{
+   transform: rotate(102deg);
+ }
+.third{
+     transform: rotate(153deg);
+   }
+.fourth{
+    transform: rotate(204deg);
+  }
+.fifth{
+    transform: rotate(255deg);
+  }
+.sixth{
+  transform: rotate(306deg);
+  }
+.seventh{
+    transform: rotate(357deg);
+  }
 .XButton {
   position: absolute;
   right: 15px;
@@ -502,7 +583,7 @@ body{
 }
 
 .Product:hover{
-  border-left: 1pt solid greenyellow;
+  border-left: 1pt solid black;
   padding-left:5%;
   transition: 150ms;
 }
@@ -538,12 +619,11 @@ body{
 }
 
 .subItem{
-
   border: 1pt solid black;
-  justify-content: space-between;
+
   margin: 2%;
   padding: 1%;
-  width: 70%;
+
 }
 
 .arrow {
@@ -678,6 +758,9 @@ select{
   background: white;
   position: absolute;
   overflow-x: scroll;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
 }
 
 
@@ -750,6 +833,7 @@ button{
   margin-left: 5px;
   font-family: Krylon;
   font-size: 1em;
+  cursor: none;
 }
 
 button:hover{
@@ -763,6 +847,10 @@ button:hover{
   display: inline-block;
 }
 
+.hoverState:hover{
+  color: white;
+  background-color: black;
+}
 #ActivityChart{
   background-color: white;
   border: 1pt solid black;

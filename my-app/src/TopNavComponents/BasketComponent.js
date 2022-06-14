@@ -7,18 +7,18 @@ export default function BasketComponent(props){
     const [rerender, setRerender] = useState(false)
     function BasketItems(props) {
         return (
-            <div>
+            <table className={'tablo'}>
                 {props.basket.length !== 0 && (
                     props.basket.map((basketItem, index) => {
                         return (
-                            <div className={'subItem'} key={index}>
-                                <div>{basketItem.Name} {basketItem.Price}€</div>
-                                <button onClick={() => removeFromBasket(props = {props, basketItem, index})}>Remove from Basket
-                                </button>
-                            </div>
+                            <tr className={'tableTingHeader'} key={index}>
+                                <td className={'tableTing'}>{basketItem.Name} {basketItem.Price}€</td>
+                                <td className={'tableTing hoverState'} onClick={() => removeFromBasket(props = {props, basketItem, index})}>Remove from Basket
+                                </td>
+                            </tr>
                         )
                     }))}
-            </div>
+            </table>
         )
     }
 

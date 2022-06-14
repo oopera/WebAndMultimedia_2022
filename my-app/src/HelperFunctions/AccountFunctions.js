@@ -163,7 +163,7 @@ export async function deleteUser(id, users, setUsers) {
     const newUsers = users.filter((el) => el._id !== id);
     setUsers(newUsers);
 }
-export async function deleteComment(comment) {
+export async function deleteComment(comment, isLoggedIn, setLoggedIn) {
     console.log(comment)
     if(comment.id === undefined){
         await fetch(`http://localhost:5000/delComment/${comment._id}`, {
@@ -177,11 +177,15 @@ export async function deleteComment(comment) {
 
 }
 
-export function deleteAccComment(comment, setLoggedIn, Comments, index){
-    console.log(comment)
+export function deleteAccComment(comment, setLoggedIn, isLoggedIn, index, rerender, setRerender){
+
+
     deleteComment(comment)
-    let commeys = (Comments)
+    let commeys = isLoggedIn.Comments
     commeys.splice(index, 1)
-    setLoggedIn.Comments(commeys)
-    ReactSession.set("Comments", commeys);
+    isLoggedIn.Comments = commeys;
+    setLoggedIn(isLoggedIn)
+    updateUser({isLoggedIn})
+    setRerender(!rerender)
+
 }

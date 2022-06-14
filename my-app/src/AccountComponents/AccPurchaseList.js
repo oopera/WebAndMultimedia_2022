@@ -1,16 +1,29 @@
+import {deleteAccComment} from "../HelperFunctions/AccountFunctions";
+import React from "react";
+
 export function AccPurchaseList(props){
     return(
         props.isLoggedIn.Purchases.map((purchase) => {
             return(
-                <div className={'subItem'} key={purchase.PurchaseID}>
+                <table className={"tablo"}>
+                    <tbody>
+
                     {purchase.Products.map((product, index) => {
                         return(
-                            <div key={index}> Item: {product} </div>
+                            <tr >
+                            <td key={index}> Item: {product} </td>
+                    </tr>
                         )
                     })}
-                    <div> Price: {purchase.Cost}€ </div>
-                    <div> Date: {purchase.Date} </div>
-                </div>
+
+                    <tr >
+                    <td className={'tableTing'}> Price: {purchase.Cost}€ </td>
+                        </tr>
+                    <tr >
+                    <td className={'tableTing'}> Date: {purchase.Date} </td>
+                        </tr>
+                    </tbody>
+                </table>
             )}
         )
     )

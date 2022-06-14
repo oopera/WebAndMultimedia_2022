@@ -9,7 +9,7 @@ export function updateBasket(props){
 }
 
 export function ProductFocus(props) {
-    console.log(props.isLoggedIn)
+
     return (
         <div style={props.style} className="ProductFocus">
             <XButton setOpenedItem={props.setOpenedProduct}/>

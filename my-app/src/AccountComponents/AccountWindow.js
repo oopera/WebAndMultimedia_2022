@@ -18,7 +18,9 @@ export function AccountWindow(props) {
                 </p>
                 <div> YOUR COMMENTS </div>
                 <AccCommentList isLoggedIn={props.isLoggedIn}
-                                setLoggedIn={props.setLoggedIn}/>
+                                setLoggedIn={props.setLoggedIn}
+                                rerender={props.rerender}
+                                setRerender={props.setRerender}/>
                 <div> YOUR PURCHASES </div>
                 <AccPurchaseList isLoggedIn={props.isLoggedIn}/>
 
