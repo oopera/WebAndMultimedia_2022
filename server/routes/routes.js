@@ -3,7 +3,7 @@ const express = require("express");
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
-const recordRoutes = express.Router();
+const routes = express.Router();
 
 // This will help us connect to the database
 const dbo = require("../db/conn");
@@ -12,7 +12,7 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
 
-recordRoutes.route("/webweb/products").get(function (req, res) {
+routes.route("/webweb/products").get(function (req, res) {
   let db_connect = dbo.getDb("webweb");
   db_connect
     .collection("products")
@@ -23,7 +23,7 @@ recordRoutes.route("/webweb/products").get(function (req, res) {
     });
 });
 
-recordRoutes.route("/webweb/comments").get(function (req, res) {
+routes.route("/webweb/comments").get(function (req, res) {
   let db_connect = dbo.getDb("webweb");
   db_connect
       .collection("comments")
@@ -34,7 +34,7 @@ recordRoutes.route("/webweb/comments").get(function (req, res) {
       });
 });
 
-recordRoutes.route("/webweb/users").get(function (req, res) {
+routes.route("/webweb/users").get(function (req, res) {
     let db_connect = dbo.getDb("webweb");
     db_connect
         .collection("users")
@@ -45,7 +45,7 @@ recordRoutes.route("/webweb/users").get(function (req, res) {
         });
 });
 
-recordRoutes.route("/webweb/purchases").get(function (req, res) {
+routes.route("/webweb/purchases").get(function (req, res) {
     let db_connect = dbo.getDb("webweb");
     db_connect
         .collection("purchases")
@@ -58,7 +58,7 @@ recordRoutes.route("/webweb/purchases").get(function (req, res) {
 
 
 
-recordRoutes.route("/comments/:id").get(function (req, res) {
+routes.route("/comments/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect
@@ -69,7 +69,7 @@ recordRoutes.route("/comments/:id").get(function (req, res) {
       });
 });
 
-recordRoutes.route("/purchases/:id").get(function (req, res) {
+routes.route("/purchases/:id").get(function (req, res) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
     db_connect
@@ -80,7 +80,7 @@ recordRoutes.route("/purchases/:id").get(function (req, res) {
         });
 });
 
-recordRoutes.route("/purchases/add").post(function (req, response) {
+routes.route("/purchases/add").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myobj = {
         date: new Date(req.body.date),
@@ -94,7 +94,7 @@ recordRoutes.route("/purchases/add").post(function (req, response) {
     });
 });
 
-recordRoutes.route("/products/add").post(function (req, response) {
+routes.route("/products/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
       Name: req.body.Name,
@@ -110,7 +110,7 @@ recordRoutes.route("/products/add").post(function (req, response) {
   });
 });
 
-recordRoutes.route("/comments/add").post(function (req, response) {
+routes.route("/comments/add").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myobj = {
         name: req.body.name,
@@ -125,16 +125,17 @@ recordRoutes.route("/comments/add").post(function (req, response) {
     })
 });
 
-recordRoutes.route("/users/add").post(function (req, response) {
+routes.route("/users/add").post(function (req, response) {
     let db_connect = dbo.getDb();
     let dbizzle = db_connect
         .collection("users")
     async function getDocs() {
         try {
-            let cursor = await dbizzle.find({"Email": req.body.Email.toLowerCase()})
+            let cursor = await dbizzle.find({"Email": req.body.email.toLowerCase()})
             return cursor.toArray()
         }catch (e) {
             console.error('Error:', e)
+            response = false
         }
     }
     (async function() {
@@ -142,10 +143,10 @@ recordRoutes.route("/users/add").post(function (req, response) {
         if(docsList.length>=1){
             console.log('Fetched documents:', docsList)
             console.log("email is already in use")
-            return false
+            return "WHAAAT"
             }else{
             let myobj = {
-                Email: req.body.Email.toLowerCase(),
+                Email: req.body.email.toLowerCase(),
                 Password: req.body.password,
                 Admin: req.body.admin,
                 Purchases: [],
@@ -162,7 +163,7 @@ recordRoutes.route("/users/add").post(function (req, response) {
     })();
 });
 
-recordRoutes.route("/users/login").post(function (req, res) {
+routes.route("/users/login").post(function (req, res) {
     let db_connect = dbo.getDb();
     db_connect
         .collection("users")
@@ -174,7 +175,7 @@ recordRoutes.route("/users/login").post(function (req, res) {
 
 });
 
-recordRoutes.route("/updateProduct/:id").post(function (req, response) {
+routes.route("/updateProduct/:id").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
     let newvalues = {
@@ -195,7 +196,7 @@ recordRoutes.route("/updateProduct/:id").post(function (req, response) {
 });
 
 
-recordRoutes.route("/updateUser/:id").post(function (req, response) {
+routes.route("/updateUser/:id").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
 
@@ -227,7 +228,7 @@ recordRoutes.route("/updateUser/:id").post(function (req, response) {
 });
 
 
-recordRoutes.route("/delProduct/:id").delete((req, response) => {
+routes.route("/delProduct/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id)};
   db_connect.collection("products").deleteOne(myquery, function (err, obj) {
@@ -238,7 +239,7 @@ recordRoutes.route("/delProduct/:id").delete((req, response) => {
 });
 
 
-recordRoutes.route("/delUser/:id").delete((req, response) => {
+routes.route("/delUser/:id").delete((req, response) => {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId(req.params.id)};
     db_connect.collection("users").deleteOne(myquery, function (err, obj) {
@@ -248,7 +249,7 @@ recordRoutes.route("/delUser/:id").delete((req, response) => {
     });
 });
 
-recordRoutes.route("/user/:id").get(function (req, res) {
+routes.route("/user/:id").get(function (req, res) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
     db_connect
@@ -260,7 +261,7 @@ recordRoutes.route("/user/:id").get(function (req, res) {
 });
 
 
-recordRoutes.route("/delComment/:id").delete((req, response) => {
+routes.route("/delComment/:id").delete((req, response) => {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId(req.params.id)};
     db_connect.collection("comments").deleteOne(myquery, function (err, obj) {
@@ -270,4 +271,4 @@ recordRoutes.route("/delComment/:id").delete((req, response) => {
     });
 });
 
-module.exports = recordRoutes;
+module.exports = routes;

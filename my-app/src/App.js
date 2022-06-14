@@ -53,7 +53,7 @@ export default function App() {
         }
         getProducts();
 
-    }, [products]);
+    }, [products.length]);
 
     useEffect(() => {
         async function getComments() {
@@ -67,7 +67,7 @@ export default function App() {
             setLoading2(false)
         }
         getComments();
-    }, [comments, rerender]);
+    }, [comments.length, rerender]);
 
 
     const useMousePosition = () => {

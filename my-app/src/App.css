@@ -66,9 +66,7 @@
     color: black;
     border: 1pt solid black;
     margin-top: 5px;
-    margin-left: 6.5px;
   }
-
 
   .FocusWindow{
     top: 25%;
@@ -81,10 +79,8 @@
   }
 
   .ProductFocus{
-
     top: 0;
     left: clamp(315px, calc(30% + 15px), calc(30% + 15px));
-
     height: calc(100vh - 180px - 9px);
     width: calc(70% - 24px);
 
@@ -100,6 +96,9 @@
     float: right;
     position: fixed;
     z-index: 10;
+    background-color: white;
+    border: 1pt black solid;
+    padding: 5pt;
   }
 
   .mobileNav {
@@ -245,7 +244,8 @@
 
 }
 
-body{
+
+body {
   height: 100vh;
   width: 100vw;
   margin: 0;
@@ -277,71 +277,6 @@ body{
   background-repeat:repeat;
 }
 
-
-@keyframes slowShift {
-  0%{
-    background-position:
-            30% -50%,
-            15% -5%,
-            70% 70%,
-            58% -47%,
-            60% 5%,
-            34% -75%,
-            75% -15%;
-  }
-
-  25%{
-  background-position:
-          5% 45%,
-          15% -5%,
-          5% 60%,
-          42% 25%,
-          5% 130%,
-          0 50%,
-          90% 20%,
-          10% 140%;
-
-
-}
-  50%{
-    background-position:
-            60% 5%,
-            15% -5%,
-            75% -15%,
-            60% 5%,
-            30% -50%,
-            58% -47%,
-            34% -75%,
-            70% 70%;
-
-  }
-
-  75%{
-    background-position:
-            5% 45%,
-            15% -5%,
-            5% 60%,
-            42% 25%,
-            5% 130%,
-            0 50%,
-            90% 20%,
-            10% 140%;
-
-
-  }
-
-  100%{
-    background-position:
-            30% -50%,
-            15% -5%,
-            70% 70%,
-            58% -47%,
-            60% 5%,
-            34% -75%,
-            75% -15%;
-
-  }
-}
 #mouse-circle {
   position: absolute;
   width: 26px;
@@ -493,6 +428,11 @@ body{
   font-family: Recia;
 }
 
+.bold{
+  font-weight: bold;
+  border-bottom: 1pt black solid;
+  font-family: Krylon;
+}
 .maintext {
   position: absolute;
   color: black;
@@ -776,6 +716,11 @@ body{
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.rowDiv{
+  display: flex;
+  flex-direction: row;
+
+}
 .buttonRow{
   display: flex;
 }
@@ -793,9 +738,6 @@ body{
   height: 25px;
 }
 
-input{
-  height: 25px;
-}
 select{
   height: 25px;
 }
@@ -840,11 +782,15 @@ select{
 }
 
 input{
-  margin: 5pt;
+  margin-right: 5pt;
+  margin-top: 5pt;
   background: white;
   border:   1pt solid black;
   outline: hidden;
+
+  height: 25px;
 }
+
 
 .TopNavForm{
   display: flex;
@@ -880,7 +826,7 @@ button{
   background: white;
   height: 30px;
   margin-top: 1%;
-  margin-left: 5px;
+  margin-right: 5px;
   font-family: Krylon;
   font-size: 1em;
   cursor: none;

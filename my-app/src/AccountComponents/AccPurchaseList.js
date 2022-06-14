@@ -4,13 +4,13 @@ export function AccPurchaseList(props){
     return(
         props.isLoggedIn.Purchases.map((purchase) => {
             return(
-                <table className={"tablo"}>
+                <table key={purchase._id} className={"tablo"}>
                     <tbody>
 
                     {purchase.Products.map((product, index) => {
                         return(
-                            <tr >
-                            <td key={index}> Item: {product} </td>
+                            <tr key={index}>
+                            <td> Item: {product} </td>
                     </tr>
                         )
                     })}
@@ -21,6 +21,12 @@ export function AccPurchaseList(props){
                     <tr >
                     <td className={'tableTing'}> Date: {purchase.Date} </td>
                         </tr>
+                    <tr >
+                        <td className={'tableTing'}> </td>
+                    </tr>
+                    <tr >
+                        <td className={'tableTing'}> </td>
+                    </tr>
                     </tbody>
                 </table>
             )}

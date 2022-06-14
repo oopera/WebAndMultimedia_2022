@@ -5,6 +5,7 @@ import {CommentList} from "./CommentList";
 export function updateBasket(props){
     let newBasket = props.basket.concat(props.product)
     props.setBasket(newBasket)
+    document.getElementById("basketResponse").innerHTML = 'Added to Basket'
 }
 
 export function ProductFocus(props) {
@@ -24,7 +25,10 @@ export function ProductFocus(props) {
                 )}
                 {props.availability > 0 && (
                     <div>
+                        <div className={'rowDiv'}>
                     <button style={{zIndex : '5'}} onClick={() => updateBasket(props)}>Add to Basket</button>
+                            <p id={'basketResponse'}></p>
+                    </div>
                     <p>{props.availability} available</p>
                     </div>
                 )}

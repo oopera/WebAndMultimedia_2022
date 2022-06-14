@@ -6,21 +6,26 @@ export function AccCommentList(props){
 
             props.isLoggedIn.Comments.map((comment, index) => {
             return(
-                <table className={"tablo"}>
+                <table className={"tablo"} key={comment._id}>
                     <tbody>
                     <tr>
-                        <td key={comment.CommentID} className={'tableTingHeader'}>
+                        <td key={comment.CommentID}>
                             Comment: {comment.Comment}</td>
                     </tr>
                     <tr >
-                   <td lassName={'tableTing'}> Item: {comment.Item} </td>
+                   <td> Item: {comment.Item} </td>
                 </tr>
                     <button onClick={() => deleteAccComment(
                         comment,
                         props.setLoggedIn,
                         props.isLoggedIn,
                         index, props.rerender, props.setRerender)}>delete Comment</button>
-
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td className={'tableTing'}></td>
+                    </tr>
                     </tbody>
             </table>
 

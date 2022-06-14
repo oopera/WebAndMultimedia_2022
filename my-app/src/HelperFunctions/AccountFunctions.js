@@ -69,6 +69,7 @@ export async function register(props){
         document.getElementById("CorrectionBox").innerHTML = "Please enter a valid email adress";
         return;
     }
+
     wantsToRegistreFunc(props)
     const newPerson = { ...props.reform };
     const response = await fetch("http://localhost:5000/users/add", {
@@ -82,16 +83,17 @@ export async function register(props){
             window.alert("Registering did not work due to an unknown error, please try again later.");
             console.log(error)
         });
+    console.log(response)
     props.setForm({email: props.reform.email, password: props.reform.password});
     if(response.ok) {
-        await login(props);
+        document.getElementById("CorrectionBox").innerHTML = "Successfully registred, you can log in now";
+
     }
 }
 
 export async function addUser(props) {
-
-    if(props.userform.password.length<8){
-        document.getElementById("CorrectionBox2").innerHTML = "Password must be >8 Chars";
+    if(props.userform.password.length<8 || props.userform.password.length>20){
+        document.getElementById("CorrectionBox2").innerHTML = "Password must be between 8 and 20 Characters long";
         return;
     }
     if(props.userform.password !== props.userform.password2){
@@ -99,12 +101,12 @@ export async function addUser(props) {
         document.getElementById("CorrectionBox2").innerHTML = "Passwords must match";
         return;
     }
-    if(props.userform.username.length<3){
+    if(props.userform.username.length<3 || props.userform.username.length>12){
 
-        document.getElementById("CorrectionBox2").innerHTML = "Username must be >3 Chars";
+        document.getElementById("CorrectionBox2").innerHTML = "Username must be between 3 and 12 Characters long";
         return;
     }
-    if(!props.userform.Email.match(
+    if(!props.userform.email.match(
         /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
         document.getElementById("CorrectionBox").innerHTML = "Please enter a valid email address";
         return;
@@ -123,9 +125,8 @@ export async function addUser(props) {
             console.log(error)
         });
     const user = await response.json();
-    props.setUserform({Email: '', username: '', password: '', password2: '', admin: false});
-    if(response.ok){
-        console.log('User Successfully added to the Database')
+    props.setUserform({email: '', username: '', password: '', password2: '', admin: false});
+    if(response.ok){console.log('User Successfully added to the Database')
     }
     const newUser = user[0]
     props.setUsers(users => {

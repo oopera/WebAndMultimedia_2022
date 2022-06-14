@@ -15,7 +15,7 @@ export default function AdminControl(props) {
     const [searchInput, setSearchInput] = useState('');
     const [openWindow, setOpenWindow] = useState('none');
     const [userform, setUserform] = useState({
-            Email: "",
+            email: "",
             username: "",
             password: "",
             password2: "",
@@ -243,15 +243,15 @@ export default function AdminControl(props) {
                 <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}
                        placeholder={'search users...'}/>
                 <select onChange={event => selectedUserChanged(event)}>
-                    {users.filter(user => user.Email !== undefined && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email}</option>)}
+                    {users.filter(user => user.email !== undefined && user.email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.email}</option>)}
                 </select>
             </div>
             <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers)}> Delete User
             </button>
 
                     <div className={'inputsUser'}>
-                        <input value={userform.Email} className={'userInput'}
-                               onChange={(e) => updateReform({Email: e.target.value})} type="email" name="email"
+                        <input value={userform.email} className={'userInput'}
+                               onChange={(e) => updateReform({email: e.target.value})} type="email" name="email"
                                placeholder="email"/>
                         <input value={userform.username} className={'userInput'}
                                onChange={(e) => updateReform({username: e.target.value})} type="username"

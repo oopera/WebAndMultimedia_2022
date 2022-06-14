@@ -14,14 +14,14 @@ export function AccountWindow(props) {
                     CLEAR CACHE
                 </button>
                 <p>
-                    (you should log out immediately after, or the cache might be reloaded
+                    (you should log out immediately after, or the cache might be reloaded)
                 </p>
-                <div> YOUR COMMENTS </div>
+                <p className={'bold'}> YOUR COMMENTS </p>
                 <AccCommentList isLoggedIn={props.isLoggedIn}
                                 setLoggedIn={props.setLoggedIn}
                                 rerender={props.rerender}
                                 setRerender={props.setRerender}/>
-                <div> YOUR PURCHASES </div>
+                <p className={'bold'}> YOUR PURCHASES </p>
                 <AccPurchaseList isLoggedIn={props.isLoggedIn}/>
 
             </div>
