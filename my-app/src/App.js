@@ -13,8 +13,8 @@ export default function App() {
     const [openedItem, setOpenedItem] = useState('null');
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [account, setAccount] = useState();
-    const [loading, setLoading] = useState(true);
-    const [loading2, setLoading2] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [loading2, setLoading2] = useState(false);
     const [loadingScreen, setloadingScreen] = useState(true);
     const [reload, setReload] = useState(false);
     const [basket, setBasket] = useState([]);

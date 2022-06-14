@@ -117,9 +117,6 @@
     border: 1pt solid black;
     margin-left: 10%;
   }
-  .loadingScreen{
-    display: none;
-  }
 
   .logo {
     left: 5%;
