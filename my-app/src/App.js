@@ -24,10 +24,6 @@ export default function App() {
 
 
     useEffect(() => {
-        setStorage();
-    },[reload]);
-
-    function setStorage() {
         if (isLoggedIn !== false) {
             ReactSession.set("wholeAcc", isLoggedIn);
             ReactSession.set("admin", account);
@@ -37,7 +33,8 @@ export default function App() {
             setLoggedIn(ReactSession.get("wholeAcc"))
             setAccount(ReactSession.get("admin"))
         }
-    }
+    },[reload]);
+
 
     useEffect(() => {
         async function getProducts() {
