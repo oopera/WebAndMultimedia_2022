@@ -25,7 +25,7 @@ export default function SideNav(){
                     <td className={'tableTing'}>Find your Comments and Purchases once you logged in under "Account"</td>
                 </tr>
                 <tr>
-                    <td className={'tableTing'}>On Mobile View the Green Square functions as the Navigation</td>
+                    <td className={'tableTing'}>On Mobile View you can use the Arrow located in the top left as the Navigation</td>
                 </tr>
                 <tr>
                     <td className={'tableTingHeader'}>How do you use it? </td>

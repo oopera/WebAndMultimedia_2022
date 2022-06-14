@@ -135,7 +135,7 @@ routes.route("/users/add").post(function (req, response) {
             return cursor.toArray()
         }catch (e) {
             console.error('Error:', e)
-            response = false
+            response.send(false)
         }
     }
     (async function() {
@@ -143,7 +143,7 @@ routes.route("/users/add").post(function (req, response) {
         if(docsList.length>=1){
             console.log('Fetched documents:', docsList)
             console.log("email is already in use")
-            return "WHAAAT"
+            response.send(false)
             }else{
             let myobj = {
                 Email: req.body.email.toLowerCase(),

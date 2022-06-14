@@ -83,7 +83,12 @@ export async function register(props){
             window.alert("Registering did not work due to an unknown error, please try again later.");
             console.log(error)
         });
-    console.log(response)
+    const responsy = await response.json()
+    if(responsy===false){
+        document.getElementById("CorrectionBox").innerHTML = "Email is already in use";
+        return
+
+    }
     props.setForm({email: props.reform.email, password: props.reform.password});
     if(response.ok) {
         document.getElementById("CorrectionBox").innerHTML = "Successfully registred, you can log in now";

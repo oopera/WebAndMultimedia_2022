@@ -42,19 +42,19 @@
 }
 
 
-@media (min-width: 1200px) {
+@media (min-width: 1201px) {
 
   .buttonRow{
     flex-direction:row;
   }
   .logo {
-    left: 32%;
+    left: 70%;
     top: 40px;
     position: absolute;
     font-size: 175%;
   }
   .maintext {
-    left: 30%;
+    left: 69%;
     top: 0;
     font-size: 60px;
   }
@@ -96,9 +96,7 @@
     float: right;
     position: fixed;
     z-index: 10;
-    background-color: white;
-    border: 1pt black solid;
-    padding: 5pt;
+    padding-left: 5pt;
   }
 
   .mobileNav {
@@ -161,7 +159,7 @@
     position: fixed;
     top: 5px;
     left: 0px;
-    z-index: 15;
+    z-index: 0;
   }
 
   .TopNav{
@@ -220,7 +218,7 @@
     visibility: visible;
     top: 5px;
     left: 0px;
-    z-index: 15;
+    z-index: 10;
   }
 }
 
@@ -631,7 +629,7 @@ body {
   padding: 10px;
   margin-left: 40px;
   margin-top: 20px;
-  z-index: 5;
+  z-index: 1;
 }
 .arrow:hover{
   border: solid gray;
@@ -641,7 +639,7 @@ body {
 .right {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
-  z-index: 5;
+  z-index: 1;
 }
 
 .left {
@@ -734,9 +732,6 @@ body {
   flex-direction: column;
 }
 
-.userInput{
-  height: 25px;
-}
 
 select{
   height: 25px;
@@ -795,6 +790,7 @@ input{
 .TopNavForm{
   display: flex;
   flex-direction: column;
+
 }
 
 .searchField{
@@ -840,7 +836,7 @@ button:hover{
 }
 
 .navInput{
-  height: 25px;
+  height: 14px;
   width: 200px;
   display: inline-block;
 }

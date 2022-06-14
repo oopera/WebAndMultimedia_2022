@@ -243,7 +243,7 @@ export default function AdminControl(props) {
                 <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}
                        placeholder={'search users...'}/>
                 <select onChange={event => selectedUserChanged(event)}>
-                    {users.filter(user => user.email !== undefined && user.email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.email}</option>)}
+                    {users.filter(user => user.Email !== undefined && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email}</option>)}
                 </select>
             </div>
             <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers)}> Delete User

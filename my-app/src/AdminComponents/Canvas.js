@@ -1,7 +1,14 @@
 import React, {useEffect} from "react";
 
 export default function Canvas(props){
-    let height = (props.products.length*70) + 50;
+    let height = (props.products.length*75) + 100;
+    let width;
+    if(props.comments>=props.purchases){
+        width = props.comments.length*20+100
+    }else{
+        width = props.purchases.length*20+100
+    }
+
     let counter = 10;
     function updateCounter(amountToUpdate){
         counter = counter+amountToUpdate
@@ -18,10 +25,10 @@ export default function Canvas(props){
             ctx.fillRect(0, counter, props.purchases.length*20, 4);
             updateCounter(10)
             ctx.fillStyle = "black"
-            ctx.fillRect(0, counter, 640, 1);
+            ctx.fillRect(0, counter, width, 1);
             updateCounter(20)
             ctx.fillText("All Comments:", 0, counter);
-            ctx.fillRect(0, counter, 640, 1);
+            ctx.fillRect(0, counter, width, 1);
             ctx.fillStyle = "red"
             updateCounter(10)
             ctx.fillRect(0, counter, props.comments.length*20, 4);
@@ -29,12 +36,12 @@ export default function Canvas(props){
         function render(product) {
             ctx.fillStyle = "black"
             updateCounter(10)
-            ctx.fillRect(0, counter, 640, 1);
+            ctx.fillRect(0, counter, width, 1);
             updateCounter(10)
             updateCounter(10)
             ctx.fillText(product.Name, 0, counter);
             ctx.fillStyle = "blue"
-            updateCounter(10)
+            updateCounter(25)
             if(product.Availability === true){
                 ctx.fillText('infinite Availability', 0, counter);
             }else{
@@ -51,17 +58,18 @@ export default function Canvas(props){
         ctx.fillStyle = "black"
         renderNumbers()
         function renderNumbers() {
-            for(let counter2 = 0; counter2 <= 50; counter2++){
+            for(let counter2 = 0; counter2 <= width; counter2++){
                 let stringy = counter2.toString()
-                ctx.fillText(stringy, counter2*20, counter);
+                ctx.fillText(stringy, counter2*20, counter+20);
             }
         }
-    },);
+    },[]);
 
     return(
         <div>
             <p> PINK INDICATES SALES, RED INDICATES COMMENTS, BLUE INDICATES AVAILABILITY </p>
-            <canvas width="640" height={height} id={'ActivityChart'}> </canvas>
+            IF THE CHART CUTS OFF ON THE SIDE, USE SHIFT SCROLL TO SCROLL SIDEWAYS
+            <canvas width={width} height={height} id={'ActivityChart'}> </canvas>
         </div>
     )
 }

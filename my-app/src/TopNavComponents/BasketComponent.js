@@ -12,7 +12,7 @@ export default function BasketComponent(props){
                     props.basket.map((basketItem, index) => {
                         return (
                             <tr className={'tableTingHeader'} key={index}>
-                                <td className={'tableTing'}>{basketItem.Name} {basketItem.Price}€</td>
+                                <td className={'tableTing'}>{basketItem.Name.toUpperCase()} {basketItem.Price}€</td>
                                 <td className={'tableTing hoverState'} onClick={() => removeFromBasket(props = {props, basketItem, index})}>Remove from Basket
                                 </td>
                             </tr>
