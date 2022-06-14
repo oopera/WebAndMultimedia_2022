@@ -23,9 +23,9 @@ export default function App() {
     ReactSession.setStoreType("localStorage");
 
 
-
-    setStorage();
-
+    useEffect(() => {
+        setStorage();
+    },[reload]);
 
     function setStorage() {
         if (isLoggedIn !== false) {
