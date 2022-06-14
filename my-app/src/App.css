@@ -199,6 +199,16 @@
     height: calc(100vh - 180px - 9px);
     width: calc(100vw - 9px);
   }
+
+  .ProductContainer{
+    width: 30%;
+    min-width: 300px;
+  }
+
+  .mobileNav{
+    visibility: visible;
+    z-index: 5;
+  }
 }
 
 @media (max-width: 500px) {
@@ -208,7 +218,10 @@
     width: 50%;
 
   }
-
+  .mobileNav{
+    visibility: visible;
+    z-index: 5;
+  }
 
 }
 
