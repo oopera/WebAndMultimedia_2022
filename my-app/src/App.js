@@ -148,16 +148,6 @@ export default function App() {
 
         <div className={'TopNavWrapper'}>
 
-            <TopNav setReload={setReload}
-                    reload={reload}
-                    basket={basket}
-                    isLoggedIn={isLoggedIn}
-                    setLoggedIn={setLoggedIn}
-                    account={account}
-                    setAccount={setAccount}
-                    openedItem={openedItem}
-                    setOpenedItem={setOpenedItem}/>
-
             <HamNav setReload={setReload}
                     reload={reload}
                     basket={basket}
@@ -167,7 +157,19 @@ export default function App() {
                     setAccount={setAccount}
                     openedItem={openedItem}
                     setOpenedItem={setOpenedItem}/>
+
+            <TopNav setReload={setReload}
+                    reload={reload}
+                    basket={basket}
+                    isLoggedIn={isLoggedIn}
+                    setLoggedIn={setLoggedIn}
+                    account={account}
+                    setAccount={setAccount}
+                    openedItem={openedItem}
+                    setOpenedItem={setOpenedItem}/>
         </div>
+
+
             <BackGroundGrafix logoName={'logo'} mainText={'maintext'}/>
                 <div className={"partingline"}> </div>
                 <div className={"breakingNewsCont"}>

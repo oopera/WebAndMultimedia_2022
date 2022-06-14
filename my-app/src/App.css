@@ -146,7 +146,10 @@
   }
   .mobileNav{
     visibility: visible;
-    z-index: 5;
+    position: fixed;
+    top: 5px;
+    left: 0px;
+    z-index: 15;
   }
 
   .TopNav{
@@ -207,20 +210,24 @@
 
   .mobileNav{
     visibility: visible;
-    z-index: 5;
+    top: 5px;
+    left: 0px;
+    z-index: 15;
   }
 }
 
-@media (max-width: 500px) {
-
+@media (max-width: 600px) {
 
   .ProductContainer{
-    width: 50%;
+    width: 20px
 
   }
   .mobileNav{
     visibility: visible;
-    z-index: 5;
+    position: fixed;
+    top: 5px;
+    left: 0px;
+    z-index: 15;
   }
 
 }
@@ -243,9 +250,8 @@ body{
 #root{
   cursor: none;
   margin: 0;
-  height: 100vh;
+  height: 99vh;
   width: 100vw;
-
   overflow: hidden;
   background-image:
           url("./images/bg9.png"),
@@ -261,7 +267,7 @@ body{
           34% -75%,
           75% -15%;
 
-  background-blend-mode:difference;
+  background-blend-mode:saturation;
   background-repeat:repeat;
 }
 
@@ -567,7 +573,7 @@ body{
   height: 150px;
   z-index: 0;
   top: 0;
-  position: absolute;
+  position: fixed;
 }
 
 .breakingNewsCont{
@@ -680,6 +686,7 @@ body{
   padding: 10px;
   margin-left: 40px;
   margin-top: 20px;
+  z-index: 5;
 }
 .arrow:hover{
   border: solid gray;
@@ -689,6 +696,7 @@ body{
 .right {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+  z-index: 5;
 }
 
 .left {
