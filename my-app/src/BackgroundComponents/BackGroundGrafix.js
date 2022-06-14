@@ -1,5 +1,3 @@
-import React, {useState} from "react";
-
 export default function BackGroundGrafix(props){
 
         let logoName = props.logoName
@@ -8,6 +6,7 @@ export default function BackGroundGrafix(props){
         <div>
             <a  href={"https://lucaslichner.de"}
                 target={"_blank"}
+                rel={"noreferrer"}
                 className={logoName}>lucaslichner.</a>
             <p className={mainText}>
                 <span>buy.</span>

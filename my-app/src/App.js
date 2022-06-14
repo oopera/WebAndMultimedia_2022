@@ -25,7 +25,7 @@ export default function App() {
 
     useEffect(() => {
         setStorage();
-    },[reload.valueOf()]);
+    },[reload]);
 
     function setStorage() {
         if (isLoggedIn !== false) {
@@ -53,7 +53,7 @@ export default function App() {
         }
         getProducts();
 
-    }, [products.length]);
+    }, [products]);
 
     useEffect(() => {
         async function getComments() {
@@ -67,7 +67,7 @@ export default function App() {
             setLoading2(false)
         }
         getComments();
-    }, [comments.length, rerender.valueOf()]);
+    }, [comments, rerender]);
 
 
     const useMousePosition = () => {
@@ -88,7 +88,7 @@ export default function App() {
                     setloadingScreen(false);
                 }, 2000)
             }
-    }, [loading.valueOf(), loading2.valueOf()]);
+    }, [loading, loading2]);
 
 
     const position = useMousePosition();

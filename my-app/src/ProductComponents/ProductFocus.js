@@ -1,4 +1,3 @@
-import React from "react";
 import XButton from "../XButton";
 import {sendComment} from "../HelperFunctions/ProductFunctions";
 import {CommentList} from "./CommentList";
@@ -9,12 +8,11 @@ export function updateBasket(props){
 }
 
 export function ProductFocus(props) {
-
     return (
-        <div style={props.style} className="ProductFocus">
+        <div style={props.style} className={"ProductFocus"}>
             <XButton setOpenedItem={props.setOpenedProduct}/>
             <div className={'focusContent'}>
-                <header className="Product-name">
+                <header className={"Product-name"}>
                 <p> {props.name.toUpperCase()} </p>
                 </header>
                 <p> {props.description.toUpperCase()} // {props.price} € </p>
@@ -47,7 +45,6 @@ export function ProductFocus(props) {
                             <p>You have to purchase the Item before you can leave a comment.</p>
                         </div>
                     )}
-
                 </div>
                 <CommentList id={props.id} comments={props.comments}/>
             </div>

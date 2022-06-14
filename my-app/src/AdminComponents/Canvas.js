@@ -56,7 +56,7 @@ export default function Canvas(props){
                 ctx.fillText(stringy, counter2*20, counter);
             }
         }
-    }, []);
+    },);
 
     return(
         <div>
