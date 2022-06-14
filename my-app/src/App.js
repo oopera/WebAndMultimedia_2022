@@ -25,7 +25,7 @@ export default function App() {
 
     useEffect(() => {
         setStorage();
-    },[reload]);
+    },[reload, setStorage]);
 
     function setStorage() {
         if (isLoggedIn !== false) {

@@ -15,7 +15,7 @@ export function ProductFocus(props) {
                 <header className={"Product-name"}>
                 <p> {props.name.toUpperCase()} </p>
                 </header>
-                <p> {props.description.toUpperCase()} // {props.price} € </p>
+                <p> {props.description.toUpperCase()} / {props.price} € </p>
                 {props.img !== undefined && (
                 <img className={"productImage"} src={props.img} alt={props.name}/>
                 )}
