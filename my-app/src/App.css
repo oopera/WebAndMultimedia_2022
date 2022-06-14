@@ -193,16 +193,14 @@
 
 body{
   cursor: none;
-  margin: 0;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+
   background-image:
   url("./images/bg9.png"),
   url("./images/bg7.jpg"),
-
   url("./images/bg5.jpg"),
-
   url("./images/bg8.png");
   background-position:
   30% -50%,
@@ -217,6 +215,12 @@ body{
   background-repeat:repeat;
 
   animation-iteration-count: infinite;
+}
+
+.siteWrapper{
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 @keyframes slowShift {

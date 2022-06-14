@@ -93,7 +93,7 @@ export default function App() {
 
     const position = useMousePosition();
     return (
-        <div>
+        <div className={'siteWrapper'}>
         {loadingScreen === true && (
             <div className={'loadingScreen'}>
                 <div className={'loadingBox'}>
