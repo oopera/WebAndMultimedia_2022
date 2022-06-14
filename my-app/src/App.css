@@ -90,10 +90,9 @@
 
   }
 
-  @keyframes rotate {
-    0%{transform: rotate(360deg)
-    }
-    100%{transform: rotate(0deg)}
+  .ProductContainer{
+    width: 30%;
+    min-width: 300px;
   }
   .TopNav{
    left: 10px;
@@ -116,6 +115,15 @@
     color: black;
     border: 1pt solid black;
     margin-left: 10%;
+  }
+  .ProductContainer{
+    width: 30%;
+    min-width: 300px;
+  }
+
+  .ProductContainer{
+    width: 30%;
+    min-width: 300px;
   }
 
   .logo {
@@ -176,6 +184,10 @@
     height: calc(100vh - 180px - 9px);
     width: 100%;
   }
+  .ProductContainer{
+    width: 30%;
+    min-width: 300px;
+  }
 }
 
 @media (max-width: 827px) {
@@ -188,6 +200,19 @@
     width: calc(100vw - 9px);
   }
 }
+
+@media (max-width: 500px) {
+
+
+  .ProductContainer{
+    width: 50%;
+
+  }
+
+
+}
+
+
 html {
   position: fixed;
   height: 100%;
@@ -664,8 +689,6 @@ body{
   padding-top: 70px;
   background: white;
   border: black solid 1pt;
-  width: 30%;
-  min-width: 300px;
   height: calc(100vh - 250px - 9px);
   overflow-x: scroll;
   margin-bottom: 40pt;
