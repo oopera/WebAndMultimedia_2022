@@ -197,29 +197,30 @@ body{
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-image:
-  url("./images/bg9.png"),
-  url("./images/bg7.jpg"),
-  url("./images/bg5.jpg"),
-  url("./images/bg8.png");
-  background-position:
-  30% -50%,
-  15% -5%,
-  58% 177%,
-  70% 70%,
-  60% 5%,
-  34% -75%,
-  75% -15%;
-
-  background-blend-mode:difference;
-  background-repeat:repeat;
-
   animation-iteration-count: infinite;
 }
 .siteWrapper{
-  height: 100vh;
+  margin-left: 7px;
+  margin-bottom: 7px;
+  height: 99vh;
   width: 100vw;
   overflow: hidden;
+  background-image:
+          url("./images/bg9.png"),
+          url("./images/bg7.jpg"),
+          url("./images/bg5.jpg"),
+          url("./images/bg8.png");
+  background-position:
+          30% -50%,
+          15% -5%,
+          58% 177%,
+          70% 70%,
+          60% 5%,
+          34% -75%,
+          75% -15%;
+
+  background-blend-mode:difference;
+  background-repeat:repeat;
 }
 
 @keyframes slowShift {
@@ -522,7 +523,7 @@ body{
   border: 1pt black solid;
   width: 100vw;
   height: 150px;
-  z-index: -10;
+  z-index: 0;
   top: 0;
   position: absolute;
 }

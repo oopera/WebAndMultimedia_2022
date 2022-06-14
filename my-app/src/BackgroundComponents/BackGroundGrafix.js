@@ -16,6 +16,7 @@ export default function BackGroundGrafix(props){
                 <span style={{fontStyle: 'italic'}}>stuff</span>
                 .
             </p>
+
         </div>
     )
 }
