@@ -130,13 +130,10 @@ export default function App() {
         )
 
     }   {loadingScreen === false && (
-
-        <div>
+            <div>
             <div className={'loadingMoverBackDown'}>
                 <div className={'welcomeTing'}> WELCOME </div>
             </div>
-
-
             <div id="mouse-circle" style={{
                 left: position.x,
                 top: position.y, zIndex: 20}}>

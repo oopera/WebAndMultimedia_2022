@@ -192,18 +192,17 @@
 
 
 body{
+
+  margin: 0;
+
+}
+
+#root{
   cursor: none;
   margin: 0;
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
-  animation-iteration-count: infinite;
-}
-.siteWrapper{
-  margin-left: 7px;
-  margin-bottom: 7px;
-  height: 99vh;
-  width: 100vw;
+
   overflow: hidden;
   background-image:
           url("./images/bg9.png"),
@@ -222,6 +221,7 @@ body{
   background-blend-mode:difference;
   background-repeat:repeat;
 }
+
 
 @keyframes slowShift {
   0%{
