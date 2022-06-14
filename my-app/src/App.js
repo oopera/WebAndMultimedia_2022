@@ -9,6 +9,8 @@ import SideNav from "./BackgroundComponents/SideNav";
 import BackGroundGrafix from "./BackgroundComponents/BackGroundGrafix";
 
 export default function App() {
+    const [basket, setBasket] = useState([]);
+    const [comments, setComments] = useState([]);
     const [products, setProducts] = useState([]);
     const [openedItem, setOpenedItem] = useState('null');
     const [isLoggedIn, setLoggedIn] = useState(false);
@@ -16,12 +18,9 @@ export default function App() {
     const [loading2, setLoading2] = useState(false);
     const [loadingScreen, setloadingScreen] = useState(true);
     const [reload, setReload] = useState(false);
-    const [basket, setBasket] = useState([]);
-    const [comments, setComments] = useState([]);
     const [rerender, setRerender] = useState(false)
 
     ReactSession.setStoreType("localStorage");
-
 
     useEffect(() => {
         setStorage();
@@ -50,7 +49,6 @@ export default function App() {
             setLoading(false)
         }
         getProducts();
-
     }, [products.length]);
 
     useEffect(() => {
@@ -96,17 +94,17 @@ export default function App() {
             <div className={'loadingScreen'}>
                 <div className={'loadingBox'}>
                     <div className={'superCircle'}>
-                    <div className={'centerCircle'}>
-                    <div className={'loadingText'} id={'loadingText'}>
-           <span className={'first'}>L</span>
-           <span className={'second'}>O</span>
-           <span className={'third'}>A</span>
-           <span className={'fourth'}>D</span>
-           <span className={'fifth'}>I</span>
-           <span className={'sixth'}>N</span>
-           <span className={'seventh'}>G</span>
+                        <div className={'centerCircle'}>
+                            <div className={'loadingText'} id={'loadingText'}>
+                               <span className={'first'}>L</span>
+                               <span className={'second'}>O</span>
+                               <span className={'third'}>A</span>
+                               <span className={'fourth'}>D</span>
+                               <span className={'fifth'}>I</span>
+                               <span className={'sixth'}>N</span>
+                               <span className={'seventh'}>G</span>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
                 <div id="mouse-circle" style={{
@@ -119,29 +117,29 @@ export default function App() {
                         left: 15,
                         top: -8 }} className={'movePosition'}>{position.y}</p>
                 </div>
-                {loading === false && loading2 === false && (
-                    <div className={'loadingMover'}>
-                        <div className={'welcomeTing'}> WELCOME </div>
-                    </div>
-                )}
+                    {loading === false && loading2 === false && (
+                        <div className={'loadingMover'}>
+                            <div className={'welcomeTing'}> WELCOME </div>
+                        </div>
+                    )}
             </div>
-        )
+        )}
 
-    }   {loadingScreen === false && (
+        {loadingScreen === false && (
             <div>
-            <div className={'loadingMoverBackDown'}>
-                <div className={'welcomeTing'}> WELCOME </div>
-            </div>
-            <div id="mouse-circle" style={{
-                left: position.x,
-                top: position.y, zIndex: 20}}>
-                <p style={{
-                    left: 15,
-                }} className={'movePosition'}>{position.x}</p>
-                <p style={{
-                    left: 15,
-                    top: -8 }} className={'movePosition'}>{position.y}</p>
-            </div>
+                <div className={'loadingMoverBackDown'}>
+                    <div className={'welcomeTing'}> WELCOME </div>
+                </div>
+                <div id="mouse-circle" style={{
+                    left: position.x,
+                    top: position.y, zIndex: 20}}>
+                    <p style={{
+                        left: 15,
+                    }} className={'movePosition'}>{position.x}</p>
+                    <p style={{
+                        left: 15,
+                        top: -8 }} className={'movePosition'}>{position.y}</p>
+                </div>
 
 
         <div className={'TopNavWrapper'}>
@@ -183,8 +181,7 @@ export default function App() {
                       rerender={rerender}
                       setRerender={setRerender}
             />
-        <SubWindow
-                   reload={reload}
+        <SubWindow reload={reload}
                    setReload={setReload}
                    isLoggedIn={isLoggedIn}
                    setLoggedIn={setLoggedIn}
@@ -198,7 +195,7 @@ export default function App() {
                    setRerender={setRerender}
                    comments={comments}
                    setComments={setComments}
-        />
+            />
 
             <div className={"frame2"}>
             </div>
