@@ -62,7 +62,8 @@ export async function purchase(props, basketPrice){
             Name: basketItem.Name,
             Description: basketItem.Description,
             Price: basketItem.Price,
-            Availability: basketItem.Availability
+            Availability: basketItem.Availability,
+            img: basketItem.img
         };
 
         const response = await fetch(`http://localhost:5000/updateProduct/${basketItem._id.toString()}`, {
