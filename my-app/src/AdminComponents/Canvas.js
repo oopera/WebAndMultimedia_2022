@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 
 export default function Canvas(props){
+
     let height = (props.products.length*75) + 100;
     let width;
     if(props.comments>=props.purchases){
@@ -33,6 +34,7 @@ export default function Canvas(props){
             updateCounter(10)
             ctx.fillRect(0, counter, props.comments.length*20, 4);
             props.products.forEach(render)
+
         function render(product) {
             ctx.fillStyle = "black"
             updateCounter(10)
@@ -53,8 +55,9 @@ export default function Canvas(props){
             ctx.fillStyle = "red"
             updateCounter(10)
             ctx.fillRect(0, counter, props.comments.filter(e=> e.productID.includes(product._id)).length*20, 4);
-
         }
+
+
         ctx.fillStyle = "black"
         renderNumbers()
         function renderNumbers() {

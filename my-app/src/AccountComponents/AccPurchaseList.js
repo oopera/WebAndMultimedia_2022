@@ -6,15 +6,13 @@ export function AccPurchaseList(props){
             return(
                 <table key={purchase._id} className={"tablo"}>
                     <tbody>
-
-                    {purchase.Products.map((product, index) => {
-                        return(
-                            <tr key={index}>
-                            <td> Item: {product} </td>
-                    </tr>
-                        )
-                    })}
-
+                        {purchase.Products.map((product, index) => {
+                            return(
+                                <tr key={index}>
+                                <td> Item: {product} </td>
+                        </tr>
+                            )
+                        })}
                     <tr >
                     <td className={'tableTing'}> Price: {purchase.Cost}€ </td>
                         </tr>

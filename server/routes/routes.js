@@ -1,16 +1,7 @@
 const express = require("express");
-
-// recordRoutes is an instance of the express router.
-// We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /record.
 const routes = express.Router();
-
-// This will help us connect to the database
 const dbo = require("../db/conn");
-
-// This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
-
 
 routes.route("/webweb/products").get(function (req, res) {
   let db_connect = dbo.getDb("webweb");
@@ -55,8 +46,6 @@ routes.route("/webweb/purchases").get(function (req, res) {
             res.json(result);
         });
 });
-
-
 
 routes.route("/comments/:id").get(function (req, res) {
   let db_connect = dbo.getDb();

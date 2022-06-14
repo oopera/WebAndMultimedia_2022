@@ -8,7 +8,6 @@ import Canvas from "./Canvas";
 export default function AdminControl(props) {
     const [users, setUsers] = useState([])
     const [purchases, setPurchases] = useState([])
-    const [comments, setComments] = useState([])
     const [isChecked, setIsChecked] = useState(false)
     const [selectedUser, setSelectedUser] = useState('');
     const [selectedProduct, setSelectedProduct] = useState("newProduct")
@@ -116,20 +115,6 @@ export default function AdminControl(props) {
 
     }, [purchases.length]);
 
-    useEffect(() => {
-        async function getComments() {
-            const response = await fetch(`http://localhost:5000/webweb/comments`);
-            if (!response.ok) {
-                const message = `Comments could not be loaded`;
-                window.alert(message);
-            }
-            const comments = await response.json();
-            setComments(comments);
-        }
-        getComments();
-    }, [comments.length]);
-
-
     return (
         <div className={'FocusWindow'}>
             <div className={'focusContent'}>
@@ -183,7 +168,7 @@ export default function AdminControl(props) {
                 {openWindow === 'chart' && (
                     <div className={'wholeChart'}>
                         <XButton setOpenedItem={setOpenWindow}/>
-                        <Canvas comments={comments} purchases={purchases} products={props.products} setOpenWindow={setOpenWindow}/>
+                        <Canvas comments={props.comments} purchases={purchases} products={props.products} setOpenWindow={setOpenWindow}/>
                     </div>
                 )}
 
@@ -234,7 +219,7 @@ export default function AdminControl(props) {
                         <div>
                     <button className={'adminButton'} onClick={() => updateProduct(productForm, props.setProducts)}> Edit Product
                     </button>
-                            <button className={'adminButton'} onClick={() => deleteProduct(selectedProduct, comments, setComments, props.products, props.setProducts)}> Delete Product
+                            <button className={'adminButton'} onClick={() => deleteProduct(selectedProduct, props.comments, props.setComments, props.products, props.setProducts)}> Delete Product
                             </button>
                         </div>
                         )}

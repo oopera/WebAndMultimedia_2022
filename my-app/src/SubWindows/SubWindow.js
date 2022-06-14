@@ -8,7 +8,10 @@ return(
     {props.openedItem === 'admin' && (
         <AdminControl setOpenedItem={props.setOpenedItem}
                       products={props.products}
-                      setProducts={props.setProducts}/>
+                      setProducts={props.setProducts}
+                      comments={props.comments}
+                      setComments={props.setComments}
+        />
 
     )}
 

@@ -26,9 +26,9 @@ export function ProductFocus(props) {
                 {props.availability > 0 && (
                     <div>
                         <div className={'rowDiv'}>
-                    <button style={{zIndex : '5'}} onClick={() => updateBasket(props)}>Add to Basket</button>
-                            <p id={'basketResponse'}></p>
-                    </div>
+                            <button style={{zIndex : '5'}} onClick={() => updateBasket(props)}>Add to Basket</button>
+                            <p id={'basketResponse'}> </p>
+                        </div>
                     <p>{props.availability} available</p>
                     </div>
                 )}
@@ -50,7 +50,8 @@ export function ProductFocus(props) {
                         </div>
                     )}
                 </div>
-                <CommentList id={props.id} comments={props.comments}/>
+                <CommentList id={props.id}
+                             comments={props.comments}/>
             </div>
         </div>
     );

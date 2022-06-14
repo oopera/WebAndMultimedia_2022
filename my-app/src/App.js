@@ -12,7 +12,6 @@ export default function App() {
     const [products, setProducts] = useState([]);
     const [openedItem, setOpenedItem] = useState('null');
     const [isLoggedIn, setLoggedIn] = useState(false);
-    const [account, setAccount] = useState();
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(false);
     const [loadingScreen, setloadingScreen] = useState(true);
@@ -20,6 +19,7 @@ export default function App() {
     const [basket, setBasket] = useState([]);
     const [comments, setComments] = useState([]);
     const [rerender, setRerender] = useState(false)
+
     ReactSession.setStoreType("localStorage");
 
 
@@ -30,12 +30,10 @@ export default function App() {
     function setStorage() {
         if (isLoggedIn !== false) {
             ReactSession.set("wholeAcc", isLoggedIn);
-            ReactSession.set("admin", account);
             ReactSession.set("hasData", true);
             setLoggedIn(isLoggedIn)
         } else if (ReactSession.get("hasData") === true) {
             setLoggedIn(ReactSession.get("wholeAcc"))
-            setAccount(ReactSession.get("admin"))
         }
     }
 
@@ -153,8 +151,6 @@ export default function App() {
                     basket={basket}
                     isLoggedIn={isLoggedIn}
                     setLoggedIn={setLoggedIn}
-                    account={account}
-                    setAccount={setAccount}
                     openedItem={openedItem}
                     setOpenedItem={setOpenedItem}/>
 
@@ -163,8 +159,6 @@ export default function App() {
                     basket={basket}
                     isLoggedIn={isLoggedIn}
                     setLoggedIn={setLoggedIn}
-                    account={account}
-                    setAccount={setAccount}
                     openedItem={openedItem}
                     setOpenedItem={setOpenedItem}/>
         </div>
@@ -196,14 +190,14 @@ export default function App() {
                    setLoggedIn={setLoggedIn}
                    basket={basket}
                    setBasket={setBasket}
-                   account={account}
-                   setAccount={setAccount}
                    openedItem={openedItem}
                    setOpenedItem={setOpenedItem}
                    products={products}
                    setProducts={setProducts}
                    rerender={rerender}
                    setRerender={setRerender}
+                   comments={comments}
+                   setComments={setComments}
         />
 
             <div className={"frame2"}>

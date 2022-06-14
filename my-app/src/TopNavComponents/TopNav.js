@@ -81,7 +81,7 @@ export default function TopNav(props) {
                             </div>
                         </div>
                         )}
-                    {props.account !== 'admin' && props.isLoggedIn !== false && wantsToRegistre === false && (
+                    {props.isLoggedIn.Admin !== 'admin' && props.isLoggedIn !== false && wantsToRegistre === false && (
                         <div className={'desktopNav'}>
                         <div className={'buttonRow'}>
                             <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
@@ -95,7 +95,7 @@ export default function TopNav(props) {
                         </div>
                         </div>
                     )}
-                {props.account === "admin" && props.isLoggedIn !== false && (
+                {props.isLoggedIn.Admin === "admin" && props.isLoggedIn !== false && (
                     <div className={'desktopNav'}>
                     <div className={'buttonRow'}>
                     <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>

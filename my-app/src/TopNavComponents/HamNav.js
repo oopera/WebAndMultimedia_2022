@@ -20,8 +20,12 @@ export default function HamNav(props) {
             {hamNav === true && (
                     <div className={'FocusWindow'}>
                         <div className={'XButton'} onClick={()=>setHamNav(!hamNav)}> </div>
-                        <TopNav setReload={props.setReload} reload={props.reload} basket={props.basket} isLoggedIn={props.isLoggedIn}
-                                setLoggedIn={props.setLoggedIn} account={props.account} setAccount={props.setAccount} openedItem={props.openedItem}
+                        <TopNav setReload={props.setReload}
+                                reload={props.reload}
+                                basket={props.basket}
+                                isLoggedIn={props.isLoggedIn}
+                                setLoggedIn={props.setLoggedIn}
+                                openedItem={props.openedItem}
                                 setOpenedItem={props.setOpenedItem}/>
                     </div>
             )}

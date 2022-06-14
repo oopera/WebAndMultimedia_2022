@@ -3,7 +3,6 @@ import React from "react";
 
 export function AccCommentList(props){
     return(
-
             props.isLoggedIn.Comments.map((comment, index) => {
             return(
                 <table className={"tablo"} key={comment._id}>
@@ -21,10 +20,10 @@ export function AccCommentList(props){
                         props.isLoggedIn,
                         index, props.rerender, props.setRerender)}>delete Comment</button>
                     <tr>
-                        <td></td>
+                        <td> </td>
                     </tr>
                     <tr>
-                        <td className={'tableTing'}></td>
+                        <td className={'tableTing'}> </td>
                     </tr>
                     </tbody>
             </table>

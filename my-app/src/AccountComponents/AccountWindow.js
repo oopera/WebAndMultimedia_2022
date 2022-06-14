@@ -13,7 +13,7 @@ export function AccountWindow(props) {
                 <div className={'rowDiv'}>
                 <button onClick={() => clear()}>
                     CLEAR CACHE
-                </button> <p id={'cacheBox'}></p>
+                </button> <p id={'cacheBox'}> </p>
                 </div>
                 <p>
                     (you should log out immediately after, or the cache might be reloaded)

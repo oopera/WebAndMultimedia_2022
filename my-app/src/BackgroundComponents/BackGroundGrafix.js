@@ -7,7 +7,9 @@ export default function BackGroundGrafix(props){
             <a  href={"https://lucaslichner.de"}
                 target={"_blank"}
                 rel={"noreferrer"}
-                className={logoName}>lucaslichner.</a>
+                className={logoName}>lucaslichner.
+            </a>
+
             <p className={mainText}>
                 <span>buy.</span>
                 <span>my.</span>

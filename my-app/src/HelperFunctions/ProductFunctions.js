@@ -2,11 +2,11 @@ import {deleteComment, updateUser} from "./AccountFunctions";
 import {ReactSession} from "react-client-session";
 
 export async function sendComment(props, rerender, setRerender){
-        let comment = document.getElementById("commentInput").value;
-        let name = props.isLoggedIn.Username
-        let productID = props.id
-        let userID = props.isLoggedIn._id
-        const newComment = {name, comment, productID, userID};
+    let comment = document.getElementById("commentInput").value;
+    let name = props.isLoggedIn.Username
+    let productID = props.id
+    let userID = props.isLoggedIn._id
+    const newComment = {name, comment, productID, userID};
     const response = await fetch("http://localhost:5000/comments/add", {
         method: "post",
         headers: {
@@ -19,8 +19,8 @@ export async function sendComment(props, rerender, setRerender){
             console.log(error)
         });
     document.getElementById("commentInput").value = "";
-        const commentDB = await response.json();
-        const comment2blogged = {Comment: comment, Item: props.name, id: commentDB.insertedId}
+    const commentDB = await response.json();
+    const comment2blogged = {Comment: comment, Item: props.name, id: commentDB.insertedId}
     props.isLoggedIn.Comments.push(comment2blogged)
     console.log(props.isLoggedIn.Comments)
     ReactSession.set("wholeAcc",  props.isLoggedIn);

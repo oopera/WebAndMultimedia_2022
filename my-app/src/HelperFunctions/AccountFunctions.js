@@ -69,7 +69,6 @@ export async function register(props){
         document.getElementById("CorrectionBox").innerHTML = "Please enter a valid email adress";
         return;
     }
-
     wantsToRegistreFunc(props)
     const newPerson = { ...props.reform };
     const response = await fetch("http://localhost:5000/users/add", {
@@ -87,13 +86,10 @@ export async function register(props){
     if(responsy===false){
         document.getElementById("CorrectionBox").innerHTML = "Email is already in use";
         return
-
     }
     props.setForm({email: props.reform.email, password: props.reform.password});
-    if(response.ok) {
-        document.getElementById("CorrectionBox").innerHTML = "Successfully registred, you can log in now";
+    document.getElementById("CorrectionBox").innerHTML = "Successfully registred, you can log in now";
 
-    }
 }
 
 export async function addUser(props) {
@@ -179,13 +175,9 @@ export async function deleteComment(comment, isLoggedIn, setLoggedIn) {
     await fetch(`http://localhost:5000/delComment/${comment.id}`, {
         method: "DELETE"
     });
-
-
 }
 
 export function deleteAccComment(comment, setLoggedIn, isLoggedIn, index, rerender, setRerender){
-
-
     deleteComment(comment)
     let commeys = isLoggedIn.Comments
     commeys.splice(index, 1)
