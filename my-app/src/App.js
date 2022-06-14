@@ -81,28 +81,25 @@ export default function App() {
         }, []);
         return position;
     };
-        useEffect(() => {
-            if(loading === true && loading2 === true) {
 
+        useEffect(() => {
+            if(loading === false && loading2 === false) {
                 setTimeout(() => {
                     setloadingScreen(false);
-                }, "2000")
+                }, 2000)
             }
-    }, [loading.valueOf(), loading.valueOf()]);
+    }, [loading.valueOf(), loading2.valueOf()]);
 
 
     const position = useMousePosition();
-
     return (
         <div>
         {loadingScreen === true && (
-
             <div className={'loadingScreen'}>
                 <div className={'loadingBox'}>
                     <div className={'superCircle'}>
                     <div className={'centerCircle'}>
                     <div className={'loadingText'} id={'loadingText'}>
-
            <span className={'first'}>L</span>
            <span className={'second'}>O</span>
            <span className={'third'}>A</span>
@@ -114,7 +111,6 @@ export default function App() {
                     </div>
                     </div>
                 </div>
-
                 <div id="mouse-circle" style={{
                     left: position.x,
                     top: position.y, zIndex: 20}}>
@@ -125,11 +121,11 @@ export default function App() {
                         left: 15,
                         top: -8 }} className={'movePosition'}>{position.y}</p>
                 </div>
-
-            <div className={'loadingMover'}>
-                <div className={'welcomeTing'}> WELCOME </div>
-             </div>
-
+                {loading === false && loading2 === false && (
+                    <div className={'loadingMover'}>
+                        <div className={'welcomeTing'}> WELCOME </div>
+                    </div>
+                )}
             </div>
         )
 
@@ -137,11 +133,7 @@ export default function App() {
 
         <div>
             <div className={'loadingMoverBackDown'}>
-
                 <div className={'welcomeTing'}> WELCOME </div>
-
-
-
             </div>
 
 

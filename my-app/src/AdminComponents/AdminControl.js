@@ -136,7 +136,6 @@ export default function AdminControl(props) {
                 {openWindow === 'help' && (
                     <div>
                     <XButton setOpenedItem={setOpenWindow}/>
-
                     <table>
                     <tbody>
                     <tr>
@@ -190,18 +189,19 @@ export default function AdminControl(props) {
 
                 {openWindow === 'none' && (
                 <div>
-                    <div onClick={() => setOpenWindow('help')}>Click me to see the Admin Doc.</div>
+                    <button onClick={() => setOpenWindow('help')}>Click me to see the Admin Doc.</button>
                     <div className={'adminButtonClmn'}>
                         <button onClick={() => setOpenWindow('chart')} className={'adminButton'}> View Chart
                         </button>
                     </div>
 
             <XButton setOpenedItem={props.setOpenedItem}/>
-            <label htmlFor="products">Choose a product:</label>
+            <div className={'chosey'}>Choose a product:
             <select onChange={event => selectedProductChanged(event)}>
                 <option value={'newProduct'}> New Product</option>
                 {props.products.map((product) => <option key={product._id} value={product._id}>{product.Name}</option>)}
             </select>
+            </div>
 
             <div className={'inputsUser'}>
                 <input  className={'userInput'}

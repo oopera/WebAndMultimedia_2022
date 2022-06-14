@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import XButton from "../XButton";
 import {sendComment} from "../HelperFunctions/ProductFunctions";
 import {CommentList} from "./CommentList";

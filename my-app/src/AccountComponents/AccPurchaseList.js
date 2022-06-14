@@ -1,4 +1,3 @@
-import {deleteAccComment} from "../HelperFunctions/AccountFunctions";
 import React from "react";
 
 export function AccPurchaseList(props){
