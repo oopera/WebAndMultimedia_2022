@@ -90,6 +90,18 @@ export default function App() {
     const position = useMousePosition();
     return (
         <div className={'siteWrapper'}>
+
+            <div id="mouse-circle" style={{
+                left: position.x,
+                top: position.y, zIndex: 20}}>
+                <p style={{
+                    left: 15,
+                }} className={'movePosition'}>{position.x}</p>
+                <p style={{
+                    left: 15,
+                    top: -8 }} className={'movePosition'}>{position.y}</p>
+            </div>
+
         {loadingScreen === true && (
             <div className={'loadingScreen'}>
                 <div className={'loadingBox'}>
@@ -107,16 +119,7 @@ export default function App() {
                         </div>
                     </div>
                 </div>
-                <div id="mouse-circle" style={{
-                    left: position.x,
-                    top: position.y, zIndex: 20}}>
-                    <p style={{
-                        left: 15,
-                    }} className={'movePosition'}>{position.x}</p>
-                    <p style={{
-                        left: 15,
-                        top: -8 }} className={'movePosition'}>{position.y}</p>
-                </div>
+
                     {loading === false && loading2 === false && (
                         <div className={'loadingMover'}>
                             <div className={'welcomeTing'}> WELCOME </div>
@@ -129,16 +132,6 @@ export default function App() {
             <div>
                 <div className={'loadingMoverBackDown'}>
                     <div className={'welcomeTing'}> WELCOME </div>
-                </div>
-                <div id="mouse-circle" style={{
-                    left: position.x,
-                    top: position.y, zIndex: 20}}>
-                    <p style={{
-                        left: 15,
-                    }} className={'movePosition'}>{position.x}</p>
-                    <p style={{
-                        left: 15,
-                        top: -8 }} className={'movePosition'}>{position.y}</p>
                 </div>
 
 
