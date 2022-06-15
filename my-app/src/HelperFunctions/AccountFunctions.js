@@ -147,7 +147,7 @@ export function logout(props){
     }
 }
 
-export async function deleteUser(id, users, setUsers) {
+export async function deleteUser(id, users, setUsers, setComments) {
 
     const user = users.filter(e => e._id.includes(id))
     console.log(user)
@@ -160,6 +160,7 @@ export async function deleteUser(id, users, setUsers) {
 
     const newUsers = users.filter((el) => el._id !== id);
     setUsers(newUsers);
+    setComments([])
 }
 export async function deleteComment(comment, isLoggedIn, setLoggedIn) {
     console.log(comment)
@@ -173,13 +174,14 @@ export async function deleteComment(comment, isLoggedIn, setLoggedIn) {
     });
 }
 
-export function deleteAccComment(comment, setLoggedIn, isLoggedIn, index, rerender, setRerender){
-    deleteComment(comment)
+export async function deleteAccComment(comment, setLoggedIn, isLoggedIn, index, rerender, setRerender, setComments){
+    await deleteComment(comment)
     let commeys = isLoggedIn.Comments
     commeys.splice(index, 1)
     isLoggedIn.Comments = commeys;
     setLoggedIn(isLoggedIn)
-    updateUser({isLoggedIn})
+    await updateUser({isLoggedIn})
     setRerender(!rerender)
+    setComments([])
 
 }

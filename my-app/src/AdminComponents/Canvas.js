@@ -3,18 +3,14 @@ import React, {useEffect} from "react";
 export default function Canvas(props){
 
     let height = (props.products.length*75) + 100;
-    let width;
-    if(props.comments>=props.purchases){
-        width = props.comments.length*20+100
-    }else{
-        width = props.purchases.length*20+100
-    }
+    let width=800;
 
     let counter = 10;
     function updateCounter(amountToUpdate){
         counter = counter+amountToUpdate
     }
     useEffect(() => {
+
             const canvas = document.getElementById('ActivityChart');
             let ctx = canvas.getContext('2d');
             ctx.font = "14px Arial";
@@ -36,6 +32,10 @@ export default function Canvas(props){
             props.products.forEach(render)
 
         function render(product) {
+                if((product.Availability*20+100)>width){
+                    width=product.Availability*50+100
+                    console.log(width)
+                }
             ctx.fillStyle = "black"
             updateCounter(10)
             ctx.fillRect(0, counter, width, 1);

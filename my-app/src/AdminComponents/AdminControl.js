@@ -199,12 +199,15 @@ export default function AdminControl(props) {
                        placeholder="description"/>
                 <input className={'userInput'}
                        value={productForm.Price}
+                       type="number"
+                       min="0"
                        onChange={(e) => updateProForm({Price: e.target.value})}
                        placeholder="price"/>
                 <input className={'userInput'}
+                       type="number"
                        value={productForm.Availability}
                        onChange={(e) => updateProForm({Availability: e.target.value})}
-                       placeholder="Availability (write 'true' if it has infinite Availability (i.e. download))"/>
+                       placeholder="Availability (enter a negative number if it has infinite Availability (i.e. Download))"/>
                 <input className={'userInput'}
                        value={productForm.img}
                        onChange={(e) => updateProForm({img: e.target.value})}
@@ -231,7 +234,7 @@ export default function AdminControl(props) {
                     {users.filter(user => user.Email !== undefined && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email}</option>)}
                 </select>
             </div>
-            <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers)}> Delete User
+            <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers, props.setComments)}> Delete User
             </button>
 
                     <div className={'inputsUser'}>

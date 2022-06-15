@@ -21,6 +21,7 @@ return(
                        setOpenedItem={props.setOpenedItem}
                        rerender={props.rerender}
                        setRerender={props.setRerender}
+                       setComments={props.setComments}
         />
     )}
     {props.openedItem === 'basket' && (

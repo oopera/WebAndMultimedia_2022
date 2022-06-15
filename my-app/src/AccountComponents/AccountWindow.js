@@ -22,7 +22,8 @@ export function AccountWindow(props) {
                 <AccCommentList isLoggedIn={props.isLoggedIn}
                                 setLoggedIn={props.setLoggedIn}
                                 rerender={props.rerender}
-                                setRerender={props.setRerender}/>
+                                setRerender={props.setRerender}
+                                setComments={props.setComments}/>
                 <p className={'bold'}> YOUR PURCHASES </p>
                 <AccPurchaseList isLoggedIn={props.isLoggedIn}/>
 

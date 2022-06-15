@@ -43,6 +43,11 @@
 
 
 @media (min-width: 1201px) {
+  .navInput{
+    height: 14px;
+    width: 453px;
+    display: inline-block;
+  }
 
   .buttonRow{
     flex-direction:row;
@@ -70,7 +75,7 @@
 
   .FocusWindow{
     top: 25%;
-    z-index: 10;
+    z-index: 3;
     height: 65vh;
     max-height: 650px;
     width: 40vw;
@@ -91,11 +96,11 @@
     min-width: 300px;
   }
   .TopNav{
-   left: 10px;
+    left: clamp(400px, calc(35%), calc(35%));
    top: 2px;
     float: right;
     position: fixed;
-    z-index: 10;
+    z-index: 4;
     padding-left: 5pt;
   }
 
@@ -110,9 +115,14 @@
     width: 70%;
   }
 }
+.sideBox {
+  margin-left: 70%;
+}
 
 @media (max-width: 1200px) {
-
+  .navInput{
+    margin-left: 10%;
+  }
   .ProductContainerOO {
     width: 70%;
   }
@@ -128,28 +138,12 @@
     border: 1pt solid black;
     margin-left: 10%;
   }
-  .ProductContainer{
-    width: 30%;
-    min-width: 300px;
-  }
 
   .ProductContainer{
     width: 30%;
     min-width: 300px;
   }
 
-  .logo {
-    left: 5%;
-    position: absolute;
-    font-size: 175%;
-    top: 60px;
-  }
-
-  .maintext {
-    left: 3%;
-    font-size: 55px;
-    top: 20px;
-  }
 
   .TopNavWrapper{
     visibility: hidden;
@@ -159,7 +153,7 @@
     position: fixed;
     top: 5px;
     left: 0px;
-    z-index: 10;
+    z-index: 4;
   }
 
   .TopNav{
@@ -175,7 +169,7 @@
   .FocusWindow{
     left: 7px;
     top: 178px;
-    z-index: 10;
+    z-index: 3;
     height: 65vh;
     max-height: 650px;
     width: 80vw;
@@ -212,13 +206,15 @@
     height: calc(100vh - 180px - 9px);
     width: calc(100vw - 9px);
   }
-
+  .sideBox {
+    margin-left: 322px;
+  }
 
   .mobileNav{
     visibility: visible;
     top: 5px;
     left: 0px;
-    z-index: 10;
+    z-index: 3;
   }
 }
 
@@ -226,9 +222,13 @@
 
   .ProductContainer{
     min-width: 0px;
-    width: 95%;
+    width: 88%;
     background-color: black;
 
+  }
+
+  .sideBox {
+    margin-left: 322px;
   }
 
 
@@ -237,7 +237,7 @@
     position: fixed;
     top: 5px;
     left: 0px;
-    z-index: 15;
+    z-index: 3;
   }
 
 }
@@ -249,6 +249,20 @@ body {
   margin: 0;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
+}
+
+
+.logo {
+  left: 30px;
+  position: absolute;
+  font-size: 30px;
+  top: 60px;
+}
+
+.maintext {
+  left: 15px;
+  font-size: 55px;
+  top: 20px;
 }
 
 #root{
@@ -289,7 +303,7 @@ body {
 
 .loadingScreen{
   background-color: white;
-  z-index: 10;
+  z-index: 5;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -297,7 +311,7 @@ body {
 
 .loadingMover{
   background-color: black;
-  z-index:11;
+  z-index:6;
   height: 0;
   width: 100vw;
   overflow: hidden;
@@ -324,7 +338,7 @@ body {
 .loadingMoverBackDown{
   visibility: hidden;
   background-color: black;
-  z-index: 15;
+  z-index: 6;
   position: absolute;
   width: 0;
   height: 100vh;
@@ -367,7 +381,7 @@ body {
 }
 
 .loadingText{
-  z-index: 10;
+  z-index: 7;
   transform-origin:center;
   animation-iteration-count: infinite;
 }
@@ -413,7 +427,6 @@ body {
 .movePosition{
   color: white;
   position: absolute;
-  z-index: 15;
 }
 .welcomeTing{
   color: white;
@@ -478,7 +491,7 @@ body {
   width: 32px;
   height: 32px;
   opacity: 1;
-  z-index: 20;
+  z-index: 10;
 }
 .XButton:hover {
   opacity: 0.5;
@@ -549,12 +562,12 @@ body {
 }
 
 .sideBox{
-  margin-left: 70%;
+
   height: calc(100vh - 229px);
   border: 1pt black solid;
   padding: 20px;
   background-color: white;
-  overflow: scroll;
+  overflow-x: scroll;
   word-wrap: break-word;
   text-align: right;
   margin-bottom: 5px;
@@ -601,6 +614,7 @@ body {
   bottom: 0;
   z-index: 0;
   border: 6pt solid white;
+  pointer-events: none
 }
 .frame2{
   position: absolute;
@@ -611,6 +625,7 @@ body {
   margin-bottom: 8px;
   z-index: 0;
   border: 1pt solid black;
+  pointer-events: none
 }
 
 .subItem{
@@ -666,7 +681,7 @@ body {
   width: 70%;
   top: 178px;
   height: calc(100vh - 250px - 9px);
-  z-index: 9;
+  z-index: 2;
   bottom: 20pt;
   margin-right: 5pt;
 }
@@ -678,7 +693,7 @@ body {
 .ProductFocus{
   border: 1pt solid black;
   background: white;
-  z-index: 10;
+  z-index: 2;
   position: absolute;
   overflow-x: scroll;
 
@@ -832,12 +847,6 @@ button{
 button:hover{
   color: white;
   background: black;
-}
-
-.navInput{
-  height: 14px;
-  width: 200px;
-  display: inline-block;
 }
 
 .hoverState:hover{

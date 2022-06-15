@@ -134,7 +134,6 @@ export default function App() {
                     <div className={'welcomeTing'}> WELCOME </div>
                 </div>
 
-
         <div className={'TopNavWrapper'}>
 
             <HamNav setReload={setReload}
@@ -161,8 +160,8 @@ export default function App() {
                     <div className={"breakingNews"} >Thank you for visiting! If youre in need of help or explanation please consult the container on the right hand side </div>
                 </div>
 
-                <SideNav/>
 
+                <SideNav/>
         <ProductList  isLoggedIn={isLoggedIn}
                       basket={basket}
                       setBasket={setBasket}

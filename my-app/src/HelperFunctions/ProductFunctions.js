@@ -138,13 +138,29 @@ export async function deleteProduct(selectedProduct, comments, setComments, prod
 
 export async function addProduct(form, products, setProducts) {
     let newAvailability
-    if(form.Availability !== 'true'){
+    if(form.Availability >= 0){
         newAvailability = parseInt(form.Availability)
     }else{
         newAvailability = true
     }
+    if(form.Name === null || form.Name === undefined || form.Name === ""){
+        window.alert("Please enter a valid Product Name");
+        return
+    }
+    if(form.Description === null || form.Description === undefined || form.Description === ""){
+        window.alert("Please enter a valid description");
+        return
+    }
+    if(form.Price === null || form.Price === undefined || form.Price <= 0){
+        window.alert("Please enter a valid price");
+        return
+    }
+    if(form.Availability === null || form.Availability === undefined || form.Availability === ""){
+        window.alert("Please enter a valid Availability");
+        return
+    }
     const newForm ={
-        Name: form.Name,
+        Name: form.Name.toUpperCase(),
         Description: form.Description,
         Price: parseFloat(form.Price),
         Availability: newAvailability,

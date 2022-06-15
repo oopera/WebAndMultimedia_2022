@@ -18,7 +18,7 @@ export function AccCommentList(props){
                         comment,
                         props.setLoggedIn,
                         props.isLoggedIn,
-                        index, props.rerender, props.setRerender)}>delete Comment</button>
+                        index, props.rerender, props.setRerender, props.setComments)}>delete Comment</button>
                     <tr>
                         <td> </td>
                     </tr>
