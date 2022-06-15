@@ -23,9 +23,9 @@ export default function BasketComponent(props){
     }
 
     function removeFromBasket(props){
-        let baskey = props.props.basket
-        baskey.splice(props.index, 1)
-        props.props.setBasket(baskey)
+        let newBasket = props.props.basket
+        newBasket.splice(props.index, 1)
+        props.props.setBasket(newBasket)
         setRerender(!rerender)
     }
 

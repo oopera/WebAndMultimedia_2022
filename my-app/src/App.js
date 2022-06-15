@@ -14,8 +14,8 @@ export default function App() {
     const [products, setProducts] = useState([]);
     const [openedItem, setOpenedItem] = useState('null');
     const [isLoggedIn, setLoggedIn] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [loading2, setLoading2] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [loading2, setLoading2] = useState(true);
     const [loadingScreen, setloadingScreen] = useState(true);
     const [reload, setReload] = useState(false);
     const [rerender, setRerender] = useState(false)

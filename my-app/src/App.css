@@ -159,7 +159,7 @@
     position: fixed;
     top: 5px;
     left: 0px;
-    z-index: 0;
+    z-index: 10;
   }
 
   .TopNav{
@@ -394,7 +394,6 @@ body {
 }
 
 .loadingText span{
-
   font-family:Recia;
   height: 50px;
   position: absolute;

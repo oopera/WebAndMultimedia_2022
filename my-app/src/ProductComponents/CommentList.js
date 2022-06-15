@@ -4,6 +4,7 @@ export function CommentList(props){
     return(
         <div className={'commentBox'}>
             <table className={"tablo"}>
+                <tbody>
                 {props.comments.filter(comment => comment.productID === props.id).map((filteredComment) => {
                     return (
                         <tr>
@@ -11,6 +12,7 @@ export function CommentList(props){
                         </tr>
                     )
                 })}
+                </tbody>
             </table>
         </div>
     )

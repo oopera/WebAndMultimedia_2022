@@ -51,6 +51,7 @@ export default function TopNav(props) {
                                 <button className={'navButton'} onClick={() => basket(props) }> {props.basket.length}</button>
                             ))}
                         </div>
+
                     </div>
                     )}
                     {props.isLoggedIn === false && wantsToRegistre === true && (

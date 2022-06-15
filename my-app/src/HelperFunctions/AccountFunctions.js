@@ -42,9 +42,6 @@ export async function login(props){
     if(user.length === 0){
         document.getElementById("CorrectionBox").innerHTML = "Wrong credentials";
     } else {
-        if(user[0].Admin === true){
-            props.props.setAccount('admin')
-        }
         props.props.setLoggedIn(user[0])
         props.props.setReload(!props.props.reload)
     }
@@ -142,7 +139,6 @@ export function wantsToRegistreFunc(props){
 }
 
 export function logout(props){
-    props.props.setAccount('');
     props.props.setLoggedIn(false);
     props.setForm({ email: "", password: ""});
     clear();
