@@ -3,6 +3,9 @@ import {AccountWindow} from "../AccountComponents/AccountWindow";
 import BasketComponent from "../TopNavComponents/BasketComponent";
 
 export default function SubWindow(props){
+
+    //This Components works as a route for the Different FocusWindows
+
 return(
     <>
     {props.openedItem === 'admin' && (
@@ -19,15 +22,12 @@ return(
         <AccountWindow isLoggedIn={props.isLoggedIn}
                        setLoggedIn={props.setLoggedIn}
                        setOpenedItem={props.setOpenedItem}
-                       rerender={props.rerender}
-                       setRerender={props.setRerender}
                        setComments={props.setComments}
         />
     )}
     {props.openedItem === 'basket' && (
         <BasketComponent setOpenedItem={props.setOpenedItem}
-                         setReload={props.setReload}
-                         reload={props.reload}
+
                          isLoggedIn={props.isLoggedIn}
                          setLoggedIn={props.setLoggedIn}
                          setBasket={props.setBasket}

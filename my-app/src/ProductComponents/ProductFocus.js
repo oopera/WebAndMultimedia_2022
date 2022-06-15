@@ -14,43 +14,43 @@ export function ProductFocus(props) {
             <XButton setOpenedItem={props.setOpenedProduct}/>
             <div className={'focusContent'}>
                 <header className={"Product-name"}>
-                <p> {props.name.toUpperCase()} </p>
+                    <p> {props.name.toUpperCase()} </p>
                 </header>
-                <p> {props.description.toUpperCase()} / {props.price} € </p>
-                {props.img !== undefined && (
-                <img className={"productImage"} src={props.img} alt={props.name}/>
-                )}
-                {props.availability <= 0 && (
-                    <p>Item is currently not in Stock</p>
-                )}
-                {props.availability > 0 && (
-                    <div>
-                        <div className={'rowDiv'}>
-                            <button style={{zIndex : '5'}} onClick={() => updateBasket(props)}>Add to Basket</button>
-                            <p id={'basketResponse'}> </p>
-                        </div>
-                    <p>{props.availability} available</p>
-                    </div>
-                )}
-                <div>
-                    {props.isLoggedIn === false && (
-                        <p>
-                            You have to log in before you can leave a comment.
-                        </p>
-                    )}
-                    {props.isLoggedIn !== false && props.isLoggedIn.Purchases.filter(e=> e.Products.includes(props.name)).length>0 &&  (
-                        <div>
-                    <input id={'commentInput'} placeholder={'Write a comment'}/>
-                    <button onClick={() => sendComment(props, props.rerender, props.setRerender)}>send</button>
-                        </div>
+                    <p> {props.description.toUpperCase()} / {props.price} € </p>
+                        {props.img !== undefined && (
+                        <img className={"productImage"} src={props.img} alt={props.name}/>
                         )}
-                    {props.isLoggedIn !== false && props.isLoggedIn.Purchases.filter(e=> e.Products.includes(props.name)).length===0 &&  (
-                        <div>
-                            <p>You have to purchase the Item before you can leave a comment.</p>
-                        </div>
-                    )}
+                        {props.availability <= 0 && (
+                            <p>Item is currently not in Stock</p>
+                        )}
+                        {props.availability > 0 && (
+                            <div>
+                                <div className={'rowDiv'}>
+                                    <button style={{zIndex : '5'}} onClick={() => updateBasket(props)}>Add to Basket</button>
+                                    <p id={'basketResponse'}> </p>
+                                </div>
+                            <p>{props.availability} available</p>
+                            </div>
+                        )}
+                <div>
+                        {props.isLoggedIn === false && (
+                            <p>
+                                You have to log in before you can leave a comment.
+                            </p>
+                        )}
+                        {props.isLoggedIn !== false && props.isLoggedIn.Purchases.filter(e=> e.Products.includes(props.name)).length>0 &&  (
+                            <div>
+                                <input id={'commentInput'} placeholder={'Write a comment'}/>
+                                <button onClick={() => sendComment(props, props.comments, props.setComments)}>send</button>
+                            </div>
+                        )}
+                        {props.isLoggedIn !== false && props.isLoggedIn.Purchases.filter(e=> e.Products.includes(props.name)).length===0 &&  (
+                            <div>
+                                <p>You have to purchase the Item before you can leave a comment.</p>
+                            </div>
+                        )}
                 </div>
-                <CommentList id={props.id}
+                    <CommentList id={props.id}
                              comments={props.comments}/>
             </div>
         </div>

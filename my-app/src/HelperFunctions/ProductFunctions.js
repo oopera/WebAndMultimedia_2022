@@ -1,7 +1,8 @@
 import {deleteComment, updateUser} from "./AccountFunctions";
 import {ReactSession} from "react-client-session";
+import {setStorage} from "./SessionFunctions";
 
-export async function sendComment(props, rerender, setRerender){
+export async function sendComment(props, comments, setComments){
     let comment = document.getElementById("commentInput").value;
     let name = props.isLoggedIn.Username
     let productID = props.id
@@ -22,18 +23,20 @@ export async function sendComment(props, rerender, setRerender){
     const commentDB = await response.json();
     const comment2blogged = {Comment: comment, Item: props.name, id: commentDB.insertedId}
     props.isLoggedIn.Comments.push(comment2blogged)
-    console.log(props.isLoggedIn.Comments)
+        setComments(comments =>{
+        return[...comments, {comment2blogged}]})
     ReactSession.set("wholeAcc",  props.isLoggedIn);
-    setRerender(!rerender)
     await updateUser(props)
 
 }
 
-
-
 export async function purchase(props, basketPrice){
     let availabilityFlag = true
     let products = []
+    let email;
+    let date = new Date().toISOString().slice(0, 10)
+    let price = basketPrice
+
     document.getElementById("infobox").innerHTML = "";
     props.basket.forEach(checkAvailability)
 
@@ -49,15 +52,15 @@ export async function purchase(props, basketPrice){
         document.getElementById("infobox").innerHTML = "ONE OF YOUR ITEMS IS NOT AVAILABLE IN THE QUANTITIES YOU SELECTED, PLEASE RECHECK";
         return;
     }
-    props.basket.forEach(updateAvailability)
 
-    function updateAvailability(spaghettiItem){
-        if(spaghettiItem.Availability === true) return
-        spaghettiItem.Availability = spaghettiItem.Availability-1
-    }
+    props.basket.forEach(updateAvailability)
+        function updateAvailability(spaghettiItem){
+            if(spaghettiItem.Availability === true) return
+            spaghettiItem.Availability = spaghettiItem.Availability-1
+        }
 
     props.basket.forEach(updateProduct)
-    async function updateProduct(basketItem){
+        async function updateProduct(basketItem){
         const updatedProduct = {
             Name: basketItem.Name,
             Description: basketItem.Description,
@@ -65,30 +68,26 @@ export async function purchase(props, basketPrice){
             Availability: basketItem.Availability,
             img: basketItem.img
         };
-
-        const response = await fetch(`http://localhost:5000/updateProduct/${basketItem._id.toString()}`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedProduct),
-        })
-            .catch(error => {
-                window.alert("Updating the Product did not work, please notify an Administrator.");
-                console.log(error, response)
-            });
+            const response = await fetch(`http://localhost:5000/updateProduct/${basketItem._id.toString()}`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedProduct),
+            })
+                .catch(error => {
+                    window.alert("Updating the Product did not work, please notify an Administrator.");
+                    console.log(error, response)
+                });
     }
 
-    let email;
-    let date = new Date().toISOString().slice(0, 10)
-    let price = basketPrice
     if(props.isLoggedIn.Email !== undefined){
         email = props.isLoggedIn.Email
     }else{
         email = ""
     }
     const newOrder = {email, date, price, products};
-    console.log(products)
+
     const response = await fetch("http://localhost:5000/purchases/add", {
         method: "post",
         headers: {
@@ -100,14 +99,18 @@ export async function purchase(props, basketPrice){
             window.alert("Your purchase could not be added to your Account, please notify an Administrator");
             console.log(error)
         });
+
     props.setBasket([])
     const purchaseDB = await response.json();
-    console.log(purchaseDB)
+
     const purchase2Blogged = {Products: products, Cost: price, Date: date, PurchaseID: purchaseDB.insertedId}
     const newAccountData = props.isLoggedIn
+
     newAccountData.Purchases.push(purchase2Blogged)
     props.setLoggedIn(newAccountData)
-    props.setReload(!props.reload)
+
+    setStorage(newAccountData, props.setLoggedIn)
+
     if (email === "") return
     await updateUser(props)
 
@@ -187,12 +190,12 @@ export async function addProduct(form, products, setProducts) {
 }
 
 export async function updateProduct(form, setProduct){
-        let newAvailability
-        if(form.Availability !== 'true'){
-             newAvailability = parseInt(form.Availability)
-        }else{
-            newAvailability = true
-        }
+    let newAvailability
+    if(form.Availability !== 'true'){
+         newAvailability = parseInt(form.Availability)
+    }else{
+        newAvailability = true
+    }
     const newForm ={
             id: form.id,
             Name: form.Name,
@@ -201,17 +204,17 @@ export async function updateProduct(form, setProduct){
             Availability: newAvailability,
             img: form.img,
     }
-        const response = await fetch(`http://localhost:5000/updateProduct/${form.id.toString()}`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newForm),
-        })
-            .catch(error => {
-                window.alert("Updating the User Failed due to an unknown error, please try again later.");
-                console.log(error, response)
-            });
+    const response = await fetch(`http://localhost:5000/updateProduct/${form.id.toString()}`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newForm),
+    })
+        .catch(error => {
+            window.alert("Updating the User Failed due to an unknown error, please try again later.");
+            console.log(error, response)
+        });
     if(response.ok) {
         document.getElementById('adminProdResponse').innerHTML = 'Product Updated'
     }else{

@@ -22,12 +22,67 @@
 
 }
 
+@keyframes upAndGone {
+  0%{
+
+    height: 0;
+  }
+  50%{
+    height: 100vh;
+  }
+  70%{
+
+    height: 100vh;
+  }
+  100%{
+    height: 100vh;
+  }
+}
+
+@keyframes upAndGoner {
+  0%{
+    right: 0;
+    visibility:visible;
+    width: 100vw;
+  }
+
+  50%{
+    right: 0;
+    width: 180px;
+  }
+  75%{
+    right: 0;
+    width: 180px;
+  }
+  100%{
+    visibility: hidden;
+    right: 0;
+    width: 0;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+
+  }
+}
+
+@keyframes slidez {
+  0% {transform: translateX(-100%);
+  }
+  100% {transform: translateX(100%);
+  }
+}
+
 @font-face {
   font-family: "NightWatch";
   src: url("TheNightWatch.ttf");
 
 }
-
 
 @font-face {
   font-family: "Krylon";
@@ -48,7 +103,9 @@
     width: 453px;
     display: inline-block;
   }
-
+  #helpButton{
+    visibility: hidden;
+  }
   .buttonRow{
     flex-direction:row;
   }
@@ -120,13 +177,15 @@
 }
 
 @media (max-width: 1200px) {
+  #helpButton{
+    visibility: hidden;
+  }
   .navInput{
     margin-left: 10%;
   }
   .ProductContainerOO {
     width: 70%;
   }
-
   .sideBox {
     margin-top: 178px;
   }
@@ -152,8 +211,8 @@
     visibility: visible;
     position: fixed;
     top: 5px;
-    left: 0px;
-    z-index: 4;
+    left: 0;
+    z-index: 3;
   }
 
   .TopNav{
@@ -213,19 +272,12 @@
   .mobileNav{
     visibility: visible;
     top: 5px;
-    left: 0px;
+    left: 0;
     z-index: 3;
   }
 }
 
 @media (max-width: 600px) {
-
-  .ProductContainer{
-    min-width: 0px;
-    width: 88%;
-    background-color: black;
-
-  }
 
   .sideBox {
     margin-left: 322px;
@@ -236,8 +288,24 @@
     visibility: visible;
     position: fixed;
     top: 5px;
-    left: 0px;
+    left: 0;
     z-index: 3;
+  }
+
+}
+
+@media (max-width: 500px) {
+  .ProductContainer{
+    width: calc(100vw - 23px);
+  }
+  .sideBox{
+    display: none;
+  }
+
+  #helpButton{
+    visibility:visible;
+    margin-top: 145px;
+    float: left;
   }
 
 }
@@ -318,22 +386,6 @@ body {
   animation: upAndGone 2s alternate;
 }
 
-@keyframes upAndGone {
-  0%{
-
-    height: 0;
-  }
-  50%{
-    height: 100vh;
-  }
-  70%{
-
-    height: 100vh;
-  }
-  100%{
-    height: 100vh;
-  }
-}
 
 .loadingMoverBackDown{
   visibility: hidden;
@@ -347,27 +399,6 @@ body {
   animation: upAndGoner 3s running;
 }
 
-@keyframes upAndGoner {
-  0%{
-    right: 0;
-    visibility:visible;
-    width: 100vw;
-  }
-
-  50%{
-    right: 0;
-    width: 180px;
-  }
-  75%{
-    right: 0;
-    width: 180px;
-  }
-  100%{
-    visibility: hidden;
-    right: 0;
-    width: 0vw;
-  }
-}
 
 .loadingBox{
   position: absolute;
@@ -408,22 +439,14 @@ body {
 }
 
 .loadingText span{
-  font-family:Recia;
+  font-family: Recia, Helvetica, sans-serif;
   height: 50px;
   position: absolute;
   width: 50px;
-  bottom: 0px;
+  bottom: 0;
   transform-origin: bottom center;
 }
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
 
-  }
-}
 .movePosition{
   color: white;
   position: absolute;
@@ -435,26 +458,26 @@ body {
   position: absolute;
   font-size: 10em;
   transform: rotate(90deg);
-  font-family: Recia;
+  font-family: Recia, Helvetica, sans-serif;
 }
 
 .bold{
   font-weight: bold;
   border-bottom: 1pt black solid;
-  font-family: Krylon;
+  font-family: Krylon, Times, serif;
 }
 .maintext {
   position: absolute;
   color: black;
   z-index: 5;
-  font-family: Krylon;
+  font-family: Krylon, Times, serif;
   font-weight: bold;
 }
 .logo{
   position: absolute;
   font-weight: bold;
   z-index: 5;
-  font-family: Krylon;
+  font-family: Krylon, Times, serif;
   color: black;
   mix-blend-mode: luminosity;
 }
@@ -554,12 +577,7 @@ body {
   animation: slidez 40s linear;
   animation-iteration-count: infinite;
 }
-@keyframes slidez {
-  0% {transform: translateX(-100%);
-}
-  100% {transform: translateX(100%);
-}
-}
+
 
 .sideBox{
 
@@ -616,16 +634,11 @@ body {
   border: 6pt solid white;
   pointer-events: none
 }
+
 .frame2{
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-  bottom: 0;
   margin-left: 7px;
   margin-bottom: 8px;
-  z-index: 0;
   border: 1pt solid black;
-  pointer-events: none
 }
 
 .subItem{
@@ -786,8 +799,7 @@ select{
 ::placeholder {
   color: black;
   font-size: 1.2em;
-
-  font-family: Krylon;
+  font-family: Krylon, Times, serif;
 }
 
 input{
@@ -818,7 +830,7 @@ input{
 
 .Product-name{
   font-size: 150%;
-  font-family: Krylon;
+  font-family: Krylon, Times, serif;
   font-weight: bold;
 }
 
@@ -837,7 +849,7 @@ button{
   height: 30px;
   margin-top: 1%;
   margin-right: 5px;
-  font-family: Krylon;
+  font-family: Krylon, Times, serif;
   font-size: 1em;
   cursor: none;
   min-width: 150px;

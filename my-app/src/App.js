@@ -7,8 +7,11 @@ import { ReactSession } from 'react-client-session';
 import HamNav from "./TopNavComponents/HamNav";
 import SideNav from "./BackgroundComponents/SideNav";
 import BackGroundGrafix from "./BackgroundComponents/BackGroundGrafix";
+import {setStorage} from "./HelperFunctions/SessionFunctions";
 
 export default function App() {
+
+    //Explicit explanation to all States can be found in the Developer documentation
     const [basket, setBasket] = useState([]);
     const [comments, setComments] = useState([]);
     const [products, setProducts] = useState([]);
@@ -17,25 +20,18 @@ export default function App() {
     const [loading, setLoading] = useState(true);
     const [loading2, setLoading2] = useState(true);
     const [loadingScreen, setloadingScreen] = useState(true);
-    const [reload, setReload] = useState(false);
-    const [rerender, setRerender] = useState(false)
 
     ReactSession.setStoreType("localStorage");
 
+    //set Storage on first Load only, afterwards setStorage has to be called explicitly
     useEffect(() => {
-        setStorage();
-    },[reload]);
+        setStorage(isLoggedIn, setLoggedIn);
+    },[]);
 
-    function setStorage() {
-        if (isLoggedIn !== false) {
-            ReactSession.set("wholeAcc", isLoggedIn);
-            ReactSession.set("hasData", true);
-            setLoggedIn(isLoggedIn)
-        } else if (ReactSession.get("hasData") === true) {
-            setLoggedIn(ReactSession.get("wholeAcc"))
-        }
-    }
+    //If the user is LoggedIn, set the Session to that account, if not - but Data is already present, load data.
 
+
+    //Load Comments and Products
     useEffect(() => {
         async function getProducts() {
             const response = await fetch(`http://localhost:5000/webweb/products`);
@@ -63,7 +59,7 @@ export default function App() {
             setLoading2(false)
         }
         getComments();
-    }, [comments.length, rerender]);
+    }, [comments.length]);
 
 
     const useMousePosition = () => {
@@ -78,6 +74,7 @@ export default function App() {
         return position;
     };
 
+    //Controls the Loading Animation, once comments and products are loaded, the load in animation starts, which gets removed from render once setLoadingScreen is false
         useEffect(() => {
             if(loading === false && loading2 === false) {
                 setTimeout(() => {
@@ -129,6 +126,7 @@ export default function App() {
         )}
 
         {loadingScreen === false && (
+
             <div>
                 <div className={'loadingMoverBackDown'}>
                     <div className={'welcomeTing'}> WELCOME </div>
@@ -136,16 +134,14 @@ export default function App() {
 
         <div className={'TopNavWrapper'}>
 
-            <HamNav setReload={setReload}
-                    reload={reload}
+            <HamNav
                     basket={basket}
                     isLoggedIn={isLoggedIn}
                     setLoggedIn={setLoggedIn}
                     openedItem={openedItem}
                     setOpenedItem={setOpenedItem}/>
 
-            <TopNav setReload={setReload}
-                    reload={reload}
+            <TopNav
                     basket={basket}
                     isLoggedIn={isLoggedIn}
                     setLoggedIn={setLoggedIn}
@@ -160,8 +156,8 @@ export default function App() {
                     <div className={"breakingNews"} >Thank you for visiting! If youre in need of help or explanation please consult the container on the right hand side </div>
                 </div>
 
+            <SideNav/>
 
-                <SideNav/>
         <ProductList  isLoggedIn={isLoggedIn}
                       basket={basket}
                       setBasket={setBasket}
@@ -170,26 +166,21 @@ export default function App() {
                       openedItem={openedItem}
                       comments={comments}
                       setComments={setComments}
-                      rerender={rerender}
-                      setRerender={setRerender}
-            />
-        <SubWindow reload={reload}
-                   setReload={setReload}
-                   isLoggedIn={isLoggedIn}
-                   setLoggedIn={setLoggedIn}
-                   basket={basket}
-                   setBasket={setBasket}
-                   openedItem={openedItem}
-                   setOpenedItem={setOpenedItem}
-                   products={products}
-                   setProducts={setProducts}
-                   rerender={rerender}
-                   setRerender={setRerender}
-                   comments={comments}
-                   setComments={setComments}
             />
 
-            <div className={"frame2"}>
+        <SubWindow     isLoggedIn={isLoggedIn}
+                       setLoggedIn={setLoggedIn}
+                       basket={basket}
+                       setBasket={setBasket}
+                       openedItem={openedItem}
+                       setOpenedItem={setOpenedItem}
+                       products={products}
+                       setProducts={setProducts}
+                       comments={comments}
+                       setComments={setComments}
+            />
+
+            <div className={"frame frame2"}>
             </div>
             <div className={"frame"}>
             </div>

@@ -5,6 +5,13 @@ import {purchase} from "../HelperFunctions/ProductFunctions";
 
 export default function BasketComponent(props){
     const [rerender, setRerender] = useState(false)
+
+    //Calculates the Price for the entire basket
+    let basketPrice = 0
+    for(let item of props.basket){
+        basketPrice = basketPrice+item.Price
+    }
+
     function BasketItems(props) {
         return (
             <table className={'tablo'}>
@@ -29,25 +36,22 @@ export default function BasketComponent(props){
         setRerender(!rerender)
     }
 
-    let basketPrice = 0
-    for(let item of props.basket){
-        basketPrice = basketPrice+item.Price
-    }
-
     return(
         <div className={'FocusWindow'}>
             <XButton setOpenedItem={props.setOpenedItem}/>
-            <div className={'focusContent'}>
-                {props.basket.length !== 0 && (
-                    <div>
-                    <BasketItems setBasket={props.setBasket} basket={props.basket}/>
-                    <button onClick={() => purchase(props, basketPrice)}>buy now</button> for {basketPrice}
-                        <p id={'infobox'}> </p>
-                    </div>
-                )}{props.basket.length === 0 && (
-                <div>Your Basket is Empty </div>
-            )}
-            </div>
+                <div className={'focusContent'}>
+                    {props.basket.length !== 0 && (
+                        <div>
+                            <BasketItems setBasket={props.setBasket} basket={props.basket}/>
+                            <button onClick={() => purchase(props, basketPrice)}>buy now
+                            </button> for {basketPrice}
+                                <p id={'infobox'}> </p>
+                        </div>
+                    )}
+                    {props.basket.length === 0 && (
+                        <div>Your Basket is Empty </div>
+                    )}
+                </div>
         </div>
     )
 }

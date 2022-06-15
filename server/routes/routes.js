@@ -118,7 +118,7 @@ routes.route("/users/add").post(function (req, response) {
     let db_connect = dbo.getDb();
     let dbizzle = db_connect
         .collection("users")
-    async function getDocs() {
+    async function emailCheck() {
         try {
             let cursor = await dbizzle.find({"Email": req.body.email.toLowerCase()})
             return cursor.toArray()
@@ -127,20 +127,32 @@ routes.route("/users/add").post(function (req, response) {
             response.send(false)
         }
     }
+    async function userNameCheck() {
+        try {
+            let cursor = await dbizzle.find({"Username": req.body.username.toLowerCase()})
+            return cursor.toArray()
+        }catch (e) {
+            console.error('Error:', e)
+            response.send(false)
+        }
+    }
     (async function() {
-        let docsList = await getDocs()
-        if(docsList.length>=1){
-            console.log('Fetched documents:', docsList)
+        let emailList = await emailCheck()
+        let userNameList = await userNameCheck()
+        if(emailList.length>=1){
+            console.log('Fetched documents:', emailList)
             console.log("email is already in use")
             response.send(false)
-            }else{
+            }else if(userNameList.length>=1) {
+            response.send(false)
+        }else{
             let myobj = {
                 Email: req.body.email.toLowerCase(),
                 Password: req.body.password,
                 Admin: req.body.admin,
                 Purchases: [],
                 Comments: [],
-                Username:req.body.username,
+                Username:req.body.username.toLowerCase(),
             };
             db_connect.collection("users").insertOne(myobj, function (err, res) {
                 if (err) throw err;

@@ -12,7 +12,6 @@ export default function ProductList(props) {
            setOpenedProduct('null');
        }else{
            setOpenedProduct(string);
-
        }
     }
 
@@ -21,9 +20,9 @@ export default function ProductList(props) {
             return (
                 <div key={product._id}>
                     {openedProduct !== product._id  &&
-                        product.Name.toLowerCase().includes(searchInput.toLowerCase()) && (
+                    product.Name.toLowerCase().includes(searchInput.toLowerCase()) && (
                         <div onClick={() => updateProduct(product._id)}>
-                        <Product img={product.img}
+                            <Product img={product.img}
                                  className={'Product'}
                                  name={product.Name}
                                  description={product.Description}
@@ -34,31 +33,32 @@ export default function ProductList(props) {
                             )}
                     {openedProduct === product._id && (
                         <>
-                        <div onClick={() => updateProduct(product._id)} key={product._id}>
-                        <Product  onClick={() => updateProduct(product._id)}
-                                  key={product._id}
-                                  className={'Focused'}
-                                  name={product.Name}
-                                  description={product.Description}
-                                  price={product.Price} a
-                                  vailability={product.Availability}/>
-                        </div>
-                        <ProductFocus setOpenedProduct={setOpenedProduct}
-                                      isLoggedIn={props.isLoggedIn}
-                                      basket={props.basket}
-                                      setBasket={props.setBasket}
-                                      product={product}
-                                      img={product.img}
-                                      id={product._id}
+                            <div onClick={() => updateProduct(product._id)} key={product._id}>
+                                <Product  onClick={() => updateProduct(product._id)}
+                                      key={product._id}
+                                      className={'Focused'}
                                       name={product.Name}
                                       description={product.Description}
-                                      price={product.Price}
-                                      availability={product.Availability}
-                                      comments={props.comments}
-                                      setComments={props.setComments}
-                                      rerender={props.rerender}
-                                      setRerender={props.setRerender}
-                        />
+                                      price={product.Price} a
+                                      vailability={product.Availability}/>
+                            </div>
+                                <ProductFocus setOpenedProduct={setOpenedProduct}
+                                          isLoggedIn={props.isLoggedIn}
+
+                                          basket={props.basket}
+                                          setBasket={props.setBasket}
+                                          product={product}
+                                          img={product.img}
+                                          id={product._id}
+                                          name={product.Name}
+                                          description={product.Description}
+                                          price={product.Price}
+                                          availability={product.Availability}
+                                          comments={props.comments}
+                                          setComments={props.setComments}
+                                          rerender={props.rerender}
+                                          setRerender={props.setRerender}
+                                />
                         </>
                         )}
                 </div>
@@ -69,11 +69,11 @@ export default function ProductList(props) {
                 <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}
                        className={'searchField'}
                        placeholder={'search...'}/>
-                <div className={'ProductContainer'}>
+                    <div className={'ProductContainer'}>
 
-                    {AproductList(props)}
+                        {AproductList(props)}
 
-                </div>
+                    </div>
             </div>
         );
     }

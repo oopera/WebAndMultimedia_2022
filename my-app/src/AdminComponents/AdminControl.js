@@ -42,7 +42,6 @@ export default function AdminControl(props) {
         setSelectedProduct(e.target.value)
         let id = e.target.value
         let img
-
         if(e.target.value !== 'newProduct') {
             if(props.products.filter(e => e._id.includes(id))[0].img === undefined){
                 img = ""
@@ -228,7 +227,7 @@ export default function AdminControl(props) {
                         )}
 
             <div>
-                <input onChange={(evt) => setSearchInput(evt.target.value)} style={{zIndex: '2'}}
+                <input onChange={(evt) => setSearchInput(evt.target.value)}
                        placeholder={'search users...'}/>
                 <select onChange={event => selectedUserChanged(event)}>
                     {users.filter(user => user.Email !== undefined && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email}</option>)}

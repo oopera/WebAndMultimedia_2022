@@ -1,8 +1,9 @@
 import {ReactSession} from "react-client-session";
-import {clear} from "./SessionFunctions";
+import {clear, setStorage} from "./SessionFunctions";
 
 export async function updateUser(props){
-    const updatedAccount = {Email: props.isLoggedIn.Email,
+    const updatedAccount = {
+        Email: props.isLoggedIn.Email,
         Password: props.isLoggedIn.Password,
         Purchases: props.isLoggedIn.Purchases,
         Username: props.isLoggedIn.Username,
@@ -17,15 +18,14 @@ export async function updateUser(props){
         },
         body: JSON.stringify(updatedAccount),
     })
-        .catch(error => {
-            window.alert("Updating the User Failed due to an unknown error, please try again later.");
-            console.log(error, response)
-        });
+    .catch(error => {
+        window.alert("Updating the User Failed due to an unknown error, please try again later.");
+        console.log(error, response)
+    });
 }
 
 export async function login(props){
     document.getElementById("CorrectionBox").innerHTML = "";
-    console.log(props.form)
     const form = { ...props.form };
     const res = await fetch("http://localhost:5000/users/login", {
         method: "post",
@@ -42,8 +42,11 @@ export async function login(props){
     if(user.length === 0){
         document.getElementById("CorrectionBox").innerHTML = "Wrong credentials";
     } else {
+
         props.props.setLoggedIn(user[0])
-        props.props.setReload(!props.props.reload)
+        console.log(user[0])
+        setStorage(user[0], props.props.setLoggedIn)
+
     }
 }
 
@@ -81,7 +84,7 @@ export async function register(props){
         });
     const responsy = await response.json()
     if(responsy===false){
-        document.getElementById("CorrectionBox").innerHTML = "Email is already in use";
+        document.getElementById("CorrectionBox").innerHTML = "Email or Username is already in use";
         return
     }
     props.setForm({email: props.reform.email, password: props.reform.password});
@@ -124,6 +127,11 @@ export async function addUser(props) {
         });
     const user = await response.json();
     props.setUserform({email: '', username: '', password: '', password2: '', admin: false});
+
+    if(user===false){
+        document.getElementById("CorrectionBox2").innerHTML = "Email or Username is already in use";
+        return
+    }
     if(response.ok){console.log('User Successfully added to the Database')
     }
     const newUser = user[0]
@@ -162,7 +170,7 @@ export async function deleteUser(id, users, setUsers, setComments) {
     setUsers(newUsers);
     setComments([])
 }
-export async function deleteComment(comment, isLoggedIn, setLoggedIn) {
+export async function deleteComment(comment) {
     console.log(comment)
     if(comment.id === undefined){
         await fetch(`http://localhost:5000/delComment/${comment._id}`, {
@@ -174,14 +182,14 @@ export async function deleteComment(comment, isLoggedIn, setLoggedIn) {
     });
 }
 
-export async function deleteAccComment(comment, setLoggedIn, isLoggedIn, index, rerender, setRerender, setComments){
+export async function deleteAccComment(comment, setLoggedIn, isLoggedIn, index, setComments){
     await deleteComment(comment)
     let commeys = isLoggedIn.Comments
     commeys.splice(index, 1)
     isLoggedIn.Comments = commeys;
     setLoggedIn(isLoggedIn)
     await updateUser({isLoggedIn})
-    setRerender(!rerender)
+
     setComments([])
 
 }

@@ -9,22 +9,22 @@ export function AccPurchaseList(props){
                         {purchase.Products.map((product, index) => {
                             return(
                                 <tr key={index}>
-                                <td> Item: {product} </td>
-                        </tr>
+                                    <td> Item: {product} </td>
+                                </tr>
                             )
                         })}
-                    <tr >
-                    <td className={'tableTing'}> Price: {purchase.Cost}€ </td>
-                        </tr>
-                    <tr >
-                    <td className={'tableTing'}> Date: {purchase.Date} </td>
-                        </tr>
-                    <tr >
-                        <td className={'tableTing'}> </td>
-                    </tr>
-                    <tr >
-                        <td className={'tableTing'}> </td>
-                    </tr>
+                            <tr>
+                                <td className={'tableTing'}> Price: {purchase.Cost}€ </td>
+                            </tr>
+                            <tr>
+                                <td className={'tableTing'}> Date: {purchase.Date} </td>
+                            </tr>
+                            <tr>
+                                <td className={'tableTing'}> </td>
+                            </tr>
+                            <tr>
+                                <td className={'tableTing'}> </td>
+                            </tr>
                     </tbody>
                 </table>
             )}

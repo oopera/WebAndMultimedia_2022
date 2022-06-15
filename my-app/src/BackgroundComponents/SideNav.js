@@ -2,7 +2,7 @@ import React from "react";
 
 export default function SideNav(){
     return(
-        <div className={"sideBox"}>Welcome to my brutalist nightmare. Enjoy your time. Or dont. I dont care, I'm a div.
+        <div className={'sideBox'}>Welcome to my brutalist nightmare. Enjoy your time. Or dont. I dont care, I'm a div.
             need help?
             <table>
                 <tbody>
