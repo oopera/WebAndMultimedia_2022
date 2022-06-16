@@ -55,7 +55,6 @@ export async function purchase(props, basketPrice){
     props.basket.forEach(checkAvailability)
 
     function checkAvailability(basketItem){
-        console.log(basketItem)
         products.push(basketItem.Name)
         if(props.basket.filter((v) => (v === basketItem)).length > basketItem.Availability && basketItem.Availability !== true){
             availabilityFlag = false

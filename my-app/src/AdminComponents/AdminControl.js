@@ -9,7 +9,7 @@ export default function AdminControl(props) {
     const [users, setUsers] = useState([])
     const [purchases, setPurchases] = useState([])
     const [isChecked, setIsChecked] = useState(false)
-    const [selectedUser, setSelectedUser] = useState('');
+    const [selectedUser, setSelectedUser] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState("newProduct")
     const [searchInput, setSearchInput] = useState('');
     const [openWindow, setOpenWindow] = useState('none');
@@ -95,7 +95,12 @@ export default function AdminControl(props) {
                 return;
             }
             const userDB = await response.json();
-            setUsers(userDB);
+            setUsers(userDB.filter(e => e._id!==props.isLoggedIn));
+            if(userDB.filter(e => e._id!==props.isLoggedIn).length !== 0) {
+                setSelectedUser(userDB.filter(e => e._id !== props.isLoggedIn)[0]._id)
+            }else{
+                setSelectedUser('')
+            }
         }
         getUsers();
     }, [users.length]);
@@ -218,12 +223,14 @@ export default function AdminControl(props) {
                         <input onChange={(evt) => setSearchInput(evt.target.value)}
                                placeholder={'search users...'}/>
                         <select onChange={event => selectedUserChanged(event)}>
-                            {users.filter(user => user.Email !== undefined && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email}</option>)}
+                            {users.filter(user => user.Email !== undefined && user.Email.toLowerCase() !== props.isLoggedIn.Email.toLowerCase() && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email}</option>)}
                         </select>
                     </div>
+                    <div className={'rowDiv'}>
                     <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers, props.setComments)}> Delete User
                     </button>
-
+                        <p id={'deleteUsertext'}></p>
+                    </div>
                     <div className={'inputsUser'}>
                         <input value={userform.email} className={'userInput'}
                                onChange={(e) => updateReform({email: e.target.value})} type="email" name="email"
@@ -246,10 +253,11 @@ export default function AdminControl(props) {
                     <label htmlFor="adminCheck"> Admin </label>
 
                         <div className={'addUserButton'}>
+                            <p id={'CorrectionBox2'}> </p>
                             <button className={'adminButton'}
                                     onClick={() => addUser(props = {userform, setUserform, props, users, setUsers})}> Add User to Database
                             </button>
-                            <p id={'CorrectionBox2'}> </p>
+
                         </div>
                 </div>
                 )}

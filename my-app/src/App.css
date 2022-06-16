@@ -343,8 +343,8 @@ body {
           url("./images/bg9.png"),
           url("./images/bg7.jpg"),
           url("./images/bg5.jpg"),
-          url('./images/HalfttoneGradients.png'),
-          url("./images/bg8.png");
+          url("./images/bg8.png"),
+url('./images/HalfttoneGradients.png');
   background-position:
           30% -50%,
           15% -5%,
@@ -469,17 +469,22 @@ body {
 .maintext {
   position: absolute;
   color: black;
+  background-color: greenyellow;
+  width: 120px;
   z-index: 5;
   font-family: Krylon, Times, serif;
   font-weight: bold;
 }
 .logo{
+
   position: absolute;
-  font-weight: bold;
-  z-index: 5;
-  font-family: Krylon, Times, serif;
   color: black;
-  mix-blend-mode: luminosity;
+  background-color:white;
+  mix-blend-mode:difference;
+  font-weight: bold;
+  z-index: 6;
+  font-family: Krylon, Times, serif;
+
 }
 .Middle{
   mix-blend-mode: difference;
@@ -604,7 +609,6 @@ body {
   transition: 250ms;
   box-shadow: 5px 5px 80px -50px #000000;
   justify-content: space-between;
-
   border-bottom: 1pt solid black;
 }
 
@@ -794,7 +798,10 @@ select{
 
   padding: 5px;
   border: 1px solid black;
+
+
 }
+
 
 ::placeholder {
   color: black;

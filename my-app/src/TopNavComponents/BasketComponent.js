@@ -15,6 +15,7 @@ export default function BasketComponent(props){
     function BasketItems(props) {
         return (
             <table className={'tablo'}>
+                <tbody>
                 {props.basket.length !== 0 && (
                     props.basket.map((basketItem, index) => {
                         return (
@@ -25,6 +26,7 @@ export default function BasketComponent(props){
                             </tr>
                         )
                     }))}
+                </tbody>
             </table>
         )
     }

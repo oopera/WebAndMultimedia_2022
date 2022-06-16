@@ -14,6 +14,7 @@ return(
                       setProducts={props.setProducts}
                       comments={props.comments}
                       setComments={props.setComments}
+                      isLoggedIn={props.isLoggedIn}
         />
 
     )}

@@ -47,7 +47,6 @@ export async function login(props){
     } else {
 
         props.props.setLoggedIn(user[0])
-        console.log(user[0])
         setStorage(user[0], props.props.setLoggedIn)
 
     }
@@ -142,7 +141,8 @@ export async function addUser(props) {
         document.getElementById("CorrectionBox2").innerHTML = "Email or Username is already in use";
         return
     }
-    if(response.ok){console.log('User Successfully added to the Database')
+    if(response.ok){
+        document.getElementById("CorrectionBox2").innerHTML = "User successfully entered into the Database";
     }
     const newUser = user[0]
     props.setUsers(users => {
@@ -171,7 +171,6 @@ export function logout(props){
     // deletes user, and resets Comments and Users state
 export async function deleteUser(id, users, setUsers, setComments) {
     const user = users.filter(e => e._id.includes(id))
-    console.log(user)
     const comments = user[0].Comments
     comments.forEach(element => deleteComment(element))
 
@@ -179,7 +178,8 @@ export async function deleteUser(id, users, setUsers, setComments) {
         method: "DELETE"
     });
 
-    const newUsers = users.filter((el) => el._id !== id);
+    const newUsers = users.filter(el => el._id !== id);
+    document.getElementById('deleteUsertext').innerHTML='User deleted'
     setUsers(newUsers);
     setComments([])
 }
@@ -201,7 +201,7 @@ export async function deleteOwnAccount(isLoggedIn, setLoggedIn, setComments, set
     // Deletes comment. Checks if comment.id exists, if not call with _id if it does call with id
     // purely a safety measure inCase old data with differing structure is still present in DB
 export async function deleteComment(comment) {
-    console.log(comment)
+
     if(comment.id === undefined){
         await fetch(`http://localhost:5000/delComment/${comment._id}`, {
             method: "DELETE"
