@@ -144,6 +144,8 @@ routes.route("/users/add").post(function (req, response) {
             console.log("email is already in use")
             response.send(false)
             }else if(userNameList.length>=1) {
+            console.log('Fetched documents:', userNameList)
+            console.log("Username is already in use")
             response.send(false)
         }else{
             let myobj = {
@@ -158,6 +160,7 @@ routes.route("/users/add").post(function (req, response) {
                 if (err) throw err;
                 response.json(res);
             });
+            console.log("User added", myobj)
             console.log("email isnt already in use")
             return true
         }

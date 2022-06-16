@@ -7,8 +7,8 @@ export function CommentList(props){
                 <tbody>
                 {props.comments.filter(comment => comment.productID === props.id).map((filteredComment) => {
                     return(
-                        <tr>
-                            <td className={'tableTingHeader'} key={filteredComment._id}> {filteredComment.name}: {filteredComment.comment} {filteredComment.Date}</td>
+                        <tr key={filteredComment._id}>
+                            <td className={'tableTingHeader'}> {filteredComment.name}: {filteredComment.comment} {filteredComment.Date}</td>
                         </tr>
                     )
                 })}

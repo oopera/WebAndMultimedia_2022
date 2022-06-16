@@ -150,6 +150,10 @@ export async function addProduct(form, products, setProducts) {
         window.alert("Please enter a valid Product Name");
         return
     }
+    if(products.filter(e => e.Name.includes(form.Name)).length>=1){
+        window.alert("Product with that Name already exists.");
+        return
+    }
     if(form.Description === null || form.Description === undefined || form.Description === ""){
         window.alert("Please enter a valid description");
         return

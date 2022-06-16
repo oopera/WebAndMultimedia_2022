@@ -24,7 +24,7 @@ export function AccountWindow(props) {
                                             setComments={props.setComments}/>
                         <p className={'bold'}> YOUR PURCHASES </p>
                             <AccPurchaseList isLoggedIn={props.isLoggedIn}/>
-            </div>
+                </div>
         </div>
     );
 }

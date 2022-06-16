@@ -189,7 +189,5 @@ export async function deleteAccComment(comment, setLoggedIn, isLoggedIn, index, 
     isLoggedIn.Comments = commeys;
     setLoggedIn(isLoggedIn)
     await updateUser({isLoggedIn})
-
     setComments([])
-
 }

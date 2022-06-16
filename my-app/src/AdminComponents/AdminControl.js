@@ -42,32 +42,32 @@ export default function AdminControl(props) {
         setSelectedProduct(e.target.value)
         let id = e.target.value
         let img
-        if(e.target.value !== 'newProduct') {
-            if(props.products.filter(e => e._id.includes(id))[0].img === undefined){
-                img = ""
+            if(e.target.value !== 'newProduct') {
+                if(props.products.filter(e => e._id.includes(id))[0].img === undefined){
+                    img = ""
+                }else{
+                    img = props.products.filter(e => e._id.includes(id))[0].img
+                }
+                setProductForm({
+                        id: e.target.value,
+                        Name: props.products.filter(e => e._id.includes(id))[0].Name,
+                        Description: props.products.filter(e => e._id.includes(id))[0].Description,
+                        Price: props.products.filter(e => e._id.includes(id))[0].Price,
+                        Availability: props.products.filter(e => e._id.includes(id))[0].Availability,
+                        img: img,
+                    }
+                )
             }else{
-                img = props.products.filter(e => e._id.includes(id))[0].img
+                setProductForm({
+                        id: "",
+                        Name: "",
+                        Description: "",
+                        Price: "",
+                        Availability: "",
+                        img: "",
+                    }
+                )
             }
-            setProductForm({
-                    id: e.target.value,
-                    Name: props.products.filter(e => e._id.includes(id))[0].Name,
-                    Description: props.products.filter(e => e._id.includes(id))[0].Description,
-                    Price: props.products.filter(e => e._id.includes(id))[0].Price,
-                    Availability: props.products.filter(e => e._id.includes(id))[0].Availability,
-                    img: img,
-                }
-            )
-        }else{
-            setProductForm({
-                    id: "",
-                    Name: "",
-                    Description: "",
-                    Price: "",
-                    Availability: "",
-                    img: "",
-                }
-            )
-        }
     }
 
     function updateProForm(value) {
@@ -93,9 +93,7 @@ export default function AdminControl(props) {
             const userDB = await response.json();
             setUsers(userDB);
         }
-
         getUsers();
-
     }, [users.length]);
 
     useEffect(() => {
@@ -109,9 +107,7 @@ export default function AdminControl(props) {
             const purchaseDB = await response.json();
             setPurchases(purchaseDB);
         }
-
         getPurchases();
-
     }, [purchases.length]);
 
     return (
@@ -120,46 +116,32 @@ export default function AdminControl(props) {
                 {openWindow === 'help' && (
                     <div>
                     <XButton setOpenedItem={setOpenWindow}/>
-                    <table>
-                    <tbody>
-                    <tr>
-                    <td className={'tableTingHeader'}>Functions:</td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTing'}>Adding a Product</td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTing'}>Putting Items into baskets</td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTing'}>Purchasing the Basket</td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTing'}>Searching for Items</td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTing'}>Find your Comments and Purchases once you logged in under "Account"</td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTing'}>On Mobile View the Green Square functions as the Navigation</td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTingHeader'}>How do you use it? </td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTing'}>Click on an Item (The Text with Prices next to them on the left hand side) </td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTing'}>Check Availability and add to Basket (You wont be able to purchase if your basket contains more than Available, but you'll save a step by checking beforehand ;) </td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTing'}>In Basket you'll see the resulting final price and you'll be able to purchase. </td>
-                    </tr>
-                    <tr>
-                    <td className={'tableTing'}>DISCLAIMER!!! Dont use serious credentials on here if you create an account - i don't want to have the responsibility attached to that. Also - once you log in you might want to clear the cache under "account" since Information will be stored to localstorage</td>
-                    </tr>
-                    </tbody>
-                    </table>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td className={'tableTingHeader'}>Functions:</td>
+                                </tr>
+                                <tr>
+                                    <td className={'tableTing'}>Under "View Chart" you can view a visual representation of the systems activity of sales, comments and availability</td>
+                                </tr>
+                                <tr>
+                                    <td className={'tableTing'}>You can choose an existing Product and Change its values, and update it via "Edit Product", there, you can also delete it under "Delete Product" By deleting that Product, all comments linked to that product will be deleted.</td>
+                                </tr>
+                                <tr>
+                                    <td className={'tableTing'}>Creating a New Product is done by selecting "New Product" and entering values. Invalid inputs will be announced. In general: enter a name, enter a description, enter a positive price. Availability is explained in the placeholder.</td>
+                                </tr>
+                                <tr>
+                                    <td className={'tableTing'}>You can also search users by Email adress. From there, you can delete that User. With deletion of the User, all comments of theirs will also be deleted. </td>
+                                </tr>
+                                <tr>
+                                    <td className={'tableTing'}>In order to create a new User, simply fill out the Form beneath the "Delete User" Button. Same restrictions as with registring normally apply i.e. an actual email must be supplied, username must be unique, and the passwords must match. </td>
+                                </tr>
+                                <tr>
+                                    <td className={'tableTing'}>You can also flag the created account for Admin, but be careful, as that is only reversible by accessing the Database. </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                 )
             }
@@ -174,67 +156,67 @@ export default function AdminControl(props) {
                 {openWindow === 'none' && (
                 <div>
                     <button onClick={() => setOpenWindow('help')}>Click me to see the Admin Doc.</button>
-                    <div className={'adminButtonClmn'}>
-                        <button onClick={() => setOpenWindow('chart')} className={'adminButton'}> View Chart
-                        </button>
-                    </div>
-
-            <XButton setOpenedItem={props.setOpenedItem}/>
-            <div className={'chosey'}>Choose a product:
-            <select onChange={event => selectedProductChanged(event)}>
-                <option value={'newProduct'}> New Product</option>
-                {props.products.map((product) => <option key={product._id} value={product._id}>{product.Name}</option>)}
-            </select>
-            </div>
-
-            <div className={'inputsUser'}>
-                <input  className={'userInput'}
-                        value={productForm.Name}
-                       onChange={(e) => updateProForm({Name: e.target.value})}
-                       placeholder="name"/>
-                <input className={'userInput'}
-                       value={productForm.Description}
-                       onChange={(e) => updateProForm({Description: e.target.value})}
-                       placeholder="description"/>
-                <input className={'userInput'}
-                       value={productForm.Price}
-                       type="number"
-                       min="0"
-                       onChange={(e) => updateProForm({Price: e.target.value})}
-                       placeholder="price"/>
-                <input className={'userInput'}
-                       type="number"
-                       value={productForm.Availability}
-                       onChange={(e) => updateProForm({Availability: e.target.value})}
-                       placeholder="Availability (enter a negative number if it has infinite Availability (i.e. Download))"/>
-                <input className={'userInput'}
-                       value={productForm.img}
-                       onChange={(e) => updateProForm({img: e.target.value})}
-                       placeholder="link to image (optional)"/>
-            </div>
-                    <p id={'adminProdResponse'}> </p>
-                    {selectedProduct === 'newProduct' && (
-                        <button className={'adminButton'} onClick={() => addProduct(productForm, props.products, props.setProducts)}> Create New Product
-                        </button>
-                    )}
-                    {selectedProduct !== 'newProduct' && (
-                        <div>
-                    <button className={'adminButton'} onClick={() => updateProduct(productForm, props.setProducts)}> Edit Product
-                    </button>
-                            <button className={'adminButton'} onClick={() => deleteProduct(selectedProduct, props.comments, props.setComments, props.products, props.setProducts)}> Delete Product
+                        <div className={'adminButtonClmn'}>
+                            <button onClick={() => setOpenWindow('chart')} className={'adminButton'}> View Chart
                             </button>
                         </div>
+
+                    <XButton setOpenedItem={props.setOpenedItem}/>
+                    <div className={'chosey'}>Choose a product:
+                        <select onChange={event => selectedProductChanged(event)}>
+                            <option value={'newProduct'}> New Product</option>
+                            {props.products.map((product) => <option key={product._id} value={product._id}>{product.Name}</option>)}
+                        </select>
+                    </div>
+
+                    <div className={'inputsUser'}>
+                        <input  className={'userInput'}
+                                value={productForm.Name}
+                               onChange={(e) => updateProForm({Name: e.target.value})}
+                               placeholder="name"/>
+                        <input className={'userInput'}
+                               value={productForm.Description}
+                               onChange={(e) => updateProForm({Description: e.target.value})}
+                               placeholder="description"/>
+                        <input className={'userInput'}
+                               value={productForm.Price}
+                               type="number"
+                               min="0"
+                               onChange={(e) => updateProForm({Price: e.target.value})}
+                               placeholder="price"/>
+                        <input className={'userInput'}
+                               type="number"
+                               value={productForm.Availability}
+                               onChange={(e) => updateProForm({Availability: e.target.value})}
+                               placeholder="Availability (enter a negative number if it has infinite Availability (i.e. Download))"/>
+                        <input className={'userInput'}
+                               value={productForm.img}
+                               onChange={(e) => updateProForm({img: e.target.value})}
+                               placeholder="link to image (optional)"/>
+                    </div>
+                    <p id={'adminProdResponse'}> </p>
+                        {selectedProduct === 'newProduct' && (
+                            <button className={'adminButton'} onClick={() => addProduct(productForm, props.products, props.setProducts)}> Create New Product
+                            </button>
+                        )}
+                        {selectedProduct !== 'newProduct' && (
+                            <div>
+                                <button className={'adminButton'} onClick={() => updateProduct(productForm, props.setProducts)}> Edit Product
+                                </button>
+                                <button className={'adminButton'} onClick={() => deleteProduct(selectedProduct, props.comments, props.setComments, props.products, props.setProducts)}> Delete Product
+                                </button>
+                            </div>
                         )}
 
-            <div>
-                <input onChange={(evt) => setSearchInput(evt.target.value)}
-                       placeholder={'search users...'}/>
-                <select onChange={event => selectedUserChanged(event)}>
-                    {users.filter(user => user.Email !== undefined && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email}</option>)}
-                </select>
-            </div>
-            <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers, props.setComments)}> Delete User
-            </button>
+                    <div>
+                        <input onChange={(evt) => setSearchInput(evt.target.value)}
+                               placeholder={'search users...'}/>
+                        <select onChange={event => selectedUserChanged(event)}>
+                            {users.filter(user => user.Email !== undefined && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email}</option>)}
+                        </select>
+                    </div>
+                    <button className={'adminButton'} onClick={() => deleteUser(selectedUser, users, setUsers, props.setComments)}> Delete User
+                    </button>
 
                     <div className={'inputsUser'}>
                         <input value={userform.email} className={'userInput'}
@@ -257,16 +239,15 @@ export default function AdminControl(props) {
                            onChange={()=>{checker()}}   name="admin"  id="adminCheck" placeholder="Admin"/>
                     <label htmlFor="adminCheck"> Admin </label>
 
-                    <div className={'addUserButton'}>
-                        <button className={'adminButton'}
-                                onClick={() => addUser(props = {userform, setUserform, props, users, setUsers})}> Add User to Database
-                        </button>
-                        <p id={'CorrectionBox2'}> </p>
-
-                    </div>
-                    </div>
-                ) }
-                   </div>
+                        <div className={'addUserButton'}>
+                            <button className={'adminButton'}
+                                    onClick={() => addUser(props = {userform, setUserform, props, users, setUsers})}> Add User to Database
+                            </button>
+                            <p id={'CorrectionBox2'}> </p>
+                        </div>
                 </div>
+                )}
+           </div>
+        </div>
     )
 }

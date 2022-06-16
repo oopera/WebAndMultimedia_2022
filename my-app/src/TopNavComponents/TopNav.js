@@ -100,7 +100,7 @@ export default function TopNav(props) {
                         <div className={'desktopNav'}>
                             <div className={'buttonRow'}>
                                 <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
-                                <button className={'navButton'} onClick={() => openWindow('admin')}> admin</button>
+                                <button className={'navButton'} onClick={() => openWindow(props, 'admin')}> admin</button>
                                 <button className={'navButton'} onClick={() => openWindow(props, 'account')}>account</button>
                                 {props.basket.length === 0 && (
                                     <button className={'navButton'} onClick={() => openWindow(props, 'basket') }> basket</button>
