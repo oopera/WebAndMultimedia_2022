@@ -19,5 +19,8 @@
     "express": "^4.17.3",
     "mongodb": "^3.7.3",
     "mongoose": "^5.12.4"
+  },
+  "devDependencies": {
+    "bcrypt": "^5.0.1"
   }
 }

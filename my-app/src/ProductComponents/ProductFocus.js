@@ -24,7 +24,7 @@ export function ProductFocus(props) {
                     <p> {props.name.toUpperCase()} </p>
                 </header>
                     <p> {props.description.toUpperCase()} / {props.price} € </p>
-                        {props.img !== undefined && (
+                        {props.img !== undefined && props.img !== null &&(
                         <img className={"productImage"} src={props.img} alt={props.name}/>
                         )}
                         {props.availability <= 0 && (

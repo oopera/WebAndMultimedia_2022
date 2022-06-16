@@ -1,6 +1,5 @@
 import {ReactSession} from "react-client-session";
 import {clear, setStorage} from "./SessionFunctions";
-
 // Updates user to information passed by props.IsLoggedIn (i.e. currently loggedIn user) - this makes it so react state lines up with db information
 
 export async function updateUser(props){
@@ -43,7 +42,7 @@ export async function login(props){
             console.log(error)
         });
     const user = await res.json();
-    if(user.length === 0){
+    if(user === false){
         document.getElementById("CorrectionBox").innerHTML = "Wrong credentials";
     } else {
 

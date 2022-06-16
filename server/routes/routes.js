@@ -1,8 +1,8 @@
 const express = require("express");
+const bcrypt = require('bcrypt')
 const routes = express.Router();
 const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
-
 // Fetches and returns Products
 routes.route("/webweb/products").get(function (req, res) {
   let db_connect = dbo.getDb("webweb");
@@ -139,8 +139,11 @@ routes.route("/comments/add").post(function (req, response) {
 //Logs User to Db
 //searches for both a User with given Email and user with given Username in DB
 //if Found, return false - compare addUser and registre functions in AccountFunctions
+//if not found, creates hash and logs user to DB
 
 routes.route("/users/add").post(function (req, response) {
+    const saltRounds = 10;
+    const password = req.body.password
     let db_connect = dbo.getDb();
     let dbizzle = db_connect
         .collection("users")
@@ -174,20 +177,25 @@ routes.route("/users/add").post(function (req, response) {
             console.log("Username is already in use")
             response.send(false)
         }else{
-            let myobj = {
-                Email: req.body.email.toLowerCase(),
-                Password: req.body.password,
-                Admin: req.body.admin,
-                Purchases: [],
-                Comments: [],
-                Username:req.body.username.toLowerCase(),
-            };
-            db_connect.collection("users").insertOne(myobj, function (err, res) {
-                if (err) throw err;
-                response.json(res);
+            bcrypt.genSalt(saltRounds, function(err, salt) {
+                bcrypt.hash(password, salt, function(err, hash) {
+                    console.log(hash)
+                    let myobj = {
+                        Email: req.body.email.toLowerCase(),
+                        Password: hash,
+                        Admin: req.body.admin,
+                        Purchases: [],
+                        Comments: [],
+                        Username:req.body.username.toLowerCase(),
+                    };
+                    db_connect.collection("users").insertOne(myobj, function (err, res) {
+                        if (err) throw err;
+                        response.json(res);
+                    });
+                });
             });
-            console.log("User added", myobj)
-            console.log("email isnt already in use")
+
+            console.log("User added")
             return true
         }
     })();
@@ -198,10 +206,16 @@ routes.route("/users/login").post(function (req, res) {
     let db_connect = dbo.getDb();
     db_connect
         .collection("users")
-        .find({"Email": req.body.email.toLowerCase(), "Password": req.body.password})
+        .find({"Email": req.body.email.toLowerCase()})
         .toArray(function (err, result) {
+            bcrypt.compare(req.body.password, result[0].Password, function(err, reso) {
+              if(reso){
+                  res.json(result)
+              } else{
+                  res.json(false)
+              }
+            });
             if (err) throw err;
-            res.json(result);
         });
 
 });

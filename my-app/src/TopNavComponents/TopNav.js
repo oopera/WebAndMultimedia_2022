@@ -32,6 +32,7 @@ export default function TopNav(props) {
 
     return (
                 <div className="TopNav">
+
                     {props.isLoggedIn === false && wantsToRegistre === false &&(
                         <div className={'desktopNav'}>
                             <div className={'inputs'}>
@@ -54,6 +55,7 @@ export default function TopNav(props) {
                             </div>
                         </div>
                     )}
+
                     {props.isLoggedIn === false && wantsToRegistre === true && (
                         <div className={'desktopNav'}>
                             <div className={'inputs'}>
@@ -82,11 +84,15 @@ export default function TopNav(props) {
                             </div>
                         </div>
                     )}
-                    {props.isLoggedIn.Admin !== true && props.isLoggedIn !== false && wantsToRegistre === false && (
+
+                    {props.isLoggedIn !== false && (
                         <div className={'desktopNav'}>
                             <div className={'buttonRow'}>
                                 <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
                                 <button className={'navButton'} onClick={() => openWindow(props, 'account') }>account</button>
+                                {props.isLoggedIn.Admin === true && props.isLoggedIn !== false && (
+                                    <button className={'navButton'} onClick={() => openWindow(props, 'admin')}> admin</button>
+                                )}
                                 {props.basket.length === 0 && (
                                     <button className={'navButton'} onClick={() => openWindow(props, 'basket') }> basket</button>
                                 )}
@@ -96,21 +102,7 @@ export default function TopNav(props) {
                             </div>
                         </div>
                     )}
-                    {props.isLoggedIn.Admin === true && props.isLoggedIn !== false && (
-                        <div className={'desktopNav'}>
-                            <div className={'buttonRow'}>
-                                <button className={'navButton'} onClick={() => logout(props = {props, form, setForm})}> logout</button>
-                                <button className={'navButton'} onClick={() => openWindow(props, 'admin')}> admin</button>
-                                <button className={'navButton'} onClick={() => openWindow(props, 'account')}>account</button>
-                                {props.basket.length === 0 && (
-                                    <button className={'navButton'} onClick={() => openWindow(props, 'basket') }> basket</button>
-                                )}
-                                {(props.basket.length !== 0 &&(
-                                    <button className={'navButton'} onClick={() => openWindow(props, 'basket') }> {props.basket.length}</button>
-                                ))}
-                            </div>
-                        </div>
-                    )}
+
                     <p id={"CorrectionBox"}> </p>
                 </div>
     )}
