@@ -12,6 +12,11 @@ export async function sendComment(props, comments, setComments){
     let name = props.isLoggedIn.Username
     let productID = props.id
     let userID = props.isLoggedIn._id
+    if(comment.length <3 || comment.length >160){
+        window.alert("Comments must be between 3 and 160 characters long. ");
+        return
+
+    }
     const newComment = {name, comment, productID, userID};
     const response = await fetch("http://localhost:5000/comments/add", {
         method: "post",

@@ -32,7 +32,7 @@ export default function TopNav(props) {
 
     return (
                 <div className="TopNav">
-
+                    {/* TopNav base case - not logged in, registre form not shown */}
                     {props.isLoggedIn === false && wantsToRegistre === false &&(
                         <div className={'desktopNav'}>
                             <div className={'inputs'}>
@@ -55,7 +55,7 @@ export default function TopNav(props) {
                             </div>
                         </div>
                     )}
-
+                    {/* TopNav register case - register form shown */}
                     {props.isLoggedIn === false && wantsToRegistre === true && (
                         <div className={'desktopNav'}>
                             <div className={'inputs'}>
@@ -84,7 +84,7 @@ export default function TopNav(props) {
                             </div>
                         </div>
                     )}
-
+                    {/* TopNav loggedin case, account window shown. if account has admin privileges, admin button will be shown */}
                     {props.isLoggedIn !== false && (
                         <div className={'desktopNav'}>
                             <div className={'buttonRow'}>

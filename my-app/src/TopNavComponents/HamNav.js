@@ -14,6 +14,7 @@ export default function HamNav(props) {
 
     return(
         <div className={'mobileNav'}>
+            {/* !! Only shown at width of >500px If help is true, focusWindow will show the user guide. */}
             {help === true && (
                 <div className={'FocusWindow'}>
                     <div className={'XButton'} onClick={()=>setHelp(!help)}> </div>

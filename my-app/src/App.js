@@ -101,7 +101,7 @@ export default function App() {
                     left: 15,
                     top: -8 }} className={'movePosition'}>{position.y}</p>
             </div>
-
+            {/* Renders the loading animation */}
         {loadingScreen === true && (
             <div className={'loadingScreen'}>
                 <div className={'loadingBox'}>
@@ -120,6 +120,7 @@ export default function App() {
                     </div>
                 </div>
 
+            {/* Renders the Transition from loading animation to loaded website */}
                     {loading === false && loading2 === false && (
                         <div className={'loadingMover'}>
                             <div className={'welcomeTing'}> WELCOME </div>
@@ -153,8 +154,10 @@ export default function App() {
         </div>
 
 
-            <BackGroundGrafix logoName={'logo'} mainText={'maintext'}/>
+                <BackGroundGrafix logoName={'logo'} mainText={'maintext'}/>
+
                 <div className={"partingline"}> </div>
+
                 <div className={"breakingNewsCont"}>
                     <div className={"breakingNews"} >Thank you for visiting! If youre in need of help or explanation please consult the container on the right hand side </div>
                 </div>

@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const routes = express.Router();
 const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
+
 // Fetches and returns Products
 routes.route("/webweb/products").get(function (req, res) {
   let db_connect = dbo.getDb("webweb");
@@ -94,7 +95,7 @@ routes.route("/purchases/add").post(function (req, response) {
     let myobj = {
         date: new Date(req.body.date),
         price: req.body.price,
-        email: req.body.email,
+        userEmail: req.body.email,
         products: req.body.products
     };
     db_connect.collection("purchases").insertOne(myobj, function (err, res) {
