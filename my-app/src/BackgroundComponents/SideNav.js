@@ -41,7 +41,10 @@ export default function SideNav(){
                         <td className={'tableTing'}>In Basket you'll see the resulting final price and you'll be able to purchase. </td>
                     </tr>
                     <tr>
-                        <td className={'tableTing'}>DISCLAIMER!!! Dont use serious credentials on here if you create an account - i don't want to have the responsibility attached to that. Also - once you log in you might want to clear the cache under "account" since Information will be stored to localstorage</td>
+                        <td className={'tableTing'}>You can also create an account. To do so you have to click on register, enter your data and click register again. Once youre registered you can log in with your credentials</td>
+                    </tr>
+                    <tr>
+                        <td className={'tableTing'}>Once youre logged in, you can leave Comments on items you have purchased. View your purchases and comment - and of course - delete your account.</td>
                     </tr>
                 </tbody>
             </table>

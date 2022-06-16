@@ -170,7 +170,6 @@ export function logout(props){
     // Maps over all of the users comments, and calls deleteComment for each of them.
     // deletes user, and resets Comments and Users state
 export async function deleteUser(id, users, setUsers, setComments) {
-
     const user = users.filter(e => e._id.includes(id))
     console.log(user)
     const comments = user[0].Comments
@@ -182,6 +181,20 @@ export async function deleteUser(id, users, setUsers, setComments) {
 
     const newUsers = users.filter((el) => el._id !== id);
     setUsers(newUsers);
+    setComments([])
+}
+// Logs out the user, deletes all of the users comments, and closes any opened Subwindow
+export async function deleteOwnAccount(isLoggedIn, setLoggedIn, setComments, setOpenedItem) {
+    setOpenedItem('none')
+    const comments = isLoggedIn.Comments
+    comments.forEach(element => deleteComment(element))
+
+    await fetch(`http://localhost:5000/delUser/${isLoggedIn._id}`, {
+        method: "DELETE"
+    });
+
+    setLoggedIn(false)
+    clear();
     setComments([])
 }
 

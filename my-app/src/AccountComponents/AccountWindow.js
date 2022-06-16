@@ -3,6 +3,7 @@ import XButton from "../XButton";
 import {clearCache} from "../HelperFunctions/SessionFunctions";
 import {AccCommentList} from "./AccCommentList";
 import {AccPurchaseList} from "./AccPurchaseList";
+import {deleteOwnAccount} from "../HelperFunctions/AccountFunctions";
 
 // Displays AccountWindow with Comments and Purchases
 export function AccountWindow(props) {
@@ -15,6 +16,9 @@ export function AccountWindow(props) {
                         <button onClick={() => clearCache()}>
                             CLEAR CACHE
                         </button> <p id={'cacheBox'}> </p>
+                        <button onClick={() => deleteOwnAccount(props.isLoggedIn, props.setLoggedIn, props.setComments,  props.setOpenedItem)}>
+                            DELETE ACCOUNT
+                        </button> <p id={'cacheBox'}> </p>
                     </div>
                         <p>
                             (you should log out immediately after, or the cache might be reloaded)
@@ -22,7 +26,8 @@ export function AccountWindow(props) {
                         <p className={'bold'}> YOUR COMMENTS </p>
                             <AccCommentList isLoggedIn={props.isLoggedIn}
                                             setLoggedIn={props.setLoggedIn}
-                                            setComments={props.setComments}/>
+                                            setComments={props.setComments}
+                                          />
                         <p className={'bold'}> YOUR PURCHASES </p>
                             <AccPurchaseList isLoggedIn={props.isLoggedIn}/>
                 </div>

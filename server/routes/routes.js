@@ -209,14 +209,20 @@ routes.route("/users/login").post(function (req, res) {
         .collection("users")
         .find({"Email": req.body.email.toLowerCase()})
         .toArray(function (err, result) {
-            bcrypt.compare(req.body.password, result[0].Password, function(err, reso) {
-              if(reso){
-                  res.json(result)
-              } else{
-                  res.json(false)
-              }
-            });
-            if (err) throw err;
+            if(result.length === 0) {
+                console.log('There is no User with that Email')
+                res.json(false)
+                return;
+            }
+                bcrypt.compare(req.body.password, result[0].Password, function (err, reso) {
+                    if (reso) {
+                        console.log(result[0])
+                        res.json(result)
+                    } else {
+                        res.json(false)
+                        console.log("The Password is incorrect")
+                    }
+                });
         });
 
 });
