@@ -43,8 +43,15 @@ export default function BasketComponent(props){
                     {props.basket.length !== 0 && (
                         <div>
                             <BasketItems setBasket={props.setBasket} basket={props.basket}/>
-                            <button onClick={() => purchase(props, basketPrice)}>buy now
-                            </button> for {basketPrice}
+                            {props.isLoggedIn === false && (
+                                <p>You must log in before you can complete your purchase</p>
+                            )}
+                            {props.isLoggedIn !== false && (
+                                <>
+                                <button onClick={() => purchase(props, basketPrice)}>buy now
+                                </button> for {basketPrice}
+                                </>
+                                )}
                                 <p id={'infobox'}> </p>
                         </div>
                     )}
