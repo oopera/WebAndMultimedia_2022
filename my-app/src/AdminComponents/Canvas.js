@@ -1,5 +1,10 @@
 import React, {useEffect} from "react";
 
+// Renders Canvas in AdminControl
+// Sets height and Width dynamically, so that the Canvas does not overflow with higher activity.
+// updateCounter is used so that the Distance between bars and Items stays consistant, and so that it is known at which position the Next item should be drawn.
+// First batch of useEffect renders the Header Information with all sales and Comments.
+// render() function renders information of specific product. renderNumbers() renders the guideNumbers at the bottom of the graph
 export default function Canvas(props){
 
     let height = (props.products.length*75) + 100;

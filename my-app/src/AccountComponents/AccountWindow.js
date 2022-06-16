@@ -4,12 +4,13 @@ import {clearCache} from "../HelperFunctions/SessionFunctions";
 import {AccCommentList} from "./AccCommentList";
 import {AccPurchaseList} from "./AccPurchaseList";
 
-
+// Displays AccountWindow with Comments and Purchases
 export function AccountWindow(props) {
     return (
         <div className="FocusWindow">
             <XButton setOpenedItem={props.setOpenedItem}/>
                 <div className={'focusContent'}>
+                    <p> Currently logged in as {props.isLoggedIn.Email}</p>
                     <div className={'rowDiv'}>
                         <button onClick={() => clearCache()}>
                             CLEAR CACHE

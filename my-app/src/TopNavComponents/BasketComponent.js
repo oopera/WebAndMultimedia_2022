@@ -11,7 +11,7 @@ export default function BasketComponent(props){
     for(let item of props.basket){
         basketPrice = basketPrice+item.Price
     }
-
+    // Maps the items contained in basket State
     function BasketItems(props) {
         return (
             <table className={'tablo'}>
@@ -28,7 +28,7 @@ export default function BasketComponent(props){
             </table>
         )
     }
-
+    // Removes basketItem at specific Index, given by the basket.map index from BasketItems()
     function removeFromBasket(props){
         let newBasket = props.props.basket
         newBasket.splice(props.index, 1)

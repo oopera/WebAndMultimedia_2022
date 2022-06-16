@@ -1,6 +1,7 @@
-export default function BackGroundGrafix(props){
+// Displays Logos
 
-        let logoName = props.logoName
+export default function BackGroundGrafix(props){
+    let logoName = props.logoName
     let mainText = props.mainText
     return(
         <div>

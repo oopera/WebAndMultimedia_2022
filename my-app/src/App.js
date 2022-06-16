@@ -61,7 +61,7 @@ export default function App() {
         getComments();
     }, [comments.length]);
 
-
+    // gets Mouse position for to replace the cursor with position and circle
     const useMousePosition = () => {
         const [position, setPosition] = useState({ x: 0, y: 0 });
         useEffect(() => {
@@ -85,6 +85,9 @@ export default function App() {
 
 
     const position = useMousePosition();
+
+    // if loadingscreen === true, play loading animation. if true and loading&loading1 === false, please loading transition
+    //display all relevant components, topnavwrapper, mobilenavwrapper, background graphics, produclist and subwindows
     return (
         <div className={'siteWrapper'}>
 

@@ -2,6 +2,11 @@ import {deleteComment, updateUser} from "./AccountFunctions";
 import {ReactSession} from "react-client-session";
 import {setStorage} from "./SessionFunctions";
 
+
+// Creates new Comment Object from props
+// posts new Comment to db
+// Saves comment from DB (including unique ID) and adds it to the User
+// Updates the User in DB with new Data - Both adds comment to comment collection, and updates user in users collection.
 export async function sendComment(props, comments, setComments){
     let comment = document.getElementById("commentInput").value;
     let name = props.isLoggedIn.Username
@@ -30,6 +35,10 @@ export async function sendComment(props, comments, setComments){
 
 }
 
+// Checks availability for each basketItem, updates the Availability of each Item based on amount in basket
+// updates each products availability in DB
+// creates Purchase Object, posts Purchase Object to purchase DB
+// saves purchase document to variable, adds it to user and updates user in DB
 export async function purchase(props, basketPrice){
     let availabilityFlag = true
     let products = []
@@ -115,11 +124,12 @@ export async function purchase(props, basketPrice){
     await updateUser(props)
 
 }
-
+// Filters all comments to Comments left on specific Product
+// Deletes all of the Comments found
+// Deletes Producs, and updates Comments and Products state
 export async function deleteProduct(selectedProduct, comments, setComments, products, setProducts){
 
     const filteredCommies = comments.filter(e => e.productID.includes(selectedProduct))
-    console.log(filteredCommies)
     filteredCommies.forEach(element => deleteComment(element))
 
     const response = await fetch(`http://localhost:5000/delProduct/${selectedProduct}`, {
@@ -138,7 +148,9 @@ export async function deleteProduct(selectedProduct, comments, setComments, prod
     }
 
 }
-
+// Checks for invalid inputs (no name, duplicate name, no description, negative price)
+// If availability is negative, set it to true (i.e. infinitve availability, i.e. downloads.)
+// creates productform if all input is valid, and posts new product to DB, and updates product state to [] - so it gets reloaded)
 export async function addProduct(form, products, setProducts) {
     let newAvailability
     if(form.Availability >= 0){
@@ -192,6 +204,8 @@ export async function addProduct(form, products, setProducts) {
     setProducts([])
 
 }
+
+// Updates product to information passed via form prop, sets Productstate to [] to trigger reload
 
 export async function updateProduct(form, setProduct){
     let newAvailability

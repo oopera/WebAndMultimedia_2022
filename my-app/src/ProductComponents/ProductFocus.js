@@ -2,11 +2,18 @@ import XButton from "../XButton";
 import {sendComment} from "../HelperFunctions/ProductFunctions";
 import {CommentList} from "./CommentList";
 
+
+// Updates Basket with passed Product Information
 export function updateBasket(props){
     let newBasket = props.basket.concat(props.product)
     props.setBasket(newBasket)
     document.getElementById("basketResponse").innerHTML = 'Added to Basket'
 }
+
+// Gets passed Product Information, and displays all relevant information
+// If product Availability <= 0, dont show add to basket.
+// If the customer isnt logged in, dont display comment field
+// if Customer is logged in, but hasnt purchased the item, dont display comment field.
 
 export function ProductFocus(props) {
     return (

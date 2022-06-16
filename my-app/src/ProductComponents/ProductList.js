@@ -4,6 +4,7 @@ import {ProductFocus} from "./ProductFocus";
 import React, {useState} from "react";
 
 export default function ProductList(props) {
+    //Explicit explanation to all States can be found in the Developer documentation
     const [searchInput, setSearchInput] = useState('');
     const [openedProduct, setOpenedProduct] = useState('');
 
@@ -14,7 +15,7 @@ export default function ProductList(props) {
            setOpenedProduct(string);
        }
     }
-
+    // maps all products into a list. onclick of product set openedProduct to that products id - load productFocus based on that ID
     function AproductList(props) {
         return props.products.map((product) => {
             return (

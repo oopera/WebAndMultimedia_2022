@@ -1,6 +1,8 @@
 import '../App.css';
 import React from "react";
 import  './ProductList';
+
+// Simple component to render the product item in productlist
 export function Product(props){
     return(
             <div className={props.className} style={props.style}>

@@ -1,6 +1,8 @@
 import {ReactSession} from "react-client-session";
 import {clear, setStorage} from "./SessionFunctions";
 
+// Updates user to information passed by props.IsLoggedIn (i.e. currently loggedIn user) - this makes it so react state lines up with db information
+
 export async function updateUser(props){
     const updatedAccount = {
         Email: props.isLoggedIn.Email,
@@ -23,6 +25,8 @@ export async function updateUser(props){
         console.log(error, response)
     });
 }
+
+// Calls login route with form passed by props, if email&password combination exists, set LoggedIn to received user Object.
 
 export async function login(props){
     document.getElementById("CorrectionBox").innerHTML = "";
@@ -50,6 +54,10 @@ export async function login(props){
     }
 }
 
+// Checks for valid input, pw length, pw===p2, email being a functioning email.
+// calls wantsToRegistreFunc (changes TopNav state so the registre form is no longer shown)
+// If Registration is successful sets Login Form to email and PW so user can login seamlessly
+// If route returns false, either username or email is already in use
 
 export async function register(props){
     if(props.reform.password.length<8){
@@ -91,6 +99,9 @@ export async function register(props){
     document.getElementById("CorrectionBox").innerHTML = "Successfully registred, you can log in now";
 
 }
+
+// Almost duplicate of register, but resets AdminInputs to "" and doesnt call wantsToRegistreFunc
+// Also updates User State which is only available in AdminComponent.
 
 export async function addUser(props) {
     if(props.userform.password.length<8 || props.userform.password.length>20){
@@ -140,12 +151,13 @@ export async function addUser(props) {
     })
 }
 
-
+    // sets state in topnav
 export function wantsToRegistreFunc(props){
     props.setWantsToRegistre(!props.wantsToRegistre)
     document.getElementById("CorrectionBox").innerHTML = "";
 }
 
+    // sets loggedIn state to false (like on load) closes account or admin window if opened, since those can no longer be accessed.
 export function logout(props){
     props.props.setLoggedIn(false);
     props.setForm({ email: "", password: ""});
@@ -155,6 +167,9 @@ export function logout(props){
     }
 }
 
+    // Filters users state down to user with passed id (selectedUser in AdminControl)
+    // Maps over all of the users comments, and calls deleteComment for each of them.
+    // deletes user, and resets Comments and Users state
 export async function deleteUser(id, users, setUsers, setComments) {
 
     const user = users.filter(e => e._id.includes(id))
@@ -170,17 +185,27 @@ export async function deleteUser(id, users, setUsers, setComments) {
     setUsers(newUsers);
     setComments([])
 }
+
+    // Deletes comment. Checks if comment.id exists, if not call with _id if it does call with id
+    // purely a safety measure inCase old data with differing structure is still present in DB
 export async function deleteComment(comment) {
     console.log(comment)
     if(comment.id === undefined){
         await fetch(`http://localhost:5000/delComment/${comment._id}`, {
             method: "DELETE"
         });
+
+    } else {
+        await fetch(`http://localhost:5000/delComment/${comment.id}`, {
+            method: "DELETE"
+        });
     }
-    await fetch(`http://localhost:5000/delComment/${comment.id}`, {
-        method: "DELETE"
-    });
 }
+
+    // Deletes a Comment from User Information. Does not get called when product gets deleted, since its not necessary. The comment is no longer displayed,
+    // but the User might still want to see it.
+    // Call deleteComments. Splices the Users Comments at index of Comments. Resets isLoggedIn state to updated UserInfo
+    // updates User with updated Userinfo
 
 export async function deleteAccComment(comment, setLoggedIn, isLoggedIn, index, setComments){
     await deleteComment(comment)

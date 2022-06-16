@@ -3,6 +3,7 @@ import '../ProductComponents/ProductList'
 import TopNav from "./TopNav";
 
 export default function HamNav(props) {
+    //Explicit explanation to all States can be found in the Developer documentation
     const [hamNav, setHamNav] = useState(false);
     const [help, setHelp] = useState(false);
 

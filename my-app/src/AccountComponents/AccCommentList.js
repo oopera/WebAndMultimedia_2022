@@ -1,6 +1,7 @@
 import {deleteAccComment} from "../HelperFunctions/AccountFunctions";
 import React from "react";
 
+// Maps Account Comments for AccountWindow in a table. Throws and Error since buttons can not be children of tables, its non-destructive though, should be handled like a warning.
 export function AccCommentList(props){
     return(
             props.isLoggedIn.Comments.map((comment, index) => {

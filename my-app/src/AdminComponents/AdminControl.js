@@ -32,12 +32,15 @@ export default function AdminControl(props) {
         }
     );
 
+    // Changes state for Admin Checkbox in AddUser
     function checker(){
         setIsChecked(!isChecked);
         updateReform({admin: !isChecked})
     }
-
+    // Updates selectedUser to userID
     const selectedUserChanged=(e)=>setSelectedUser(e.target.value)
+    // Updates selectedProduct to productID, sets ProductForm to information of Product with that ID
+    //if selectedProduct is newProduct, setForm to ""
     const selectedProductChanged=(e)=>{
         setSelectedProduct(e.target.value)
         let id = e.target.value
@@ -70,6 +73,7 @@ export default function AdminControl(props) {
             }
     }
 
+    //These update the forms
     function updateProForm(value) {
         return setProductForm((prev) => {
             return {...prev, ...value};
@@ -81,7 +85,7 @@ export default function AdminControl(props) {
             return {...prev, ...value};
         });
     }
-
+    // Fetch all userdata
     useEffect(() => {
         async function getUsers() {
             const response = await fetch(`http://localhost:5000/webweb/users`);
@@ -96,6 +100,7 @@ export default function AdminControl(props) {
         getUsers();
     }, [users.length]);
 
+    // Fetch all purchase Data
     useEffect(() => {
         async function getPurchases() {
             const response = await fetch(`http://localhost:5000/webweb/purchases`);
@@ -110,6 +115,7 @@ export default function AdminControl(props) {
         getPurchases();
     }, [purchases.length]);
 
+    // Lots of inputs, buttons and data Mapping. Should be self explanatory, functions can be found in HelperFunctions
     return (
         <div className={'FocusWindow'}>
             <div className={'focusContent'}>

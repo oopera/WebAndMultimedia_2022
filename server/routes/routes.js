@@ -3,6 +3,7 @@ const routes = express.Router();
 const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
+// Fetches and returns Products
 routes.route("/webweb/products").get(function (req, res) {
   let db_connect = dbo.getDb("webweb");
   db_connect
@@ -14,6 +15,7 @@ routes.route("/webweb/products").get(function (req, res) {
     });
 });
 
+//Fetches and returns Comments
 routes.route("/webweb/comments").get(function (req, res) {
   let db_connect = dbo.getDb("webweb");
   db_connect
@@ -25,6 +27,7 @@ routes.route("/webweb/comments").get(function (req, res) {
       });
 });
 
+//Fetches and returns users
 routes.route("/webweb/users").get(function (req, res) {
     let db_connect = dbo.getDb("webweb");
     db_connect
@@ -36,6 +39,7 @@ routes.route("/webweb/users").get(function (req, res) {
         });
 });
 
+//Fetches and returns purchases
 routes.route("/webweb/purchases").get(function (req, res) {
     let db_connect = dbo.getDb("webweb");
     db_connect
@@ -47,6 +51,7 @@ routes.route("/webweb/purchases").get(function (req, res) {
         });
 });
 
+//Fetches and returns specific Comment based on ID
 routes.route("/comments/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
@@ -58,6 +63,7 @@ routes.route("/comments/:id").get(function (req, res) {
       });
 });
 
+//Fetches and returns specific purchase based on ID
 routes.route("/purchases/:id").get(function (req, res) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
@@ -69,6 +75,20 @@ routes.route("/purchases/:id").get(function (req, res) {
         });
 });
 
+
+//Fetches and returns specific user based on ID
+routes.route("/user/:id").get(function (req, res) {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: ObjectId( req.params.id )};
+    db_connect
+        .collection("user")
+        .findOne(myquery, function (err, result) {
+            if (err) throw err;
+            res.json(result);
+        });
+});
+
+//Logs purchase to Db
 routes.route("/purchases/add").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myobj = {
@@ -83,6 +103,7 @@ routes.route("/purchases/add").post(function (req, response) {
     });
 });
 
+//Logs product to Db
 routes.route("/products/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
@@ -99,6 +120,7 @@ routes.route("/products/add").post(function (req, response) {
   });
 });
 
+//Logs Comment to Db
 routes.route("/comments/add").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myobj = {
@@ -113,6 +135,10 @@ routes.route("/comments/add").post(function (req, response) {
         response.json(res);
     })
 });
+
+//Logs User to Db
+//searches for both a User with given Email and user with given Username in DB
+//if Found, return false - compare addUser and registre functions in AccountFunctions
 
 routes.route("/users/add").post(function (req, response) {
     let db_connect = dbo.getDb();
@@ -167,6 +193,7 @@ routes.route("/users/add").post(function (req, response) {
     })();
 });
 
+//Checks if User with passed credentials exists, returns found Documents with given credentials
 routes.route("/users/login").post(function (req, res) {
     let db_connect = dbo.getDb();
     db_connect
@@ -179,6 +206,8 @@ routes.route("/users/login").post(function (req, res) {
 
 });
 
+
+//Update Product with passed Data
 routes.route("/updateProduct/:id").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
@@ -199,7 +228,8 @@ routes.route("/updateProduct/:id").post(function (req, response) {
         });
 });
 
-
+//Update User with passed Data, casts IDs of Coments and Purchases, since these are first added to isLoggedIn
+//ObjectID doesnt exist in React, so they must be converted here.
 routes.route("/updateUser/:id").post(function (req, response) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId( req.params.id )};
@@ -231,7 +261,7 @@ routes.route("/updateUser/:id").post(function (req, response) {
         });
 });
 
-
+//Delete Product with passed ID
 routes.route("/delProduct/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id)};
@@ -242,7 +272,7 @@ routes.route("/delProduct/:id").delete((req, response) => {
   });
 });
 
-
+//Delete User with passed ID
 routes.route("/delUser/:id").delete((req, response) => {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId(req.params.id)};
@@ -253,18 +283,7 @@ routes.route("/delUser/:id").delete((req, response) => {
     });
 });
 
-routes.route("/user/:id").get(function (req, res) {
-    let db_connect = dbo.getDb();
-    let myquery = { _id: ObjectId( req.params.id )};
-    db_connect
-        .collection("user")
-        .findOne(myquery, function (err, result) {
-            if (err) throw err;
-            res.json(result);
-        });
-});
-
-
+//Delete Comment with passed ID
 routes.route("/delComment/:id").delete((req, response) => {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId(req.params.id)};

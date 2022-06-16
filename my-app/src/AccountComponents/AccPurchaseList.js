@@ -1,5 +1,7 @@
 import React from "react";
 
+
+// Maps Purchases of Account in a table in AccountWindow
 export function AccPurchaseList(props){
     return(
         props.isLoggedIn.Purchases.map((purchase) => {

@@ -1,5 +1,6 @@
 import React from "react";
 
+// Displays the User Guide on the Right hand side
 export default function SideNav(){
     return(
         <div className={'sideBox'}>Welcome to my brutalist nightmare. Enjoy your time. Or dont. I dont care, I'm a div.
