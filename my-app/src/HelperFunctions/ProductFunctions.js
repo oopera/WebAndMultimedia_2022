@@ -47,7 +47,7 @@ export async function sendComment(props, comments, setComments){
 export async function purchase(props, basketPrice){
     let availabilityFlag = true
     let products = []
-    let email;
+    let email = props.isLoggedIn.Email;
     let date = new Date().toISOString().slice(0, 10)
     let price = basketPrice
 
@@ -94,11 +94,7 @@ export async function purchase(props, basketPrice){
                 });
     }
 
-    if(props.isLoggedIn.Email !== undefined){
-        email = props.isLoggedIn.Email
-    }else{
-        email = ""
-    }
+
     const newOrder = {email, date, price, products};
 
     const response = await fetch("http://localhost:5000/purchases/add", {

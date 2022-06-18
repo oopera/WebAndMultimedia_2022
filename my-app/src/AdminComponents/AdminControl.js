@@ -223,7 +223,7 @@ export default function AdminControl(props) {
                         <input onChange={(evt) => setSearchInput(evt.target.value)}
                                placeholder={'search users...'}/>
                         <select onChange={event => selectedUserChanged(event)}>
-                            {users.filter(user => user.Email !== undefined && user.Email.toLowerCase() !== props.isLoggedIn.Email.toLowerCase() && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email}</option>)}
+                            {users.filter(user => user.Email.toLowerCase() !== props.isLoggedIn.Email.toLowerCase() && user.Email.toLowerCase().includes(searchInput.toLowerCase())).map(user => <option value={user._id} key={user._id}>{user.Email}</option>)}
                         </select>
                     </div>
                     <div className={'rowDiv'}>

@@ -80,19 +80,19 @@
 
 @font-face {
   font-family: "NightWatch";
-  src: url("TheNightWatch.ttf");
+  src: url("Fonts/TheNightWatch.ttf");
 
 }
 
 @font-face {
   font-family: "Krylon";
-  src: url("Krylon-Regular.otf");
+  src: url("Fonts/Krylon-Regular.otf");
 
 }
 
 @font-face {
   font-family: "Recia";
-  src: url("ReciaSerifDisplay-Bold.ttf");
+  src: url("Fonts/ReciaSerifDisplay-Bold.ttf");
 
 }
 
@@ -304,7 +304,7 @@
 
   #helpButton{
     visibility:visible;
-    margin-top: 145px;
+    margin-top: 185px;
     float: left;
   }
 
