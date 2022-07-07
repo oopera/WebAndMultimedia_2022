@@ -12,7 +12,7 @@ export async function updateUser(props){
         Admin: props.isLoggedIn.Admin,
         id: props.isLoggedIn._id};
     ReactSession.set("wholeAcc", props.isLoggedIn);
-    const response = await fetch(`http://localhost:5000/updateUser/${props.isLoggedIn._id.toString()}`, {
+    const response = await fetch(`/updateUser/${props.isLoggedIn._id.toString()}`, {
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -30,7 +30,7 @@ export async function updateUser(props){
 export async function login(props){
     document.getElementById("CorrectionBox").innerHTML = "";
     const form = { ...props.form };
-    const res = await fetch("http://localhost:5000/users/login", {
+    const res = await fetch("/users/login", {
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export async function register(props){
     }
     wantsToRegistreFunc(props)
     const newPerson = { ...props.reform };
-    const response = await fetch("http://localhost:5000/users/add", {
+    const response = await fetch("/users/add", {
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -123,7 +123,7 @@ export async function addUser(props) {
     }
 
     const newPerson = {...props.userform};
-    const response = await fetch("http://localhost:5000/users/add", {
+    const response = await fetch("/users/add", {
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -174,7 +174,7 @@ export async function deleteUser(id, users, setUsers, setComments) {
     const comments = user[0].Comments
     comments.forEach(element => deleteComment(element))
 
-    await fetch(`http://localhost:5000/delUser/${id}`, {
+    await fetch(`/delUser/${id}`, {
         method: "DELETE"
     });
 
@@ -189,7 +189,7 @@ export async function deleteOwnAccount(isLoggedIn, setLoggedIn, setComments, set
     const comments = isLoggedIn.Comments
     comments.forEach(element => deleteComment(element))
 
-    await fetch(`http://localhost:5000/delUser/${isLoggedIn._id}`, {
+    await fetch(`/delUser/${isLoggedIn._id}`, {
         method: "DELETE"
     });
 
@@ -203,12 +203,12 @@ export async function deleteOwnAccount(isLoggedIn, setLoggedIn, setComments, set
 export async function deleteComment(comment) {
 
     if(comment.id === undefined){
-        await fetch(`http://localhost:5000/delComment/${comment._id}`, {
+        await fetch(`/delComment/${comment._id}`, {
             method: "DELETE"
         });
 
     } else {
-        await fetch(`http://localhost:5000/delComment/${comment.id}`, {
+        await fetch(`/delComment/${comment.id}`, {
             method: "DELETE"
         });
     }
