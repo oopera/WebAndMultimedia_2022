@@ -18,7 +18,7 @@ export async function sendComment(props, comments, setComments){
 
     }
     const newComment = {name, comment, productID, userID};
-    const response = await fetch("/comments/add", {
+    const response = await fetch("https://webundmultimedia2022.herokuapp.com/comments/add", {
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export async function purchase(props, basketPrice){
             Availability: basketItem.Availability,
             img: basketItem.img
         };
-            const response = await fetch(`/updateProduct/${basketItem._id.toString()}`, {
+            const response = await fetch(`https://webundmultimedia2022.herokuapp.com/updateProduct/${basketItem._id.toString()}`, {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export async function purchase(props, basketPrice){
 
     const newOrder = {email, date, price, products};
 
-    const response = await fetch("/purchases/add", {
+    const response = await fetch("https://webundmultimedia2022.herokuapp.com/purchases/add", {
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -132,7 +132,7 @@ export async function deleteProduct(selectedProduct, comments, setComments, prod
     const filteredCommies = comments.filter(e => e.productID.includes(selectedProduct))
     filteredCommies.forEach(element => deleteComment(element))
 
-    const response = await fetch(`/delProduct/${selectedProduct}`, {
+    const response = await fetch(`https://webundmultimedia2022.herokuapp.com/delProduct/${selectedProduct}`, {
         method: "DELETE"
     });
 
@@ -185,7 +185,7 @@ export async function addProduct(form, products, setProducts) {
         Availability: newAvailability,
         img: form.img,
     }
-    const response = await fetch("/products/add", {
+    const response = await fetch("https://webundmultimedia2022.herokuapp.com/products/add", {
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -222,7 +222,7 @@ export async function updateProduct(form, setProduct){
             Availability: newAvailability,
             img: form.img,
     }
-    const response = await fetch(`/updateProduct/${form.id.toString()}`, {
+    const response = await fetch(`https://webundmultimedia2022.herokuapp.com/updateProduct/${form.id.toString()}`, {
         method: "post",
         headers: {
             "Content-Type": "application/json",

@@ -88,7 +88,7 @@ export default function AdminControl(props) {
     // Fetch all userdata
     useEffect(() => {
         async function getUsers() {
-            const response = await fetch(`/webweb/users`);
+            const response = await fetch(`https://webundmultimedia2022.herokuapp.com/webweb/users`);
             if (!response.ok) {
                 const message = `Users could not be loaded`;
                 window.alert(message);
@@ -108,7 +108,7 @@ export default function AdminControl(props) {
     // Fetch all purchase Data
     useEffect(() => {
         async function getPurchases() {
-            const response = await fetch(`/webweb/purchases`);
+            const response = await fetch(`https://webundmultimedia2022.herokuapp.com/webweb/purchases`);
             if (!response.ok) {
                 const message = `Purchases could not be loaded`;
                 window.alert(message);
