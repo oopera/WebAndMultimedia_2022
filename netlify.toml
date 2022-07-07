@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "http://lucaslichner-web2022.netlify.app/"
+  from = ""
   to = "https://webundmultimedia2022.herokuapp.com/"
   status = 200
   force = true
