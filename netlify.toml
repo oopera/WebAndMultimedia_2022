@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "http://lucaslichner-web2022.netlify.app/"
+  to = "https://webundmultimedia2022.herokuapp.com/"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
