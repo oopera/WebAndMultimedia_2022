@@ -34,7 +34,7 @@ export default function App() {
     //Load Comments and Products
     useEffect(() => {
         async function getProducts() {
-            const response = await fetch(`http://localhost:5000/webweb/products`);
+            const response = await fetch(`/webweb/products`);
             if (!response.ok) {
                 const message = `Products could not be loaded`;
                 window.alert(message);
@@ -49,7 +49,7 @@ export default function App() {
 
     useEffect(() => {
         async function getComments() {
-            const response = await fetch(`http://localhost:5000/webweb/comments`);
+            const response = await fetch(`/webweb/comments`);
             if (!response.ok) {
                 const message = `Comments could not be loaded`;
                 window.alert(message);
