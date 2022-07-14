@@ -1,1 +1,1 @@
-  /api/* https://webundmultimedia2022.herokuapp.com/ 200
+  /api/* https://webundmultimedia2022.herokuapp.com/:splat 200
