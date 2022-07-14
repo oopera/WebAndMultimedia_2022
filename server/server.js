@@ -13,7 +13,8 @@ app.use(require("./routes/routes"));
 const dbo = require("./db/conn");
 
 app.listen(port, () => {
-  // perform a database connection when server starts
+
+  console.log("I EXIST ALSO")
   dbo.connectToServer(function (err) {
     if (err) console.error(err);
 
