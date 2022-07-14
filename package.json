@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/oopera/WebAndMultimedia_2022/issues"
   },
-  "homepage": "https://github.com/oopera/WebAndMultimedia_2022#readme"
+  "homepage": "https://github.com/oopera/WebAndMultimedia_2022#readme",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
 }
