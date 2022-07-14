@@ -3,6 +3,9 @@ const app = express();
 const cors = require('cors')
 require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT;
+
+console.log("I EXIST")
+
 app.use(cors())
 app.use(express.json());
 app.use(require("./routes/routes"));
